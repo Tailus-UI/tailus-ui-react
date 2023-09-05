@@ -1,4 +1,4 @@
-import AccordionUI from "./accordion";
+import AccordionUI from "./Accordion";
 
 export default {
   component: AccordionUI,
