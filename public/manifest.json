@@ -1,0 +1,47 @@
+{
+    "short_name": "Tailus",
+    "name": "Tailus UI",
+    "description": "Customizable UI components for Tailwind CSS",
+    "icons": [
+        {
+            "src": "favicon-black.svg",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "favicon-white.svg",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "/tls/x128.png",
+            "type": "image/png",
+            "sizes": "128x128"
+        },
+        {
+            "src": "/tls/x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/tls/x256.png",
+            "type": "image/png",
+            "sizes": "256x256"
+        },
+        {
+            "src": "/tls/x384.png",
+            "type": "image/png",
+            "sizes": "384x384"
+        },
+        {
+            "src": "/tls/x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": ".",
+    "display_override": ["window-control-overlay", "minimal-ui"],
+    "display": "fullscreen",
+    "theme_color": "#ffffff",
+    "background_color": "#000000"
+}
