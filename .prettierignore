@@ -1,0 +1,5 @@
+**/*.mdx
+**/generated/
+src/samples/
+**/snippet.*
+/dist
