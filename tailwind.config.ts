@@ -8,6 +8,21 @@ export default {
   ],
   theme: {
     extend: {
+      colors: ({ colors }) => ({
+            inherit: colors.inherit,
+            current: colors.current,
+            transparent: colors.transparent,
+            primary: colors.blue,
+            secondary: colors.purple,
+            accent: colors.fuchsia,
+            danger: colors.red,
+            success: colors.green,
+            warning: colors.amber,
+            info: colors.blue,
+            gray: colors.zinc,
+            black: colors.black,
+            white: colors.white,
+        }),
       keyframes: {
         slideDown: {
           from: { height: 0 },
