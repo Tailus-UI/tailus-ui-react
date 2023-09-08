@@ -2,10 +2,10 @@ import React from "react";
 import classNames from "classnames";
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { accordion as accordionTheme } from "@tailus/themer-accordion"
+import { softVariant as accordionTheme } from "@tailus/themer-accordion"
 
-const AccordionUI = () => (
-    <Accordion.Root className="w-full min-w-[28rem] max-w-md" type="single" defaultValue="item-1" collapsible>
+const AccordionSoftVariant = () => (
+    <Accordion.Root className={`w-full min-w-[28rem] max-w-md ${accordionTheme.root}`} type="single" defaultValue="item-1" collapsible>
         <AccordionItem value="item-1">
             <AccordionTrigger>Is it accessible?  </AccordionTrigger>
             <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
@@ -44,4 +44,4 @@ const AccordionContent = React.forwardRef(({ children, className, ...props }: an
     </Accordion.Content>
 ));
 
-export default AccordionUI;
+export default AccordionSoftVariant;

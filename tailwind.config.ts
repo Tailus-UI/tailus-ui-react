@@ -1,8 +1,10 @@
-/** @type {import('tailwindcss').Config} */
+import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
 export default {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "index.html",
+    "./src/**/*.{js,jsx,ts,tsx,vue,html}",
+    './node_modules/@tailus/**/*.{js,jsx,ts,tsx,vue}',
   ],
   theme: {
     extend: {
@@ -22,6 +24,35 @@ export default {
       },
     },
   },
-  plugins: [],
-}
+plugins: [
+        plugin(function ({ addBase, theme, matchUtilities }) {
+            addBase({
+                ":root": {
+                    "--btn-border-radius": theme("borderRadius.xl"),
+                    "--field-border-radius": theme("borderRadius.xl"),
+                    "--card-border-radius": theme("borderRadius.2xl"),
+                    "--avatar-border-radius": theme("borderRadius.full"),
+                    "--avatar-status-position": theme("spacing.px"),
+                "--accordion-border-radius": theme("borderRadius.xl"),
+                    "--accordion-shadow" : theme("boxShadow.xl"),
+                    "--checktokens-border-radius": theme("borderRadius.full"),
+                    "--alert-border-radius": theme("borderRadius.xl"),
+                    "--badge-border-radius": theme("borderRadius.lg"),
+                    "--context-border-radius": theme("borderRadius.2xl"),
+                    "--pill-border-radius": theme("borderRadius.xl"),
+                    "--toast-border-radius": theme("borderRadius.lg"),
+                    "--tabs-border-radius": theme("borderRadius.xl"),
+                    "--primary-tabs-border-radius": theme("borderRadius.3xl"),
+                    "--popover-border-radius": theme("borderRadius.xl"),
+                    "--navmenu-border-radius": theme("borderRadius.3xl"),
+                },
+            });
+            matchUtilities({
+                perspective: (value) => ({
+                    perspective: value,
+                }),
+            });
+        }),
+    ],
+}  satisfies Config
 
