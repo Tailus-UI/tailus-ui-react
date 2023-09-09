@@ -13,6 +13,11 @@ import SoftIconButton from "./soft-variant/IconButton";
 import SoftLeadingIconButton from "./soft-variant/LeadingIconButton";
 import SoftTrailingIconButton from "./soft-variant/TrailingIconButton";
 
+import GhostButton from "./ghost-variant/Button";
+import GhostIconButton from "./ghost-variant/IconButton";
+import GhostLeadingIconButton from "./ghost-variant/LeadingIconButton";
+import GhostTrailingIconButton from "./ghost-variant/TrailingIconButton";
+
 export default {
     component: ButtonUI,
     tags: ['autodocs'],
@@ -32,3 +37,8 @@ export const Soft = () => <SoftButton />;
 export const SoftIcon = () => <SoftIconButton />
 export const SoftLeadingIcon = () => <SoftLeadingIconButton />
 export const SoftTrailingIcon = () => <SoftTrailingIconButton />
+
+export const Ghost = () => <GhostButton />;
+export const GhostIcon = () => <GhostIconButton />
+export const GhostLeadingIcon = () => <GhostLeadingIconButton />
+export const GhostTrailingIcon = () => <GhostTrailingIconButton />
