@@ -7,6 +7,7 @@ import AccordionGhostVariant from "./Ghost";
 
 export default {
   component: AccordionUI,
+  tags: ['autodocs'],
 };
 
 export const Accordion = () => <AccordionUI />;
