@@ -8,6 +8,11 @@ import OutlinedIconButton from "./outlined-variant/IconButton";
 import OutlinedLeadingIconButton from "./outlined-variant/LeadingIconButton";
 import OutlinedTrailingIconButton from "./outlined-variant/TrailingIconButton";
 
+import SoftButton from "./soft-variant/Button";
+import SoftIconButton from "./soft-variant/IconButton";
+import SoftLeadingIconButton from "./soft-variant/LeadingIconButton";
+import SoftTrailingIconButton from "./soft-variant/TrailingIconButton";
+
 export default {
     component: ButtonUI,
     tags: ['autodocs'],
@@ -22,3 +27,8 @@ export const Outlined = () => <OutlinedButton />;
 export const OutlinedIcon = () => <OutlinedIconButton />
 export const OutlinedLeadingIcon = () => <OutlinedLeadingIconButton />
 export const OutlinedTrailingIcon = () => <OutlinedTrailingIconButton />
+
+export const Soft = () => <SoftButton />;
+export const SoftIcon = () => <SoftIconButton />
+export const SoftLeadingIcon = () => <SoftLeadingIconButton />
+export const SoftTrailingIcon = () => <SoftTrailingIconButton />
