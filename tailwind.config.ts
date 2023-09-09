@@ -44,22 +44,10 @@ plugins: [
             addBase({
                 ":root": {
                     "--btn-border-radius": theme("borderRadius.md"),
-                    "--field-border-radius": theme("borderRadius.xl"),
-                    "--card-border-radius": theme("borderRadius.2xl"),
-                    "--avatar-border-radius": theme("borderRadius.full"),
-                    "--avatar-status-position": theme("spacing.px"),
-                "--accordion-border-radius": theme("borderRadius.xl"),
+                    "--accordion-border-radius": theme("borderRadius.xl"),
                     "--accordion-shadow" : theme("boxShadow.xl"),
-                    "--checktokens-border-radius": theme("borderRadius.full"),
-                    "--alert-border-radius": theme("borderRadius.xl"),
-                    "--badge-border-radius": theme("borderRadius.lg"),
-                    "--context-border-radius": theme("borderRadius.2xl"),
-                    "--pill-border-radius": theme("borderRadius.xl"),
-                    "--toast-border-radius": theme("borderRadius.lg"),
-                    "--tabs-border-radius": theme("borderRadius.xl"),
-                    "--primary-tabs-border-radius": theme("borderRadius.3xl"),
-                    "--popover-border-radius": theme("borderRadius.xl"),
-                    "--navmenu-border-radius": theme("borderRadius.3xl"),
+                    "--annonce-border-radius" : theme("borderRadius.full"),
+
                 },
             });
             matchUtilities({
