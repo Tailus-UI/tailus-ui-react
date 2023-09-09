@@ -43,7 +43,7 @@ plugins: [
         plugin(function ({ addBase, theme, matchUtilities }) {
             addBase({
                 ":root": {
-                    "--btn-border-radius": theme("borderRadius.xl"),
+                    "--btn-border-radius": theme("borderRadius.md"),
                     "--field-border-radius": theme("borderRadius.xl"),
                     "--card-border-radius": theme("borderRadius.2xl"),
                     "--avatar-border-radius": theme("borderRadius.full"),
