@@ -1,4 +1,5 @@
 import CardUI from "./Card";
+import CardElevatedVariant from "./Elevated";
 
 export default {
     component: CardUI,
@@ -6,3 +7,4 @@ export default {
 }
 
 export const Card = () => <CardUI />;
+export const Elevated = () => <CardElevatedVariant />

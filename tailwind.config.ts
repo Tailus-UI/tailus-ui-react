@@ -1,5 +1,8 @@
 import type { Config } from 'tailwindcss'
 import plugin from 'tailwindcss/plugin'
+
+const shadowColor = "gray";
+
 export default {
   content: [
     "index.html",
@@ -40,7 +43,7 @@ export default {
     },
   },
 plugins: [
-        plugin(function ({ addBase, theme, matchUtilities }) {
+        plugin(function ({ addBase, theme, matchUtilities, addComponents }) {
             addBase({
               ":root": {
                     "--ui-light-border-color" : theme("colors.gray.200"),
@@ -53,10 +56,20 @@ plugins: [
                     "--avatar-status-position": theme("spacing.px"),
                     "--card-border-radius": theme("borderRadius.3xl"),
                     "--card-light-bg": theme("colors.white"),
-                    "--card-dark-bg": theme("colors.gray.950"),
-                    "--card-padding" : theme("spacing.8"),
+                    "--card-dark-bg": theme("colors.gray.900"),
+                    "--card-padding": theme("spacing.8"),
+                    
+                    "--card-shadow": `0 10px 15px -3px var(--card-shadow-appearance), 0 4px 6px -4px var(--card-shadow-appearance)`,
+                    "--card-shadow-appearance" : `theme(colors.${shadowColor}.900 / var(--card-shadow-opacity))`,
+                    "--card-shadow-opacity": "10%",
                 },
             });
+          addComponents({
+            // write a css class '.card-shadow' the shadow offset, size and color comes from css variables
+            ".card-shadow": {
+              boxShadow: `var(--card-shadow)`
+            }
+          })
             matchUtilities({
                 perspective: (value) => ({
                     perspective: value,
