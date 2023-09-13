@@ -47,7 +47,8 @@ plugins: [
                     "--accordion-border-radius": theme("borderRadius.xl"),
                     "--accordion-shadow" : theme("boxShadow.xl"),
                     "--annonce-border-radius" : theme("borderRadius.full"),
-
+                "--avatar-border-radius": theme("borderRadius.full"),
+                    "--avatar-status-position" : theme("spacing.px"),
                 },
             });
             matchUtilities({
