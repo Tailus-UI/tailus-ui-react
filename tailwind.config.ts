@@ -42,13 +42,19 @@ export default {
 plugins: [
         plugin(function ({ addBase, theme, matchUtilities }) {
             addBase({
-                ":root": {
+              ":root": {
+                    "--ui-light-border-color" : theme("colors.gray.200"),
+                    "--ui-dark-border-color": theme("colors.gray.800"),
                     "--btn-border-radius": theme("borderRadius.md"),
                     "--accordion-border-radius": theme("borderRadius.xl"),
                     "--accordion-shadow" : theme("boxShadow.xl"),
                     "--annonce-border-radius" : theme("borderRadius.full"),
-                "--avatar-border-radius": theme("borderRadius.full"),
-                    "--avatar-status-position" : theme("spacing.px"),
+                    "--avatar-border-radius": theme("borderRadius.full"),
+                    "--avatar-status-position": theme("spacing.px"),
+                    "--card-border-radius": theme("borderRadius.3xl"),
+                    "--card-light-bg": theme("colors.white"),
+                    "--card-dark-bg": theme("colors.gray.950"),
+                    "--card-padding" : theme("spacing.8"),
                 },
             });
             matchUtilities({

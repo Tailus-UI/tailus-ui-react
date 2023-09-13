@@ -1,8 +1,8 @@
-import AccordionUI from "./components/accordion/Accordion";
+import CardUI from "./components/card/Card";
 
 function App() {
     return (
-        <AccordionUI />
+        <CardUI />
     );
 }
 
