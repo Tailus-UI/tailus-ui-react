@@ -55,7 +55,7 @@ const AccordionTrigger = React.forwardRef(({ children, className, ...props }: an
 
 const AccordionContent = React.forwardRef(({ children, className, ...props }: any, forwardedRef) => (
     <Accordion.Content className={classNames(accordionTheme.content, className)}  {...props} ref={forwardedRef}>
-        <div className="pb-6 pl-12 ml-1 pr-6">{children}</div>
+        <div className="pb-4 pl-12 ml-1 pr-6">{children}</div>
     </Accordion.Content>
 ));
 
