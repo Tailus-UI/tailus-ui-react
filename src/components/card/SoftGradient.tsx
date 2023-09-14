@@ -1,6 +1,6 @@
-import { gradientBordersVariant as cardTheme } from '@tailus/themer-card';
+import { softGradientVariant as cardTheme } from '@tailus/themer-card';
 
-const CardGradientBordersVariant = () => (
+const CardSoftGradientVariant = () => (
     <div className={cardTheme.outer + " max-w-xs"}>
         <div className={cardTheme.inner}>
             <div>
@@ -15,4 +15,4 @@ const CardGradientBordersVariant = () => (
     </div>
 )
 
-export default CardGradientBordersVariant
+export default CardSoftGradientVariant
