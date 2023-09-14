@@ -55,7 +55,7 @@ plugins: [
                     "--avatar-border-radius": theme("borderRadius.full"),
                     "--avatar-status-position": theme("spacing.px"),
                     "--card-border-radius": theme("borderRadius.3xl"),
-                    "--card-light-bg": theme("colors.white"),
+                    "--card-light-bg": theme("colors.gray.100"),
                     "--card-dark-bg": theme("colors.gray.900"),
                     "--card-padding": theme("spacing.8"),
                     "--card-shadow": `0 10px 15px -3px var(--card-shadow-appearance), 0 4px 6px -4px var(--card-shadow-appearance)`,
