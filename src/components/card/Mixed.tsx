@@ -1,6 +1,6 @@
-import { elevatedVariant as cardTheme } from '@tailus/themer-card';
+import { mixedVariant as cardTheme } from '@tailus/themer-card';
 
-const CardElevatedVariant = () => (
+const CardMixedVariant = () => (
     <div className={cardTheme + " max-w-xs"}>
         <div>
             <img className="h-full w-full object-cover dark:hidden" src="http://127.0.0.1:5173/legend.png" alt="" />
@@ -13,4 +13,4 @@ const CardElevatedVariant = () => (
     </div>
 )
 
-export default CardElevatedVariant
+export default CardMixedVariant
