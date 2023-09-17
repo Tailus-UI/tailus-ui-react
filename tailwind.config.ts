@@ -60,14 +60,23 @@ plugins: [
                     "--card-light-bg": theme("colors.gray.50"),
                     "--card-dark-bg": theme("colors.gray.900"),
                     "--card-padding": theme("spacing.8"),
+                    
                     "--card-shadow": `0 10px 15px -3px var(--card-shadow-appearance), 0 4px 6px -4px var(--card-shadow-appearance)`,
                     "--card-shadow-appearance" : `theme(colors.${shadowColor}.900 / var(--card-shadow-opacity))`,
                     "--card-shadow-opacity": "7.5%",
+                    
+                    "--feedback-dark-bg": theme("colors.gray.950"),
+                    "--feedback-light-border-color": theme("colors.gray.100"),
+                    "--feedback-dark-border-color": theme("colors.gray.800"),
+                    "--flag-border-radius": theme("borderRadius.xl"),
+                    
                 },
             });
           addComponents({
-            // write a css class '.card-shadow' the shadow offset, size and color comes from css variables
             ".card-shadow": {
+              boxShadow: `var(--card-shadow)`
+            },
+            ".feedback-shadow": {
               boxShadow: `var(--card-shadow)`
             }
           })
