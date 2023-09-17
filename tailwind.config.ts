@@ -70,7 +70,19 @@ plugins: [
                     "--feedback-dark-border-color": theme("colors.gray.800"),
                     "--flag-border-radius": theme("borderRadius.xl"),
                     
-                    "--badge-border-radius": theme("borderRadius.full"),
+                "--badge-border-radius": theme("borderRadius.full"),
+                    
+                "--menu-border-radius": theme("borderRadius.2xl"),
+                "--menu-light-bg-opacity": "80%",
+                "--menu-dark-bg-opacity": theme("50%"),
+                "--menu-dark-bg": "theme(colors.gray.900 / 70%)",
+                "--menu-light-border-color": theme("colors.gray.200"),
+                "--menu-dark-border-color": "theme(colors.white / 10%)",
+                "--separator-light-color": theme("colors.gray.200"),
+                "--separator-dark-color": theme("colors.gray.800"),
+                "--menu-dark-backdrop-blur": "2rem",
+                "--menu-light-backdrop-blur": "2rem",
+                
                 },
             });
           addComponents({
@@ -78,6 +90,9 @@ plugins: [
               boxShadow: `var(--card-shadow)`
             },
             ".feedback-shadow": {
+              boxShadow: `var(--card-shadow)`
+            },
+            ".menu-shadow": {
               boxShadow: `var(--card-shadow)`
             }
           })
