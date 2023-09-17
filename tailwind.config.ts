@@ -70,6 +70,7 @@ plugins: [
                     "--feedback-dark-border-color": theme("colors.gray.800"),
                     "--flag-border-radius": theme("borderRadius.xl"),
                     
+                    "--badge-border-radius": theme("borderRadius.full"),
                 },
             });
           addComponents({
