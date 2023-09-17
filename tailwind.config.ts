@@ -65,7 +65,7 @@ plugins: [
                     "--card-shadow-appearance" : `theme(colors.${shadowColor}.900 / var(--card-shadow-opacity))`,
                     "--card-shadow-opacity": "7.5%",
                     
-                    "--feedback-dark-bg": theme("colors.gray.950"),
+                    "--feedback-dark-bg": theme("colors.gray.900"),
                     "--feedback-light-border-color": theme("colors.gray.100"),
                     "--feedback-dark-border-color": theme("colors.gray.800"),
                     "--flag-border-radius": theme("borderRadius.xl"),
