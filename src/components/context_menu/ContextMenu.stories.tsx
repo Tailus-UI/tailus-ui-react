@@ -1,4 +1,5 @@
-import ContextMenuUI from "./ContextMenu"
+import ContextMenuUI from "./ContextMenu";
+import SoftContextMenu from "./SoftContextMenu";
 
 export default {
     component: ContextMenuUI,
@@ -6,3 +7,4 @@ export default {
 }
 
 export const ContextMenu = () => <ContextMenuUI />;
+export const Soft = () => <SoftContextMenu />;
