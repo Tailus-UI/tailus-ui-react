@@ -20,7 +20,6 @@ import GhostTrailingIconButton from "./ghost-variant/TrailingIconButton";
 
 export default {
     component: ButtonUI,
-    tags: ['autodocs'],
 }
 
 export const Button = () => <ButtonUI />;

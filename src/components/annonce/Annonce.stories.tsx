@@ -4,7 +4,6 @@ import { softAnnonce } from "@tailus/themer-annonce"
 
 export default {
   component: AnnonceUI,
-  tags: ['autodocs'],
 };
 
 export const Annonce = () => (

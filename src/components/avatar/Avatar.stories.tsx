@@ -5,7 +5,6 @@ import AvatarBottomStatus from "./BottomStatus";
 
 export default {
     component: AvatarUI,
-    tags: ['autodocs'],
 }
 
 export const Avatar = () => <AvatarUI />;

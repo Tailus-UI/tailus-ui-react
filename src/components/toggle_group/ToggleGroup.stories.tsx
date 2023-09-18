@@ -2,7 +2,6 @@ import ToggleGroupUI from "./ToggleGroup";
 
 export default {
     component: ToggleGroupUI,
-    tags: ['autodocs'],
 }
 
 export const ToggleGroup = () => (

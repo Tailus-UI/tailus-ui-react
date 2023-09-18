@@ -3,7 +3,6 @@ import RadioGroupShadowVariant from "./ShadowRadio";
 
 export default {
     component: RadioGroupUI,
-    tags: ['autodocs'],
 }
 
 export const RadioGroup = () => <RadioGroupUI />;

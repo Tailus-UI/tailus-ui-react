@@ -4,7 +4,6 @@ import BadgeSoftVariant from "./Soft";
 
 export default {
     component: BadgeUI,
-    tags: ['autodocs'],
 }
 
 export const Badge = () => <BadgeUI />;

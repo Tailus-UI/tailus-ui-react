@@ -3,7 +3,6 @@ import VerticalScrollArea from "./VerticalScrollArea";
 
 export default {
     component: ScrollAreaUI,
-    tags: ['autodocs'],
 }
 
 export const ScrollArea = () => (

@@ -7,7 +7,6 @@ import InfoCentredAlertDialog from "./InfoCentredAlertDialog";
 
 export default {
     component: AlertDialogUI,
-    tags: ['autodocs'],
 }
 
 export const AlertDialog = () => (
