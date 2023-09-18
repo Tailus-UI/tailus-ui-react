@@ -1,6 +1,6 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Pencil1Icon, ArchiveIcon, TrashIcon, FileIcon, DotsVerticalIcon } from "@radix-ui/react-icons";
-import { dropdownmenu as theme } from "@tailus/themer-dropdown-menu";
+import { dropdownMenu as theme } from "@tailus/themer-dropdown-menu";
 import { ghostIconButton as buttonTheme } from "@tailus/themer-button";
 
 const DropdownMenuUI = () => {
@@ -16,20 +16,20 @@ const DropdownMenuUI = () => {
             <DropdownMenu.Portal>
                 <DropdownMenu.Content className={theme.content} sideOffset={5}>
                     <DropdownMenu.Item className={theme.item.primary}>
-                        <Pencil1Icon className="h-[1.125rem] w-[1.125rem]" />
+                        <Pencil1Icon className={theme.icon} />
                         Edit
                     </DropdownMenu.Item>
                     <DropdownMenu.Item className={theme.item.primary}>
-                        <FileIcon className="h-[1.125rem] w-[1.125rem]" />
+                        <FileIcon className={theme.icon} />
                         Duplicate
                     </DropdownMenu.Item>
                         <DropdownMenu.Separator className={theme.separator} />
                     <DropdownMenu.Item className={theme.item.primary} disabled>
-                        <ArchiveIcon className="h-[1.125rem] w-[1.125rem]" />
+                        <ArchiveIcon className={theme.icon} />
                         Archive
                     </DropdownMenu.Item>
                     <DropdownMenu.Item className={theme.item.danger}>
-                        <TrashIcon className="h-[1.125rem] w-[1.125rem]" />
+                        <TrashIcon className={theme.icon} />
                         Delete
                     </DropdownMenu.Item>
                 </DropdownMenu.Content>
