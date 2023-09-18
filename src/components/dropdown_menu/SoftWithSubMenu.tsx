@@ -1,9 +1,9 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Pencil1Icon, ArchiveIcon, TrashIcon, FileIcon, DotsVerticalIcon, DownloadIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { dropdownmenu as theme } from "@tailus/themer-dropdown-menu";
+import { softDropdownMenu as theme } from "@tailus/themer-dropdown-menu";
 import { ghostIconButton as buttonTheme } from "@tailus/themer-button";
 
-const DropdownMenuSubMenu = () => {
+const SoftDropdownSubMenu = () => {
     return (
         <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
@@ -55,4 +55,4 @@ const DropdownMenuSubMenu = () => {
     );
 };
 
-export default DropdownMenuSubMenu;
+export default SoftDropdownSubMenu;
