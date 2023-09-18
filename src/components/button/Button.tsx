@@ -1,7 +1,7 @@
 import {button as buttonTheme} from "@tailus/themer-button"
 
 const ButtonUI = () => (
-    <button className={buttonTheme.warning.sm}>
+    <button className={buttonTheme.warning.md}>
         <span>Button</span>
     </button>
 );

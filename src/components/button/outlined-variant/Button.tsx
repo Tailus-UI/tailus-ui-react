@@ -1,7 +1,7 @@
 import {outlinedButton as buttonTheme} from "@tailus/themer-button"
 
 const OutlinedButtonUI = () => (
-    <button className={buttonTheme.primary.sm}>
+    <button className={buttonTheme.primary.md}>
         <span>Button</span>
     </button>
 );
