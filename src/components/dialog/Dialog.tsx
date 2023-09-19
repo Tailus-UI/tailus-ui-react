@@ -49,7 +49,7 @@ const DialogUI = () => (
 
                 <RadioGroupUI />
 
-                <div className="mt-6 flex justify-end">
+                <div className={dialog.actions}>
                     <Dialog.Close>
                         <button className={buttonTheme.primary.md}>
                             <span>Submit</span>

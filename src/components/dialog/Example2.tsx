@@ -25,7 +25,7 @@ const DialogExample2 = () => (
 
                 <div className={dialog.actions}>
                     <Dialog.Close>
-                        <button className={ghostButton.gray.md}>
+                        <button className={ghostButton.primary.md}>
                             <span>Cancel</span>
                         </button>
                     </Dialog.Close>
