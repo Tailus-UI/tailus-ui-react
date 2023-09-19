@@ -10,14 +10,14 @@ const FlagWithMessage = () => (
         <div className={flagTheme.content}>
             <h6 className={flagTheme.title.info}>New update available</h6>
             <p id="error-flag-description-2" className={flagTheme.message}>
-                Your account is being used on another device, please logout and login again.
+                Radix UI support, Modern UI, Customization...
             </p>
             <div className={flagTheme.actions}>
                 <a href="#" className={flagTheme.link}>
-                    Free up space
+                    Learn more
                 </a>
                 <a href="#" className={flagTheme.link}>
-                    Upgrade storage
+                    Upgrade now
                 </a>
             </div>
         </div>
