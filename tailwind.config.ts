@@ -59,8 +59,10 @@ plugins: [
                     "--ui-light-border-color" : theme("colors.gray.200"),
                     "--ui-dark-border-color": theme("colors.gray.800"),
                     "--ui-light-border-hover-color": theme("colors.gray.300"),
-                    "--ui-dark-border-hover-color" : theme("colors.gray.700"),
-                    "--btn-border-radius": theme("borderRadius.md"),
+                    "--ui-dark-border-hover-color": theme("colors.gray.700"),
+                    
+                  "--btn-border-radius": theme("borderRadius.md"),
+                   "--btn-border-width" : "1.5px",
                     "--accordion-border-radius": theme("borderRadius.xl"),
                     "--accordion-shadow" : theme("boxShadow.xl"),
                     "--annonce-border-radius" : theme("borderRadius.full"),
