@@ -78,7 +78,7 @@ plugins: [
                     "--feedback-dark-bg": theme("colors.gray.950"),
                     "--feedback-light-border-color": theme("colors.gray.200"),
                     "--feedback-dark-border-color": theme("colors.gray.800"),
-                "--flag-border-radius": theme("borderRadius.xl"),
+                    "--flag-border-radius": theme("borderRadius.xl"),
                     "--flag-padding": theme("spacing.6"),
                     
                     "--badge-border-radius": theme("borderRadius.full"),
@@ -94,7 +94,9 @@ plugins: [
                     "--menu-dark-backdrop-blur": "2rem",
                     "--menu-light-backdrop-blur": "2rem",
                     
-                    "--alert-border-radius": theme("borderRadius.2xl"),
+                "--alert-border-radius": theme("borderRadius.2xl"),
+                    
+                "--field-border-radius" : theme("borderRadius.lg"),
                 },
             });
           addComponents({
