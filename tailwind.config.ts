@@ -101,6 +101,8 @@ plugins: [
                 "--field-border-radius": theme("borderRadius.lg"),
                 
                 "--switch-border-radius": theme("borderRadius.full"),
+
+                "--select-dark-bg" : theme("colors.gray.950"),
                 },
             });
           addComponents({
