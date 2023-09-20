@@ -69,8 +69,8 @@ plugins: [
                     "--avatar-border-radius": theme("borderRadius.full"),
                     "--avatar-status-position": theme("spacing.px"),
                     "--card-border-radius": theme("borderRadius.3xl"),
-                    "--card-light-bg": theme("colors.gray.50"),
-                    "--card-dark-bg": theme("colors.gray.900"),
+                    "--card-light-bg": theme("colors.gray.100"),
+                    "--card-dark-bg": theme("colors.gray.950"),
                     "--card-padding": theme("spacing.8"),
                     
                     "--card-shadow": `0 10px 15px -3px var(--card-shadow-appearance), 0 4px 6px -4px var(--card-shadow-appearance)`,
@@ -91,18 +91,25 @@ plugins: [
                     "--menu-dark-bg": "theme(colors.gray.950 / 80%)",
                     "--menu-light-border-color": theme("colors.gray.200"),
                     "--menu-dark-border-color": theme("colors.gray.800"),
+                    "--menu-light-backdrop-blur": "2rem",
+                    "--menu-dark-backdrop-blur": "2rem",
+
                     "--separator-light-color": theme("colors.gray.200"),
                     "--separator-dark-color": theme("colors.gray.800"),
-                    "--menu-dark-backdrop-blur": "2rem",
-                    "--menu-light-backdrop-blur": "2rem",
                     
-                "--alert-border-radius": theme("borderRadius.2xl"),
-                    
-                "--field-border-radius": theme("borderRadius.lg"),
+                    "--alert-border-radius": theme("borderRadius.2xl"),
+                    "--field-border-radius": theme("borderRadius.lg"),
                 
-                "--switch-border-radius": theme("borderRadius.full"),
-
-                "--select-dark-bg" : theme("colors.gray.950"),
+                    "--switch-border-radius": theme("borderRadius.full"),
+                    
+                    "--select-dark-bg": theme("colors.gray.950"),
+                    
+                    "--tabs-light-bg": theme("colors.gray.100"),
+                      "--tabs-light-border-color": theme("colors.gray.200"),
+                      "--tabs-dark-border-color": theme("colors.gray.800"),
+                    "--tabs-border-radius": theme("borderRadius.2xl"),
+                    "--tabs-dark-bg": theme("colors.gray.950"),
+                    "--tabs-indicator-dark-bg": theme("colors.gray.900"),
                 },
             });
           addComponents({
