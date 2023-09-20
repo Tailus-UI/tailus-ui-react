@@ -98,7 +98,9 @@ plugins: [
                     
                 "--alert-border-radius": theme("borderRadius.2xl"),
                     
-                "--field-border-radius" : theme("borderRadius.lg"),
+                "--field-border-radius": theme("borderRadius.lg"),
+                
+                "--switch-border-radius": theme("borderRadius.full"),
                 },
             });
           addComponents({
