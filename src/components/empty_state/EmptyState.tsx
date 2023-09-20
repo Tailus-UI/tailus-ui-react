@@ -11,7 +11,7 @@ const EmptyStateUI = () => (
             <p className={emptyState.description}>We've got something for everyone.</p>
         </div>
         <button className={outlinedButton.info.md}>
-            <span>Refresh</span>
+            <span>Retry</span>
         </button>
     </div>
 );
