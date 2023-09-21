@@ -105,11 +105,12 @@ plugins: [
                     "--select-dark-bg": theme("colors.gray.950"),
                     
                     "--tabs-light-bg": theme("colors.gray.100"),
-                      "--tabs-light-border-color": theme("colors.gray.200"),
-                      "--tabs-dark-border-color": theme("colors.gray.900"),
-                    "--tabs-border-radius": theme("borderRadius.2xl"),
-                    "--tabs-dark-bg": theme("colors.gray.950"),
-                    "--tabs-indicator-dark-bg": theme("colors.gray.700"),
+                    "--tabs-light-border-color": theme("colors.gray.200"),
+                    "--tabs-dark-border-color": theme("colors.gray.800"),
+                    "--tabs-border-radius": theme("borderRadius.lg"),
+                    "--tabs-dark-bg": theme("colors.gray.900"),
+                    "--tabs-indicator-light-bg": theme("colors.gray.900"),
+                    "--tabs-indicator-dark-bg": theme("colors.white"),
                 },
             });
           addComponents({

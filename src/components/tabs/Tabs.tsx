@@ -1,17 +1,19 @@
 import * as Tabs from "@radix-ui/react-tabs";
-import { mixedTabs as tabsTheme } from "@tailus/themer-tabs";
+import { bottomIndicatorTabs as tabsTheme } from "@tailus/themer-tabs";
 import { mixedVariant as cardTheme } from "@tailus/themer-card";
-import { button as buttonTheme} from "@tailus/themer-button";
+import { button as buttonTheme } from "@tailus/themer-button";
+import { softBadge as badge } from "@tailus/themer-badge"
+import { PersonIcon, LockClosedIcon } from "@radix-ui/react-icons";
 
 function onValueChange(): void {
-   const indicator4 = document.getElementById("indicator4") as HTMLElement | null;
+  const indicator4 = document.getElementById("indicator4") as HTMLElement | null;
   const list = document.querySelector("#app-tabs2") as HTMLElement | null;
   const activeTrigger = list?.querySelector("[data-state='active']") as HTMLElement | null;
 
-  if (indicator4) {
-    indicator4.style.left = activeTrigger ? activeTrigger.offsetLeft + activeTrigger.offsetWidth / 2 - indicator4.offsetWidth / 2 + "px" : "";
-    indicator4.style.width = activeTrigger?.offsetWidth + "px";
-  }
+    if (indicator4 && activeTrigger) {
+        indicator4.style.left =  activeTrigger.offsetLeft + "px";
+        indicator4.style.width = activeTrigger.offsetWidth + "px";
+    }
 }
 
 onValueChange();
@@ -21,13 +23,16 @@ const TabsAppUI = () => (
         <Tabs.List className={tabsTheme.list} aria-label="Manage your account" id="app-tabs2">
             <span id="indicator4" className={tabsTheme.indicator} aria-hidden="true"></span>
             <Tabs.Trigger className={tabsTheme.trigger} value="account">
+                <PersonIcon className={tabsTheme.triggerIcon} />
                 Account
+                <span className={badge.gray.sm}>55</span>
             </Tabs.Trigger>
             <Tabs.Trigger className={tabsTheme.trigger} value="pwd">
+                <LockClosedIcon className={tabsTheme.triggerIcon} />
                 Password
             </Tabs.Trigger>
         </Tabs.List>
-        <Tabs.Content className={tabsTheme.content} value="account">
+        <Tabs.Content className="" value="account">
             <div className={cardTheme}>
                 <p className="text-gray-700 dark:text-gray-300">Make changes to your account here. Click save when you're done.</p>
                 <form action="" className="mt-6">
