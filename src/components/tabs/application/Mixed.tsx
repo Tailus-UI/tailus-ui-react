@@ -1,8 +1,7 @@
 import * as Tabs from "@radix-ui/react-tabs";
-import { tabs as tabsTheme } from "@tailus/themer-tabs";
-import { mixedVariant as cardTheme } from "@tailus/themer-card";
+import { mixedTabs as tabsTheme } from "@tailus/themer-tabs";
+import { card as cardTheme } from "@tailus/themer-card";
 import { button as buttonTheme } from "@tailus/themer-button";
-import { softBadge as badge } from "@tailus/themer-badge"
 import { PersonIcon, LockClosedIcon } from "@radix-ui/react-icons";
 
 function onValueChange(): void {
@@ -18,14 +17,13 @@ function onValueChange(): void {
 
 onValueChange();
 
-const TabsAppUI = () => (
+const TabsAppMixed = () => (
     <Tabs.Root className="my-auto flex h-fit space-y-4 w-[22rem] flex-col" defaultValue="account" onValueChange={onValueChange}>
         <Tabs.List className={tabsTheme.list} aria-label="Manage your account" id="app-tabs2">
             <span id="indicator4" className={tabsTheme.indicator} aria-hidden="true"></span>
             <Tabs.Trigger className={tabsTheme.trigger} value="account">
                 <PersonIcon className={tabsTheme.triggerIcon} />
                 Account
-                <span className={badge.gray.sm}>55</span>
             </Tabs.Trigger>
             <Tabs.Trigger className={tabsTheme.trigger} value="pwd">
                 <LockClosedIcon className={tabsTheme.triggerIcon} />
@@ -87,4 +85,4 @@ const TabsAppUI = () => (
     </Tabs.Root>
 );
 
-export default TabsAppUI;
+export default TabsAppMixed;
