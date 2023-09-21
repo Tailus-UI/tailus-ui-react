@@ -106,10 +106,10 @@ plugins: [
                     
                     "--tabs-light-bg": theme("colors.gray.100"),
                       "--tabs-light-border-color": theme("colors.gray.200"),
-                      "--tabs-dark-border-color": theme("colors.gray.800"),
+                      "--tabs-dark-border-color": theme("colors.gray.900"),
                     "--tabs-border-radius": theme("borderRadius.2xl"),
                     "--tabs-dark-bg": theme("colors.gray.950"),
-                    "--tabs-indicator-dark-bg": theme("colors.gray.900"),
+                    "--tabs-indicator-dark-bg": theme("colors.gray.700"),
                 },
             });
           addComponents({
