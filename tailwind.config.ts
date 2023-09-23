@@ -117,7 +117,10 @@ plugins: [
                     "--tabs-bottom-indicator-light-bg": theme("colors.primary.600"),
                 "--tabs-bottom-indicator-dark-bg": theme("colors.primary.400"),
                     
-                "--tabs-soft-border-radius" : theme("borderRadius.full"),
+                "--tabs-soft-border-radius": theme("borderRadius.full"),
+                "--popover-border-radius": theme("borderRadius.xl"),
+                "--popover-padding": theme("spacing.6"),
+                
                 },
             });
           addComponents({
