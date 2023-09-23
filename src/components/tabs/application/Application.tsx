@@ -19,8 +19,8 @@ onValueChange();
 
 const TabsApp = () => (
     <Tabs.Root className="my-auto flex h-fit space-y-4 w-[22rem] flex-col" defaultValue="account" onValueChange={onValueChange}>
-        <Tabs.List className={tabsTheme.list} aria-label="Manage your account" id="app-tabs2">
-            <span id="indicator4" className={tabsTheme.indicator} aria-hidden="true"></span>
+        <Tabs.List className={tabsTheme.list.soft} aria-label="Manage your account" id="app-tabs2">
+            <span id="indicator4" className={tabsTheme.indicator.elevated} aria-hidden="true"></span>
             <Tabs.Trigger className={tabsTheme.trigger} value="account">
                 <PersonIcon className={tabsTheme.triggerIcon} />
                 Account

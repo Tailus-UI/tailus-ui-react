@@ -1,5 +1,5 @@
 import * as Tabs from "@radix-ui/react-tabs";
-import { outlinedTabs as tabsTheme } from "@tailus/themer-tabs";
+import { tabs as tabsTheme } from "@tailus/themer-tabs";
 import { mixedVariant as cardTheme } from "@tailus/themer-card";
 import { button as buttonTheme } from "@tailus/themer-button";
 
@@ -18,8 +18,8 @@ onValueChange();
 
 const OutlinedTabsMarketing = () => (
     <Tabs.Root className="my-auto flex h-fit space-y-4 flex-col" defaultValue="monthly" onValueChange={onValueChange}>
-        <Tabs.List className={tabsTheme.list + " w-max mx-auto"} aria-label="Manage your account" id="marketing-tabs">
-            <span id="indicator4" className={tabsTheme.indicator} aria-hidden="true"></span>
+        <Tabs.List className={tabsTheme.list.outlined + " w-max mx-auto"} aria-label="Manage your account" id="marketing-tabs">
+            <span id="indicator4" className={tabsTheme.indicator.outlined} aria-hidden="true"></span>
             <Tabs.Trigger className={tabsTheme.trigger} value="monthly">
                 Monthly
             </Tabs.Trigger>

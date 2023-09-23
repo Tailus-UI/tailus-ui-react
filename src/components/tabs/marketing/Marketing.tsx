@@ -18,8 +18,8 @@ onValueChange();
 
 const TabsMarketing = () => (
     <Tabs.Root className="my-auto flex h-fit space-y-4 flex-col" defaultValue="monthly" onValueChange={onValueChange}>
-        <Tabs.List className={tabsTheme.list + " w-max mx-auto"} aria-label="Choose your plans" id="marketing-tabs">
-            <span id="indicator4" className={tabsTheme.indicator} aria-hidden="true"></span>
+        <Tabs.List className={tabsTheme.list.soft + " w-max mx-auto"} aria-label="Choose your plans" id="marketing-tabs">
+            <span id="indicator4" className={tabsTheme.indicator.elevated} aria-hidden="true"></span>
             <Tabs.Trigger className={tabsTheme.trigger} value="monthly">
                 Monthly
             </Tabs.Trigger>

@@ -1,7 +1,7 @@
 import TabsEcommerce from "./ecommerce/Ecommerce";
 import OutlinedTabsEcommerce from "./ecommerce/Outlined";
 import MixedTabsEcommerce from "./ecommerce/Mixed";
-import BottomIndicatorTabsEcommerce from "./ecommerce/BottomIndicator"
+import BottomIndicatorTabsEcommerce from "./ecommerce/BottomIndicator";
 
 export default {
     component: TabsEcommerce

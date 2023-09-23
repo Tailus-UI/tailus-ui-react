@@ -1,5 +1,5 @@
 import * as Tabs from "@radix-ui/react-tabs";
-import { outlinedTabs as tabsTheme } from "@tailus/themer-tabs";
+import { tabs as tabsTheme } from "@tailus/themer-tabs";
 import { card as cardTheme } from "@tailus/themer-card";
 import { button as buttonTheme } from "@tailus/themer-button";
 import { PersonIcon, LockClosedIcon } from "@radix-ui/react-icons";
@@ -19,8 +19,8 @@ onValueChange();
 
 const TabsAppOulined = () => (
     <Tabs.Root className="my-auto flex h-fit space-y-4 w-[22rem] flex-col" defaultValue="account" onValueChange={onValueChange}>
-        <Tabs.List className={tabsTheme.list} aria-label="Manage your account" id="app-tabs2">
-            <span id="indicator4" className={tabsTheme.indicator} aria-hidden="true"></span>
+        <Tabs.List className={tabsTheme.list.outlined} aria-label="Manage your account" id="app-tabs2">
+            <span id="indicator4" className={tabsTheme.indicator.outlined} aria-hidden="true"></span>
             <Tabs.Trigger className={tabsTheme.trigger} value="account">
                 <PersonIcon className={tabsTheme.triggerIcon} />
                 Account

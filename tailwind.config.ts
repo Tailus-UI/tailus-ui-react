@@ -15,7 +15,7 @@ export default {
             inherit: colors.inherit,
             current: colors.current,
             transparent: colors.transparent,
-            primary: colors.teal,
+            primary: colors.blue,
             secondary: colors.purple,
             accent: colors.fuchsia,
             danger: colors.red,
@@ -68,7 +68,7 @@ plugins: [
                     "--annonce-border-radius" : theme("borderRadius.full"),
                     "--avatar-border-radius": theme("borderRadius.full"),
                     "--avatar-status-position": theme("spacing.px"),
-                    "--card-border-radius": theme("borderRadius.xl"),
+                    "--card-border-radius": theme("borderRadius.3xl"),
                     "--card-light-bg": theme("colors.gray.100"),
                     "--card-dark-bg": theme("colors.gray.950"),
                     "--card-padding": theme("spacing.8"),
@@ -108,14 +108,16 @@ plugins: [
                     "--tabs-light-border-color": theme("colors.gray.200"),
                     "--tabs-dark-border-color": theme("colors.gray.800"),
                     "--tabs-border-radius": theme("borderRadius.xl"),
-                    "--tabs-dark-bg": theme("colors.gray.950"),
+                    "--tabs-dark-bg": theme("colors.gray.800"),
                     "--tabs-indicator-light-bg": theme("colors.primary.600"),
-                    "--tabs-indicator-dark-bg": theme("colors.gray.800"),
+                    "--tabs-indicator-dark-bg": theme("colors.gray.950"),
                     
                     "--tabs-bottom-indicator-trigger-dark-bg": theme("colors.gray.800"),
                     "--tabs-bottom-indicator-border-radius" : theme("borderRadius.md"),
                     "--tabs-bottom-indicator-light-bg": theme("colors.primary.600"),
-                    "--tabs-bottom-indicator-dark-bg": theme("colors.primary.400"),
+                "--tabs-bottom-indicator-dark-bg": theme("colors.primary.400"),
+                    
+                "--tabs-soft-border-radius" : theme("borderRadius.full"),
                 },
             });
           addComponents({

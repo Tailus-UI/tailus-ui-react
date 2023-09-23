@@ -1,5 +1,5 @@
 import * as Tabs from "@radix-ui/react-tabs";
-import { tabs as tabsTheme } from "@tailus/themer-tabs";
+import { bottomIndicatorTabs as tabsTheme } from "@tailus/themer-tabs";
 
 function onValueChange(): void {
   const indicator4 = document.getElementById("indicator4") as HTMLElement | null;
@@ -7,17 +7,17 @@ function onValueChange(): void {
   const activeTrigger = list?.querySelector("[data-state='active']") as HTMLElement | null;
 
     if (indicator4 && activeTrigger) {
-        indicator4.style.left =  activeTrigger.offsetLeft + "px";
-        indicator4.style.width = activeTrigger.offsetWidth + "px";
+        indicator4.style.left =  activeTrigger.offsetLeft + 8 + "px";
+        indicator4.style.width = activeTrigger.offsetWidth - 16 + "px";
     }
 }
 
 onValueChange();
 
-const TabsAppUI = () => (
+const TabsBottomIndicator = () => (
     <Tabs.Root className="w-[22rem] flex flex-col" defaultValue="nike" onValueChange={onValueChange}>
-         <Tabs.List className={tabsTheme.list.soft + " w-max"} aria-label="stores" id="ecommerce">
-            <span id="indicator4" className={tabsTheme.indicator.elevated} aria-hidden="true"></span>
+         <Tabs.List className={tabsTheme.list + " w-max"} aria-label="stores" id="ecommerce">
+            <span id="indicator4" className={tabsTheme.indicator} aria-hidden="true"></span>
             <Tabs.Trigger className={tabsTheme.trigger} value="nike">
                 <svg className={tabsTheme.triggerIcon} aria-hidden viewBox="0 0 24 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M23.9998 0L6.44181 7.476C4.98581 8.092 3.76281 8.401 2.77381 8.401C1.65381 8.401 0.840814 8.009 0.336814 7.224C0.0198138 6.72 -0.0731862 6.081 0.0568138 5.306C0.186814 4.531 0.532814 3.706 1.09281 2.828C1.55981 2.118 2.32481 1.185 3.38981 0.0279999C3.02858 0.596666 2.76368 1.22106 2.60581 1.876C2.32581 3.071 2.57781 3.948 3.36181 4.508C3.73481 4.769 4.24781 4.9 4.90181 4.9C5.42381 4.9 6.01181 4.816 6.66581 4.648L23.9998 0Z" fill="currentColor"/>
@@ -49,4 +49,4 @@ const TabsAppUI = () => (
     </Tabs.Root>
 );
 
-export default TabsAppUI;
+export default TabsBottomIndicator;
