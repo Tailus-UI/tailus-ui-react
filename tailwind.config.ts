@@ -15,7 +15,7 @@ export default {
             inherit: colors.inherit,
             current: colors.current,
             transparent: colors.transparent,
-            primary: colors.blue,
+            primary: colors.orange,
             secondary: colors.purple,
             accent: colors.fuchsia,
             danger: colors.red,
@@ -138,6 +138,13 @@ plugins: [
                 
                 "--tooltip-border-radius": theme("borderRadius.md"),
                 "--toast-border-radius": theme("borderRadius.xl"),
+
+                "--field-light-bg": theme("colors.gray.100"),
+                "--field-light-focus-bg": theme("colors.gray.50"),
+                "--field-dark-bg": theme("colors.gray.800"),
+                "--field-dark-focus-bg": theme("colors.gray.900"),
+                "--field-light-border-color": theme("colors.gray.300"),
+                "--field-dark-border-color": theme("colors.gray.800"),
                 },
             });
           addComponents({
