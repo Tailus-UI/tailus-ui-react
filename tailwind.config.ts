@@ -15,7 +15,7 @@ export default {
             inherit: colors.inherit,
             current: colors.current,
             transparent: colors.transparent,
-            primary: colors.orange,
+            primary: colors.indigo,
             secondary: colors.purple,
             accent: colors.fuchsia,
             danger: colors.red,
