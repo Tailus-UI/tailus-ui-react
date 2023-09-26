@@ -4,12 +4,12 @@
     "description": "Customizable UI components for Tailwind CSS",
     "icons": [
         {
-            "src": "favicon-black.svg",
+            "src": "/favicon-black.svg",
             "sizes": "64x64 32x32 24x24 16x16",
             "type": "image/x-icon"
         },
         {
-            "src": "favicon-white.svg",
+            "src": "/favicon-white.svg",
             "sizes": "64x64 32x32 24x24 16x16",
             "type": "image/x-icon"
         },
