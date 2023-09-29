@@ -1,16 +1,32 @@
-import { card as cardTheme } from '@tailus/themer-card';
+import { getPadding, getVariant } from './Card.config';
 
-const CardUI = () => (
-    <div className={cardTheme + " max-w-xs"}>
-        <div className='aspect-auto'>
-            <img className="h-full w-full object-cover dark:hidden" src="/legend.png" alt="tailus card stats img" height={688} width={1168} />
-            <img className="hidden h-full w-full object-cover dark:block" src="/legend-dark.png" alt="tailus card dark stats img" height={688} width={1168} />
-        </div>
-        <div className="relative z-10 mt-6 space-y-3 text-center">
-            <h3 className="text-xl font-medium text-gray-800 transition group-hover:text-secondary-950 dark:text-white">Faster than light</h3>
-            <p className="text-base text-gray-700 dark:text-gray-300">Provident fugit vero voluptate dolores voluptates a sapiente.</p>
-        </div>
-    </div>
-)
+type Props = {
+    children: string | JSX.Element | JSX.Element[],
+    variant: string | { outer: string, inner: string }
+    padding: string
+}
+
+const CardUI = (props : Props) => {
+    const cardTheme = getVariant(props.variant)
+    const CardPadding = getPadding(props.padding)
+   
+    return (
+        <>
+            {
+                props.variant === "elevatedGradient" || props.variant === "softGradient" 
+                ?
+                <div className={cardTheme.outer + " " + CardPadding + " max-w-xs"} >
+                    <div className={cardTheme.inner}>
+                        {props.children}
+                    </div>
+                </div>
+                :
+                <div className={cardTheme + " " + CardPadding + " max-w-xs"} >
+                    {props.children}
+                </div>
+            }
+        </>
+    )
+}
 
 export default CardUI
