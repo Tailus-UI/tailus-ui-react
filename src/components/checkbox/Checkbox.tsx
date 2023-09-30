@@ -1,4 +1,3 @@
-import React from "react";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import {checkbox as checkboxTheme} from "@tailus/themer-checkbox";
 
