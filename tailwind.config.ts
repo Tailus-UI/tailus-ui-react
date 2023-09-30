@@ -76,8 +76,8 @@ plugins: [
                     "--ui-light-border-hover-color": theme("colors.gray.300"),
                     "--ui-dark-border-hover-color": theme("colors.gray.700"),
                     
-                  "--btn-border-radius": theme("borderRadius.full"),
-                   "--btn-border-width" : "1.5px",
+                  "--btn-border-radius": theme("borderRadius.lg"),
+                   "--btn-border-width" : "2px",
                     "--accordion-border-radius": theme("borderRadius.xl"),
                     "--accordion-shadow" : theme("boxShadow.xl"),
                     "--annonce-border-radius" : theme("borderRadius.full"),
@@ -121,11 +121,11 @@ plugins: [
                     
                     "--tabs-light-bg": theme("colors.gray.100"),
                     "--tabs-light-border-color": theme("colors.gray.200"),
-                    "--tabs-dark-border-color": theme("colors.gray.800"),
+                    "--tabs-dark-border-color": theme("colors.gray.600"),
                     "--tabs-border-radius": theme("borderRadius.xl"),
-                    "--tabs-dark-bg": theme("colors.gray.800"),
+                    "--tabs-dark-bg": theme("colors.gray.950"),
                     "--tabs-indicator-light-bg": theme("colors.primary.600"),
-                    "--tabs-indicator-dark-bg": theme("colors.gray.950"),
+                    "--tabs-indicator-dark-bg": theme("colors.gray.800"),
                     
                     "--tabs-bottom-indicator-trigger-dark-bg": theme("colors.gray.800"),
                     "--tabs-bottom-indicator-border-radius" : theme("borderRadius.md"),

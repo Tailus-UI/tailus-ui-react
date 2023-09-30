@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { outlinedVariant as accordionTheme } from "@tailus/themer-accordion"
+import { softVariant as accordionTheme } from "@tailus/themer-accordion"
 
 const AccordionOutlinedVariant = () => (
     <Accordion.Root className={`w-full min-w-[28rem] max-w-md ${accordionTheme.root}`} type="single" defaultValue="item-1" collapsible>

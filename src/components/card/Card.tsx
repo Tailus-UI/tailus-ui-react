@@ -1,7 +1,7 @@
 import { card as cardTheme } from '@tailus/themer-card';
 
 const CardUI = () => (
-    <div className={cardTheme + " max-w-xs"}>
+    <div className={cardTheme + " w-[500px] max-w-xs"}>
         <div className='aspect-auto'>
             <img className="h-full w-full object-cover dark:hidden" src="/legend.png" alt="tailus card stats img" height={688} width={1168} />
             <img className="hidden h-full w-full object-cover dark:block" src="/legend-dark.png" alt="tailus card dark stats img" height={688} width={1168} />

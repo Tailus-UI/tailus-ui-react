@@ -1,5 +1,6 @@
 import { card, elevatedGradientVariant, elevatedVariant, softVariant, softGradientVariant, mixedVariant } from '@tailus/themer-card'
 import { cva, VariantProps } from 'class-variance-authority'
+import {cn} from "../../lib/utils"
 
 const cardui = cva(["max-w-xs"], {
   variants: {
@@ -12,15 +13,15 @@ const cardui = cva(["max-w-xs"], {
       softGradient: softGradientVariant.outer, 
     },
     padding: {
-      none: 'p-0',
-      one: 'p-1',
-      two: 'p-2',
-      three: 'p-3',
+      0: 'p-0',
+      1: 'p-1',
+      2: 'p-2',
+      3: 'p-3',
     }
   },
   defaultVariants: {
     variant: "card",
-    padding: "none",
+    padding: 0,
   }
 })
 
@@ -36,7 +37,7 @@ export const MyCard: React.FC<CardProps> = ({
   children,
   ...props
 }) => (
-  <div className={cardui({ variant, padding, className })} {...props} >
+  <div className={cn(cardui({ variant, padding, className }))} {...props} >
       {
         variant === 'softGradient' ? 
         <>
@@ -54,7 +55,6 @@ export const MyCard: React.FC<CardProps> = ({
         <>
           { children }
         </>
-
       }
   </div>
 );

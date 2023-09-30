@@ -7,11 +7,17 @@ import CardElevatedGradientVariant from "./ElevatedGradient";
 
 export default {
     component: CardUI,
+    docs: {
+        title : "Card",
+        description: {
+            component: 'A card component',
+        },
+    }
 }
 
 export const Card = () => <CardUI />;
 export const Elevated = () => <CardElevatedVariant />
-export const Mixed = () => <CardMixedVariant />
+export const Mixed = () => <Card />
 export const Soft = () => <CardSoftVariant />
 export const SoftGradient = () => <CardSoftGradientVariant />
 export const ElevatedGradient = () => <CardElevatedGradientVariant />

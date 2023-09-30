@@ -1,5 +1,5 @@
 import AvatarUI from "./Avatar";
-import AvatarSolidFallback from "./SolidFallback";
+import AvatarSolidFallback from "./SoftFallback";
 import AvatarTopStatus from "./TopStatus";
 import AvatarBottomStatus from "./BottomStatus";
 

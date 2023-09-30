@@ -4,8 +4,8 @@ import { MyCard } from "./components/card/Card.config";
 
 function App() {
     return (
-        <div className="flex">
-            <MyCard variant={'card'} padding={'tree'}>
+        <div className="flex justify-center min-h-screen items-center">
+            <MyCard className="p-12" variant="mixed">
                 <div className='aspect-auto'>
                     <img className="h-full w-full object-cover dark:hidden" src="/legend.png" alt="tailus card stats img" height={688} width={1168} />
                     <img className="hidden h-full w-full object-cover dark:block" src="/legend-dark.png" alt="tailus card dark stats img" height={688} width={1168} />
