@@ -75,15 +75,28 @@ plugins: [
                     "--ui-dark-border-color": theme("colors.gray.800"),
                     "--ui-light-border-hover-color": theme("colors.gray.300"),
                     "--ui-dark-border-hover-color": theme("colors.gray.700"),
-                    
-                  "--btn-border-radius": theme("borderRadius.lg"),
-                   "--btn-border-width" : "2px",
-                    "--accordion-border-radius": theme("borderRadius.xl"),
-                    "--accordion-shadow" : theme("boxShadow.xl"),
+                   /* 
                     "--annonce-border-radius" : theme("borderRadius.full"),
                     "--avatar-border-radius": theme("borderRadius.full"),
-                    "--avatar-status-position": theme("spacing.px"),
+                    "--flag-border-radius": theme("borderRadius.xl"),
+                    "--badge-border-radius": theme("borderRadius.full"), 
+                    "--menu-border-radius": theme("borderRadius.2xl"),
+                    "--alert-border-radius": theme("borderRadius.2xl"),
+                    "--toast-border-radius": theme("borderRadius.xl"),
+                    "--field-border-radius": theme("borderRadius.lg"),
+                    "--switch-border-radius": theme("borderRadius.full"),
+                    "--tabs-border-radius": theme("borderRadius.xl"),
+                    "--popover-border-radius": theme("borderRadius.xl"),
+                    "--tabs-soft-border-radius": theme("borderRadius.full"),
                     "--card-border-radius": theme("borderRadius.3xl"),
+                    "--accordion-border-radius": theme("borderRadius.xl"),
+                    "--tabs-bottom-indicator-border-radius" : theme("borderRadius.md"),
+                    "--tooltip-border-radius": theme("borderRadius.md"),
+                    "--btn-border-radius": theme("borderRadius.lg"),
+                    */
+                    "--btn-border-width" : "2px",
+                    "--accordion-shadow" : theme("boxShadow.xl"),
+                    "--avatar-status-position": theme("spacing.px"),
                     "--card-light-bg": theme("colors.gray.100"),
                     "--card-dark-bg": theme("colors.gray.950"),
                     "--card-padding": theme("spacing.8"),
@@ -95,12 +108,7 @@ plugins: [
                     "--feedback-dark-bg": theme("colors.gray.950"),
                     "--feedback-light-border-color": theme("colors.gray.200"),
                     "--feedback-dark-border-color": theme("colors.gray.800"),
-                    "--flag-border-radius": theme("borderRadius.xl"),
                     "--flag-padding": theme("spacing.6"),
-                    
-                    "--badge-border-radius": theme("borderRadius.full"),
-                        
-                    "--menu-border-radius": theme("borderRadius.2xl"),
                     "--menu-light-bg-opacity": "90%",
                     "--menu-dark-bg-opacity": theme("50%"),
                     "--menu-dark-bg": "theme(colors.gray.950 / 80%)",
@@ -108,36 +116,22 @@ plugins: [
                     "--menu-dark-border-color": theme("colors.gray.800"),
                     "--menu-light-backdrop-blur": "2rem",
                     "--menu-dark-backdrop-blur": "2rem",
-
                     "--separator-light-color": theme("colors.gray.200"),
                     "--separator-dark-color": theme("colors.gray.800"),
-                    
-                    "--alert-border-radius": theme("borderRadius.2xl"),
-                    "--field-border-radius": theme("borderRadius.lg"),
-                
-                    "--switch-border-radius": theme("borderRadius.full"),
-                    
                     "--select-dark-bg": theme("colors.gray.950"),
-                    
                     "--tabs-light-bg": theme("colors.gray.100"),
                     "--tabs-light-border-color": theme("colors.gray.200"),
                     "--tabs-dark-border-color": theme("colors.gray.600"),
-                    "--tabs-border-radius": theme("borderRadius.xl"),
                     "--tabs-dark-bg": theme("colors.gray.950"),
                     "--tabs-indicator-light-bg": theme("colors.primary.600"),
                     "--tabs-indicator-dark-bg": theme("colors.gray.800"),
                     
                     "--tabs-bottom-indicator-trigger-dark-bg": theme("colors.gray.800"),
-                    "--tabs-bottom-indicator-border-radius" : theme("borderRadius.md"),
                     "--tabs-bottom-indicator-light-bg": theme("colors.primary.600"),
                 "--tabs-bottom-indicator-dark-bg": theme("colors.primary.400"),
                     
-                "--tabs-soft-border-radius": theme("borderRadius.full"),
-                "--popover-border-radius": theme("borderRadius.xl"),
                 "--popover-padding": theme("spacing.6"),
                 
-                "--tooltip-border-radius": theme("borderRadius.md"),
-                "--toast-border-radius": theme("borderRadius.xl"),
 
                 "--field-light-bg": theme("colors.gray.100"),
                 "--field-light-focus-bg": theme("colors.gray.50"),

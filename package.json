@@ -32,6 +32,7 @@
     "@tailus/themer-accordion": "^0.0.3",
     "@tailus/themer-alert-dialog": "^0.0.1",
     "@tailus/themer-annonce": "^0.0.1",
+    "@tailus/themer-avatar": "^0.0.3",
     "@tailus/themer-badge": "^0.0.1",
     "@tailus/themer-button": "^0.0.1",
     "class-variance-authority": "^0.7.0",
