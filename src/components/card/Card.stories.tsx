@@ -1,34 +1,9 @@
-<<<<<<< HEAD
-import CardUI from "./Card";
-import CardElevatedVariant from "./Elevated";
-import CardMixedVariant from "./Mixed";
-import CardSoftVariant from "./Soft";
-import CardSoftGradientVariant from "./SoftGradient";
-import CardElevatedGradientVariant from "./ElevatedGradient";
-
-export default {
-    component: CardUI,
-    docs: {
-        title : "Card",
-        description: {
-            component: 'A card component',
-        },
-    }
-}
-
-export const Card = () => <CardUI />;
-export const Elevated = () => <CardElevatedVariant />
-export const Mixed = () => <Card />
-export const Soft = () => <CardSoftVariant />
-export const SoftGradient = () => <CardSoftGradientVariant />
-export const ElevatedGradient = () => <CardElevatedGradientVariant />
-=======
 import type { Meta, StoryObj } from '@storybook/react';
 import { Card } from "./Card";
 
 
 const meta: Meta<typeof Card> = {
-  title: 'CARD/Card',
+  title: 'Card',
   component: Card,
   parameters: {
     layout: 'centered',
@@ -126,4 +101,3 @@ export const ElevatedGradient: Story = {
     className: "max-w-xs"
   },
 };
->>>>>>> 2017f2c5eb3c55baa1d82502f3ba57c5a0d8e218
