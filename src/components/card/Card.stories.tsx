@@ -6,7 +6,8 @@ import CardSoftGradientVariant from "./SoftGradient";
 import CardElevatedGradientVariant from "./ElevatedGradient";
 
 export default {
-    component: CardUI,
+  component: CardUI,
+  tags : ["tailwind", "card", "autodocs"],
 }
 
 export const Card = () => <CardUI />;
