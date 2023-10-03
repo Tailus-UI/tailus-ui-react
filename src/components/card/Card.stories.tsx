@@ -3,16 +3,13 @@ import { Card } from "./Card";
 
 
 const meta: Meta<typeof Card> = {
-  title: 'CARD/Card',
+  title: 'Card',
   component: Card,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
         component: 'A customizable card component for React applications.',
-      },
-      source: {
-        code: `<Card variant="outlined" padding={5}>This is a card</Card>`,
       },
     },
   },

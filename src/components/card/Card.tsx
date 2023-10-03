@@ -43,7 +43,6 @@ const cardui = cva([''], {
   },
   defaultVariants: {
     variant: 'outlined',
-    padding: 5,
   },
 });
 
