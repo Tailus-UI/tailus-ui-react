@@ -86,7 +86,7 @@ export const SoftGradient: Story = {
     variant: 'softGradient',
     padding: 5,
     children: example,
-    className: "max-w-xs"
+    className: "max-w-xs",
   },
 };
 
@@ -95,6 +95,6 @@ export const ElevatedGradient: Story = {
     variant: 'elevatedGradient',
     padding: 5,
     children: example,
-    className: "max-w-xs"
+    className: "max-w-xs",
   },
 };

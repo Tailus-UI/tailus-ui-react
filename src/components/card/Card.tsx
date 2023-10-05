@@ -31,9 +31,9 @@ const variantMap = {
   outlined: card,
   mixed: mixedVariant,
   elevated: elevatedVariant,
-  elevatedGradient: elevatedGradientVariant.outer,
+  elevatedGradient: [elevatedGradientVariant.outer, "max-w-xs"],
   soft: softVariant,
-  softGradient: softGradientVariant.outer,
+  softGradient: [softGradientVariant.outer, "max-w-xs"]
 };
 
 const cardui = cva([''], {
@@ -57,14 +57,20 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   const innerClass = variant === 'softGradient' ? softGradientVariant.inner : variant === 'elevatedGradient' ? elevatedGradientVariant.inner : '';
   const classes = cn(cardui({ variant, padding, className }));
+  const innerGradient = cn(cardui({variant}))
   return (
-    <div className={classes} {...props}>
+    <div >
       {innerClass ? (
-        <div className={innerClass}>
+        <div className={innerGradient}>
+          <div className={innerClass}>
+            {children}
+          </div>
+        </div>
+        
+      ) : (
+        <div className={classes} {...props}>
           {children}
         </div>
-      ) : (
-        children
       )}
     </div>
   );
