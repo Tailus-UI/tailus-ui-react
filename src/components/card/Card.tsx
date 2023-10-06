@@ -36,6 +36,7 @@ const variantMap = {
   softGradient: [softGradientVariant.outer, "max-w-xs"]
 };
 
+
 const cardui = cva([''], {
   variants: {
     variant: variantMap,
@@ -46,6 +47,36 @@ const cardui = cva([''], {
   },
 });
 
+
+const innerui = cva([''], {
+  variants: {
+    variant: {
+      inner: softGradientVariant.inner
+    },
+    padding: paddingVariants,
+  },
+});
+
+
+
+interface InnerProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof innerui> {}
+
+const Inner: React.FC<InnerProps> = ({
+  variant,
+  padding,
+  children,
+  ...props
+}) => {
+  const classes = cn(innerui({ variant, padding }));
+  return (
+    
+        <div className={classes} {...props}>
+          {children}
+        </div>
+      )
+  }
+
+
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardui> {}
 
 export const Card: React.FC<CardProps> = ({
@@ -55,16 +86,16 @@ export const Card: React.FC<CardProps> = ({
   children,
   ...props
 }) => {
-  const innerClass = variant === 'softGradient' ? softGradientVariant.inner : variant === 'elevatedGradient' ? elevatedGradientVariant.inner : '';
+  const innerClass = variant === 'softGradient' ? softGradientVariant.inner : variant === 'elevatedGradient' ? elevatedGradientVariant.inner: '';
   const classes = cn(cardui({ variant, padding, className }));
-  const innerGradient = cn(cardui({variant}))
+  const innerGradient = cn(cardui({variant, className}))
   return (
     <div >
       {innerClass ? (
         <div className={innerGradient}>
-          <div className={innerClass}>
+          <Inner variant='inner' padding={padding}>
             {children}
-          </div>
+          </Inner>
         </div>
         
       ) : (
