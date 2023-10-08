@@ -5,7 +5,7 @@ export default {
   content: [
     "index.html",
     "./src/**/*.{js,jsx,ts,tsx,vue,html}",
-    './node_modules/@tailus/**/*.{js,jsx,ts,tsx,vue}',
+    './node_modules/@tailus/themer-**/dist/**/*.{js,ts}',
   ],
   theme: {
     extend: {
@@ -26,24 +26,24 @@ export default {
         }),
       keyframes: {
         slideDown: {
-          from: { height: 0 },
+          from: { height: '0' },
           to: { height: 'var(--radix-accordion-content-height)' },
         },
         slideUp: {
           from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: 0 },
+          to: { height: '0' },
         },
         overlayShow: {
-          from: { opacity: 0 },
-          to: { opacity: 1 },
+          from: { opacity: '0' },
+          to: { opacity: '1' },
         },
         contentShow: {
-          from: { opacity: 0, transform: 'translate(-50%, -48%) scale(0.96)' },
-          to: { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+          from: { opacity: '0', transform: 'translate(-50%, -48%) scale(0.96)' },
+          to: { opacity: '1', transform: 'translate(-50%, -50%) scale(1)' },
         },
         hide: {
-          from: { opacity: 1 },
-          to: { opacity: 0 },
+          from: { opacity: '1' },
+          to: { opacity: '0' },
         },
         slideIn: {
           from: { transform: 'translateX(calc(100% + var(--viewport-padding)))' },
@@ -66,7 +66,121 @@ export default {
     },
   },
   plugins: [
-    themer,
+    themer({
+    
+      appearance: "dark", // light | dark | both
+       /*
+      background: "lighter", // light | lighter | hight | higher
+      padding: "largest", // small | medium | large | larger | largest
+      border: "light", // lighter | light | high | higher 
+      radius: "sharp", // boxy | sharp | smooth | smoothest
+      shadow: {
+        size: "xxl",
+        opacity: 5,
+      },
+       */
+      components: {
+        accordion: {
+          rounded: "none",
+          softBg: "200",
+          ghostBg:"100",
+          shadow: {
+            size: "sm",
+            opacity: 5,
+          },
+          
+          dark: {
+            softBg: "900",
+            ghostBg: "900",
+            elevatedBg : "900",
+          }
+        }, 
+        /*
+        alert: {
+          rounded: "none",
+          shadow: {
+            size: "md",
+            opacity:5,
+          }
+        },
+        annonce: {
+          rounded : "md",
+        },
+        avatar: {
+          rounded: "2xl",
+          statusInset:"-0.5"
+        }, 
+        badge: {
+          rounded: "md",
+        },
+        button: {
+          rounded: "xl",
+          borderWith:"1.5",
+        },
+        card: {
+          rounded: "3xl",
+          padding: "12",
+          bg: "100",
+          shadow: {
+            size: "md",
+            opacity:4,
+          },
+          dark: {
+            bg:"950",
+          }
+        },
+        menu: {
+          rounded: "3xl",
+          borderColor: "200",
+          bgOpacity: 99,
+          backdropBlur: "3",
+          shadow: {
+            size: "md",
+            opacity:3,
+          },
+          dark: {
+            bg: "950",
+            borderColor: "800",
+            bgOpacity: 50,
+            backdropBlur: "5",
+          }
+        },
+        feedback: {
+          borderColor : "200",
+          shadow: {
+            size: "md",
+            opacity:4,
+          },
+          dark: {
+            borderColor: "600",
+            bg: "950",
+          }
+        },
+        flag: {
+          rounded: "xl",
+          padding: "4",
+        },
+        field: {
+          rounded: "full",
+          softBg: "100",
+          softBgFocus: "50",
+          borderColor: "300",
+          dark: {
+            softBg: "900",
+            softBgFocus: "950",
+            borderColor: "800",
+          }
+        },
+        popover: {
+          rounded : "3xl",
+        }, */
+        switch: {
+          rounded:"md"
+        },
+      } 
+     
+    }),
+
   ]
 }  satisfies Config
 
