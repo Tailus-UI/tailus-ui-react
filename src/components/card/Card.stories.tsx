@@ -11,9 +11,6 @@ const meta: Meta<typeof Card> = {
       description: {
         component: 'A customizable card component for React applications.',
       },
-      source: {
-        code: `<Card variant="outlined" padding={5}>This is a card</Card>`,
-      },
     },
   },
   tags: ['autodocs'],
@@ -89,7 +86,7 @@ export const SoftGradient: Story = {
     variant: 'softGradient',
     padding: 5,
     children: example,
-    className: "max-w-xs"
+    className: "max-w-xs",
   },
 };
 
@@ -98,6 +95,6 @@ export const ElevatedGradient: Story = {
     variant: 'elevatedGradient',
     padding: 5,
     children: example,
-    className: "max-w-xs"
+    className: "max-w-xs",
   },
 };

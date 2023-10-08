@@ -5,7 +5,7 @@ export default {
   content: [
     "index.html",
     "./src/**/*.{js,jsx,ts,tsx,vue,html}",
-    './node_modules/@tailus/**/*.{js,jsx,ts,tsx,vue}',
+    './node_modules/@tailus/themer-**/dist/**/*.{js,ts}',
   ],
   theme: {
     extend: {
@@ -13,14 +13,14 @@ export default {
             inherit: colors.inherit,
             current: colors.current,
             transparent: colors.transparent,
-            primary: colors.gray,
+            primary: colors.lime,
             secondary: colors.purple,
             accent: colors.fuchsia,
             danger: colors.red,
             success: colors.green,
             warning: colors.amber,
             info: colors.blue,
-            gray: colors.slate,
+            gray: colors.zinc,
             black: colors.black,
             white: colors.white,
         }),
@@ -66,14 +66,7 @@ export default {
     },
   },
   plugins: [
-    themer({
-      appearance: "light", // light | dark | both
-      background: "lighter", // light | lighter | hight | higher
-      padding: "medium", // small | medium | large | larger | largest
-      border: "high", // lighter | light | high | higher 
-      radius: "smoothest", // boxy | sharp | smooth | smoothest
-      shadow: "soft", // soft | hard | softer | harder | softest | hardest
-    }),
+    themer,
   ],
 }  satisfies Config
 

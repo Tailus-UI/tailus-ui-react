@@ -25,14 +25,16 @@ const paddingVariants = {
   12: 'p-12',
 };
 
+
 const variantMap = {
   outlined: card,
   mixed: mixedVariant,
   elevated: elevatedVariant,
   elevatedGradient: elevatedGradientVariant.outer,
   soft: softVariant,
-  softGradient: softGradientVariant.outer,
+  softGradient: softGradientVariant.outer
 };
+
 
 const cardui = cva([''], {
   variants: {
@@ -41,9 +43,38 @@ const cardui = cva([''], {
   },
   defaultVariants: {
     variant: 'outlined',
-    padding: 0,
   },
 });
+
+
+const innerCard = cva([''], {
+  variants: {
+    variant: {
+      inner: softGradientVariant.inner
+    },
+    padding: paddingVariants,
+  },
+});
+
+
+
+interface InnerProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof innerCard> {}
+
+const InnerCard: React.FC<InnerProps> = ({
+  variant,
+  padding,
+  children,
+  ...props
+}) => {
+  const classes = cn(innerCard({ variant, padding }));
+  return (
+    
+        <div className={classes} {...props}>
+          {children}
+        </div>
+      )
+  }
+
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardui> {}
 
@@ -54,16 +85,22 @@ export const Card: React.FC<CardProps> = ({
   children,
   ...props
 }) => {
-  const innerClass = variant === 'softGradient' ? softGradientVariant.inner : variant === 'elevatedGradient' ? elevatedGradientVariant.inner : '';
+  const innerClass = variant === 'softGradient' ? softGradientVariant.inner : variant === 'elevatedGradient' ? elevatedGradientVariant.inner: '';
   const classes = cn(cardui({ variant, padding, className }));
+  const innerGradient = cn(cardui({variant, className}))
   return (
-    <div className={classes} {...props}>
+    <div >
       {innerClass ? (
-        <div className={innerClass}>
+        <div className={innerGradient}>
+          <InnerCard variant='inner' padding={padding}>
+            {children}
+          </InnerCard>
+        </div>
+        
+      ) : (
+        <div className={classes} {...props}>
           {children}
         </div>
-      ) : (
-        children
       )}
     </div>
   );
