@@ -93,9 +93,9 @@ export const Card: React.FC<CardProps> = ({
     <div >
       {variant === 'softGradient' || variant === 'elevatedGradient' ? (
         <div className={innerGradient}>
-          <InnerCard variant='inner' padding={padding}>
-            {children}
-          </InnerCard>
+            <InnerCard variant={innerClass} padding={padding}>
+                {children}
+            </InnerCard>
         </div>
         
       ) : (
