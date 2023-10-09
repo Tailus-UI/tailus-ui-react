@@ -57,13 +57,13 @@ const ToastUI = () => {
     );
 };
 
-function oneWeekAway(date) {
+function oneWeekAway() {
     const now = new Date();
     const inOneWeek = now.setDate(now.getDate() + 7);
     return new Date(inOneWeek);
 }
 
-function prettyDate(date) {
+function prettyDate(date: Date) {
     return new Intl.DateTimeFormat("en-US", { dateStyle: "full", timeStyle: "short" }).format(date);
 }
 

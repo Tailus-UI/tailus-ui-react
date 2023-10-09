@@ -1,13 +1,11 @@
 import type { Config } from 'tailwindcss'
-import plugin from 'tailwindcss/plugin'
-
-const shadowColor = "gray";
+import themer from '@tailus/themer'
 
 export default {
   content: [
     "index.html",
     "./src/**/*.{js,jsx,ts,tsx,vue,html}",
-    './node_modules/@tailus/**/*.{js,jsx,ts,tsx,vue}',
+    './node_modules/@tailus/themer-**/dist/**/*.{js,ts}',
   ],
   theme: {
     extend: {
@@ -15,7 +13,7 @@ export default {
             inherit: colors.inherit,
             current: colors.current,
             transparent: colors.transparent,
-            primary: colors.indigo,
+            primary: colors.lime,
             secondary: colors.purple,
             accent: colors.fuchsia,
             danger: colors.red,
@@ -28,24 +26,24 @@ export default {
         }),
       keyframes: {
         slideDown: {
-          from: { height: 0 },
+          from: { height: "0" },
           to: { height: 'var(--radix-accordion-content-height)' },
         },
         slideUp: {
           from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: 0 },
+          to: { height: "0" },
         },
         overlayShow: {
-          from: { opacity: 0 },
-          to: { opacity: 1 },
+          from: { opacity: "0" },
+          to: { opacity: "1" },
         },
         contentShow: {
-          from: { opacity: 0, transform: 'translate(-50%, -48%) scale(0.96)' },
-          to: { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+          from: { opacity: "0", transform: 'translate(-50%, -48%) scale(0.96)' },
+          to: { opacity: "1", transform: 'translate(-50%, -50%) scale(1)' },
         },
         hide: {
-          from: { opacity: 1 },
-          to: { opacity: 0 },
+          from: { opacity: "1" },
+          to: { opacity: "0" },
         },
         slideIn: {
           from: { transform: 'translateX(calc(100% + var(--viewport-padding)))' },
@@ -67,106 +65,122 @@ export default {
       },
     },
   },
-plugins: [
-        plugin(function ({ addBase, theme, matchUtilities, addComponents }) {
-            addBase({
-              ":root": {
-                    "--ui-light-border-color" : theme("colors.gray.200"),
-                    "--ui-dark-border-color": theme("colors.gray.800"),
-                    "--ui-light-border-hover-color": theme("colors.gray.300"),
-                    "--ui-dark-border-hover-color": theme("colors.gray.700"),
-                    
-                  "--btn-border-radius": theme("borderRadius.full"),
-                   "--btn-border-width" : "1.5px",
-                    "--accordion-border-radius": theme("borderRadius.xl"),
-                    "--accordion-shadow" : theme("boxShadow.xl"),
-                    "--annonce-border-radius" : theme("borderRadius.full"),
-                    "--avatar-border-radius": theme("borderRadius.full"),
-                    "--avatar-status-position": theme("spacing.px"),
-                    "--card-border-radius": theme("borderRadius.3xl"),
-                    "--card-light-bg": theme("colors.gray.100"),
-                    "--card-dark-bg": theme("colors.gray.950"),
-                    "--card-padding": theme("spacing.8"),
-                    
-                    "--card-shadow": `0 10px 15px -3px var(--card-shadow-appearance), 0 4px 6px -4px var(--card-shadow-appearance)`,
-                    "--card-shadow-appearance" : `theme(colors.${shadowColor}.900 / var(--card-shadow-opacity))`,
-                    "--card-shadow-opacity": "7.5%",
-                    
-                    "--feedback-dark-bg": theme("colors.gray.950"),
-                    "--feedback-light-border-color": theme("colors.gray.200"),
-                    "--feedback-dark-border-color": theme("colors.gray.800"),
-                    "--flag-border-radius": theme("borderRadius.xl"),
-                    "--flag-padding": theme("spacing.6"),
-                    
-                    "--badge-border-radius": theme("borderRadius.full"),
-                        
-                    "--menu-border-radius": theme("borderRadius.2xl"),
-                    "--menu-light-bg-opacity": "90%",
-                    "--menu-dark-bg-opacity": theme("50%"),
-                    "--menu-dark-bg": "theme(colors.gray.950 / 80%)",
-                    "--menu-light-border-color": theme("colors.gray.200"),
-                    "--menu-dark-border-color": theme("colors.gray.800"),
-                    "--menu-light-backdrop-blur": "2rem",
-                    "--menu-dark-backdrop-blur": "2rem",
+  plugins: [
+    themer({
+    
+      appearance: "dark", // light | dark | both
+       /*
+      background: "lighter", // light | lighter | hight | higher
+      padding: "largest", // small | medium | large | larger | largest
+      border: "light", // lighter | light | high | higher 
+      radius: "sharp", // boxy | sharp | smooth | smoothest
+      shadow: {
+        size: "xxl",
+        opacity: 5,
+      },
+       */
+      components: {
+        accordion: {
+          rounded: "none",
+          softBg: "200",
+          ghostBg:"100",
+          shadow: {
+            size: "sm",
+            opacity: 5,
+          },
+          
+          dark: {
+            softBg: "900",
+            ghostBg: "900",
+            elevatedBg : "900",
+          }
+        }, 
+        /*
+        alert: {
+          rounded: "none",
+          shadow: {
+            size: "md",
+            opacity:5,
+          }
+        },
+        annonce: {
+          rounded : "md",
+        },
+        avatar: {
+          rounded: "2xl",
+          statusInset:"-0.5"
+        }, 
+        badge: {
+          rounded: "md",
+        },
+        button: {
+          rounded: "xl",
+          borderWith:"1.5",
+        },
+        card: {
+          rounded: "3xl",
+          padding: "12",
+          bg: "100",
+          shadow: {
+            size: "md",
+            opacity:4,
+          },
+          dark: {
+            bg:"950",
+          }
+        },
+        menu: {
+          rounded: "3xl",
+          borderColor: "200",
+          bgOpacity: 99,
+          backdropBlur: "3",
+          shadow: {
+            size: "md",
+            opacity:3,
+          },
+          dark: {
+            bg: "950",
+            borderColor: "800",
+            bgOpacity: 50,
+            backdropBlur: "5",
+          }
+        },
+        feedback: {
+          borderColor : "200",
+          shadow: {
+            size: "md",
+            opacity:4,
+          },
+          dark: {
+            borderColor: "600",
+            bg: "950",
+          }
+        },
+        flag: {
+          rounded: "xl",
+          padding: "4",
+        },
+        field: {
+          rounded: "full",
+          softBg: "100",
+          softBgFocus: "50",
+          borderColor: "300",
+          dark: {
+            softBg: "900",
+            softBgFocus: "950",
+            borderColor: "800",
+          }
+        },
+        popover: {
+          rounded : "3xl",
+        }, */
+        switch: {
+          rounded:"md"
+        },
+      } 
+     
+    }),
 
-                    "--separator-light-color": theme("colors.gray.200"),
-                    "--separator-dark-color": theme("colors.gray.800"),
-                    
-                    "--alert-border-radius": theme("borderRadius.2xl"),
-                    "--field-border-radius": theme("borderRadius.lg"),
-                
-                    "--switch-border-radius": theme("borderRadius.full"),
-                    
-                    "--select-dark-bg": theme("colors.gray.950"),
-                    
-                    "--tabs-light-bg": theme("colors.gray.100"),
-                    "--tabs-light-border-color": theme("colors.gray.200"),
-                    "--tabs-dark-border-color": theme("colors.gray.800"),
-                    "--tabs-border-radius": theme("borderRadius.xl"),
-                    "--tabs-dark-bg": theme("colors.gray.800"),
-                    "--tabs-indicator-light-bg": theme("colors.primary.600"),
-                    "--tabs-indicator-dark-bg": theme("colors.gray.950"),
-                    
-                    "--tabs-bottom-indicator-trigger-dark-bg": theme("colors.gray.800"),
-                    "--tabs-bottom-indicator-border-radius" : theme("borderRadius.md"),
-                    "--tabs-bottom-indicator-light-bg": theme("colors.primary.600"),
-                "--tabs-bottom-indicator-dark-bg": theme("colors.primary.400"),
-                    
-                "--tabs-soft-border-radius": theme("borderRadius.full"),
-                "--popover-border-radius": theme("borderRadius.xl"),
-                "--popover-padding": theme("spacing.6"),
-                
-                "--tooltip-border-radius": theme("borderRadius.md"),
-                "--toast-border-radius": theme("borderRadius.xl"),
-
-                "--field-light-bg": theme("colors.gray.100"),
-                "--field-light-focus-bg": theme("colors.gray.50"),
-                "--field-dark-bg": theme("colors.gray.800"),
-                "--field-dark-focus-bg": theme("colors.gray.900"),
-                "--field-light-border-color": theme("colors.gray.300"),
-                "--field-dark-border-color": theme("colors.gray.800"),
-                },
-            });
-          addComponents({
-            ".card-shadow": {
-              boxShadow: `var(--card-shadow)`
-            },
-            ".feedback-shadow": {
-              boxShadow: `var(--card-shadow)`
-            },
-            ".menu-shadow": {
-              boxShadow: `var(--card-shadow)`
-            },
-            ".alert-shadow": {
-              boxShadow: `var(--card-shadow)`
-            }
-          })
-            matchUtilities({
-                perspective: (value) => ({
-                    perspective: value,
-                }),
-            });
-        }),
-    ],
+  ]
 }  satisfies Config
 

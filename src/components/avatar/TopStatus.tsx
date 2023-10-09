@@ -1,6 +1,5 @@
 import * as Avatar from '@radix-ui/react-avatar';
-import { avatar as avatarTheme } from "@tailus/themer-avatar";
-import { solidFallback as solidFallbackTheme } from "@tailus/themer-avatar";
+import { softFallbackAvatar as avatarTheme } from "@tailus/themer-avatar";
 
 const AvatarTopStatus = () => (
   <div className="flex gap-5">
@@ -32,14 +31,14 @@ const AvatarTopStatus = () => (
         </Avatar.Root>
         <Avatar.Root className={avatarTheme.root.lg + " " + avatarTheme.topStatus.away}>
         <Avatar.Fallback
-            className={solidFallbackTheme.warning}
+            className={avatarTheme.fallback.accent}
         >
             ST
         </Avatar.Fallback>
         </Avatar.Root>
          <Avatar.Root className={avatarTheme.root.lg + " " + avatarTheme.topStatus.busy}>
         <Avatar.Fallback
-            className={avatarTheme.fallback.warning}
+            className={avatarTheme.fallback.secondary}
         >
             ST
         </Avatar.Fallback>

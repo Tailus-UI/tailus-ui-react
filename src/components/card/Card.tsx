@@ -9,8 +9,6 @@ import {
 import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 
-
-
 const paddingVariants = {
   0: 'p-0',
   1: 'p-1',
@@ -26,6 +24,7 @@ const paddingVariants = {
   11: 'p-11',
   12: 'p-12',
 };
+
 
 const variantMap = {
   outlined: card,
@@ -48,7 +47,7 @@ const cardui = cva([''], {
 });
 
 
-const innerui = cva([''], {
+const innerCard = cva([''], {
   variants: {
     variant: {
       innerSoft: softGradientVariant.inner,
@@ -60,15 +59,15 @@ const innerui = cva([''], {
 
 
 
-interface InnerProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof innerui> {}
+interface InnerProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof innerCard> {}
 
-const Inner: React.FC<InnerProps> = ({
+const InnerCard: React.FC<InnerProps> = ({
   variant,
   padding,
   children,
   ...props
 }) => {
-  const classes = cn(innerui({ variant, padding }));
+  const classes = cn(innerCard({ variant, padding }));
   return (
     
         <div className={classes} {...props}>
@@ -94,9 +93,9 @@ export const Card: React.FC<CardProps> = ({
     <div >
       {variant === 'softGradient' || variant === 'elevatedGradient' ? (
         <div className={innerGradient}>
-          <Inner variant={innerClass} padding={padding}>
+          <InnerCard variant='inner' padding={padding}>
             {children}
-          </Inner>
+          </InnerCard>
         </div>
         
       ) : (
