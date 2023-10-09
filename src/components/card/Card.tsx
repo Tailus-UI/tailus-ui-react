@@ -50,7 +50,8 @@ const cardui = cva([''], {
 const innerCard = cva([''], {
   variants: {
     variant: {
-      inner: softGradientVariant.inner
+      innerSoft: softGradientVariant.inner,
+      innerElevated:  elevatedGradientVariant.inner
     },
     padding: paddingVariants,
   },
@@ -85,12 +86,12 @@ export const Card: React.FC<CardProps> = ({
   children,
   ...props
 }) => {
-  const innerClass = variant === 'softGradient' ? softGradientVariant.inner : variant === 'elevatedGradient' ? elevatedGradientVariant.inner: '';
+  const innerClass = variant === 'softGradient' ? 'innerSoft' : variant === 'elevatedGradient' ? 'innerElevated': null;
   const classes = cn(cardui({ variant, padding, className }));
   const innerGradient = cn(cardui({variant, className}))
   return (
     <div >
-      {innerClass ? (
+      {variant === 'softGradient' || variant === 'elevatedGradient' ? (
         <div className={innerGradient}>
           <InnerCard variant='inner' padding={padding}>
             {children}
