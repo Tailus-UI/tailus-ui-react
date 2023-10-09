@@ -66,7 +66,121 @@ export default {
     },
   },
   plugins: [
-    themer,
-  ],
+    themer({
+    
+      appearance: "dark", // light | dark | both
+       /*
+      background: "lighter", // light | lighter | hight | higher
+      padding: "largest", // small | medium | large | larger | largest
+      border: "light", // lighter | light | high | higher 
+      radius: "sharp", // boxy | sharp | smooth | smoothest
+      shadow: {
+        size: "xxl",
+        opacity: 5,
+      },
+       */
+      components: {
+        accordion: {
+          rounded: "none",
+          softBg: "200",
+          ghostBg:"100",
+          shadow: {
+            size: "sm",
+            opacity: 5,
+          },
+          
+          dark: {
+            softBg: "900",
+            ghostBg: "900",
+            elevatedBg : "900",
+          }
+        }, 
+        /*
+        alert: {
+          rounded: "none",
+          shadow: {
+            size: "md",
+            opacity:5,
+          }
+        },
+        annonce: {
+          rounded : "md",
+        },
+        avatar: {
+          rounded: "2xl",
+          statusInset:"-0.5"
+        }, 
+        badge: {
+          rounded: "md",
+        },
+        button: {
+          rounded: "xl",
+          borderWith:"1.5",
+        },
+        card: {
+          rounded: "3xl",
+          padding: "12",
+          bg: "100",
+          shadow: {
+            size: "md",
+            opacity:4,
+          },
+          dark: {
+            bg:"950",
+          }
+        },
+        menu: {
+          rounded: "3xl",
+          borderColor: "200",
+          bgOpacity: 99,
+          backdropBlur: "3",
+          shadow: {
+            size: "md",
+            opacity:3,
+          },
+          dark: {
+            bg: "950",
+            borderColor: "800",
+            bgOpacity: 50,
+            backdropBlur: "5",
+          }
+        },
+        feedback: {
+          borderColor : "200",
+          shadow: {
+            size: "md",
+            opacity:4,
+          },
+          dark: {
+            borderColor: "600",
+            bg: "950",
+          }
+        },
+        flag: {
+          rounded: "xl",
+          padding: "4",
+        },
+        field: {
+          rounded: "full",
+          softBg: "100",
+          softBgFocus: "50",
+          borderColor: "300",
+          dark: {
+            softBg: "900",
+            softBgFocus: "950",
+            borderColor: "800",
+          }
+        },
+        popover: {
+          rounded : "3xl",
+        }, */
+        switch: {
+          rounded:"md"
+        },
+      } 
+     
+    }),
+
+  ]
 }  satisfies Config
 

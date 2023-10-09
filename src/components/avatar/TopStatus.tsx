@@ -31,14 +31,14 @@ const AvatarTopStatus = () => (
         </Avatar.Root>
         <Avatar.Root className={avatarTheme.root.lg + " " + avatarTheme.topStatus.away}>
         <Avatar.Fallback
-            className={avatarTheme.fallback.warning}
+            className={avatarTheme.fallback.accent}
         >
             ST
         </Avatar.Fallback>
         </Avatar.Root>
          <Avatar.Root className={avatarTheme.root.lg + " " + avatarTheme.topStatus.busy}>
         <Avatar.Fallback
-            className={avatarTheme.fallback.warning}
+            className={avatarTheme.fallback.secondary}
         >
             ST
         </Avatar.Fallback>

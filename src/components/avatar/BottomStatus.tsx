@@ -10,7 +10,7 @@ const AvatarBottomStatus = () => (
                 alt="Shekinah Tshiokufila"
             />
         <Avatar.Fallback
-                className={avatarTheme.fallback.warning}
+                className={avatarTheme.softFallback.warning}
                 delayMs={600}
         >
             ST
@@ -23,7 +23,7 @@ const AvatarBottomStatus = () => (
                 alt="Shekinah Tshiokufila"
             />
         <Avatar.Fallback
-                className={avatarTheme.fallback.warning}
+                className={avatarTheme.softFallback.warning}
                 delayMs={600}
         >
             ST
@@ -31,14 +31,14 @@ const AvatarBottomStatus = () => (
         </Avatar.Root>
         <Avatar.Root className={avatarTheme.root.lg + " " + avatarTheme.bottomStatus.away}>
         <Avatar.Fallback
-            className={avatarTheme.fallback.warning}
+            className={avatarTheme.softFallback.primary}
         >
             ST
         </Avatar.Fallback>
         </Avatar.Root>
          <Avatar.Root className={avatarTheme.root.lg + " " + avatarTheme.bottomStatus.busy}>
         <Avatar.Fallback
-            className={avatarTheme.fallback.warning}
+            className={avatarTheme.softFallback.accent}
         >
             ST
         </Avatar.Fallback>
