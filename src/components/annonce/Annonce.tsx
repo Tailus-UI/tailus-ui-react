@@ -18,7 +18,7 @@ const colorsMap = {
     neutral: "neutral"
 }
 
-const AnnonceVariant = cva([''], {
+const annonceVariants = cva([''], {
     variants: {
       variant: variantsMap ,
       colorVariant: colorsMap,
@@ -29,7 +29,7 @@ const AnnonceVariant = cva([''], {
     }
   });
 
-export interface AnnonceProps extends React.HTMLAttributes<HTMLAnchorElement>, VariantProps<typeof AnnonceVariant> {}
+export interface AnnonceProps extends React.HTMLAttributes<HTMLAnchorElement>, VariantProps<typeof annonceVariants> {}
 
 export const Annonce: React.FC<AnnonceProps> = ({
     className,
@@ -39,7 +39,7 @@ export const Annonce: React.FC<AnnonceProps> = ({
   }) => {
    
     const annonceUtilities = variantsMap[variant!].root
-    const classes = cn(AnnonceVariant({ className }), annonceUtilities);
+    const classes = cn(annonceVariants({ className }), annonceUtilities);
     return(
         <a href="" className={classes} {...props}>
             <span className={variantsMap[variant!].concern[colorVariant!]}>New</span>

@@ -25,7 +25,7 @@ const sizesMap = {
     lg: "lg",
 }
 
-const BadgeVariant = cva([''], {
+const badgeVariants = cva([''], {
     variants: {
       variant: variantsMap ,
       colorVariant: colorsMap,
@@ -39,7 +39,7 @@ const BadgeVariant = cva([''], {
   });
 
 
-export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof BadgeVariant> {}
+export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof badgeVariants> {}
 
 export const Badge: React.FC<BadgeProps> = ({
     className,
@@ -51,7 +51,7 @@ export const Badge: React.FC<BadgeProps> = ({
   }) => {
    
     const badgeUtilities = variantsMap[variant!][colorVariant!][size!]
-    const classes = cn(BadgeVariant({ className }), badgeUtilities);
+    const classes = cn(badgeVariants({ className }), badgeUtilities);
     return(
         <span  className={classes} {...props} role="badge">
             {children}
