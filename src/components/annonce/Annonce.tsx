@@ -44,26 +44,14 @@ export const Annonce: React.FC<AnnonceProps> = ({
     href,
     ...props
   }) => {
-   
+    const Component = href ? 'a' : 'div';
     const annonceUtilities = variantsMap[variant!].root
     const classes = cn(annonceVariants({ className }), annonceUtilities);
     return(
-        <>
-        {
-          href ? (
-            <a href={href} className={classes} {...props}>
-              <span className={variantsMap[variant!]['concern'][colorVariant!]}>{concern}</span>
-              <span className={variantsMap[variant!]['message']}>{message}</span>
-            </a>
-          ) : (
-            <div className={classes} {...props}>
-
-              <span className={variantsMap[variant!]['concern'][colorVariant!]}>{concern}</span>
-              <span className={variantsMap[variant!]['message']}>{message}</span>
-            </div>
-          )
-        }
-        </>
+        <Component href={href} className={classes} {...props}>
+          <span className={variantsMap[variant!]['concern'][colorVariant!]}>{concern}</span>
+          <span className={variantsMap[variant!]['message']}>{message}</span>
+        </Component>
     )
   }
 

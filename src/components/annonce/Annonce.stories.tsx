@@ -45,7 +45,6 @@ export const Oulined: Story = {
       colorVariant: "primary",
       concern: "New",
       message: "This is a new feature",
-      href: "https://www.google.com",
     },
 };
 
@@ -55,7 +54,6 @@ export const Soft: Story = {
     colorVariant: 'primary',
     concern: "New",
     message: "This is a new feature",
-    href: "https://www.google.com",
   },
 };
 
