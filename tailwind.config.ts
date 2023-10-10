@@ -67,7 +67,6 @@ export default {
   },
   plugins: [
     themer({
-    
       appearance: "dark", // light | dark | both
        /*
       background: "lighter", // light | lighter | hight | higher
@@ -78,7 +77,6 @@ export default {
         size: "xxl",
         opacity: 5,
       },
-       */
       components: {
         accordion: {
           rounded: "none",
@@ -88,7 +86,6 @@ export default {
             size: "sm",
             opacity: 5,
           },
-          
           dark: {
             softBg: "900",
             ghostBg: "900",
@@ -173,14 +170,39 @@ export default {
         },
         popover: {
           rounded : "3xl",
-        }, */
+        }, 
         switch: {
           rounded:"md"
         },
+        select: {
+          dark: {
+            bg: "950",
+          }
+        },
+        tabs: {
+          borderColor: "200",
+          listBg: "100",
+          rounded: {
+            list: "md",
+            softVariant: "md",
+            bottomIndicatorVariant: "md",
+          },
+          dark: {
+            borderColor: "800",
+            listBg: "800",
+            triggerBg: "900",
+            indicatorBg:"950"
+          }
+        },
+        toast: {
+          rounded:"md"
+        },
+        tooltip: {
+          rounded:"md"
+        },
       } 
-     
+      */
     }),
-
   ]
 }  satisfies Config
 
