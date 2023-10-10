@@ -1,21 +1,47 @@
-import AnnonceUI from "./Annonce";
-import { annonce as annonceTheme } from "@tailus/themer-annonce"
-import { softAnnonce } from "@tailus/themer-annonce"
+import type { Meta, StoryObj } from '@storybook/react';
+import { Annonce } from "./Annonce";
 
-export default {
-  component: AnnonceUI,
+
+const meta: Meta<typeof Annonce> = {
+  title: 'Annonce',
+  component: Annonce,
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        component: 'A customizable Annonce component for React applications.',
+      },
+    },
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    variant: { 
+      control: 'select', 
+      options: ['soft', 'outlined'] 
+    },
+    colorVariant: { 
+      control: 'select', 
+      options: ["primary", "secondary", "accent", "danger", "success", "warning", "info", "gray",] 
+    },
+  }
 };
 
-export const Annonce = () => (
-    <a href="" className={annonceTheme.root}>
-        <span className={annonceTheme.concern.primary}>New</span>
-        <span className={annonceTheme.message}>Introducing a all new Tailus !</span>
-    </a>
-)
+export default meta;
 
-export const Soft = () => (
-    <a href="" className={softAnnonce.root}>
-        <span className={softAnnonce.concern.gray}>New</span>
-        <span className={softAnnonce.message}>Introducing a all new Tailus !</span>
-    </a>
-)
+type Story = StoryObj<typeof meta>;
+
+export const Oulined: Story = {
+    args: {
+      variant: 'outlined',
+      colorVariant: "primary",
+    },
+};
+
+export const Soft: Story = {
+  args: {
+    variant: 'soft',
+    colorVariant: 'primary',
+  },
+};
+
+
