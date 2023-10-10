@@ -16,15 +16,15 @@ const meta: Meta<typeof Badge> = {
   tags: ['autodocs'],
   argTypes: {
     variant: { 
-      control: 'inline-radio', 
+      control: 'select', 
       options: ['solid', 'soft', 'outlined'] 
     },
     colorVariant: { 
-      control: 'inline-radio', 
+      control: 'select', 
       options: ["primary", "secondary", "accent", "danger", "success", "warning", "info", "gray",] 
     },
     size: { 
-        control: 'inline-radio', 
+        control: 'select', 
         options: ["sm", "md", "lg"] 
       },
     children: { control: 'text' }
