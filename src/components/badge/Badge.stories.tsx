@@ -27,8 +27,7 @@ const meta: Meta<typeof Badge> = {
         control: 'inline-radio', 
         options: ["sm", "md", "lg"] 
       },
-    children: { control: 'text' },
-    className: { control: 'text' }
+    children: { control: 'text' }
   }
 };
 
@@ -41,9 +40,8 @@ export const Solid: Story = {
   args: {
     variant: 'solid',
     colorVariant: 'primary',
-    size: "sm",
-    children: "solid",
-    className: ""
+    size: "md",
+    children: "Open",
   },
 };
 
@@ -51,9 +49,8 @@ export const Soft: Story = {
   args: {
     variant: 'soft',
     colorVariant: 'primary',
-    children: "soft",
-    size: "sm",
-    className: ""
+    size: "md",
+    children: "Open",
   },
 };
 
@@ -61,9 +58,8 @@ export const Oulined: Story = {
   args: {
     variant: 'outlined',
     colorVariant: "primary",
-    size: "sm",
-    children: "outlined",
-    className: ""
+    size: "md",
+    children: "Open",
   },
 };
 
