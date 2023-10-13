@@ -36,7 +36,7 @@ const variantMap = {
 };
 
 
-const cardui = cva([''], {
+const cardVariants = cva([''], {
   variants: {
     variant: variantMap,
     padding: paddingVariants,
@@ -77,7 +77,7 @@ const InnerCard: React.FC<InnerProps> = ({
   }
 
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardui> {}
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {}
 
 export const Card: React.FC<CardProps> = ({
   className,
@@ -87,8 +87,8 @@ export const Card: React.FC<CardProps> = ({
   ...props
 }) => {
   const innerClass = variant === 'softGradient' ? 'innerSoft' : variant === 'elevatedGradient' ? 'innerElevated': null;
-  const classes = cn(cardui({ variant, padding, className }));
-  const innerGradient = cn(cardui({variant, className}))
+  const classes = cn(cardVariants({ variant, padding, className }));
+  const innerGradient = cn(cardVariants({variant, className}))
   return (
     <div >
       {variant === 'softGradient' || variant === 'elevatedGradient' ? (
