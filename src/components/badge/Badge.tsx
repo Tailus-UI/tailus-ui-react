@@ -51,7 +51,7 @@ export const Badge: React.FC<BadgeProps> = ({
   }) => {
    
     const badgeUtilities = variantsMap[variant!][colorVariant!][size!]
-    const classes = cn(badgeVariants({ className }), badgeUtilities);
+    const classes = cn(badgeUtilities, className);
     return(
         <span  className={classes} {...props} role="badge">
             {children}

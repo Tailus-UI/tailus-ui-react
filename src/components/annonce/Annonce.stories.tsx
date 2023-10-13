@@ -44,7 +44,8 @@ export const Oulined: Story = {
       variant: 'outlined',
       colorVariant: "primary",
       concern: "New",
-      message: "This is a new feature",
+      message: "The all new version of Tailus is out !",
+      href: "https://tailus.io"
     },
 };
 
@@ -53,7 +54,8 @@ export const Soft: Story = {
     variant: 'soft',
     colorVariant: 'primary',
     concern: "New",
-    message: "This is a new feature",
+    message: "The all new version of Tailus is out !",
+      href: "https://tailus.io"
   },
 };
 

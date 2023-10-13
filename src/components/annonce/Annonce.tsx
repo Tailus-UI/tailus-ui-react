@@ -46,7 +46,7 @@ export const Annonce: React.FC<AnnonceProps> = ({
   }) => {
     const Component = href ? 'a' : 'div';
     const annonceUtilities = variantsMap[variant!].root
-    const classes = cn(annonceVariants({ className }), annonceUtilities);
+    const classes = cn(annonceUtilities, className);
     return(
         <Component href={href} className={classes} {...props}>
           <span className={variantsMap[variant!]['concern'][colorVariant!]}>{concern}</span>
