@@ -23,6 +23,15 @@ const meta: Meta<typeof Annonce> = {
       control: 'select', 
       options: ["primary", "secondary", "accent", "danger", "success", "warning", "info", "gray",] 
     },
+    concern: {
+      control: 'text',
+    },
+    message: {
+      control: 'text',
+    },
+    href: {
+      control: 'text',
+    }
   }
 };
 
@@ -34,6 +43,8 @@ export const Oulined: Story = {
     args: {
       variant: 'outlined',
       colorVariant: "primary",
+      concern: "New",
+      message: "This is a new feature",
     },
 };
 
@@ -41,6 +52,8 @@ export const Soft: Story = {
   args: {
     variant: 'soft',
     colorVariant: 'primary',
+    concern: "New",
+    message: "This is a new feature",
   },
 };
 
