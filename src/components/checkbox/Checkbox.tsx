@@ -17,20 +17,23 @@ const checkboxVariants = cva([''], {
     }
 });
 
-export interface CheckboxProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof checkboxVariants> {}
+export interface CheckboxProps extends React.HTMLAttributes<HTMLInputElement>, VariantProps<typeof checkboxVariants> {
+    checked: boolean
+}
 
 export const Checkbox: React.FC<CheckboxProps> = ({
     className,
     variant,
     children,
     id,
+    checked,
     ...props
   }) => {
     
     const classes = cn('flex items-center', className)
     return(
         <div className={classes} {...props}>
-            <CheckboxUi.Root className={variantsMap[variant!].root} defaultChecked id={id}>
+            <CheckboxUi.Root className={variantsMap[variant!].root} checked={checked} id={id}>
                 <CheckboxUi.Indicator className={variantsMap[variant!].indicator}>
                     <svg className="h-3 w-3" viewBox="0 0 33 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 10.909L4.364 6.54499L13.091 15.272L28.364 -0.00100708L32.728 4.36299L13.092 23.999L0 10.909Z" fill="currentColor" />
