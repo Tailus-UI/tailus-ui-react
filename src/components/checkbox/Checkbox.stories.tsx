@@ -21,7 +21,10 @@ const meta: Meta<typeof Checkbox> = {
     },
     children: { control: 'text' },
     id: {control: 'text'},
-    checked: {control: 'boolean'}
+    typeOfChecked: {
+      control: 'select',
+      options: ['checked', 'defaultChecked']
+    }
   }
 };
 
@@ -35,7 +38,7 @@ export const Default: Story = {
     variant: 'default',
     children: "Keep me signed in",
     id: 'c1',
-    checked: true
+    typeOfChecked: 'defaultChecked'
   },
 };
 
@@ -44,7 +47,7 @@ export const Ring: Story = {
     variant: 'ring',
     children: "Keep me signed in",
     id: 'c1',
-    checked: true
+    typeOfChecked: 'defaultChecked'
   },
 };
 
