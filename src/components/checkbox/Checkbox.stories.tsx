@@ -19,7 +19,8 @@ const meta: Meta<typeof Checkbox> = {
       control: 'select', 
       options: ['default', 'ring',] 
     },
-    children: { control: 'text' }
+    children: { control: 'text' },
+    id: {control: 'text'}
   }
 };
 
@@ -32,6 +33,7 @@ export const Default: Story = {
   args: {
     variant: 'default',
     children: "Keep me signed in",
+    id: 'c1',
   },
 };
 
@@ -39,6 +41,7 @@ export const Ring: Story = {
   args: {
     variant: 'ring',
     children: "Keep me signed in",
+    id: 'c1',
   },
 };
 
