@@ -35,7 +35,7 @@ const meta: Meta<typeof Button> = {
         control: 'boolean'
     },
     label: { control: 'text' },
-    children: { control: 'text' },
+    href: { control: 'text' },
   }
 };
 
