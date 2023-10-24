@@ -62,6 +62,7 @@ interface AvatarProps extends React.HTMLAttributes<HTMLElement>, VariantProps<ty
     statusPosition?: "top" | "bottom";
     src: string,
     alt: string,
+    initials?: string,
 }
 
 export const Avatar: React.FC<AvatarProps> = ({
@@ -73,15 +74,10 @@ export const Avatar: React.FC<AvatarProps> = ({
     statusPosition,
     src,
     alt,
+    initials,
     ...props
 }) => {
-    const initials = alt
-        .split(" ")
-        .map((word) => word.charAt(0))
-        .join("")
-        .toUpperCase();
-    
-    const avatarUtilities = cn(avatar.root[size!], statusPosition ? statusPositionMap[statusPosition!][status!] : "")
+    const avatarUtilities = cn(avatar.root[size!], statusPosition && statusPositionMap[statusPosition!][status!])
     const fallbackUtilities = fallbackMap[fallback!][color!]
     const avatarRootClasses = cn(avatarUtilities, className);
     const fallbackClasses = cn(fallbackUtilities, className);
@@ -98,7 +94,7 @@ export const Avatar: React.FC<AvatarProps> = ({
                 {...props}
                 delayMs={600}
             >
-                {initials}
+                {initials?.toUpperCase()}
             </AvatarUI.Fallback>
         </AvatarUI.Root>
     )
