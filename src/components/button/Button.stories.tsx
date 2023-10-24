@@ -3,7 +3,7 @@ import { Button } from "./Button";
 
 
 const meta: Meta<typeof Button> = {
-  title: 'Button/Icon',
+  title: 'Button',
   component: Button,
   parameters: {
     layout: 'centered',
@@ -23,6 +23,10 @@ const meta: Meta<typeof Button> = {
       control: 'select', 
       options: ["primary", "secondary", "accent", "danger", "success", "warning", "info", "gray", "neutral"] 
     },
+    icon: { 
+      control: 'select', 
+      options: ["none", "only", "leading", "trailing"] 
+    },
     size: { 
         control: 'select', 
         options: ["xs", "sm", "md", "lg", "xl"] 
@@ -30,7 +34,8 @@ const meta: Meta<typeof Button> = {
     disabled: {
         control: 'boolean'
     },
-    children: { control: 'text' }
+    label: { control: 'text' },
+    children: { control: 'text' },
   }
 };
 
@@ -43,8 +48,9 @@ export const Solid: Story = {
   args: {
     variant: 'solid',
     colorVariant: 'primary',
+    icon: 'none',
     size: "md",
-    children: "Open",
+    label: "Open",
   },
 };
 
@@ -52,8 +58,9 @@ export const Soft: Story = {
   args: {
     variant: 'soft',
     colorVariant: 'primary',
+    icon: 'none',
     size: "md",
-    children: "Open",
+    label: "Open",
   },
 };
 
@@ -61,8 +68,9 @@ export const Oulined: Story = {
     args: {
       variant: 'outlined',
       colorVariant: "primary",
+      icon: 'none',
       size: "md",
-      children: "Boost button",
+      label: "Open",
     },
   };
 
@@ -71,7 +79,7 @@ export const Oulined: Story = {
       variant: 'ghost',
       colorVariant: "primary",
       size: "md",
-      children: "Open",
+      label: "Open",
     },
   };
   
