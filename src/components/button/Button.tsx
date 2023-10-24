@@ -17,33 +17,37 @@ import button, {
 } from "@tailus/themer-button";
 import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
+import React from "react";
 
 const variantsMap = {
   solid: {
-    none: button,
     only: iconButton,
     leading: leadingIconButton,
     trailing: trailingIconButton,
   },
   soft: {
-    none: softButton,
     only: softIconButton,
     leading: softLeadingIconButton,
     trailing: softTrailingIconButton,
   },
   ghost: {
-    none: ghostButton,
     only: ghostIconButton,
     leading: ghostLeadingIconButton,
     trailing: ghostTrailingIconButton,
   },
   outlined: {
-    none: outlinedButton,
     only: outlinedIconButton,
     leading: outlinedLeadingIconButton,
     trailing: outlinedTrailingIconButton,
   }
 };
+
+const simpleButtonVariants = {
+  solid: button,
+  soft: softButton,
+  ghost: ghostButton,
+  outlined: outlinedButton,
+}
 
 const colorsMap = {
   primary: 'primary',
@@ -81,7 +85,7 @@ const buttonVariants = cva([''], {
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>, VariantProps<typeof buttonVariants> {
   disabled?: boolean;
   label?: string;
-  icon: 'none' | 'only' | 'leading' | 'trailing';
+  icon?: 'only' | 'leading' | 'trailing';
   href?: string;
 }
 
@@ -97,35 +101,34 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  const buttonUtilities = variantsMap[variant!][icon!][colorVariant!][size!];
-  const classes = cn(buttonUtilities, className);
+
+  const buttonUtilities = simpleButtonVariants[variant!][colorVariant!]?.[size!];
+  const iconButtons =  icon && variantsMap[variant!][icon][colorVariant!][size!]
+  
+  const classes = icon ? cn(iconButtons, className) : cn(buttonUtilities, className);
   const Component = href ? 'a' : 'button';
 
-  if (icon === 'only') {
-    return (
-      <Component href={href} className={classes} {...props} disabled={disabled}>
-        <span className={variantsMap[variant!][icon!].icon[size!]}>{children}</span>
-      </Component>
-    );
-  } else if (icon === 'leading') {
-    return (
-      <Component href={href} className={classes} {...props} disabled={disabled}>
-        <span className={variantsMap[variant!][icon!].icon[size!]}>{children}</span>
-        <span>{label}</span>
-      </Component>
-    );
-  } else if (icon === 'trailing') {
-    return (
-      <Component href={href} className={classes} {...props} disabled={disabled}>
-        <span>{label}</span>
-        <span className={variantsMap[variant!][icon!].icon[size!]}>{children}</span>
-      </Component>
-    );
-  } else {
-    return (
-      <Component href={href} className={classes} {...props} disabled={disabled}>
-        <span>{label}</span>
-      </Component>
-    );
+  const cloneElement = (element: React.ReactElement, classNames: string) => {
+    return React.cloneElement(element, {
+      className: cn(element.props.className, classNames),
+    });
   }
+
+  return (
+    <Component href={href} className={classes} {...props} disabled={disabled}>
+        {!icon && <span>{label}</span>}
+        { icon === 'only' && <span className="sr-only">{label}</span> }
+        {icon === 'trailing' && <span>{label}</span>}
+        { icon &&
+          cloneElement(children as React.ReactElement, variantsMap[variant!][icon!].icon[size!])
+        }
+        { icon === 'leading' && <span>{label}</span> }
+    </Component>
+  )
 };
+
+Button.defaultProps = {
+  variant: "solid",
+  colorVariant: "primary",
+  size: "md",
+}
