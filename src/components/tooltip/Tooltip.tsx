@@ -1,26 +1,23 @@
-import * as Tooltip from "@radix-ui/react-tooltip";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { tooltip as theme } from "@tailus/themer-tooltip";
-import { ArchiveIcon } from "@radix-ui/react-icons";
-import { iconButton as buttonTheme } from "@tailus/themer-button";
+import React from "react";
 
-const TooltipUI = () => {
-    return (
-        <Tooltip.Provider>
-            <Tooltip.Root>
-                <Tooltip.Trigger asChild>
-                    <button className={buttonTheme.warning.md}>
-                        <span className="sr-only">Archive</span>
-                        <ArchiveIcon className={buttonTheme.icon.md}  aria-hidden/>
-                    </button>
-                </Tooltip.Trigger>
-                <Tooltip.Portal>
-                    <Tooltip.Content className={theme.content} sideOffset={4}>
-                        Archive
-                    </Tooltip.Content>
-                </Tooltip.Portal>
-            </Tooltip.Root>
-        </Tooltip.Provider>
-    );
-};
+const TooltipProvider = TooltipPrimitive.Provider;
+const TooltipRoot = TooltipPrimitive.Root;
+const TooltipTrigger = TooltipPrimitive.Trigger;
+const TooltipPortal = TooltipPrimitive.Portal;
 
-export default TooltipUI;
+const TooltipContent = React.forwardRef((props, forwardedRef, sideOffset = 4) => (
+  <TooltipPrimitive.Content
+    className={theme.content}
+    sideOffset={sideOffset}
+    ref={forwardedRef}
+    {...props}
+  />
+));
+
+const TooltipArrow = React.forwardRef((props, forwardedRef) => (
+  <TooltipPrimitive.Arrow className={theme.arrow} ref={forwardedRef} {...props} />
+));
+
+export { TooltipProvider, TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow };
