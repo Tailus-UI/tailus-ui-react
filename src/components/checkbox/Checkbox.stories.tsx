@@ -1,9 +1,53 @@
-import CheckboxUI from "./Checkbox";
-import CheckboxRingVariant from "./Ring";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Checkbox } from "./Checkbox";
 
-export default {
-    component: CheckboxUI,
-}
 
-export const Checkbox = () => <CheckboxUI />;
-export const WithRing = () => <CheckboxRingVariant />;
+const meta: Meta<typeof Checkbox> = {
+  title: 'Checkbox',
+  component: Checkbox,
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        component: 'A customizable checkbox component for React applications.',
+      },
+    },
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    variant: { 
+      control: 'select', 
+      options: ['default', 'ring',] 
+    },
+    children: { control: 'text' },
+    id: {control: 'text'},
+    typeOfChecked: {
+      control: 'select',
+      options: ['checked', 'defaultChecked']
+    }
+  }
+};
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+
+export const Default: Story = {
+  args: {
+    variant: 'default',
+    children: "Keep me signed in",
+    id: 'c1',
+    typeOfChecked: 'defaultChecked'
+  },
+};
+
+export const Ring: Story = {
+  args: {
+    variant: 'ring',
+    children: "Keep me signed in",
+    id: 'c1',
+    typeOfChecked: 'defaultChecked'
+  },
+};
+
