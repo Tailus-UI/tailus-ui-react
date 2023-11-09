@@ -14,7 +14,7 @@ const TooltipUI = ({ withArrow }: { withArrow?: boolean }) => {
                   </button>
               </TooltipTrigger>
               <TooltipPortal>
-                  <TooltipContent className="bg-red-400">
+                  <TooltipContent>
                       Archive
                       {withArrow && <TooltipArrow />}
                   </TooltipContent>
