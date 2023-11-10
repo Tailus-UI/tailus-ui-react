@@ -5,11 +5,11 @@ import {ReactNode} from "react";
 const CheckboxUI = ({ variant, children, label }: { variant: string, children: ReactNode, label: string }) => (
   <div className="flex items-center">
     <CheckboxRoot variant={variant} defaultChecked={true} id="c1">
-      <CheckboxIndicator variant={variant}>
+      <CheckboxIndicator>
         {children}
       </CheckboxIndicator>
     </CheckboxRoot>
-    <CheckboxLabel htmlFor="c1" variant={variant}>
+    <CheckboxLabel htmlFor="c1">
         {label}
     </CheckboxLabel>
   </div>
@@ -30,7 +30,8 @@ const meta: Meta<typeof CheckboxUI> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['checkbox', 'ring'],
+      options: ['default', 'ring'],
+      defaultValue: 'default',
     },
     children: {
       control: 'hidden'
@@ -47,7 +48,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Checkbox: Story = {
   args: {
-    variant: 'checkbox',
+    variant: 'default',
     label: 'Keep me signed in',
     children: <svg className="w-4 h-4" viewBox="0 0 46 33" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clip-path="url(#clip0_23_2)">
