@@ -4,33 +4,29 @@ import React, {forwardRef} from "react";
 import {cn} from "../../lib/utils";
 import {cva, type VariantProps} from "class-variance-authority";
 
-const checkbox = cva('',{
+export type CheckboxVariantProps = VariantProps<typeof checkboxVariants>;
+const checkboxVariants = cva('',{
   variants: {
     variant: {
       default: checkboxTheme.root,
       ring: checkBoxRingTheme.root,
     }
-  },
-  defaultVariants: {
-    variant: 'default',
   }
 });
 
-type CheckboxRootProps = {
-  className?: string;
-  props?: React.ComponentProps<typeof CheckboxPrimitive.Root>;
-}
-
 export interface CheckboxProps
-  extends VariantProps<typeof checkbox>, CheckboxRootProps {}
+  extends Omit<CheckboxVariantProps, 'variant'>,
+  Required<Pick<CheckboxVariantProps, 'variant'>> {
+    className?: string;
+  }
 
 const CheckboxRoot = forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({className, variant, ...props}: CheckboxProps, forwardedRef) => (
+  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> & CheckboxProps
+>(({className, variant = 'default', ...props}: CheckboxProps, forwardedRef) => (
   <CheckboxPrimitive.Root
     ref={forwardedRef}
-    className={cn(checkbox({variant}), className)}
+    className={ cn(checkboxVariants({variant: variant}), className) }
     {...props}
   />
 ));
@@ -67,7 +63,7 @@ const CheckboxLabel = forwardRef<React.ElementRef<"label">, React.ComponentProps
 );
 
 export {
-    CheckboxRoot,
-    CheckboxIndicator,
-    CheckboxLabel,
-}
+  CheckboxRoot,
+  CheckboxIndicator,
+  CheckboxLabel,
+};

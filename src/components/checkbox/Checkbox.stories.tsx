@@ -2,7 +2,7 @@ import {CheckboxIndicator, CheckboxLabel, CheckboxRoot} from "./Checkbox";
 import {Meta, StoryObj} from "@storybook/react";
 import {ReactNode} from "react";
 
-const CheckboxUI = ({ variant, children, label }: { variant: string, children: ReactNode, label: string }) => (
+const CheckboxUI = ({ variant, children, label }: { variant: 'default'|'ring', children: ReactNode, label: string }) => (
   <div className="flex items-center">
     <CheckboxRoot variant={variant} defaultChecked={true} id="c1">
       <CheckboxIndicator>
@@ -10,7 +10,7 @@ const CheckboxUI = ({ variant, children, label }: { variant: string, children: R
       </CheckboxIndicator>
     </CheckboxRoot>
     <CheckboxLabel htmlFor="c1">
-        {label}
+      {label}
     </CheckboxLabel>
   </div>
 );
