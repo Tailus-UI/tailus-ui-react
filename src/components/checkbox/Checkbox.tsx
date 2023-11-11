@@ -14,11 +14,9 @@ const checkboxVariants = cva('',{
   }
 });
 
-export interface CheckboxProps
-  extends Omit<CheckboxVariantProps, 'variant'>,
-  Required<Pick<CheckboxVariantProps, 'variant'>> {
-    className?: string;
-  }
+export interface CheckboxProps extends CheckboxVariantProps {
+  className?: string;
+}
 
 const CheckboxRoot = forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
