@@ -1,57 +1,78 @@
 import { annonce, softAnnonce } from "@tailus/themer-annonce";
 import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
+import React from "react";
 
-const variantsMap = {
-  outlined: annonce,
-  soft: softAnnonce
-}
-
-const colorsMap = {
-  primary: "primary",
-  secondary: "secondary",
-  success: "success",
-  danger: "danger",
-  warning: "warning",
-  accent: "accent",
-  gray: "gray",
-  neutral: "neutral"
-}
-
-const annonceVariants = cva([''], {
+export type AnnonceRootVariantProps = VariantProps<typeof annonceRootVariant>;
+const annonceRootVariant = cva('', {
   variants: {
-    variant: variantsMap ,
-    colorVariant: colorsMap,
-  },
-  defaultVariants: {
-    variant: 'outlined',
-    colorVariant: 'primary',
+    variant: {
+      outlined: annonce.root,
+      soft: softAnnonce.root
+    },
   }
-  });
+});
 
-export interface AnnonceProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof annonceVariants> {
-  message: string;
-  concern: string;
+export interface AnnonceRootProps extends AnnonceRootVariantProps {
+  className?: string;
   href?: string;
+  children: React.ReactNode;
 }
 
-export const Annonce: React.FC<AnnonceProps> = ({
-    className,
-    variant,
-    colorVariant,
-    concern,
-    message,
-    href,
-    ...props
-  }) => {
-    const Component = href ? 'a' : 'div';
-    const annonceUtilities = variantsMap[variant!].root
-    const classes = cn(annonceUtilities, className);
-    return(
-        <Component href={href} className={classes} {...props}>
-          <span className={variantsMap[variant!]['concern'][colorVariant!]}>{concern}</span>
-          <span className={variantsMap[variant!]['message']}>{message}</span>
-        </Component>
-    )
-  }
+export const AnnonceRoot: React.FC<AnnonceRootProps> = ({
+  className,
+  href,
+  variant = "outlined",
+  children,
+  ...props
+}) => {
+  const Component = href ? "a" : "div";
 
+  return (
+    <Component 
+      href={href} 
+      className={cn(annonceRootVariant({ variant: variant }), className)} 
+      {...props}
+    >
+      {children}
+    </Component>
+  );
+};
+
+export interface AnnonceConcernProps {
+  className?: string,
+  intent?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'accent' | 'gray' | 'neutral',
+  children: React.ReactNode,
+}
+
+export const AnnonceConcern: React.FC<AnnonceConcernProps> = (({
+  className,
+  intent = 'primary',
+  children,
+  ...props 
+}) => (
+  <span 
+    className={cn(annonce.concern[intent], className)} 
+    {...props}
+  >
+    {children}
+  </span>
+));
+
+export interface AnnonceMessageProps {
+  className?: string,
+  children: React.ReactNode,
+}
+
+export const AnnonceMessage: React.FC<AnnonceMessageProps> = (({
+  className,
+  children,
+  ...props
+}) => (
+  <span 
+    className={cn(annonce.message, className)} 
+    {...props}
+  >
+    {children}
+  </span>
+));
