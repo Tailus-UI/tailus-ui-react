@@ -1,12 +1,12 @@
-import * as Form from "@radix-ui/react-form";
+import {Root} from "@radix-ui/react-form";
 import {card as cardTheme} from "@tailus/themer-card";
 import React from "react";
 
 const FormRoot = React.forwardRef<
   HTMLFormElement,
-  React.ComponentProps<typeof Form.Root>>(
+  React.ComponentProps<typeof Root>>(
     (props, forwardedRef) => (
-    <Form.Root
+    <Root
       ref={forwardedRef}
       className={cardTheme}
       {...props}
