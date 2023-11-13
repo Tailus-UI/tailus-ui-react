@@ -8,7 +8,7 @@ import {
   FormMessage,
   FormSubmit,
   FormTextArea
-} from "./Form";
+} from "./";
 import { Meta, StoryObj } from "@storybook/react";
 
 type FormUIProps = {
