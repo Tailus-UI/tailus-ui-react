@@ -10,7 +10,7 @@ const textareaVariants = cva("", {
       outlined: outlinedTheme.textarea.sm,
     },
     size: {
-      xs: softTHeme.textarea.xs,
+      xs: outlinedTheme.textarea.xs,
       sm: outlinedTheme.textarea.sm,
       md: outlinedTheme.textarea.md,
       lg: outlinedTheme.textarea.lg,

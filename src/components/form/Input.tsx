@@ -10,7 +10,7 @@ const inputVarianrs = cva("input", {
       outlined: outlinedTheme.input.sm,
     },
     size: {
-      xs: softTHeme.input.xs,
+      xs: outlinedTheme.input.xs,
       sm: outlinedTheme.input.sm,
       md: outlinedTheme.input.md,
       lg: outlinedTheme.input.lg,
