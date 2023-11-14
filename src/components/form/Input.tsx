@@ -1,5 +1,6 @@
 import React from 'react';
-import { cn, inputFormVariants } from '../../lib/utils.ts';
+import { cn } from '../../lib/utils.ts';
+import {inputFormVariants} from "./utils.ts";
 
 const inputVariants = inputFormVariants("input");
 
