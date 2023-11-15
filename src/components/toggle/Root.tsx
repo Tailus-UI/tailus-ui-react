@@ -6,11 +6,11 @@ import {cn} from "../../lib/utils.ts";
 export interface ToggleRootProps {
   className?: string,
   variant?: 'default' | 'highlight',
-  intent?: 'primary' | 'secondary' | 'info' | 'warning' | 'danger' | 'neutral' | 'accent' | 'success',
+  intent?: 'primary' | 'secondary' | 'warning' | 'danger' | 'neutral' | 'accent' | 'success',
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 }
 
-export const ToggleRoot = React.forwardRef<
+const ToggleRoot = React.forwardRef<
   React.ElementRef<typeof Root>,
   React.ComponentPropsWithoutRef<typeof Root> & ToggleRootProps
 >(({
