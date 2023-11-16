@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from "@storybook/react";
-import {ToggleIconAfter, ToggleIconBefore, ToggleRoot} from "./index";
+import {ToggleIconAfter, ToggleIconBefore, ToggleRoot} from "./Toggle";
 
 type ToggleProps = {
   variant?: 'default' | 'highlight',
