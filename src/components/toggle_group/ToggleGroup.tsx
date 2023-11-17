@@ -3,10 +3,14 @@ import {toggleGroup as defaultTheme, highlightToggleGroup as highlightTheme} fro
 import React, {createContext, useContext} from "react";
 import {cloneElement, cn} from "../../lib/utils.ts";
 
+export type Variant = 'default' | 'highlight';
+export type Intent = 'primary' | 'secondary' | 'warning' | 'danger' | 'neutral' | 'accent' | 'success';
+export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
 interface Appearance {
-  variant: 'default' | 'highlight',
-  intent: 'primary' | 'secondary' | 'warning' | 'danger' | 'neutral' | 'accent' | 'success',
-  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  variant: Variant,
+  intent: Intent,
+  size: Size
 }
 
 const defaultAppearance: Appearance = {
@@ -16,9 +20,9 @@ const defaultAppearance: Appearance = {
 }
 
 interface RootProps {
-  variant?: 'default' | 'highlight',
-  intent?: 'primary' | 'secondary' | 'warning' | 'danger' | 'neutral' | 'accent' | 'success',
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  variant?: Variant,
+  intent?: Intent,
+  size?: Size
 }
 
 // Create context with default values
