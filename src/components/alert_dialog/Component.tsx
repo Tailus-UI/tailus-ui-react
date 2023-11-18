@@ -56,6 +56,20 @@ const AlertDialogTitle = React.forwardRef<
     )
 });
 
+const AlertDialogDescription = React.forwardRef<
+    React.ElementRef<typeof AlertDialogPrimitive.Description>,
+    React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description> & AlertDialogProps
+>(({className, variant = 'default', ...props}, forwardedRef) => {
+    const theme = variant === "centred" ? centredTheme : defaultTheme;
+    return (
+        <AlertDialogPrimitive.Description
+        {...props}
+        ref={forwardedRef}
+        className={cn(theme.description, className)}
+        />
+    )
+});
+
 export {
   AlertDialogRoot,
   AlertDialogTrigger,
@@ -63,4 +77,5 @@ export {
   AlertDialogOverlay,
   AlertDialogContent,
   AlertDialogTitle,
+  AlertDialogDescription,
 }
