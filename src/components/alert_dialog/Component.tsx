@@ -70,6 +70,8 @@ const AlertDialogDescription = React.forwardRef<
     )
 });
 
+const AlertDialogCancel = AlertDialogPrimitive.Cancel;
+
 export {
   AlertDialogRoot,
   AlertDialogTrigger,
@@ -78,4 +80,5 @@ export {
   AlertDialogContent,
   AlertDialogTitle,
   AlertDialogDescription,
+  AlertDialogCancel,
 }
