@@ -29,19 +29,11 @@ const ToggleGroupUI = (
     ItemTwoIntent
   }: ToggleUIProps
 ) => {
-  if (globalVariant) {
-    ItemOneVariant = globalVariant;
-    ItemTwoVariant = globalVariant;
-  }
-
-  if (globalIntent) {
-    ItemOneIntent = globalIntent;
-    ItemTwoIntent = globalIntent;
-  }
-
   return (
-    <ToggleGroupRoot intent={globalIntent} variant={globalVariant} size={globalSize} type="single" defaultValue="like"
-                     aria-label="User feedback">
+    <ToggleGroupRoot
+      intent={globalIntent} variant={globalVariant} size={globalSize}
+      type="single" defaultValue="like" aria-label="User feedback"
+    >
       <ToggleGroupItem value="like" aria-label="I like it" variant={ItemOneVariant} intent={ItemOneIntent}>
         <ToggleGroupIconBefore>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -102,28 +94,28 @@ const meta: Meta<typeof ToggleGroupUI> = {
     globalVariant: {
       name: 'Global variant',
       control: 'select',
-      options: ['default', 'highlight', undefined],
-      defaultValue: undefined,
+      options: ['default', 'highlight'],
+      defaultValue: 'default',
       description: 'Global variant (Root element) applied to all elements'
     },
     ItemOneVariant: {
       name: 'First item variant',
       control: 'select',
-      options: ['default', 'highlight'],
-      defaultValue: 'default',
+      options: ['default', 'highlight', undefined],
+      defaultValue: undefined,
       description: 'The variant of the first toggleItem.'
     },
     ItemTwoVariant: {
       name: 'Second item variant',
       control: 'select',
-      options: ['default', 'highlight'],
-      defaultValue: 'default',
+      options: ['default', 'highlight', undefined],
+      defaultValue: undefined,
       description: 'The variant of the second toggleItem.'
     },
     globalIntent: {
       name: 'Global intent',
       control: 'select',
-      options: ['primary', 'secondary', 'warning', 'danger', 'neutral', 'accent', 'success', undefined],
+      options: ['primary', 'secondary', 'warning', 'danger', 'neutral', 'accent', 'success'],
       defaultValue: 'primary',
       description: 'The intent of the toggle.'
     },
@@ -137,15 +129,15 @@ const meta: Meta<typeof ToggleGroupUI> = {
     ItemOneIntent: {
       name: 'First item intent',
       control: 'select',
-      options: ['primary', 'secondary', 'warning', 'danger', 'neutral', 'accent', 'success'],
-      defaultValue: 'primary',
+      options: ['primary', 'secondary', 'warning', 'danger', 'neutral', 'accent', 'success', undefined],
+      defaultValue: undefined,
       description: 'The intent of the toggle.'
     },
     ItemTwoIntent: {
       name: 'Second item intent',
       control: 'select',
-      options: ['primary', 'secondary', 'warning', 'danger', 'neutral', 'accent', 'success'],
-      defaultValue: 'primary',
+      options: ['primary', 'secondary', 'warning', 'danger', 'neutral', 'accent', 'success', undefined],
+      defaultValue: undefined,
       description: 'The intent of the toggle.'
     },
   },
@@ -157,13 +149,13 @@ type Story = StoryObj<typeof meta>;
 
 export const ToggleGroup: Story = {
   args: {
-    globalVariant: undefined,
+    globalVariant: 'default',
     globalIntent: 'primary',
     globalSize: 'md',
-    ItemOneVariant: 'default',
-    ItemTwoVariant: 'default',
-    ItemOneIntent: 'primary',
-    ItemTwoIntent: 'primary'
+    ItemOneVariant: undefined,
+    ItemTwoVariant: undefined,
+    ItemOneIntent: undefined,
+    ItemTwoIntent: undefined
   },
   render: args => (
     <ToggleGroupUI {...args} />
@@ -172,13 +164,13 @@ export const ToggleGroup: Story = {
 
 export const ToggleGroupExample2: Story = {
   args: {
-    globalVariant: undefined,
+    globalVariant: 'default',
     globalIntent: 'primary',
     globalSize: 'md',
-    ItemOneVariant: 'default',
-    ItemTwoVariant: 'default',
-    ItemOneIntent: 'primary',
-    ItemTwoIntent: 'primary'
+    ItemOneVariant: undefined,
+    ItemTwoVariant: undefined,
+    ItemOneIntent: undefined,
+    ItemTwoIntent: undefined
   },
   render: args => (
     <div
@@ -191,13 +183,13 @@ export const ToggleGroupExample2: Story = {
 
 export const ToggleGroupExample1: Story = {
   args: {
-    globalVariant: undefined,
+    globalVariant: 'default',
     globalIntent: 'primary',
     globalSize: 'md',
-    ItemOneVariant: 'default',
-    ItemTwoVariant: 'default',
-    ItemOneIntent: 'primary',
-    ItemTwoIntent: 'primary'
+    ItemOneVariant: undefined,
+    ItemTwoVariant: undefined,
+    ItemOneIntent: undefined,
+    ItemTwoIntent: undefined
   },
   render: args => (
     <div className="flex flex-col items-center gap-2 text-gray-700 dark:text-gray-300">
