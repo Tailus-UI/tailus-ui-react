@@ -6,18 +6,31 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import {cn} from "../../lib/utils.ts";
 import React from "react";
 
-const AlertDialogRoot = AlertDialogPrimitive.Root;
+export const VariantContext = React.createContext<"centred" | "default">("default");
+type AlertDialogProps = { variant?: "centred" | "default" }
+
+const AlertDialogRoot = React.forwardRef<
+  React.ElementRef<typeof AlertDialogPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Root> & AlertDialogProps
+>(({variant = "default", ...props}, forwardedRef) => {
+  return (
+    <VariantContext.Provider value={variant}>
+      <AlertDialogPrimitive.Root
+        {...props}
+        ref={forwardedRef}
+      />
+    </VariantContext.Provider>
+  )
+});
+
 const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
 const AlertDialogPortal = AlertDialogPrimitive.Portal;
 
-type AlertDialogProps = {
-    variant?: "centred" | "default"
-}
-
 const AlertDialogOverlay = React.forwardRef<
-    React.ElementRef<typeof AlertDialogPrimitive.Overlay>,
-    React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay> & AlertDialogProps
->(({className, variant = 'default', ...props}, forwardedRef) => {
+  React.ElementRef<typeof AlertDialogPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>
+>(({className, ...props}, forwardedRef) => {
+  const variant = React.useContext(VariantContext);
   const theme = variant === "centred" ? centredTheme : defaultTheme;
   return (
     <AlertDialogPrimitive.Overlay
@@ -29,62 +42,66 @@ const AlertDialogOverlay = React.forwardRef<
 })
 
 const AlertDialogContent = React.forwardRef<
-    React.ElementRef<typeof AlertDialogPrimitive.Content>,
-    React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content> & AlertDialogProps
->(({className, variant = 'default', ...props}, forwardedRef) => {
-    const theme = variant === "centred" ? centredTheme : defaultTheme;
-    return (
-        <AlertDialogPrimitive.Content
-        {...props}
-        ref={forwardedRef}
-        className={cn(theme.content, className)}
-        />
-    )
+  React.ElementRef<typeof AlertDialogPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>
+>(({className, ...props}, forwardedRef) => {
+  const variant = React.useContext(VariantContext);
+  const theme = variant === "centred" ? centredTheme : defaultTheme;
+  return (
+    <AlertDialogPrimitive.Content
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.content, className)}
+    />
+  )
 });
 
 const AlertDialogTitle = React.forwardRef<
-    React.ElementRef<typeof AlertDialogPrimitive.Title>,
-    React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title> & AlertDialogProps
->(({className, variant = 'default', ...props}, forwardedRef) => {
-    const theme = variant === "centred" ? centredTheme : defaultTheme;
-    return (
-        <AlertDialogPrimitive.Title
-        {...props}
-        ref={forwardedRef}
-        className={cn(theme.title, className)}
-        />
-    )
+  React.ElementRef<typeof AlertDialogPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>
+>(({className, ...props}, forwardedRef) => {
+  const variant = React.useContext(VariantContext);
+  const theme = variant === "centred" ? centredTheme : defaultTheme;
+  return (
+    <AlertDialogPrimitive.Title
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.title, className)}
+    />
+  )
 });
 
 const AlertDialogDescription = React.forwardRef<
-    React.ElementRef<typeof AlertDialogPrimitive.Description>,
-    React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description> & AlertDialogProps
->(({className, variant = 'default', ...props}, forwardedRef) => {
-    const theme = variant === "centred" ? centredTheme : defaultTheme;
-    return (
-        <AlertDialogPrimitive.Description
-        {...props}
-        ref={forwardedRef}
-        className={cn(theme.description, className)}
-        />
-    )
+  React.ElementRef<typeof AlertDialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description>
+>(({className, ...props}, forwardedRef) => {
+  const variant = React.useContext(VariantContext);
+  const theme = variant === "centred" ? centredTheme : defaultTheme;
+  return (
+    <AlertDialogPrimitive.Description
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.description, className)}
+    />
+  )
 });
 
 const AlertDialogCancel = AlertDialogPrimitive.Cancel;
 const AlertDialogAction = AlertDialogPrimitive.Action;
 
 const AlertDialogActions = React.forwardRef<
-    React.ElementRef<"div">,
-    React.ComponentPropsWithoutRef<"div"> & AlertDialogProps
->(({className, variant = 'default', ...props}, forwardedRef) => {
-    const theme = variant === "centred" ? centredTheme : defaultTheme;
-    return (
-        <div
-        {...props}
-        ref={forwardedRef}
-        className={cn(theme.actions, className)}
-        />
-    )
+  React.ElementRef<"div">,
+  React.ComponentPropsWithoutRef<"div">
+>(({className, ...props}, forwardedRef) => {
+  const variant = React.useContext(VariantContext);
+  const theme = variant === "centred" ? centredTheme : defaultTheme;
+  return (
+    <div
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.actions, className)}
+    />
+  )
 });
 
 export {
