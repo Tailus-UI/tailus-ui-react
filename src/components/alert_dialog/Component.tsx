@@ -104,6 +104,31 @@ const AlertDialogActions = React.forwardRef<
   )
 });
 
+const AlertDialogImageContainer = React.forwardRef<
+  React.ElementRef<"div">,
+  React.ComponentPropsWithoutRef<"div">
+>(({className, ...props}, forwardedRef) => {
+  const variant = React.useContext(VariantContext);
+  const theme = variant === "centred" ? centredTheme : defaultTheme;
+  return (
+    <div
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.imageContainer.danger, className)}
+    />
+  )
+});
+
+interface AlertDialogImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  className?: string,
+}
+
+const AlertDialogImage: React.FC<AlertDialogImageProps> = ({className, ...props}) => {
+  const variant = React.useContext(VariantContext);
+  const theme = variant === "centred" ? centredTheme : defaultTheme;
+  return <img {...props} className={cn(theme.image, className)} alt={props.alt}/>;
+};
+
 export {
   AlertDialogRoot,
   AlertDialogTrigger,
@@ -115,4 +140,6 @@ export {
   AlertDialogCancel,
   AlertDialogAction,
   AlertDialogActions,
+  AlertDialogImageContainer,
+  AlertDialogImage
 }
