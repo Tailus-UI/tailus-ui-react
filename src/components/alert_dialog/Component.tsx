@@ -7,23 +7,17 @@ import {cn} from "../../lib/utils.ts";
 import React from "react";
 
 export const VariantContext = React.createContext<"centred" | "default">("default");
-type AlertDialogProps = {
+interface AlertDialogProps extends React.ComponentProps<typeof AlertDialogPrimitive.Root> {
   variant?: "centred" | "default"
 }
 
-const AlertDialogRoot = React.forwardRef<
-  React.ElementRef<typeof AlertDialogPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Root> & AlertDialogProps
->(({variant = "default", ...props}, forwardedRef) => {
-  return (
-    <VariantContext.Provider value={variant}>
-      <AlertDialogPrimitive.Root
-        {...props}
-        ref={forwardedRef}
-      />
-    </VariantContext.Provider>
-  )
-});
+const AlertDialogRoot: React.FC<AlertDialogProps> = ({variant = "default", ...props}) => {
+    return (
+        <VariantContext.Provider value={variant}>
+        <AlertDialogPrimitive.Root {...props} />
+        </VariantContext.Provider>
+    )
+}
 
 const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
 const AlertDialogPortal = AlertDialogPrimitive.Portal;
