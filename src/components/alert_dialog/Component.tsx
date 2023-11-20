@@ -7,7 +7,9 @@ import {cn} from "../../lib/utils.ts";
 import React from "react";
 
 export const VariantContext = React.createContext<"centred" | "default">("default");
-type AlertDialogProps = { variant?: "centred" | "default" }
+type AlertDialogProps = {
+  variant?: "centred" | "default"
+}
 
 const AlertDialogRoot = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Root>,
@@ -106,15 +108,15 @@ const AlertDialogActions = React.forwardRef<
 
 const AlertDialogImageContainer = React.forwardRef<
   React.ElementRef<"div">,
-  React.ComponentPropsWithoutRef<"div">
->(({className, ...props}, forwardedRef) => {
+  React.ComponentPropsWithoutRef<"div"> & {intent?: "danger" | "warning" | "info"}
+>(({className, intent = 'danger', ...props}, forwardedRef) => {
   const variant = React.useContext(VariantContext);
   const theme = variant === "centred" ? centredTheme : defaultTheme;
   return (
     <div
       {...props}
       ref={forwardedRef}
-      className={cn(theme.imageContainer.danger, className)}
+      className={cn(theme.imageContainer[intent], className)}
     />
   )
 });
@@ -128,6 +130,23 @@ const AlertDialogImage: React.FC<AlertDialogImageProps> = ({className, ...props}
   const theme = variant === "centred" ? centredTheme : defaultTheme;
   return <img {...props} className={cn(theme.image, className)} alt={props.alt}/>;
 };
+
+const AlertDialog = {
+  Root: AlertDialogRoot,
+  Trigger: AlertDialogTrigger,
+  Portal: AlertDialogPortal,
+  Overlay: AlertDialogOverlay,
+  Content: AlertDialogContent,
+  Title: AlertDialogTitle,
+  Description: AlertDialogDescription,
+  Cancel: AlertDialogCancel,
+  Action: AlertDialogAction,
+  Actions: AlertDialogActions,
+  ImageContainer: AlertDialogImageContainer,
+  Image: AlertDialogImage
+}
+
+export default AlertDialog;
 
 export {
   AlertDialogRoot,
