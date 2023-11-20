@@ -170,8 +170,8 @@ export const AlertDialog_: Story = {
 
 
 type anotherDialogProps = {
-    variant: "default" | "centred",
-    intent: "info" | "warning" | "danger",
+  variant: "default" | "centred",
+  intent: "info" | "warning" | "danger",
 
 }
 const anotherExample = (args: anotherDialogProps) => (
@@ -212,10 +212,10 @@ const anotherExample = (args: anotherDialogProps) => (
 )
 
 export const Example: Story = {
-    name: "Another Example",
-    args: {
-        variant: "default",
-        intent: "info"
-    },
+  name: "Another Example",
+  args: {
+    variant: "default",
+    intent: "info"
+  },
   render: anotherExample,
 }

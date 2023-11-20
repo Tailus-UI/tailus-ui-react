@@ -108,7 +108,7 @@ const AlertDialogActions = React.forwardRef<
 
 const AlertDialogImageContainer = React.forwardRef<
   React.ElementRef<"div">,
-  React.ComponentPropsWithoutRef<"div"> & {intent?: "danger" | "warning" | "info"}
+  React.ComponentPropsWithoutRef<"div"> & { intent?: "danger" | "warning" | "info" }
 >(({className, intent = 'danger', ...props}, forwardedRef) => {
   const variant = React.useContext(VariantContext);
   const theme = variant === "centred" ? centredTheme : defaultTheme;
