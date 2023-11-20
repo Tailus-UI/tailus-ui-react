@@ -1,4 +1,4 @@
-import AlertDialog from "./Component.tsx";
+import AlertDialog from "./AlertDialog.tsx";
 import {button as solidButton, ghostButton, softIconButton} from "@tailus/themer-button";
 import {Meta, StoryObj} from "@storybook/react";
 import {Button} from "../button/Button.tsx";
