@@ -212,6 +212,7 @@ const anotherExample = (args: anotherDialogProps) => (
 )
 
 export const Example: Story = {
+    name: "Another Example",
     args: {
         variant: "default",
         intent: "info"
