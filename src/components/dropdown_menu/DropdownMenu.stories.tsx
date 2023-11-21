@@ -5,10 +5,13 @@ type DropdownMenuUIProps = {
   variant?: "default" | "soft",
   intent?: "primary" | "warning" | "danger" | "gray" | "neutral"
 }
+
 const DropdownMenuUI = (args: DropdownMenuUIProps) => {
   return (
     <DropdownMenu.Root>
+      <DropdownMenu.Trigger asChild>
 
+      </DropdownMenu.Trigger>
     </DropdownMenu.Root>
   );
 }

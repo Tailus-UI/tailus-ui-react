@@ -2,13 +2,16 @@
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 
 const DropdownMenuRoot = DropdownMenuPrimitive.Root;
+const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 
 const DropdownMenu = {
   Root: DropdownMenuRoot,
+  Trigger: DropdownMenuTrigger,
 };
 
 export default DropdownMenu;
 
 export {
   DropdownMenuRoot,
+  DropdownMenuTrigger,
 }
