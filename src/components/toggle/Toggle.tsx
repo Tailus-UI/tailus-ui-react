@@ -86,9 +86,18 @@ const ToggleIconBefore = ({className, children}: ToggleIconProps) => {
   );
 };
 
+const Toggle = {
+  Root: ToggleRoot,
+  Icon: ToggleIcon,
+  IconAfter: ToggleIconAfter,
+  IconBefore: ToggleIconBefore
+}
+
 export {
-    ToggleRoot,
-    ToggleIcon,
-    ToggleIconAfter,
-    ToggleIconBefore
+  ToggleRoot,
+  ToggleIcon,
+  ToggleIconAfter,
+  ToggleIconBefore
 };
+
+export default Toggle;

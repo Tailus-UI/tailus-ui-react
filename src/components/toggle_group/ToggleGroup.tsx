@@ -1,4 +1,4 @@
-import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 import {toggleGroup as defaultTheme, highlightToggleGroup as highlightTheme} from "@tailus/themer-toggle-group"
 import React, {createContext, useContext} from "react";
 import {cloneElement, cn} from "../../lib/utils.ts";
@@ -35,8 +35,8 @@ const RootContext = createContext(defaultAppearance);
 // Creating the ToggleGroupRoot component with forwardRef to pass the ref
 // The component is wrapped in the RootContext.Provider to provide the context values
 const ToggleGroupRoot = React.forwardRef<
-  React.ElementRef<typeof ToggleGroup.Root>,
-  React.ComponentPropsWithoutRef<typeof ToggleGroup.Root> & RootProps
+  React.ElementRef<typeof ToggleGroupPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> & RootProps
 >((
   {
     className,
@@ -52,7 +52,7 @@ const ToggleGroupRoot = React.forwardRef<
   // Returning the component with the context Provider
   return (
     <RootContext.Provider value={{variant: variant, intent: intent, size: size}}>
-      <ToggleGroup.Root className={cn(variantClassNames, className)} ref={forwardedRef} {...props} />
+      <ToggleGroupPrimitive.Root className={cn(variantClassNames, className)} ref={forwardedRef} {...props} />
     </RootContext.Provider>
   );
 });
@@ -62,8 +62,8 @@ const ItemContext = createContext(defaultAppearance);
 
 // Creating the ToggleGroupItem component with forwardRef to pass the ref
 const ToggleGroupItem = React.forwardRef<
-  React.ElementRef<typeof ToggleGroup.Item>,
-  React.ComponentPropsWithoutRef<typeof ToggleGroup.Item> & RootProps
+  React.ElementRef<typeof ToggleGroupPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> & RootProps
 >((
   {
     className,
@@ -91,7 +91,7 @@ const ToggleGroupItem = React.forwardRef<
   // Returning the component with the context Provider
   return (
     <ItemContext.Provider value={{variant: variant, intent: intent, size: size}}>
-      <ToggleGroup.Item className={cn(variantClassNames, className)} ref={forwardedRef} {...props} />
+      <ToggleGroupPrimitive.Item className={cn(variantClassNames, className)} ref={forwardedRef} {...props} />
     </ItemContext.Provider>
   );
 });
@@ -145,6 +145,14 @@ const ToggleGroupIconBefore = ({className, children}: ToggleIconProps) => {
   );
 };
 
+const ToggleGroup = {
+  Root: ToggleGroupRoot,
+  Item: ToggleGroupItem,
+  Icon: ToggleGroupIcon,
+  IconAfter: ToggleGroupIconAfter,
+  IconBefore: ToggleGroupIconBefore
+}
+
 // Exporting the components for later use
 export {
   ToggleGroupRoot,
@@ -153,3 +161,5 @@ export {
   ToggleGroupIconAfter,
   ToggleGroupIconBefore
 };
+
+export default ToggleGroup;
