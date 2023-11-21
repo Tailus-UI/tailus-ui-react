@@ -1,5 +1,7 @@
 import DropdownMenu from "./DropdownMenu2.tsx";
 import {Meta, StoryObj} from "@storybook/react";
+import {DotsVerticalIcon} from "@radix-ui/react-icons";
+import {Button} from "../button/Button.tsx";
 
 type DropdownMenuUIProps = {
   variant?: "default" | "soft",
@@ -10,7 +12,9 @@ const DropdownMenuUI = (args: DropdownMenuUIProps) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-
+        <Button label="DismissDialog" icon="only" colorVariant="gray">
+          <DotsVerticalIcon />
+        </Button>
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
