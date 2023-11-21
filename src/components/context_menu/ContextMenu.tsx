@@ -1,62 +1,249 @@
-import * as ContextMenu from "@radix-ui/react-context-menu";
-import { ChevronRightIcon } from "@radix-ui/react-icons";
-import {contextMenu as contextTheme} from "@tailus/themer-context-menu"
+import * as ContextMenuPrimitive from "@radix-ui/react-context-menu";
+import {contextMenu as defaultTheme, softContextMenu as softTheme} from "@tailus/themer-context-menu"
+import React from "react";
+import {cn} from "../../lib/utils.ts";
 
-const ContextMenuUI = () => {
+type MenuContextValue = {
+  variant: "default" | "soft";
+  intent: "primary" | "warning" | "danger" | "gray";
+}
 
-    return (
-        <ContextMenu.Root>
-            <div className="-mt-12">
-                <span className="text-gray-700 dark:text-gray-300">Right click the logo.</span>
+const defaultMenuContextValue: MenuContextValue = {
+  variant: "default",
+  intent: "primary",
+}
 
-                <ContextMenu.Trigger>
-                    <div className="mt-12 mx-auto w-fit rounded-[--menu-border-radius] px-4 py-2 transition duration-300 hover:bg-gray-100 dark:hover:bg-white/5">
-                        <img className="w-16 h-16 mx-auto" src="/tls/x512.png" alt="" />
-                        <span className="text-xs font-medium text-gray-700 dark:text-gray-300">tailus-logo.png</span>
-                    </div>
-                </ContextMenu.Trigger>
-            </div>
+const MenuContext = React.createContext(defaultMenuContextValue);
 
-            <ContextMenu.Portal>
-                <ContextMenu.Content className={contextTheme.content}>
-                    <ContextMenu.Item className={contextTheme.item.primary}>
-                        Scale <div className={contextTheme.command}>⌘+S</div>
-                    </ContextMenu.Item>
-                    <ContextMenu.Item className={contextTheme.item.primary}>
-                        Set to Primary <div className={contextTheme.command}>⌘+P</div>
-                    </ContextMenu.Item>
-                    <ContextMenu.Separator className={contextTheme.separator} />
-                    <ContextMenu.Item className={contextTheme.item.primary}>Copy </ContextMenu.Item>
-                    <ContextMenu.Item className={contextTheme.item.primary}>Share... </ContextMenu.Item>
-                    <ContextMenu.Separator className={contextTheme.separator} />
-                    <ContextMenu.Sub>
-                        <ContextMenu.SubTrigger className={contextTheme.subTriger.primary}>
-                            Download
-                            <div className={contextTheme.icon}>
-                                <ChevronRightIcon />
-                            </div>
-                        </ContextMenu.SubTrigger>
-                        <ContextMenu.Portal>
-                            <ContextMenu.SubContent className={contextTheme.subContent} sideOffset={4} alignOffset={-5}>
-                                <ContextMenu.Item className={contextTheme.item.primary}>Logomark </ContextMenu.Item>
-                                <ContextMenu.Item className={contextTheme.item.primary}>Logotype </ContextMenu.Item>
-                                <ContextMenu.Separator className={contextTheme.separator} />
+const ContextMenuRoot = ContextMenuPrimitive.Root;
+const ContextMenuTrigger = ContextMenuPrimitive.Trigger;
+const ContextMenuPortal = ContextMenuPrimitive.Portal;
+const ContextMenuLabel = ContextMenuPrimitive.Label;
+const ContextMenuGroup = ContextMenuPrimitive.Group;
+const ContextMenuCheckboxItem = ContextMenuPrimitive.CheckboxItem;
+const ContextMenuItemIndicator = ContextMenuPrimitive.ItemIndicator;
+const ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup;
+const ContextMenuRadioItem = ContextMenuPrimitive.RadioItem;
+const ContextMenuSub = ContextMenuPrimitive.Sub;
 
-                                <ContextMenu.Item className={contextTheme.item.primary}>All </ContextMenu.Item>
-                            </ContextMenu.SubContent>
-                        </ContextMenu.Portal>
-                    </ContextMenu.Sub>
-                    <ContextMenu.Separator className={contextTheme.separator} />
-                    <ContextMenu.Item className={contextTheme.item.warning}>
-                        Archive <div className={contextTheme.command}>⌘+D</div>
-                    </ContextMenu.Item>
-                    <ContextMenu.Item className={contextTheme.item.danger}>
-                        Delete <div className={contextTheme.command}>⌘+D</div>
-                    </ContextMenu.Item>
-                </ContextMenu.Content>
-            </ContextMenu.Portal>
-        </ContextMenu.Root>
-    );
-};
+export interface ContextMenuContentProps {
+  variant?: "default" | "soft";
+  intent?: "primary" | "warning" | "danger" | "gray";
+}
 
-export default ContextMenuUI;
+const ContextMenuContent = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content> & ContextMenuContentProps
+>(({className, variant, intent, ...props}, forwardedRef) => {
+  const contextValues = {
+    variant: variant || defaultMenuContextValue.variant,
+    intent: intent || defaultMenuContextValue.intent
+  }
+  const theme = variant === "default" ? defaultTheme : softTheme;
+
+  return (
+    <MenuContext.Provider value={contextValues}>
+      <ContextMenuPrimitive.Content
+        {...props}
+        ref={forwardedRef}
+        className={cn(theme.content, className)}
+      />
+    </MenuContext.Provider>
+  );
+});
+
+export interface ContextMenuItemProps {
+  variant?: "default" | "soft";
+  intent?: "primary" | "warning" | "danger" | "gray";
+}
+
+const ContextMenuItem = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Item> & ContextMenuItemProps
+>((
+  {
+    className,
+    intent,
+    variant,
+    ...props
+  }, forwardedRef
+) => {
+  const {
+    variant: contextVariant,
+    intent: contextIntent
+  } = React.useContext(MenuContext);
+
+  variant = variant || contextVariant;
+  intent = intent || contextIntent;
+
+  const theme = variant === "default" ? defaultTheme : softTheme;
+
+  return (
+    <ContextMenuPrimitive.Item
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.item[intent], className)}
+    />
+  );
+});
+
+interface ContextMenuSubTriggerProps extends ContextMenuItemProps {
+}
+
+const ContextMenuSubTrigger = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.SubTrigger>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubTrigger> & ContextMenuSubTriggerProps
+>((
+  {
+    className,
+    intent = "primary",
+    variant,
+    ...props
+  }, forwardedRef
+) => {
+  const {
+    variant: contextVariant,
+    intent: contextIntent
+  } = React.useContext(MenuContext);
+
+  variant = variant || contextVariant;
+  intent = intent || contextIntent;
+
+  const theme = variant === "default" ? defaultTheme : softTheme;
+
+  return (
+    <ContextMenuPrimitive.SubTrigger
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.subTriger[intent], className)}
+    />
+  );
+});
+
+interface ContextMenuSubContentProps extends ContextMenuContentProps {
+}
+
+const ContextMenuSubContent = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.SubContent>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubContent> & ContextMenuSubContentProps
+>((
+  {
+    className,
+    variant,
+    ...props
+  }, forwardedRef
+) => {
+  const {variant: contextVariant} = React.useContext(MenuContext);
+  variant = variant || contextVariant;
+  const theme = variant === "default" ? defaultTheme : softTheme;
+  return (
+    <ContextMenuPrimitive.SubContent
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.subContent, className)}
+    />
+  );
+});
+
+interface ContextMenuSeparatorProps extends ContextMenuContentProps {
+}
+
+const ContextMenuSeparator = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.Separator>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Separator> & ContextMenuSeparatorProps
+>(({className, variant, ...props}, forwardedRef) => {
+  const {variant: contextVariant} = React.useContext(MenuContext);
+  variant = variant || contextVariant;
+  const theme = variant === "default" ? defaultTheme : softTheme;
+
+  return (
+    <ContextMenuPrimitive.Separator
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.separator, className)}
+    />
+  );
+});
+
+interface ContextMenuCommandProps {
+  variant?: "default" | "soft";
+}
+
+const ContextMenuCommand = React.forwardRef<
+  React.ElementRef<"div">,
+  React.ComponentPropsWithoutRef<"div"> & ContextMenuCommandProps
+>(({className, variant, ...props}, forwardedRef) => {
+  const {variant: contextVariant} = React.useContext(MenuContext);
+  variant = variant || contextVariant;
+  const theme = variant === "default" ? defaultTheme : softTheme;
+
+  return (
+    <div
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.command, className)}
+    />
+  );
+});
+
+interface ContextMenuIconProps extends ContextMenuCommandProps {
+}
+
+const ContextMenuIcon = React.forwardRef<
+  React.ElementRef<"div">,
+  React.ComponentPropsWithoutRef<"div"> & ContextMenuIconProps
+>(({className, variant, ...props}, forwardedRef) => {
+  const {variant: contextVariant} = React.useContext(MenuContext);
+  variant = variant || contextVariant;
+  const theme = variant === "default" ? defaultTheme : softTheme;
+
+  return (
+    <div
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.icon, className)}
+    />
+  );
+});
+
+const ContextMenu = {
+  Root: ContextMenuRoot,
+  Trigger: ContextMenuTrigger,
+  Portal: ContextMenuPortal,
+  Content: ContextMenuContent,
+  Label: ContextMenuLabel,
+  Item: ContextMenuItem,
+  Group: ContextMenuGroup,
+  CheckboxItem: ContextMenuCheckboxItem,
+  ItemIndicator: ContextMenuItemIndicator,
+  RadioGroup: ContextMenuRadioGroup,
+  RadioItem: ContextMenuRadioItem,
+  Sub: ContextMenuSub,
+  SubTrigger: ContextMenuSubTrigger,
+  SubContent: ContextMenuSubContent,
+  Separator: ContextMenuSeparator,
+  Command: ContextMenuCommand,
+  Icon: ContextMenuIcon,
+}
+
+export {
+  ContextMenuRoot,
+  ContextMenuTrigger,
+  ContextMenuPortal,
+  ContextMenuContent,
+  ContextMenuLabel,
+  ContextMenuItem,
+  ContextMenuGroup,
+  ContextMenuCheckboxItem,
+  ContextMenuItemIndicator,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuSub,
+  ContextMenuSubTrigger,
+  ContextMenuSubContent,
+  ContextMenuSeparator,
+  ContextMenuCommand,
+  ContextMenuIcon,
+}
+
+export default ContextMenu;
