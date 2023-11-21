@@ -1,11 +1,11 @@
-import DropdownMenu from "./DropdownMenu2.tsx";
+import DropdownMenu, {Intent, Variant} from "./DropdownMenu2.tsx";
 import {Meta, StoryObj} from "@storybook/react";
 import {DotsVerticalIcon} from "@radix-ui/react-icons";
 import {Button} from "../button/Button.tsx";
 
 type DropdownMenuUIProps = {
-  variant?: "default" | "soft",
-  intent?: "primary" | "warning" | "danger" | "gray" | "neutral"
+  variant?: Variant,
+  intent?: Intent
 }
 
 const DropdownMenuUI = (args: DropdownMenuUIProps) => {
