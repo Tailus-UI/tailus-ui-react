@@ -7,8 +7,8 @@ type Variant = "default" | "soft";
 type Intent = "primary" | "warning" | "danger" | "gray" | "neutral";
 
 interface MenuContextValue {
-  variant: Variant;
-  intent: Intent;
+  variant?: Variant;
+  intent?: Intent;
 }
 
 const defaultMenuContextValues: MenuContextValue = {
