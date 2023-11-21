@@ -45,11 +45,14 @@ const DropdownMenuContent = React.forwardRef<
   );
 });
 
+const DropdownMenuArrow = DropdownMenuPrimitive.Arrow;
+
 const DropdownMenu = {
   Root: DropdownMenuRoot,
   Trigger: DropdownMenuTrigger,
   Portal: DropdownMenuPortal,
   Content: DropdownMenuContent,
+  Arrow: DropdownMenuArrow,
 };
 
 export default DropdownMenu;
@@ -59,6 +62,7 @@ export {
   DropdownMenuTrigger,
   DropdownMenuPortal,
   DropdownMenuContent,
+  DropdownMenuArrow,
 }
 
 export type {
