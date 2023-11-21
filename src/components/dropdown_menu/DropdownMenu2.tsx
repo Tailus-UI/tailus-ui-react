@@ -47,12 +47,34 @@ const DropdownMenuContent = React.forwardRef<
 
 const DropdownMenuArrow = DropdownMenuPrimitive.Arrow;
 
+interface DropdownMenuItemProps extends MenuContextValue {
+}
+
+const DropdownMenuItem = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> & DropdownMenuItemProps
+>(({className, variant, intent, ...props}, forwardedRef) => {
+  const contextValues = React.useContext(MenuContext);
+  variant = variant || contextValues.variant;
+  intent = intent || contextValues.intent;
+  const theme = variant === "default" ? defaultTheme : softTheme;
+
+  return (
+    <DropdownMenuPrimitive.Item
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.item[intent], className)}
+    />
+  );
+});
+
 const DropdownMenu = {
   Root: DropdownMenuRoot,
   Trigger: DropdownMenuTrigger,
   Portal: DropdownMenuPortal,
   Content: DropdownMenuContent,
   Arrow: DropdownMenuArrow,
+  Item: DropdownMenuItem,
 };
 
 export default DropdownMenu;
@@ -63,6 +85,7 @@ export {
   DropdownMenuPortal,
   DropdownMenuContent,
   DropdownMenuArrow,
+  DropdownMenuItem,
 }
 
 export type {
