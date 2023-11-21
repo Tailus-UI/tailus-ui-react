@@ -12,6 +12,10 @@ const DropdownMenuUI = (args: DropdownMenuUIProps) => {
       <DropdownMenu.Trigger asChild>
 
       </DropdownMenu.Trigger>
+
+      <DropdownMenu.Portal>
+
+      </DropdownMenu.Portal>
     </DropdownMenu.Root>
   );
 }
