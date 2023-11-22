@@ -7,8 +7,8 @@ type Variant = "default" | "soft";
 type Intent = "primary" | "warning" | "danger" | "gray" | "neutral";
 
 interface MenuContextValue {
-  variant?: Variant;
-  intent?: Intent;
+  variant: Variant;
+  intent: Intent;
 }
 
 const defaultMenuContextValues: MenuContextValue = {
@@ -47,7 +47,9 @@ const DropdownMenuContent = React.forwardRef<
 
 const DropdownMenuArrow = DropdownMenuPrimitive.Arrow;
 
-interface DropdownMenuItemProps extends MenuContextValue {
+interface DropdownMenuItemProps {
+  variant?: Variant,
+  intent?: Intent,
 }
 
 const DropdownMenuItem = React.forwardRef<
