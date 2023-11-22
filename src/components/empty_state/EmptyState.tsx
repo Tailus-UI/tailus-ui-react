@@ -1,19 +1,18 @@
-import { emptyState } from "@tailus/themer-empty-state"
-import { outlinedButton } from "@tailus/themer-button"
+import {emptyState} from "@tailus/themer-empty-state"
+import React from "react";
 
-const EmptyStateUI = () => (
-    <div className={emptyState.root}>
-        <div className={emptyState.imageContainer.gray}>
-            <img className={emptyState.image} src="https://cdn-icons-png.flaticon.com/512/9841/9841563.png" alt="Tailus disconnected user empty state" width={512} height={512} />
-        </div>
-        <div className={emptyState.content}>
-            <h3 className={emptyState.title}>You're offline</h3>
-            <p className={emptyState.description}>We've got something for everyone.</p>
-        </div>
-        <button className={outlinedButton.info.md}>
-            <span>Retry</span>
-        </button>
-    </div>
-);
+const EmptyStateRoot = React.forwardRef<
+  HTMLDivElement, React.HTMLAttributes<HTMLDivElement>
+>((props, ref) => (
+  <div ref={ref} className={emptyState.root} {...props} />
+));
 
-export default EmptyStateUI;
+const EmptyState = {
+  Root: EmptyStateRoot,
+};
+
+export default EmptyState;
+
+export {
+  EmptyStateRoot,
+}
