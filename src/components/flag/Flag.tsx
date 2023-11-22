@@ -78,6 +78,17 @@ const FlagLink = React.forwardRef<
   />
 ));
 
+const FLagMessage = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({className, ...props}, ref) => (
+  <p
+    ref={ref}
+    className={cn(theme.message, className)}
+    {...props}
+  />
+));
+
 const Flag = {
   Root: FlagRoot,
   IconContainer: FlagIconContainer,
@@ -85,6 +96,7 @@ const Flag = {
   Title: FlagTitle,
   Content: FlagContent,
   Link: FlagLink,
+  Message: FLagMessage,
 };
 
 export default Flag;
@@ -96,4 +108,5 @@ export {
   FlagTitle,
   FlagContent,
   FlagLink,
+  FLagMessage,
 }
