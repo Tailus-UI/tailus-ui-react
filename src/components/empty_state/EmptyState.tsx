@@ -29,9 +29,18 @@ const EmptyStateImageContainer = React.forwardRef<
   />
 ));
 
+interface EmptyStateImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  className?: string,
+}
+
+const EmptyStateImage: React.FC<EmptyStateImageProps> = ({className, ...props}) => {
+  return <img {...props} className={cn(emptyState.image, className)} alt={props.alt}/>;
+};
+
 const EmptyState = {
   Root: EmptyStateRoot,
   ImageContainer: EmptyStateImageContainer,
+  Image: EmptyStateImage,
 };
 
 export default EmptyState;
@@ -39,6 +48,7 @@ export default EmptyState;
 export {
   EmptyStateRoot,
   EmptyStateImageContainer,
+  EmptyStateImage,
 }
 
 export type {
