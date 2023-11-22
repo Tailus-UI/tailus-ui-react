@@ -47,11 +47,22 @@ const EmptyStateContent = React.forwardRef<
   />
 ));
 
+const EmptyStateTitle = React.forwardRef<
+  HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>
+>(({className, ...props}, ref) => (
+  <h3
+    ref={ref}
+    className={cn(emptyState.title, className)}
+    {...props}
+  />
+));
+
 const EmptyState = {
   Root: EmptyStateRoot,
   ImageContainer: EmptyStateImageContainer,
   Image: EmptyStateImage,
   Content: EmptyStateContent,
+  Title: EmptyStateTitle,
 };
 
 export default EmptyState;
@@ -61,6 +72,7 @@ export {
   EmptyStateImageContainer,
   EmptyStateImage,
   EmptyStateContent,
+  EmptyStateTitle,
 }
 
 export type {
