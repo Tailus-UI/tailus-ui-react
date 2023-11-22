@@ -39,10 +39,28 @@ const FlagIcon = ({className, intent = "info", children}: FlagIconProps) => {
   );
 };
 
+
+interface FlagTitleProps {
+  className?: string,
+  intent?: Intent,
+}
+
+const FlagTitle = React.forwardRef<
+  HTMLHeadingElement,
+  React.HTMLAttributes<HTMLHeadingElement> & FlagTitleProps
+>(({className, intent = "info", ...props}, ref) => (
+  <h6
+    ref={ref}
+    className={cn(theme.title[intent], className)}
+    {...props}
+  />
+));
+
 const Flag = {
   Root: FlagRoot,
   IconContainer: FlagIconContainer,
   Icon: FlagIcon,
+  Title: FlagTitle,
 };
 
 export default Flag;
@@ -51,4 +69,5 @@ export {
   FlagRoot,
   FlagIconContainer,
   FlagIcon,
+  FlagTitle,
 }
