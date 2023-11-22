@@ -67,12 +67,24 @@ const FlagContent = React.forwardRef<
   />
 ));
 
+const FlagLink = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({className, ...props}, ref) => (
+  <a
+    ref={ref}
+    className={cn(theme.link, className)}
+    {...props}
+  />
+));
+
 const Flag = {
   Root: FlagRoot,
   IconContainer: FlagIconContainer,
   Icon: FlagIcon,
   Title: FlagTitle,
   Content: FlagContent,
+  Link: FlagLink,
 };
 
 export default Flag;
@@ -83,4 +95,5 @@ export {
   FlagIcon,
   FlagTitle,
   FlagContent,
+  FlagLink,
 }
