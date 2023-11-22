@@ -13,12 +13,25 @@ const FlagRoot = React.forwardRef<
   />
 ));
 
+const FlagIconContainer = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({className, ...props}, ref) => (
+  <div
+    ref={ref}
+    className={cn(theme.icon.parent, className)}
+    {...props}
+  />
+));
+
 const Flag = {
   Root: FlagRoot,
+  IconContainer: FlagIconContainer,
 };
 
 export default Flag;
 
 export {
   FlagRoot,
+  FlagIconContainer,
 }
