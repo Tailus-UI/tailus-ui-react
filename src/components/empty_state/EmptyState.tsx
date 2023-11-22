@@ -14,14 +14,31 @@ const EmptyStateRoot = React.forwardRef<
   />
 ));
 
+
+interface EmptyStateImageProps {
+  intent?: Intent;
+}
+
+const EmptyStateImageContainer = React.forwardRef<
+  HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & EmptyStateImageProps
+>(({className, intent = "gray", ...props}, ref) => (
+  <div
+    ref={ref}
+    className={cn(emptyState.imageContainer[intent], className)}
+    {...props}
+  />
+));
+
 const EmptyState = {
   Root: EmptyStateRoot,
+  ImageContainer: EmptyStateImageContainer,
 };
 
 export default EmptyState;
 
 export {
   EmptyStateRoot,
+  EmptyStateImageContainer,
 }
 
 export type {
