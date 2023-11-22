@@ -56,11 +56,23 @@ const FlagTitle = React.forwardRef<
   />
 ));
 
+const FlagContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({className, ...props}, ref) => (
+  <div
+    ref={ref}
+    className={cn(theme.content, className)}
+    {...props}
+  />
+));
+
 const Flag = {
   Root: FlagRoot,
   IconContainer: FlagIconContainer,
   Icon: FlagIcon,
   Title: FlagTitle,
+  Content: FlagContent,
 };
 
 export default Flag;
@@ -70,4 +82,5 @@ export {
   FlagIconContainer,
   FlagIcon,
   FlagTitle,
+  FlagContent,
 }
