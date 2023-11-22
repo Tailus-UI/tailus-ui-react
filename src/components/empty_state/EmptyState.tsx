@@ -37,10 +37,21 @@ const EmptyStateImage: React.FC<EmptyStateImageProps> = ({className, ...props}) 
   return <img {...props} className={cn(emptyState.image, className)} alt={props.alt}/>;
 };
 
+const EmptyStateContent = React.forwardRef<
+  HTMLDivElement, React.HTMLAttributes<HTMLDivElement>
+>(({className, ...props}, ref) => (
+  <div
+    ref={ref}
+    className={cn(emptyState.content, className)}
+    {...props}
+  />
+));
+
 const EmptyState = {
   Root: EmptyStateRoot,
   ImageContainer: EmptyStateImageContainer,
   Image: EmptyStateImage,
+  Content: EmptyStateContent,
 };
 
 export default EmptyState;
@@ -49,6 +60,7 @@ export {
   EmptyStateRoot,
   EmptyStateImageContainer,
   EmptyStateImage,
+  EmptyStateContent,
 }
 
 export type {
