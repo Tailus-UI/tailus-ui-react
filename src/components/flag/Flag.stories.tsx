@@ -1,7 +1,8 @@
 import {Meta, StoryObj} from "@storybook/react";
 import Flag from "./Flag.tsx";
+import React from "react";
 
-const ExampleWithMessage = (withMessage: boolean) => {
+const ExampleWithMessage: React.FC<{ withMessage: boolean }> = ({withMessage}) => {
   return (
     <Flag.Root
       aria-label="Error flag"
@@ -18,22 +19,24 @@ const ExampleWithMessage = (withMessage: boolean) => {
           </svg>
         </Flag.Icon>
       </Flag.IconContainer>
-      {withMessage && (
-        <Flag.Content>
-          <Flag.Title>New update available</Flag.Title>
-          <Flag.Message id="error-flag-description-2">
-            Radix UI support, Modern UI, Customization...
-          </Flag.Message>
-          <Flag.Actions>
-            <Flag.Link href="#">
-              Learn more
-            </Flag.Link>
-            <Flag.Link href="#">
-              Upgrade now
-            </Flag.Link>
-          </Flag.Actions>
-        </Flag.Content>
-      )}
+      <Flag.Content>
+        <Flag.Title>New update available</Flag.Title>
+        {withMessage && (
+          <>
+            <Flag.Message id="error-flag-description-2">
+              Radix UI support, Modern UI, Customization...
+            </Flag.Message>
+            <Flag.Actions>
+              <Flag.Link href="#">
+                Learn more
+              </Flag.Link>
+              <Flag.Link href="#">
+                Upgrade now
+              </Flag.Link>
+            </Flag.Actions>
+          </>
+        )}
+      </Flag.Content>
       <Flag.CloseButton label="Dismiss alert">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
           <path fillRule="evenodd"
