@@ -60,10 +60,28 @@ const RadioGroupIndicator = React.forwardRef<
   )
 });
 
+const RadioGroupLabel = React.forwardRef<
+  React.ElementRef<"label">,
+  React.ComponentProps<"label">
+>((props, forwardedRef) => {
+  return (
+    <Context.Consumer>
+      {withShadow => (
+        <label
+          {...props}
+          ref={forwardedRef}
+          className={cn(withShadow ? shadowTheme.label : defaultTheme.label, props.className)}
+        />
+      )}
+    </Context.Consumer>
+  )
+});
+
 const RadioGroup = {
   Root: RadioGroupRoot,
   Item: RadioGroupItem,
   Indicator: RadioGroupIndicator,
+  Label: RadioGroupLabel,
 }
 
 export default RadioGroup;
@@ -72,4 +90,5 @@ export {
   RadioGroupRoot,
   RadioGroupItem,
   RadioGroupIndicator,
+  RadioGroupLabel,
 }
