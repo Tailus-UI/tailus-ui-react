@@ -55,10 +55,21 @@ const ProgressHeader: React.FC<HeaderProps> = ((props) => (
   />
 ));
 
+interface LabelProps extends HeaderProps {
+}
+
+const ProgressLabel: React.FC<LabelProps> = ((props) => (
+  <div
+    {...props}
+    className={cn(theme.label, props.className)}
+  />
+));
+
 const Progress = {
   Root: ProgressRoot,
   Indicator: ProgressIndicator,
   Header: ProgressHeader,
+  Label: ProgressLabel,
 }
 
 export default Progress;
@@ -67,4 +78,5 @@ export {
   ProgressIndicator,
   ProgressRoot,
   ProgressHeader,
+  ProgressLabel,
 }
