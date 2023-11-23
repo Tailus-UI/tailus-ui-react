@@ -75,12 +75,23 @@ const ProgressMessage: React.FC<MessageProps> = ((props) => (
   />
 ));
 
+interface TimerProps extends React.HTMLAttributes<HTMLSpanElement> {
+}
+
+const ProgressTimer: React.FC<TimerProps> = ((props) => (
+  <div
+    {...props}
+    className={cn(theme.timer, props.className)}
+  />
+));
+
 const Progress = {
   Root: ProgressRoot,
   Indicator: ProgressIndicator,
   Header: ProgressHeader,
   Label: ProgressLabel,
   Message: ProgressMessage,
+  Timer: ProgressTimer,
 }
 
 export default Progress;
@@ -91,4 +102,5 @@ export {
   ProgressHeader,
   ProgressLabel,
   ProgressMessage,
+  ProgressTimer,
 }
