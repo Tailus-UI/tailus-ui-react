@@ -15,8 +15,8 @@ import button, {
   softTrailingIconButton,
   trailingIconButton
 } from "@tailus/themer-button";
-import { cva, VariantProps } from 'class-variance-authority';
-import { cn } from '../../lib/utils';
+import {cva, VariantProps} from 'class-variance-authority';
+import {cn} from '../../lib/utils';
 import React from "react";
 
 const variantsMap = {
@@ -89,22 +89,25 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HT
   href?: string;
 }
 
-export const Button: React.FC<ButtonProps> = ({
-  className,
-  colorVariant,
-  variant,
-  size,
-  disabled,
-  label,
-  icon,
-  href,
-  children,
-  ...props
-}) => {
+export const Button = React.forwardRef<
+  HTMLButtonElement & HTMLAnchorElement, ButtonProps
+>((
+  {
+    className,
+    colorVariant,
+    variant,
+    size,
+    disabled,
+    label,
+    icon,
+    href,
+    children,
+    ...props
+  }, ref) => {
 
   const buttonUtilities = simpleButtonVariants[variant!][colorVariant!]?.[size!];
-  const iconButtons =  icon && variantsMap[variant!][icon][colorVariant!][size!]
-  
+  const iconButtons = icon && variantsMap[variant!][icon][colorVariant!][size!]
+
   const classes = icon ? cn(iconButtons, className) : cn(buttonUtilities, className);
   const Component = href ? 'a' : 'button';
 
@@ -115,17 +118,19 @@ export const Button: React.FC<ButtonProps> = ({
   }
 
   return (
-    <Component href={href} className={classes} {...props} disabled={disabled}>
-        {!icon && <span>{label}</span>}
-        { icon === 'only' && <span className="sr-only">{label}</span> }
-        {icon === 'trailing' && <span>{label}</span>}
-        { icon &&
-          cloneElement(children as React.ReactElement, variantsMap[variant!][icon!].icon[size!])
-        }
-        { icon === 'leading' && <span>{label}</span> }
+    <Component href={href} className={classes} {...props} disabled={disabled} ref={ref as any}>
+      {!icon && <span>{label}</span>}
+      {icon === 'only' && <span className="sr-only">{label}</span>}
+      {icon === 'trailing' && <span>{label}</span>}
+      {icon &&
+        cloneElement(children as React.ReactElement, variantsMap[variant!][icon!].icon[size!])
+      }
+      {icon === 'leading' && <span>{label}</span>}
     </Component>
   )
-};
+});
+
+Button.displayName = 'Button';
 
 Button.defaultProps = {
   variant: "solid",
