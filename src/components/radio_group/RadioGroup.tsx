@@ -3,7 +3,6 @@ import {radioGroup as defaultTheme, shadowVariant as shadowTheme} from "@tailus/
 import React from "react";
 import {cn} from "../../lib/utils.ts";
 
-
 const defaultVariant = false;
 const Context = React.createContext<boolean>(defaultVariant);
 
@@ -44,9 +43,27 @@ const RadioGroupItem = React.forwardRef<
   )
 });
 
+const RadioGroupIndicator = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Indicator>,
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Indicator>
+>((props, forwardedRef) => {
+  return (
+    <Context.Consumer>
+      {withShadow => (
+        <RadioGroupPrimitive.Indicator
+          {...props}
+          ref={forwardedRef}
+          className={cn(withShadow ? shadowTheme.indicator : defaultTheme.indicator, props.className)}
+        />
+      )}
+    </Context.Consumer>
+  )
+});
+
 const RadioGroup = {
   Root: RadioGroupRoot,
   Item: RadioGroupItem,
+  Indicator: RadioGroupIndicator,
 }
 
 export default RadioGroup;
@@ -54,4 +71,5 @@ export default RadioGroup;
 export {
   RadioGroupRoot,
   RadioGroupItem,
+  RadioGroupIndicator,
 }
