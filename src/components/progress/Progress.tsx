@@ -65,11 +65,22 @@ const ProgressLabel: React.FC<LabelProps> = ((props) => (
   />
 ));
 
+interface MessageProps extends React.HTMLAttributes<HTMLSpanElement> {
+}
+
+const ProgressMessage: React.FC<MessageProps> = ((props) => (
+  <div
+    {...props}
+    className={cn(theme.message, props.className)}
+  />
+));
+
 const Progress = {
   Root: ProgressRoot,
   Indicator: ProgressIndicator,
   Header: ProgressHeader,
   Label: ProgressLabel,
+  Message: ProgressMessage,
 }
 
 export default Progress;
@@ -79,4 +90,5 @@ export {
   ProgressRoot,
   ProgressHeader,
   ProgressLabel,
+  ProgressMessage,
 }
