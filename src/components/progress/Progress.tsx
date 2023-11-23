@@ -19,12 +19,40 @@ const ProgressRoot = React.forwardRef<
   />
 ));
 
+type IndicatorIntent =
+  "primary"
+  | "gradient"
+  | "danger"
+  | "gray"
+  | "info"
+  | "neutral"
+  | "secondary"
+  | "success"
+  | "warning";
+
+interface IndicatorProps extends React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Indicator> {
+  intent?: IndicatorIntent;
+}
+
+const ProgressIndicator = React.forwardRef<
+  React.ElementRef<typeof ProgressPrimitive.Indicator>,
+  IndicatorProps
+>(({className, intent = "primary", ...props}, forwardedRef) => (
+  <ProgressPrimitive.Indicator
+    {...props}
+    ref={forwardedRef}
+    className={cn(theme.indicator[intent], className)}
+  />
+));
+
 const Progress = {
   Root: ProgressRoot,
+  Indicator: ProgressIndicator
 }
 
 export default Progress;
 
 export {
-  ProgressPrimitive,
+  ProgressIndicator,
+  ProgressRoot
 }
