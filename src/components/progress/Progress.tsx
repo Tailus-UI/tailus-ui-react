@@ -45,14 +45,26 @@ const ProgressIndicator = React.forwardRef<
   />
 ));
 
+interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+}
+
+const ProgressHeader: React.FC<HeaderProps> = ((props) => (
+  <div
+    {...props}
+    className={cn(theme.header, props.className)}
+  />
+));
+
 const Progress = {
   Root: ProgressRoot,
-  Indicator: ProgressIndicator
+  Indicator: ProgressIndicator,
+  Header: ProgressHeader,
 }
 
 export default Progress;
 
 export {
   ProgressIndicator,
-  ProgressRoot
+  ProgressRoot,
+  ProgressHeader,
 }
