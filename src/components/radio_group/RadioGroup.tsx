@@ -1,35 +1,38 @@
-import * as RadioGroup from "@radix-ui/react-radio-group";
-import { radioGroup as radioTheme } from "@tailus/themer-radio-group"
+import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
+import {radioGroup as defaultTheme, shadowVariant as shadowTheme} from "@tailus/themer-radio-group"
+import React from "react";
+import {cn} from "../../lib/utils.ts";
 
-const RadioGroupUI = () => (
-    <form>
-        <RadioGroup.Root className="flex flex-col gap-2.5" defaultValue="problem" aria-label="View density">
-            <div className="flex items-center">
-                <RadioGroup.Item className={radioTheme.item} value="understanding" id="rr1">
-                    <RadioGroup.Indicator className={radioTheme.indicator} />
-                </RadioGroup.Item>
-                <label className={radioTheme.label} htmlFor="rr1">
-                    Easy to understand
-                </label>
-            </div>
-            <div className="flex items-center">
-                <RadioGroup.Item className={radioTheme.item} value="problem" id="rr2">
-                    <RadioGroup.Indicator className={radioTheme.indicator} />
-                </RadioGroup.Item>
-                <label className={radioTheme.label} htmlFor="rr2">
-                    Solved my problem
-                </label>
-            </div>
-            <div className="flex items-center">
-                <RadioGroup.Item className={radioTheme.item} value="other" id="rr3">
-                    <RadioGroup.Indicator className={radioTheme.indicator} />
-                </RadioGroup.Item>
-                <label className={radioTheme.label} htmlFor="rr3">
-                    Other
-                </label>
-            </div>
-        </RadioGroup.Root>
-    </form>
-);
+type Variant = boolean;
+const defaultVariant: Variant = false;
+const Context = React.createContext<Variant>(defaultVariant);
 
-export default RadioGroupUI;
+interface RadioGroupProps {
+  withShadow?: Variant;
+}
+
+const RadioGroupRoot = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> & RadioGroupProps
+>(({withShadow, ...props}, forwardedRef) => {
+  withShadow = withShadow || React.useContext(Context);
+
+  return (
+    <Context.Provider value={withShadow}>
+      <RadioGroupPrimitive.Root
+        {...props}
+        ref={forwardedRef}
+      />
+    </Context.Provider>
+  )
+});
+
+const RadioGroup = {
+  Root: RadioGroupRoot,
+}
+
+export default RadioGroup;
+
+export {
+  RadioGroupRoot,
+}
