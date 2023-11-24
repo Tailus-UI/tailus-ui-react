@@ -3,7 +3,7 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import {select as theme} from "@tailus/themer-select"
 import {softForm as softTheme, outlinedForm as defaultTheme} from "@tailus/themer-form"
 import {cloneElement, cn} from "../../lib/utils.ts";
-import {CheckIcon} from "@radix-ui/react-icons";
+import {CheckIcon, ChevronDownIcon, ChevronUpIcon} from "@radix-ui/react-icons";
 
 const SelectRoot = SelectPrimitive.Root;
 
@@ -109,23 +109,27 @@ const SelectLabel = React.forwardRef<
 const SelectScrollUpButton = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
->(({className, ...props}, forwardedRef) => (
+>(({className, children, ...props}, forwardedRef) => (
   <SelectPrimitive.ScrollUpButton
     {...props}
     ref={forwardedRef}
     className={cn(theme.scrollButton, className)}
-  />
+  >
+    {children || <ChevronUpIcon/>}
+  </SelectPrimitive.ScrollUpButton>
 ));
 
 const SelectScrollDownButton = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.ScrollDownButton>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
->(({className, ...props}, forwardedRef) => (
+>(({className, children, ...props}, forwardedRef) => (
   <SelectPrimitive.ScrollDownButton
     {...props}
     ref={forwardedRef}
     className={cn(theme.scrollButton, className)}
-  />
+  >
+    {children || <ChevronDownIcon/>}
+  </SelectPrimitive.ScrollDownButton>
 ));
 
 const SelectGroup = SelectPrimitive.Group;
