@@ -1,29 +1,92 @@
 import * as Popover from "@radix-ui/react-popover";
-import { InfoCircledIcon, Cross2Icon } from "@radix-ui/react-icons";
-import { popover } from "@tailus/themer-popover";
-import { softIconButton, ghostIconButton } from "@tailus/themer-button";
+import {popover} from "@tailus/themer-popover";
+import React from "react";
+import {cn} from "../../lib/utils.ts";
 
-const PopoverUI = () => (
-    <Popover.Root>
-        <Popover.Trigger>
-            <button className={softIconButton.gray.md}>
-                <span className="sr-only">Learn more</span>
-                <InfoCircledIcon className={softIconButton.icon.md} />
-            </button>
-        </Popover.Trigger>
-        <Popover.Portal>
-            <Popover.Content className={popover.content}>
-                <div className={popover.title}>Title</div>
-                <p className={popover.description}>Inventore perspiciatis atque consequatur? Autem reiciendis nemo error, rerum tempora.</p>
-                <Popover.Close asChild>
-                    <button className={ghostIconButton.gray.md + " !absolute top-1 right-1"}>
-                        <span className="sr-only">Dismiss dialog</span>
-                        <Cross2Icon className={ghostIconButton.icon.md} aria-hidden/>
-                    </button>
-                </Popover.Close>
-            </Popover.Content>
-        </Popover.Portal>
-    </Popover.Root>
-);
+// Define custom components based on the Popover components from @radix-ui/react-popover
+const PopoverRoot = Popover.Root;
+const PopoverTrigger = Popover.Trigger;
+const PopoverAnchor = Popover.Anchor;
+const PopoverPortal = Popover.Portal;
 
-export default PopoverUI;
+// Creating a custom PopoverContent component with ref
+// This component is based on the Content component from @radix-ui/react-popover
+const PopoverContent = React.forwardRef<
+  React.ElementRef<typeof Popover.Content>,
+  React.ComponentPropsWithoutRef<typeof Popover.Content>
+>(({className, ...props}, forwardedRef) => (
+  <Popover.Content
+    {...props}
+    ref={forwardedRef}
+    className={cn(popover.content, className)}
+  />
+));
+
+// Creating a custom PopoverTitle component with ref
+// This component is a div that takes all props of a standard div
+// and passes them to the actual div. Additionally, it merges passed class names
+// with those of the popover theme.
+const PopoverTitle = React.forwardRef<
+  React.ElementRef<"div">,
+  React.ComponentPropsWithoutRef<"div">
+>(({className, ...props}, forwardedRef) => (
+  <div
+    {...props}
+    ref={forwardedRef}
+    className={cn(popover.title, className)}
+  />
+));
+
+// Creating a custom PopoverDescription component with ref
+// This component is a paragraph that takes all props of a standard paragraph
+// and passes them to the actual paragraph. Additionally, it merges passed class names
+// with those of the popover theme.
+const PopoverDescription = React.forwardRef<
+  React.ElementRef<"p">,
+  React.ComponentPropsWithoutRef<"p">
+>(({className, ...props}, forwardedRef) => (
+  <p
+    {...props}
+    ref={forwardedRef}
+    className={cn(popover.description, className)}
+  />
+));
+
+// Creating a custom PopoverClose component with ref
+// This component is based on the Close component from @radix-ui/react-popover
+const PopoverClose = React.forwardRef<
+  React.ElementRef<typeof Popover.Close>,
+  React.ComponentPropsWithoutRef<typeof Popover.Close>
+>(({className, ...props}, forwardedRef) => (
+  <Popover.Close
+    {...props}
+    ref={forwardedRef}
+    className={cn(popover.close, className)}
+  />
+));
+
+// Creating a custom PopoverArrow component with ref
+// This component is based on the Arrow component from @radix-ui/react-popover
+const PopoverArrow = React.forwardRef<
+  React.ElementRef<typeof Popover.Arrow>,
+  React.ComponentPropsWithoutRef<typeof Popover.Arrow>
+>(({className, ...props}, forwardedRef) => (
+  <Popover.Arrow
+    {...props}
+    ref={forwardedRef}
+    className={cn(popover.arrow, className)}
+  />
+));
+
+// Exporting all fragments of the popover component
+export {
+  PopoverRoot,
+  PopoverTrigger,
+  PopoverAnchor,
+  PopoverPortal,
+  PopoverContent,
+  PopoverTitle,
+  PopoverDescription,
+  PopoverClose,
+  PopoverArrow
+};

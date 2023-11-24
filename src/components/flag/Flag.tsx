@@ -1,25 +1,183 @@
-import { flag as flagTheme } from "@tailus/themer-flag"
+import {flag as defaultTheme, flagWithMessage as theme} from "@tailus/themer-flag"
+import {cloneElement, cn} from "../../lib/utils.ts";
+import React from "react";
+import {Button} from "../button/Button.tsx";
 
-const FlagUI = () => (
-    <div className={flagTheme.root + " min-w-[24rem]"} aria-label="Error flag" aria-describedby="error-flag-description" role="alert" >
-        <div className={flagTheme.icon.parent}>
-            <svg className={flagTheme.icon.danger} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clipRule="evenodd" />
-            </svg>
-        </div>
-        <p className={flagTheme.title.danger} id="error-flag-description">
-            Update failed !{" "}
-            <a href="#" className={flagTheme.link}>
-                Learn more
-            </a>{" "}
-        </p>
-        <button className={flagTheme.close.button}>
-            <span className="sr-only">Dismiss alert</span>
-            <svg className={flagTheme.close.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clipRule="evenodd" />
-            </svg>
-        </button>
-    </div>
-)
+type Intent = "success" | "warning" | "danger" | "info" | "gray";
+type Variant = "default" | "withMessage";
 
-export default FlagUI;
+const defaultVariant = "default";
+const VariantContext = React.createContext<Variant>(defaultVariant);
+
+interface FlagProps {
+  withMessage?: boolean,
+}
+
+const FlagRoot = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & FlagProps
+>(({className, withMessage, ...props}, ref) => {
+  const variant = withMessage ? "withMessage" : "default";
+  const chosenTheme = variant === "default" ? defaultTheme : theme;
+  return (
+    <VariantContext.Provider value={variant}>
+      <div
+        ref={ref}
+        className={cn(chosenTheme.root, className)}
+        {...props}
+      />
+    </VariantContext.Provider>
+  )
+});
+
+const FlagIconContainer = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({className, ...props}, ref) => {
+  const variant = React.useContext(VariantContext);
+  const chosenTheme = variant === "default" ? defaultTheme : theme;
+  return (
+    <div
+      ref={ref}
+      className={cn(chosenTheme.icon.parent, className)}
+      {...props}
+    />
+  )
+});
+
+interface FlagIconProps {
+  className?: string,
+  intent?: Intent,
+  children?: React.ReactNode,
+}
+
+const FlagIcon = ({className, intent = "info", children}: FlagIconProps) => {
+  const variant = React.useContext(VariantContext);
+  const chosenTheme = variant === "default" ? defaultTheme : theme;
+  return cloneElement(
+    children as React.ReactElement,
+    cn(chosenTheme.icon[intent], className)
+  );
+};
+
+interface FlagTitleProps {
+  className?: string,
+  intent?: Intent,
+}
+
+const FlagTitle = React.forwardRef<
+  HTMLHeadingElement,
+  React.HTMLAttributes<HTMLHeadingElement> & FlagTitleProps
+>(({className, intent = "info", ...props}, ref) => {
+  const variant = React.useContext(VariantContext);
+  const chosenTheme = variant === "default" ? defaultTheme : theme;
+  return (
+    <h6
+      ref={ref}
+      className={cn(chosenTheme.title[intent], className)}
+      {...props}
+    />
+  )
+});
+
+const FlagContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({className, ...props}, ref) => (
+  <div
+    ref={ref}
+    className={cn(theme.content, className)}
+    {...props}
+  />
+));
+
+const FlagLink = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({className, ...props}, ref) => {
+  const variant = React.useContext(VariantContext);
+  const chosenTheme = variant === "default" ? defaultTheme : theme;
+  return (
+    <a
+      ref={ref}
+      className={cn(chosenTheme.link, className)}
+      {...props}
+    />
+  )
+});
+
+const FLagMessage = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({className, ...props}, ref) => (
+  <p
+    ref={ref}
+    className={cn(theme.message, className)}
+    {...props}
+  />
+));
+
+const FlagActions = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({className, ...props}, ref) => {
+  const variant = React.useContext(VariantContext);
+  const chosenTheme = variant === "default" ? defaultTheme : theme;
+  return (
+    <div
+      ref={ref}
+      className={cn(chosenTheme.actions, className)}
+      {...props}
+    />
+  )
+});
+
+interface FlagCloseButtonProps {
+  children?: React.ReactNode,
+}
+
+const FlagCloseButton = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentPropsWithoutRef<typeof Button> & FlagCloseButtonProps
+>(({className, children, ...props}, ref) => {
+  const variant = React.useContext(VariantContext);
+  const chosenTheme = variant === "default" ? defaultTheme : theme;
+  return (
+    <button
+      ref={ref}
+      className={cn(chosenTheme.close.button, className)}
+      {...props}
+    >
+      {cloneElement(
+        children as React.ReactElement,
+        chosenTheme.close.icon
+      )}
+    </button>
+  )
+});
+
+const Flag = {
+  Root: FlagRoot,
+  IconContainer: FlagIconContainer,
+  Icon: FlagIcon,
+  Title: FlagTitle,
+  Content: FlagContent,
+  Link: FlagLink,
+  Message: FLagMessage,
+  Actions: FlagActions,
+  CloseButton: FlagCloseButton,
+};
+
+export default Flag;
+
+export {
+  FlagRoot,
+  FlagIconContainer,
+  FlagIcon,
+  FlagTitle,
+  FlagContent,
+  FlagLink,
+  FLagMessage,
+  FlagActions,
+  FlagCloseButton,
+}

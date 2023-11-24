@@ -1,37 +1,158 @@
-import { alertDialog as alertDialogTheme } from "@tailus/themer-alert-dialog"
-import { button as solidButton, ghostButton, softIconButton } from "@tailus/themer-button"
-import * as AlertDialog from "@radix-ui/react-alert-dialog";
+import {
+  alertDialog as defaultTheme,
+  centredAlertDialog as centredTheme,
+} from "@tailus/themer-alert-dialog"
+import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
+import {cn} from "../../lib/utils.ts";
+import React from "react";
 
-const AlertDialogUI = () => (
-    <AlertDialog.Root>
-        <AlertDialog.Trigger asChild>
-            <button className={softIconButton.danger.md}>
-                <span className="sr-only">Delete</span>
-                <svg className={softIconButton.icon.md} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                </svg>
-            </button>
-        </AlertDialog.Trigger>
-        <AlertDialog.Portal>
-            <AlertDialog.Overlay className={alertDialogTheme.overlay} />
-            <AlertDialog.Content className={alertDialogTheme.content}>
-                <AlertDialog.Title className={alertDialogTheme.title}>Are you absolutely sure?</AlertDialog.Title>
-                <AlertDialog.Description className={alertDialogTheme.description}>This action cannot be undone. This will permanently delete your account and remove your data from our servers.</AlertDialog.Description>
-                <div className={alertDialogTheme.actions}>
-                    <AlertDialog.Cancel asChild>
-                        <button className={ghostButton.gray.md}>
-                            <span>Cancel</span>
-                        </button>
-                    </AlertDialog.Cancel>
-                    <AlertDialog.Action asChild>
-                        <button className={solidButton.danger.md}>
-                            <span>Delete</span>
-                        </button>
-                    </AlertDialog.Action>
-                </div>
-            </AlertDialog.Content>
-        </AlertDialog.Portal>
-    </AlertDialog.Root>
-);
+export const VariantContext = React.createContext<"centred" | "default">("default");
+interface AlertDialogProps extends React.ComponentProps<typeof AlertDialogPrimitive.Root> {
+  variant?: "centred" | "default"
+}
 
-export default AlertDialogUI;
+const AlertDialogRoot: React.FC<AlertDialogProps> = ({variant = "default", ...props}) => {
+    return (
+        <VariantContext.Provider value={variant}>
+        <AlertDialogPrimitive.Root {...props} />
+        </VariantContext.Provider>
+    )
+}
+
+const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
+const AlertDialogPortal = AlertDialogPrimitive.Portal;
+
+const AlertDialogOverlay = React.forwardRef<
+  React.ElementRef<typeof AlertDialogPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>
+>(({className, ...props}, forwardedRef) => {
+  const variant = React.useContext(VariantContext);
+  const theme = variant === "centred" ? centredTheme : defaultTheme;
+  return (
+    <AlertDialogPrimitive.Overlay
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.overlay, className)}
+    />
+  )
+})
+
+const AlertDialogContent = React.forwardRef<
+  React.ElementRef<typeof AlertDialogPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>
+>(({className, ...props}, forwardedRef) => {
+  const variant = React.useContext(VariantContext);
+  const theme = variant === "centred" ? centredTheme : defaultTheme;
+  return (
+    <AlertDialogPrimitive.Content
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.content, className)}
+    />
+  )
+});
+
+const AlertDialogTitle = React.forwardRef<
+  React.ElementRef<typeof AlertDialogPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>
+>(({className, ...props}, forwardedRef) => {
+  const variant = React.useContext(VariantContext);
+  const theme = variant === "centred" ? centredTheme : defaultTheme;
+  return (
+    <AlertDialogPrimitive.Title
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.title, className)}
+    />
+  )
+});
+
+const AlertDialogDescription = React.forwardRef<
+  React.ElementRef<typeof AlertDialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description>
+>(({className, ...props}, forwardedRef) => {
+  const variant = React.useContext(VariantContext);
+  const theme = variant === "centred" ? centredTheme : defaultTheme;
+  return (
+    <AlertDialogPrimitive.Description
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.description, className)}
+    />
+  )
+});
+
+const AlertDialogCancel = AlertDialogPrimitive.Cancel;
+const AlertDialogAction = AlertDialogPrimitive.Action;
+
+const AlertDialogActions = React.forwardRef<
+  React.ElementRef<"div">,
+  React.ComponentPropsWithoutRef<"div">
+>(({className, ...props}, forwardedRef) => {
+  const variant = React.useContext(VariantContext);
+  const theme = variant === "centred" ? centredTheme : defaultTheme;
+  return (
+    <div
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.actions, className)}
+    />
+  )
+});
+
+const AlertDialogImageContainer = React.forwardRef<
+  React.ElementRef<"div">,
+  React.ComponentPropsWithoutRef<"div"> & { intent?: "danger" | "warning" | "info" }
+>(({className, intent = 'danger', ...props}, forwardedRef) => {
+  const variant = React.useContext(VariantContext);
+  const theme = variant === "centred" ? centredTheme : defaultTheme;
+  return (
+    <div
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.imageContainer[intent], className)}
+    />
+  )
+});
+
+interface AlertDialogImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  className?: string,
+}
+
+const AlertDialogImage: React.FC<AlertDialogImageProps> = ({className, ...props}) => {
+  const variant = React.useContext(VariantContext);
+  const theme = variant === "centred" ? centredTheme : defaultTheme;
+  return <img {...props} className={cn(theme.image, className)} alt={props.alt}/>;
+};
+
+const AlertDialog = {
+  Root: AlertDialogRoot,
+  Trigger: AlertDialogTrigger,
+  Portal: AlertDialogPortal,
+  Overlay: AlertDialogOverlay,
+  Content: AlertDialogContent,
+  Title: AlertDialogTitle,
+  Description: AlertDialogDescription,
+  Cancel: AlertDialogCancel,
+  Action: AlertDialogAction,
+  Actions: AlertDialogActions,
+  ImageContainer: AlertDialogImageContainer,
+  Image: AlertDialogImage
+}
+
+export default AlertDialog;
+
+export {
+  AlertDialogRoot,
+  AlertDialogTrigger,
+  AlertDialogPortal,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogCancel,
+  AlertDialogAction,
+  AlertDialogActions,
+  AlertDialogImageContainer,
+  AlertDialogImage
+}
