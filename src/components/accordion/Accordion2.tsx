@@ -50,8 +50,24 @@ const AccordionRoot = React.forwardRef<
   )
 });
 
+const AccordionItem = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
+>(({className, ...props}, forwardedRef) => {
+  const variant = React.useContext(Context);
+  const classNamesVariant = classVariant("item")({variant: variant});
+  return (
+    <AccordionPrimitive.Item
+      className={cn(classNamesVariant, className)}
+      {...props}
+      ref={forwardedRef}
+    />
+  )
+});
+
 const Accordion = {
   Root: AccordionRoot,
+  Item: AccordionItem,
 }
 
 export default Accordion;
