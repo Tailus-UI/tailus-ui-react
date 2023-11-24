@@ -1,6 +1,7 @@
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 import {scrollArea as scrollAreaTheme} from "@tailus/themer-scroll-area"
 import {Meta, StoryObj} from "@storybook/react";
+import ScrollArea from "./ScrollArea.tsx";
 
 const ScrollAreaUI = () => (
   <ScrollAreaPrimitive.Root className="h-full w-fit overflow-hidden">
@@ -86,7 +87,7 @@ const ScrollAreaUI = () => (
     <ScrollAreaPrimitive.Scrollbar className={scrollAreaTheme.bar.horizontal} orientation="horizontal">
       <ScrollAreaPrimitive.Thumb className={scrollAreaTheme.thumb}/>
     </ScrollAreaPrimitive.Scrollbar>
-  </ScrollAreaPrimitive.Root>
+  </ScrollAreaPrimitive.Root >
 );
 
 const VerticalScrollArea = () => (
@@ -193,7 +194,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const ScrollArea: Story = {
+export const ScrollArea_: Story = {
   render: () => (
     <div
       className="flex aspect-video h-full w-full max-w-3xl items-center rounded-2xl border border-gray-200 py-1 dark:border-white/10">
@@ -202,9 +203,11 @@ export const ScrollArea: Story = {
   )
 };
 
-export const Vertical = () => (
-  <div
-    className="flex aspect-video h-full w-[48rem] max-w-3xl items-center rounded-2xl border border-gray-200 py-1 dark:border-white/10">
-    <VerticalScrollArea/>
-  </div>
-)
+export const Vertical: Story = {
+  render: () => (
+    <div
+      className="flex aspect-video h-full w-[48rem] max-w-3xl items-center rounded-2xl border border-gray-200 py-1 dark:border-white/10">
+      <VerticalScrollArea/>
+    </div>
+  )
+};
