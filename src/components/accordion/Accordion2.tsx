@@ -27,6 +27,9 @@ const classVariant = (element: ElementType) => cva('', {
   }
 });
 
+const defaultContextValue: Variant = "default";
+const Context = React.createContext<Variant>(defaultContextValue);
+
 interface AccordionRootProps {
   variant?: Variant;
 }
@@ -34,14 +37,16 @@ interface AccordionRootProps {
 const AccordionRoot = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & AccordionRootProps
->(({className, variant = "default", ...props}, forwardedRef) => {
+>(({className, variant, ...props}, forwardedRef) => {
   const classNamesVariant = classVariant("root")({variant: variant});
   return (
-    <AccordionPrimitive.Root
-      ref={forwardedRef}
-      className={cn(classNamesVariant, className)}
-      {...props}
-    />
+    <Context.Provider value={variant || defaultContextValue}>
+      <AccordionPrimitive.Root
+        className={cn(classNamesVariant, className)}
+        {...props}
+        ref={forwardedRef}
+      />
+    </Context.Provider>
   )
 });
 
