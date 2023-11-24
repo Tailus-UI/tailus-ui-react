@@ -56,6 +56,17 @@ const SelectContent = React.forwardRef<
   />
 ));
 
+const SelectViewport = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Viewport>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Viewport>
+>(({className, ...props}, forwardedRef) => (
+  <SelectPrimitive.Viewport
+    {...props}
+    ref={forwardedRef}
+    className={cn(theme.viewport, className)}
+  />
+));
+
 const Select = {
   Root: SelectRoot,
   Trigger: SelectTrigger,
@@ -64,6 +75,7 @@ const Select = {
   Icon: SelectIcon,
   Portal: SelectPortal,
   Content: SelectContent,
+  Viewport: SelectViewport,
 };
 
 export default Select;
