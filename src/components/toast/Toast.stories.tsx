@@ -1,6 +1,5 @@
 import {Meta, StoryObj} from "@storybook/react";
 import * as React from "react";
-import {ghostButton, button} from "@tailus/themer-button";
 import {Cross2Icon} from "@radix-ui/react-icons";
 import Toast from "./Toast";
 import {Button} from "../button/Button.tsx";
@@ -15,36 +14,30 @@ const useToastState = () => {
     return () => clearTimeout(timerRef.current);
   }, []);
 
-  return { open, setOpen, eventDateRef, timerRef };
+  return {open, setOpen, eventDateRef, timerRef};
 };
 
 const ToastUI = () => {
-  const { open, setOpen, eventDateRef, timerRef } = useToastState();
+  const {open, setOpen, eventDateRef, timerRef} = useToastState();
+
+  const handleOpen = () => {
+    setOpen(false);
+    window.clearTimeout(timerRef.current);
+    timerRef.current = window.setTimeout(() => {
+      eventDateRef.current = oneWeekAway();
+      setOpen(true);
+    }, 100);
+  }
 
   return (
     <Toast.Provider>
-      <button
-        className={button.primary.lg}
-        onClick={() => {
-          setOpen(false);
-          window.clearTimeout(timerRef.current);
-          timerRef.current = window.setTimeout(() => {
-            eventDateRef.current = oneWeekAway();
-            setOpen(true);
-          }, 100);
-        }}
-      >
-        <span>Add to calendar</span>
-      </button>
-
+      <Button label={"Add to calendar"} size={"lg"} onClick={handleOpen} />
       <Toast.Root open={open} onOpenChange={setOpen}>
         <Toast.Header>
           <Toast.Title>Scheduled: Catch up</Toast.Title>
           <Toast.Actions>
             <Toast.Action asChild altText="Goto schedule to undo">
-              <button className={ghostButton.primary.sm}>
-                <span>Undo</span>
-              </button>
+              <Button label="Undo" variant={"ghost"} colorVariant={"primary"} size={"sm"}/>
             </Toast.Action>
             <Toast.Close>
               <Button label="Dismiss toast" icon={"only"} variant={"ghost"} colorVariant={"gray"} size={"sm"}>
@@ -59,7 +52,7 @@ const ToastUI = () => {
           </time>
         </Toast.Description>
       </Toast.Root>
-      <Toast.Viewport />
+      <Toast.Viewport/>
     </Toast.Provider>
   );
 };
