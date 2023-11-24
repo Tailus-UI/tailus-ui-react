@@ -45,6 +45,17 @@ const SelectTriggerValue = SelectPrimitive.Value;
 const SelectIcon = SelectPrimitive.Icon;
 const SelectPortal = SelectPrimitive.Portal;
 
+const SelectContent = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
+>(({className, ...props}, forwardedRef) => (
+  <SelectPrimitive.Content
+    {...props}
+    ref={forwardedRef}
+    className={cn(theme.content, className)}
+  />
+));
+
 const Select = {
   Root: SelectRoot,
   Trigger: SelectTrigger,
@@ -52,6 +63,7 @@ const Select = {
   Value: SelectTriggerValue,
   Icon: SelectIcon,
   Portal: SelectPortal,
-}
+  Content: SelectContent,
+};
 
 export default Select;
