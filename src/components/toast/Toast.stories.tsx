@@ -33,7 +33,7 @@ const ToastUI = () => {
 
       <Toast.Root open={open} onOpenChange={setOpen}>
         <Toast.Header>
-          <ToastPrimitive.Title className={theme.title}>Scheduled: Catch up</ToastPrimitive.Title>
+          <Toast.Title>Scheduled: Catch up</Toast.Title>
           <div className={theme.actions}>
             <ToastPrimitive.Action asChild altText="Goto schedule to undo">
               <button className={ghostButton.primary.sm}>

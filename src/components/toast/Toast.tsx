@@ -31,10 +31,24 @@ const ToastHeader = React.forwardRef<
   );
 });
 
+const ToastTitle = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitive.Title>
+>((props, forwardedRef) => {
+  return (
+    <ToastPrimitive.Title
+      ref={forwardedRef}
+      className={cn(theme.title, props.className)}
+      {...props}
+    />
+  );
+});
+
 const Toast = {
   Provider: ToastProvider,
   Root: ToastRoot,
   Header: ToastHeader,
+  Title: ToastTitle,
 }
 
 export default Toast;
@@ -43,4 +57,5 @@ export {
   ToastProvider,
   ToastRoot,
   ToastHeader,
+  ToastTitle,
 }
