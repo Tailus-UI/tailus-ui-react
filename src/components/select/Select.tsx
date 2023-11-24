@@ -95,6 +95,17 @@ const SelectItem = React.forwardRef<
   </SelectPrimitive.Item>
 ));
 
+const SelectLabel = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Label>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
+>(({className, ...props}, forwardedRef) => (
+  <SelectPrimitive.Label
+    {...props}
+    ref={forwardedRef}
+    className={cn(theme.label, className)}
+  />
+));
+
 const Select = {
   Root: SelectRoot,
   Trigger: SelectTrigger,
@@ -105,6 +116,7 @@ const Select = {
   Content: SelectContent,
   Viewport: SelectViewport,
   Item: SelectItem,
+  Label: SelectLabel,
 };
 
 export default Select;
