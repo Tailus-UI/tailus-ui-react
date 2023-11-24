@@ -1,33 +1,50 @@
 import React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import {select as theme} from "@tailus/themer-select"
-import {cn} from "../../lib/utils.ts";
+import {softForm as softTheme, outlinedForm as defaultTheme} from "@tailus/themer-form"
+import {cloneElement, cn} from "../../lib/utils.ts";
 
 const SelectRoot = SelectPrimitive.Root;
 
-const SelectTrigger = React.forwardRef<
-    React.ElementRef<typeof SelectPrimitive.Trigger>,
-    React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({className, ...props}, forwardedRef) => {
-    const triggerTheme = "inline-flex items-center justify-between h-10 gap-2 min-w-[10rem]" +
-      " w-auto rounded-[--field-border-radius] border border-gray-200 bg-transparent px-4 ring-0 transition" +
-      " duration-300 focus:border-gray-600 focus:outline-none focus:ring-[3px] focus:ring-primary-600/10" +
-      " focus:ring-offset-white dark:border-gray-800 dark:text-white dark:focus:border-white/60" +
-      " dark:focus:ring-primary-900/50 dark:focus:ring-offset-gray-900";
+interface SelectTriggerProps {
+  softVariant?: boolean,
+  size?: "xs" | "sm" | "md" | "lg" | "xl",
+}
 
-    return (
-      <SelectPrimitive.Trigger
-        {...props}
-        ref={forwardedRef}
-        className={cn(triggerTheme, className)}
-        aria-label="Food"
-      />
-    )
+const SelectTrigger = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & SelectTriggerProps
+>((
+  {
+    softVariant = false,
+    size = "md",
+    className,
+    ...props
+  }, forwardedRef
+) => {
+  const theme = softVariant ? softTheme : defaultTheme;
+  return (
+    <SelectPrimitive.Trigger
+      {...props}
+      ref={forwardedRef}
+      className={cn(theme.input[size], "flex items-center justify-between gap-4", className)}
+    />
+  )
 });
 
+interface SelectIconProps {
+  className?: string,
+  children: React.ReactNode
+}
+
+const SelectTriggerIcon = ({className, children}: SelectIconProps) => {
+  return cloneElement(children as React.ReactElement, cn(theme.triggerIcon, className));
+};
+
 const Select = {
-    Root: SelectRoot,
-    Trigger: SelectTrigger,
+  Root: SelectRoot,
+  Trigger: SelectTrigger,
+  TriggerIcon: SelectTriggerIcon,
 }
 
 export default Select;
