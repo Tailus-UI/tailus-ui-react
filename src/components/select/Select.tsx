@@ -128,6 +128,8 @@ const SelectScrollDownButton = React.forwardRef<
   />
 ));
 
+const SelectGroup = SelectPrimitive.Group;
+
 const Select = {
   Root: SelectRoot,
   Trigger: SelectTrigger,
@@ -141,6 +143,7 @@ const Select = {
   Label: SelectLabel,
   ScrollUpButton: SelectScrollUpButton,
   ScrollDownButton: SelectScrollDownButton,
+  Group: SelectGroup,
 };
 
 export default Select;
