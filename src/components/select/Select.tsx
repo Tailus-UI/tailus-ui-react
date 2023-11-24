@@ -106,6 +106,28 @@ const SelectLabel = React.forwardRef<
   />
 ));
 
+const SelectScrollUpButton = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
+>(({className, ...props}, forwardedRef) => (
+  <SelectPrimitive.ScrollUpButton
+    {...props}
+    ref={forwardedRef}
+    className={cn(theme.scrollButton, className)}
+  />
+));
+
+const SelectScrollDownButton = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.ScrollDownButton>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
+>(({className, ...props}, forwardedRef) => (
+  <SelectPrimitive.ScrollDownButton
+    {...props}
+    ref={forwardedRef}
+    className={cn(theme.scrollButton, className)}
+  />
+));
+
 const Select = {
   Root: SelectRoot,
   Trigger: SelectTrigger,
@@ -117,6 +139,8 @@ const Select = {
   Viewport: SelectViewport,
   Item: SelectItem,
   Label: SelectLabel,
+  ScrollUpButton: SelectScrollUpButton,
+  ScrollDownButton: SelectScrollDownButton,
 };
 
 export default Select;
