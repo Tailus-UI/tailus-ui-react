@@ -83,6 +83,9 @@ const ToastViewport = React.forwardRef<
   );
 });
 
+const ToastAction = ToastPrimitive.Action;
+const ToastClose = ToastPrimitive.Close;
+
 const Toast = {
   Provider: ToastProvider,
   Root: ToastRoot,
@@ -91,6 +94,8 @@ const Toast = {
   Actions: ToastActions,
   Description: ToastDescription,
   Viewport: ToastViewport,
+  Action: ToastAction,
+  Close: ToastClose,
 }
 
 export default Toast;
@@ -103,4 +108,6 @@ export {
   ToastActions,
   ToastDescription,
   ToastViewport,
+  ToastAction,
+  ToastClose,
 }
