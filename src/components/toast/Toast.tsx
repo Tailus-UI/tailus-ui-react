@@ -70,6 +70,19 @@ const ToastDescription = React.forwardRef<
   );
 });
 
+const ToastViewport = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitive.Viewport>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitive.Viewport>
+>((props, forwardedRef) => {
+  return (
+    <ToastPrimitive.Viewport
+      ref={forwardedRef}
+      className={cn(theme.viewport, props.className)}
+      {...props}
+    />
+  );
+});
+
 const Toast = {
   Provider: ToastProvider,
   Root: ToastRoot,
@@ -77,6 +90,7 @@ const Toast = {
   Title: ToastTitle,
   Actions: ToastActions,
   Description: ToastDescription,
+  Viewport: ToastViewport,
 }
 
 export default Toast;
@@ -88,4 +102,5 @@ export {
   ToastTitle,
   ToastActions,
   ToastDescription,
+  ToastViewport,
 }

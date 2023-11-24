@@ -1,7 +1,6 @@
 import {Meta, StoryObj} from "@storybook/react";
 import * as React from "react";
 import * as ToastPrimitive from "@radix-ui/react-toast";
-import {toast as theme} from "@tailus/themer-toast";
 import {ghostButton, ghostIconButton, button} from "@tailus/themer-button";
 import {Cross2Icon} from "@radix-ui/react-icons";
 import Toast from "./Toast";
@@ -54,7 +53,7 @@ const ToastUI = () => {
           </time>
         </Toast.Description>
       </Toast.Root>
-      <ToastPrimitive.Viewport className={theme.viewport}/>
+      <Toast.Viewport />
     </Toast.Provider>
   );
 };
