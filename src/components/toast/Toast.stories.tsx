@@ -34,7 +34,7 @@ const ToastUI = () => {
       <Toast.Root open={open} onOpenChange={setOpen}>
         <Toast.Header>
           <Toast.Title>Scheduled: Catch up</Toast.Title>
-          <div className={theme.actions}>
+          <Toast.Actions>
             <ToastPrimitive.Action asChild altText="Goto schedule to undo">
               <button className={ghostButton.primary.sm}>
                 <span>Undo</span>
@@ -46,7 +46,7 @@ const ToastUI = () => {
                 <Cross2Icon className={ghostIconButton.icon.md} aria-hidden/>
               </button>
             </ToastPrimitive.Close>
-          </div>
+          </Toast.Actions>
         </Toast.Header>
         <ToastPrimitive.Description asChild>
           <time className={theme.description} dateTime={eventDateRef.current.toISOString()}>
