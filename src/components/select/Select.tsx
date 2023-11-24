@@ -41,10 +41,17 @@ const SelectTriggerIcon = ({className, children}: SelectIconProps) => {
   return cloneElement(children as React.ReactElement, cn(theme.triggerIcon, className));
 };
 
+const SelectTriggerValue = SelectPrimitive.Value;
+const SelectIcon = SelectPrimitive.Icon;
+const SelectPortal = SelectPrimitive.Portal;
+
 const Select = {
   Root: SelectRoot,
   Trigger: SelectTrigger,
   TriggerIcon: SelectTriggerIcon,
+  Value: SelectTriggerValue,
+  Icon: SelectIcon,
+  Portal: SelectPortal,
 }
 
 export default Select;
