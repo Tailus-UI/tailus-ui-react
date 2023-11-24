@@ -27,3 +27,26 @@ const classVariant = (element: ElementType) => cva('', {
   }
 });
 
+interface AccordionRootProps {
+  variant?: Variant;
+}
+
+const AccordionRoot = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & AccordionRootProps
+>(({className, variant = "default", ...props}, forwardedRef) => {
+  const classNamesVariant = classVariant("root")({variant: variant});
+  return (
+    <AccordionPrimitive.Root
+      ref={forwardedRef}
+      className={cn(classNamesVariant, className)}
+      {...props}
+    />
+  )
+});
+
+const Accordion = {
+  Root: AccordionRoot,
+}
+
+export default Accordion;
