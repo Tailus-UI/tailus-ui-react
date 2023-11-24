@@ -48,11 +48,11 @@ const ToastUI = () => {
             </ToastPrimitive.Close>
           </Toast.Actions>
         </Toast.Header>
-        <ToastPrimitive.Description asChild>
-          <time className={theme.description} dateTime={eventDateRef.current.toISOString()}>
+        <Toast.Description asChild>
+          <time dateTime={eventDateRef.current.toISOString()}>
             {prettyDate(eventDateRef.current)}
           </time>
-        </ToastPrimitive.Description>
+        </Toast.Description>
       </Toast.Root>
       <ToastPrimitive.Viewport className={theme.viewport}/>
     </Toast.Provider>
