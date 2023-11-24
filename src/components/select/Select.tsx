@@ -3,6 +3,7 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import {select as theme} from "@tailus/themer-select"
 import {softForm as softTheme, outlinedForm as defaultTheme} from "@tailus/themer-form"
 import {cloneElement, cn} from "../../lib/utils.ts";
+import {CheckIcon} from "@radix-ui/react-icons";
 
 const SelectRoot = SelectPrimitive.Root;
 
@@ -67,6 +68,33 @@ const SelectViewport = React.forwardRef<
   />
 ));
 
+const SelectItemIndicator = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.ItemIndicator>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ItemIndicator>
+>(({className, ...props}, forwardedRef) => (
+  <SelectPrimitive.ItemIndicator
+    {...props}
+    ref={forwardedRef}
+    className={cn(theme.itemIndicator, className)}
+  />
+));
+
+const SelectItem = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
+>(({className, children, ...props}, forwardedRef) => (
+  <SelectPrimitive.Item
+    {...props}
+    ref={forwardedRef}
+    className={cn(theme.item, className)}
+  >
+    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+    <SelectItemIndicator>
+      <CheckIcon/>
+    </SelectItemIndicator>
+  </SelectPrimitive.Item>
+));
+
 const Select = {
   Root: SelectRoot,
   Trigger: SelectTrigger,
@@ -76,6 +104,7 @@ const Select = {
   Portal: SelectPortal,
   Content: SelectContent,
   Viewport: SelectViewport,
+  Item: SelectItem,
 };
 
 export default Select;
