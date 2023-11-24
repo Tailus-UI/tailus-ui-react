@@ -1,11 +1,12 @@
 import {Meta, StoryObj} from "@storybook/react";
 import * as React from "react";
-import * as ToastPrimitive from "@radix-ui/react-toast";
-import {ghostButton, ghostIconButton, button} from "@tailus/themer-button";
+import {ghostButton, button} from "@tailus/themer-button";
 import {Cross2Icon} from "@radix-ui/react-icons";
 import Toast from "./Toast";
+import {Button} from "../button/Button.tsx";
 
-const ToastUI = () => {
+// Custom hooks for managing state and effects
+const useToastState = () => {
   const [open, setOpen] = React.useState(false);
   const eventDateRef = React.useRef(new Date());
   const timerRef = React.useRef(0);
@@ -14,8 +15,14 @@ const ToastUI = () => {
     return () => clearTimeout(timerRef.current);
   }, []);
 
+  return { open, setOpen, eventDateRef, timerRef };
+};
+
+const ToastUI = () => {
+  const { open, setOpen, eventDateRef, timerRef } = useToastState();
+
   return (
-    <Toast.Provider swipeDirection="center">
+    <Toast.Provider>
       <button
         className={button.primary.lg}
         onClick={() => {
@@ -34,17 +41,16 @@ const ToastUI = () => {
         <Toast.Header>
           <Toast.Title>Scheduled: Catch up</Toast.Title>
           <Toast.Actions>
-            <ToastPrimitive.Action asChild altText="Goto schedule to undo">
+            <Toast.Action asChild altText="Goto schedule to undo">
               <button className={ghostButton.primary.sm}>
                 <span>Undo</span>
               </button>
-            </ToastPrimitive.Action>
-            <ToastPrimitive.Close>
-              <button className={ghostIconButton.gray.sm}>
-                <span className="sr-only">Dismiss toast</span>
-                <Cross2Icon className={ghostIconButton.icon.md} aria-hidden/>
-              </button>
-            </ToastPrimitive.Close>
+            </Toast.Action>
+            <Toast.Close>
+              <Button label="Dismiss toast" icon={"only"} variant={"ghost"} colorVariant={"gray"} size={"sm"}>
+                <Cross2Icon aria-hidden/>
+              </Button>
+            </Toast.Close>
           </Toast.Actions>
         </Toast.Header>
         <Toast.Description asChild>
@@ -58,16 +64,21 @@ const ToastUI = () => {
   );
 };
 
-function oneWeekAway() {
+// Constants for date manipulation and formatting
+const WEEK_IN_DAYS = 7;
+const DATE_OPTIONS: Intl.DateTimeFormatOptions = {dateStyle: "full", timeStyle: "short"};
+
+const oneWeekAway = () => {
   const now = new Date();
-  const inOneWeek = now.setDate(now.getDate() + 7);
+  const inOneWeek = now.setDate(now.getDate() + WEEK_IN_DAYS);
   return new Date(inOneWeek);
-}
+};
 
-function prettyDate(date: Date) {
-  return new Intl.DateTimeFormat("en-US", {dateStyle: "full", timeStyle: "short"}).format(date);
-}
+const prettyDate = (date: Date) => {
+  return new Intl.DateTimeFormat("en-US", DATE_OPTIONS).format(date);
+};
 
+// Metadata for the story
 const meta: Meta<typeof ToastUI> = {
   title: 'Toast',
   component: ToastUI,
