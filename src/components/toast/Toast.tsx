@@ -18,9 +18,23 @@ const ToastRoot = React.forwardRef<
   );
 });
 
+const ToastHeader = React.forwardRef<
+  React.ElementRef<"div">,
+  React.ComponentPropsWithoutRef<"div">
+>((props, forwardedRef) => {
+  return (
+    <div
+      ref={forwardedRef}
+      className={cn(theme.header, props.className)}
+      {...props}
+    />
+  );
+});
+
 const Toast = {
   Provider: ToastProvider,
   Root: ToastRoot,
+  Header: ToastHeader,
 }
 
 export default Toast;
@@ -28,4 +42,5 @@ export default Toast;
 export {
   ToastProvider,
   ToastRoot,
+  ToastHeader,
 }

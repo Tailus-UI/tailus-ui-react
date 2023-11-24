@@ -32,7 +32,7 @@ const ToastUI = () => {
       </button>
 
       <Toast.Root open={open} onOpenChange={setOpen}>
-        <div className={theme.header}>
+        <Toast.Header>
           <ToastPrimitive.Title className={theme.title}>Scheduled: Catch up</ToastPrimitive.Title>
           <div className={theme.actions}>
             <ToastPrimitive.Action asChild altText="Goto schedule to undo">
@@ -47,7 +47,7 @@ const ToastUI = () => {
               </button>
             </ToastPrimitive.Close>
           </div>
-        </div>
+        </Toast.Header>
         <ToastPrimitive.Description asChild>
           <time className={theme.description} dateTime={eventDateRef.current.toISOString()}>
             {prettyDate(eventDateRef.current)}
