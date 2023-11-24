@@ -10,20 +10,23 @@ import {
   softVariant as softTheme,
   outlinedElevatedVariant as outlinedElevatedTheme,
 } from "@tailus/themer-accordion"
+import {cva} from "class-variance-authority";
 
 type Variant = "default" | "outlined" | "elevated" | "ghost" | "soft" | "outlinedElevated";
 type ElementType = keyof typeof defaultTheme;
 
-const getTheme = (element: ElementType) => {
-  return {
-    default: defaultTheme[element],
-    outlined: outlinedTheme[element],
-    elevated: elevatedTheme[element],
-    ghost: ghostTheme[element],
-    soft: softTheme[element],
-    outlinedElevated: outlinedElevatedTheme[element],
+const variantTheme = (element: ElementType) => cva('', {
+  variants: {
+    variant: {
+      default: defaultTheme[element],
+      outlined: outlinedTheme[element],
+      elevated: elevatedTheme[element],
+      ghost: ghostTheme[element],
+      soft: softTheme[element],
+      outlinedElevated: outlinedElevatedTheme[element],
+    }
   }
-}
+})
 
 const defaultContextValue: Variant = "default";
 const Context = React.createContext<Variant>(defaultContextValue);
@@ -36,11 +39,10 @@ const AccordionRoot = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & AccordionRootProps
 >(({className, variant, ...props}, forwardedRef) => {
-  const classNamesVariant = getTheme("root")[variant || defaultContextValue];
   return (
     <Context.Provider value={variant || defaultContextValue}>
       <AccordionPrimitive.Root
-        className={cn(classNamesVariant, className)}
+        className={cn(variantTheme("root")({variant: variant}), className)}
         {...props}
         ref={forwardedRef}
       />
@@ -53,10 +55,9 @@ const AccordionItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
 >(({className, ...props}, forwardedRef) => {
   const variant = React.useContext(Context);
-  const classNamesVariant = getTheme("item")[variant];
   return (
     <AccordionPrimitive.Item
-      className={cn(classNamesVariant, className)}
+      className={cn(variantTheme("item")({variant: variant}), className)}
       {...props}
       ref={forwardedRef}
     />
@@ -88,14 +89,14 @@ const AccordionTrigger = React.forwardRef<
   const classNamesIcon = generateTriggerClassNames(variant).icon;
   const classNamesParent = generateTriggerClassNames(variant).parent;
   return (
-    <AccordionPrimitive.Header>
+    <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger
         className={cn(classNamesParent, className)}
         {...props}
         ref={forwardedRef}
       >
         {children}
-        <ChevronDownIcon className={classNamesIcon} aria-hidden={true}/>
+        <ChevronDownIcon className={cn(classNamesIcon)} aria-hidden={true}/>
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   )
