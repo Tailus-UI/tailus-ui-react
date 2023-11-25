@@ -1,47 +1,133 @@
+import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import {cn} from "../../lib/utils.ts";
 import React from "react";
-import classNames from "classnames";
-import * as Accordion from "@radix-ui/react-accordion";
-import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { accordion as accordionTheme } from "@tailus/themer-accordion"
+import {ChevronDownIcon} from "@radix-ui/react-icons";
+import {
+  accordion as defaultTheme,
+  outlinedVariant as outlinedTheme,
+  elevatedVariant as elevatedTheme,
+  ghostVariant as ghostTheme,
+  softVariant as softTheme,
+  outlinedElevatedVariant as outlinedElevatedTheme,
+} from "@tailus/themer-accordion"
+import {cva} from "class-variance-authority";
 
-const AccordionUI = () => (
-    <Accordion.Root className="w-full min-w-[28rem] max-w-md" type="single" defaultValue="item-1" collapsible>
-        <AccordionItem value="item-1">
-            <AccordionTrigger>Is it accessible?  </AccordionTrigger>
-            <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
-        </AccordionItem>
+type Variant = "default" | "outlined" | "elevated" | "ghost" | "soft" | "outlinedElevated";
+type ElementType = keyof typeof defaultTheme;
 
-        <AccordionItem value="item-2">
-            <AccordionTrigger>Is it unstyled?</AccordionTrigger>
-            <AccordionContent>Yes. It's unstyled by default, giving you freedom over the look and feel.</AccordionContent>
-        </AccordionItem>
+const variantTheme = (element: ElementType) => cva('', {
+  variants: {
+    variant: {
+      default: defaultTheme[element],
+      outlined: outlinedTheme[element],
+      elevated: elevatedTheme[element],
+      ghost: ghostTheme[element],
+      soft: softTheme[element],
+      outlinedElevated: outlinedElevatedTheme[element],
+    }
+  }
+})
 
-        <AccordionItem value="item-3">
-            <AccordionTrigger>Can it be animated?</AccordionTrigger>
-            <AccordionContent>Yes! You can animate the Accordion with CSS or JavaScript.</AccordionContent>
-        </AccordionItem>
-    </Accordion.Root>
-);
+const defaultContextValue: Variant = "default";
+const Context = React.createContext<Variant>(defaultContextValue);
 
-const AccordionItem = React.forwardRef(({ children, className, ...props }: any, forwardedRef) => (
-    <Accordion.Item className={classNames(accordionTheme.item, className)} {...props} ref={forwardedRef}>
+interface AccordionRootProps {
+  variant?: Variant;
+}
+
+const AccordionRoot = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & AccordionRootProps
+>(({className, variant, ...props}, forwardedRef) => {
+  return (
+    <Context.Provider value={variant || defaultContextValue}>
+      <AccordionPrimitive.Root
+        className={cn(variantTheme("root")({variant: variant}), className)}
+        {...props}
+        ref={forwardedRef}
+      />
+    </Context.Provider>
+  )
+});
+
+const AccordionItem = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
+>(({className, ...props}, forwardedRef) => {
+  const variant = React.useContext(Context);
+  return (
+    <AccordionPrimitive.Item
+      className={cn(variantTheme("item")({variant: variant}), className)}
+      {...props}
+      ref={forwardedRef}
+    />
+  )
+});
+
+const AccordionTrigger = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
+>(({className, children, ...props}, forwardedRef) => {
+  const generateTriggerClassNames = (theme: Variant) => {
+    const themes = {
+      default: defaultTheme,
+      outlined: outlinedTheme,
+      elevated: elevatedTheme,
+      ghost: ghostTheme,
+      soft: softTheme,
+      outlinedElevated: outlinedElevatedTheme,
+    }
+
+    return {
+      parent: themes[theme].trigger.parent,
+      icon: themes[theme].trigger.icon,
+      content: themes[theme].trigger.content,
+    }
+  }
+
+  const variant = React.useContext(Context);
+  const classNamesIcon = generateTriggerClassNames(variant).icon;
+  const classNamesParent = generateTriggerClassNames(variant).parent;
+  const classNamesContent = generateTriggerClassNames(variant).content;
+  return (
+    <AccordionPrimitive.Header className="flex">
+      <AccordionPrimitive.Trigger
+        className={cn(classNamesParent, className)}
+        {...props}
+        ref={forwardedRef}
+      >
+        <div className={classNamesContent}>
+          {children}
+        </div>
+        <ChevronDownIcon className={cn(classNamesIcon)} aria-hidden={true}/>
+      </AccordionPrimitive.Trigger>
+    </AccordionPrimitive.Header>
+  )
+});
+
+const AccordionContent = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
+>(({className, children, ...props}, forwardedRef) => {
+  const variant = React.useContext(Context);
+  return (
+    <AccordionPrimitive.Content
+      className={cn(variantTheme("content")({variant: variant}), className)}
+      {...props}
+      ref={forwardedRef}
+    >
+      <div className="pb-4">
         {children}
-    </Accordion.Item>
-));
+      </div>
+    </AccordionPrimitive.Content>
+  )
+});
 
-const AccordionTrigger = React.forwardRef(({ children, className, ...props }: any, forwardedRef) => (
-    <Accordion.Header className="flex">
-        <Accordion.Trigger className={classNames(accordionTheme.trigger.parent, className)} {...props} ref={forwardedRef}>
-            {children}
-            <ChevronDownIcon className={classNames(accordionTheme.trigger.icon, className)} aria-hidden />
-        </Accordion.Trigger>
-    </Accordion.Header>
-));
+const Accordion = {
+  Root: AccordionRoot,
+  Item: AccordionItem,
+  Trigger: AccordionTrigger,
+  Content: AccordionContent
+}
 
-const AccordionContent = React.forwardRef(({ children, className, ...props }: any, forwardedRef) => (
-    <Accordion.Content className={classNames(accordionTheme.content, className)}  {...props} ref={forwardedRef}>
-        <div className="pb-4">{children}</div>
-    </Accordion.Content>
-));
-
-export default AccordionUI;
+export default Accordion;
