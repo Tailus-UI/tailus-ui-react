@@ -13,8 +13,10 @@ const ScrollAreaRoot = React.forwardRef<
     className={cn(theme.root, props.className)}
   />
 ));
+ScrollAreaRoot.displayName = ScrollAreaPrimitive.Root.displayName;
 
 const ScrollAreaViewport = ScrollAreaPrimitive.Viewport;
+ScrollAreaViewport.displayName = ScrollAreaPrimitive.Viewport.displayName;
 
 const ScrollAreaScrollBar = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Scrollbar>,
@@ -22,19 +24,25 @@ const ScrollAreaScrollBar = React.forwardRef<
 >((
   {
     className,
-    orientation,
+    children,
+    orientation = "vertical",
     ...props
   }, forwardedRef
 ) => {
-  const orientationTheme = orientation === "vertical" ? theme.bar.vertical : theme.bar.horizontal;
   return (
     <ScrollAreaPrimitive.Scrollbar
       {...props}
+      orientation={orientation}
       ref={forwardedRef}
-      className={cn(orientationTheme, className)}
-    />
+      className={cn(theme.bar[orientation], className)}
+    >
+      {children ?? (
+        <ScrollAreaPrimitive.Thumb className={theme.thumb}/>
+      )}
+    </ScrollAreaPrimitive.Scrollbar>
   );
 });
+ScrollAreaScrollBar.displayName = ScrollAreaPrimitive.Scrollbar.displayName;
 
 const ScrollAreaThumb = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Thumb>,
@@ -46,8 +54,10 @@ const ScrollAreaThumb = React.forwardRef<
     className={cn(theme.thumb, props.className)}
   />
 ));
+ScrollAreaThumb.displayName = 'ScrollAreaThumb';
 
 const ScrollAreaCorner = ScrollAreaPrimitive.Corner;
+ScrollAreaCorner.displayName = ScrollAreaPrimitive.Corner.displayName;
 
 const ScrollArea = {
   Root: ScrollAreaRoot,
