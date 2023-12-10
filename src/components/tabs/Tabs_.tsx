@@ -8,6 +8,8 @@ import {
 import React from "react";
 
 type TabsVariant = "default" | "soft" | "outlined" | "bottomIndicator";
+const defaultVariant: TabsVariant = "default";
+const VariantContext = React.createContext<TabsVariant>(defaultVariant);
 
 const tabsThemes = {
   default: defaultTheme,
@@ -25,10 +27,12 @@ const TabsRoot = React.forwardRef<
   React.ComponentProps<typeof TabsPrimitive.Root> & TabsRootProps
 >((props, forwardedRef) => {
   return (
-    <TabsPrimitive.Root
-      {...props}
-      ref={forwardedRef}
-    />
+    <VariantContext.Provider value={props.variant ?? defaultVariant}>
+      <TabsPrimitive.Root
+        {...props}
+        ref={forwardedRef}
+      />
+    </VariantContext.Provider>
   )
 });
 
