@@ -151,7 +151,7 @@ interface SelectGroupProps {
 const SelectGroup = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Group>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Group> & SelectGroupProps
->(({className, children, ...props}, forwardedRef) => (
+>(({children, ...props}, forwardedRef) => (
   <SelectPrimitive.Group
     {...props}
     ref={forwardedRef}
