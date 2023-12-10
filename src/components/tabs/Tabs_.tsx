@@ -11,7 +11,7 @@ type TabsVariant = "default" | "soft" | "outlined" | "bottomIndicator";
 const defaultVariant: TabsVariant = "default";
 const VariantContext = React.createContext<TabsVariant>(defaultVariant);
 
-const tabsThemes = {
+const theme = {
   default: defaultTheme,
   soft: softTheme,
   outlined: outlinedTheme,
