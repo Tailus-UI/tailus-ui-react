@@ -1,19 +1,24 @@
 import {tabs as tabsTheme} from "@tailus/themer-tabs";
 import {useEffect, useRef, useState} from "react";
 import Tabs from "./Tabs.tsx";
+import type {Meta, StoryObj} from "@storybook/react";
 
-type TabsAppProps = "nike" | "adidas" | "puma"
-type TabsVariant = "default" | "soft" | "outlined" | "bottomIndicator";
-type Size = "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "xxxl";
-type Intent = "primary" | "secondary" | "accent" | "gray" | "neutral";
+export type TabsAppProps = "nike" | "adidas" | "puma"
+export type TabsVariant = "default" | "soft" | "outlined" | "bottomIndicator";
+export type Size = "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "xxxl";
+export type Indicator = "outlined" | "elevated";
+export type Intent = "primary" | "secondary" | "accent" | "gray" | "neutral";
+export type ListVariant = "soft" | "outlined";
 
-type TabsUIProps = {
+export type TabsUIProps = {
   variant?: TabsVariant,
   size?: Size,
-  intent?: Intent
+  intent?: Intent,
+  listVariant?: ListVariant,
+  indicator?: Indicator
 }
 
-const TabsUI = ({ variant }: TabsUIProps) => {
+const TabsUI = ({variant, listVariant, size, intent, indicator}: TabsUIProps) => {
   const [state, setState] = useState<TabsAppProps>("adidas");
   const spanRef = useRef<HTMLSpanElement>(null);
 
@@ -26,17 +31,20 @@ const TabsUI = ({ variant }: TabsUIProps) => {
   }, [state]);
 
   return (
-    <Tabs.Root 
+    <Tabs.Root
       variant={variant}
-      className="w-[22rem] flex flex-col" 
+      className="w-[22rem] flex flex-col"
       defaultValue={state}
       onValueChange={(value) => setState(value as TabsAppProps)}
+      intent={intent}
     >
-      <Tabs.List 
-        className={"w-max"} 
+      <Tabs.List
+        className={"w-max"}
         aria-label="stores"
+        variant={listVariant}
+        size={size}
       >
-        <Tabs.Indicator ref={spanRef}/>
+        <Tabs.Indicator ref={spanRef} indicator={indicator}/>
         <Tabs.Trigger value="nike" id="nike">
           <Tabs.TriggerIcon>
             <svg aria-hidden viewBox="0 0 24 9" fill="none"
@@ -84,27 +92,73 @@ const TabsUI = ({ variant }: TabsUIProps) => {
   )
 }
 
-export default {
+const meta: Meta<typeof TabsUI> = {
+  title: "Tabs",
   component: TabsUI,
-  title: "Tabs"
+  tags: ["autodocs"],
+  parameters: {
+    layout: "centered",
+    docs: {
+      description: {
+        component: "The tabs component theme is a collection of Tailwindcss utilities that can be used to create tabs components with different colors, styles, and variants. Tabs components are used to allow users to navigate between different sections of content.",
+      }
+    }
+  },
+  argTypes: {
+    variant: {
+      options: ["default", "soft", "outlined", "bottomIndicator"],
+      control: "radio",
+      defaultValue: "default"
+    },
+    listVariant: {
+      options: ["soft", "outlined"],
+      control: "select",
+      defaultValue: "outlined",
+      if: {
+        arg: "variant",
+        eq: "default",
+      }
+    },
+    size: {
+      control: "select",
+      options: ["xs", "sm", "md", "lg", "xl", "xxl", "xxxl"],
+      defaultValue: "md",
+      if: {
+        arg: "variant",
+        eq: "soft",
+      }
+    },
+    intent: {
+      control: "select",
+      options: ["primary", "secondary", "accent", "gray", "neutral"],
+      defaultValue: "primary",
+      if: {
+        arg: "variant",
+        eq: "soft",
+      }
+    },
+    indicator: {
+      control: "select",
+      options: ["outlined", "elevated"],
+      defaultValue: "outlined",
+      if: {
+        arg: "variant",
+        eq: "default",
+      }
+    }
+  },
 }
 
-const Template = (args) => <TabsUI {...args} />;
+export default meta;
+type Story = StoryObj<typeof TabsUI>;
 
-export const Default = Template.bind({});
-Default.args = {};
-
-export const bottomIndicator = Template.bind({});
-bottomIndicator.args = {
-  variant: "bottomIndicator"
-};
-
-export const soft = Template.bind({});
-soft.args = {
-  variant: "soft"
-};
-
-export const outlined = Template.bind({});
-outlined.args = {
-  variant: "outlined"
-};
+export const Tabs_: Story = {
+  name: "Tabs",
+  args: {
+    variant: meta.argTypes?.variant?.defaultValue,
+    listVariant: meta.argTypes?.listVariant?.defaultValue,
+    intent: meta.argTypes?.intent?.defaultValue,
+    size: meta.argTypes?.size?.defaultValue,
+    indicator: meta.argTypes?.indicator?.defaultValue,
+  }
+}
