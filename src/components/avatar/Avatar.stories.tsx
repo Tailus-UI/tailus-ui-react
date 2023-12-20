@@ -1,4 +1,4 @@
-import Avatar from "./Avatar_.tsx";
+import Avatar from "./Avatar.tsx";
 import type {Meta, StoryObj} from "@storybook/react";
 
 type Intent = "primary" | "secondary" | "accent" | "danger" | "success" | "warning" | "info" | "gray";
