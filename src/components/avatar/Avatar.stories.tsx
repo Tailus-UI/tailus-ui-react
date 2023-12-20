@@ -1,10 +1,6 @@
 import Avatar from "./Avatar.tsx";
-import type {Meta, StoryObj} from "@storybook/react";
-
-type Intent = "primary" | "secondary" | "accent" | "danger" | "success" | "warning" | "info" | "gray";
-type Size = "lg" | "md" | "sm" | "xs";
-type Status = "online" | "offline" | "away" | "busy";
-type StatusPosition = "top" | "bottom";
+import type { Meta, StoryObj } from "@storybook/react";
+import type { Intent, Size, Status, StatusPosition } from "./Avatar.tsx";
 
 type AvatarProps = {
   isSoft: boolean,

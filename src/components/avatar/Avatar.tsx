@@ -11,10 +11,12 @@ const variants = {
   solid: solidTheme
 };
 
-type AvatarVariant = "solid" | "soft";
-type Intent = "primary" | "secondary" | "accent" | "danger" | "success" | "warning" | "info" | "gray";
-type Status = "online" | "offline" | "away" | "busy";
-type Size = "xs" | "sm" | "md" | "lg" | "xl";
+export type AvatarVariant = "solid" | "soft";
+export type Intent = "primary" | "secondary" | "accent" | "danger" | "success" | "warning" | "info" | "gray";
+export type Status = "online" | "offline" | "away" | "busy";
+export type Size = "xs" | "sm" | "md" | "lg" | "xl";
+export type StatusPosition = "top" | "bottom";
+
 type AvatarProps = {
   variant: AvatarVariant,
   intent: Intent,
@@ -27,7 +29,6 @@ const AvatarContext = React.createContext<AvatarProps>({
   size: "md",
 });
 
-type StatusPosition = "top" | "bottom";
 
 interface AvatarRootProps {
   isSoft?: boolean,
@@ -51,11 +52,13 @@ const AvatarRoot = React.forwardRef<
     size: size || contextValues.size,
   };
 
-  const statusPosition = props.statusPosition
-    ? (props.statusPosition === "top" ? "topStatus" : "bottomStatus")
-    : "bottomStatus";
-
-  const status = props.status || "online";
+  let statusClass = '';
+  if (props.status || props.statusPosition) {
+    const position = props.statusPosition
+      ? (props.statusPosition === "top" ? "topStatus" : "bottomStatus")
+      : "bottomStatus";
+    statusClass = variants[variant][position][props.status || "online"];
+  }
 
   return (
     <AvatarContext.Provider value={updatedContextValues}>
@@ -65,7 +68,7 @@ const AvatarRoot = React.forwardRef<
         className={
           cn(
             variants[variant].root[size || contextValues.size],
-            variants[variant][statusPosition][status],
+            statusClass,
             className
           )
         }
