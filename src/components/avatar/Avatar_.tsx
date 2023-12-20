@@ -18,7 +18,6 @@ type Size = "xs" | "sm" | "md" | "lg" | "xl";
 type AvatarProps = {
   variant: AvatarVariant,
   intent: Intent,
-  status: Status,
   size: Size
 }
 
@@ -26,14 +25,16 @@ const AvatarContext = React.createContext<AvatarProps>({
   variant: "solid",
   intent: "primary",
   size: "md",
-  status: "online",
 });
+
+type StatusPosition = "top" | "bottom";
 
 interface AvatarRootProps {
   isSoft?: boolean,
   size?: Size,
   intent?: Intent,
-  Status?: Status
+  status?: Status,
+  statusPosition?: StatusPosition,
 }
 
 const AvatarRoot = React.forwardRef<
@@ -45,28 +46,37 @@ const AvatarRoot = React.forwardRef<
   const variant = isSoft ? "soft" : contextValues.variant;
 
   const updatedContextValues = {
-    ...contextValues,
-    variant: variant
+    variant: variant,
+    intent: props.intent || contextValues.intent,
+    size: size || contextValues.size,
   };
+
+  const statusPosition = props.statusPosition
+    ? (props.statusPosition === "top" ? "topStatus" : "bottomStatus")
+    : "bottomStatus";
+
+  const status = props.status || "online";
 
   return (
     <AvatarContext.Provider value={updatedContextValues}>
       <AvatarPrimitive.Root
         {...props}
         ref={ref}
-        className={cn(variants[variant].root[size || contextValues.size], className)}
+        className={
+          cn(
+            variants[variant].root[size || contextValues.size],
+            variants[variant][statusPosition][status],
+            className
+          )
+        }
       />
     </AvatarContext.Provider>
   );
 });
 
-type AvatarFallbackProps = {
-  intent?: Intent,
-}
-
 const AvatarFallback = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Fallback>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback> & AvatarFallbackProps
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
 >(({className, ...props}, ref) => {
   const {intent, variant} = React.useContext(AvatarContext);
   return (
