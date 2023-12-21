@@ -1,3 +1,4 @@
+import {Meta} from "@storybook/react";
 import {FormInput as Input} from "../form";
 import Label from "./Label.tsx";
 
@@ -15,9 +16,12 @@ const LabelUI = () => (
     </div>
     );
 
-export default {
-    component: LabelUI,
-};
+const meta: Meta<typeof LabelUI> = {
+    title: 'Label',
+    tags: ['autodocs'],
+}
+
+export default meta;
 
 export const Label_ = () => <LabelUI />;
 
