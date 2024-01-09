@@ -9,12 +9,12 @@ If you need any help, feel free to reach out to [@tailus-ui](https://twitter.com
 
 ## About this repository
 
-This repository is the source code for the React components of [beta.tailus.io](https://beta.tailus.io).
+This repository is the source code for the React components of [Tailus UI](https://beta.tailus.io).
 
 - We use [npm](https://npmjs.com) as our package manager.
 - We use [React](https://reactjs.org) for the website and components.
 - We use [Radix](https://radix-ui.com) for the components.
-- The styles applied to the components come from [Tailus-themer](https://github.com/Tailus-UI/themer).
+- The styles applied to the components come from [Tailus Themer](https://github.com/Tailus-UI/themer).
 - [vite](https://vitejs.dev) is used for the development server.
 - [Prettier](https://prettier.io) is used for code formatting.
 - [ESLint](https://eslint.org) is used for linting.
@@ -33,19 +33,19 @@ src
 ├   └── ...
 ├── lib
 ├   └── ...
-├── .eslintrc.cjs
-├── .gitignore
-├── .prettierrc.cjs
-├── LICENSE
-├── package.json
-├── package-lock.json
-├── postcss.config.js
-├── prettier.config.cjs
-├── README.md
-├── tailwind.config.cjs
-├── tsconfig.json
-├── vite.config.cjs
-└── ...
+.eslintrc.cjs
+.gitignore
+.prettierrc.cjs
+LICENSE.md
+package.json
+package-lock.json
+ostcss.config.js
+prettier.config.cjs
+README.md
+tailwind.config.cjs
+tsconfig.json
+vite.config.cjs
+...
 ```
 
 ```
@@ -88,12 +88,12 @@ git checkout -b my-new-branch
 npm install
 ```
 
-### Run the development server
+### Run Storybook
 
 To start the development process, run the following command:
 
 ```bash
-npm run dev
+npm run storybook
 ```
 
 ## Components

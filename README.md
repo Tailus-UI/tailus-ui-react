@@ -1,28 +1,29 @@
-<div style="text-align: center;">
-<img src="public/favicon-white.svg" alt="Logo tailus" width="70" height="70" style="margin: 2rem 0 -2rem 0">
-<h1>tailus-ui-react</h1>
-<p>TailusUI - Tailus themer - Radix UI - Tailwind CSS components</p>
-<span>A library of reusable and customizable React components, based on Radix UI and styled with Tailwindcss and the tailus-themer package.</span>
-<div style="margin-top: 1rem">
-    <a href="https://twitter.com/tailus_ui">
-      <img alt="badge twitter" src="https://img.shields.io/twitter/follow/tailus_ui?style=social">
-    </a>
-    <a href="https://cd.linkedin.com/company/tailus-ui">
-      <img alt="logo linkedin" src="https://img.shields.io/badge/-tailus_ui-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://cd.linkedin.com/company/tailus-ui">
-    </a>
-    <a href="https://www.github.com/tailus-ui/tailus-ui-react">
-      <img alt="github stars" src="https://img.shields.io/github/stars/tailus-ui/tailus-ui-react?style=social">
-    </a>
-    <img alt="MIT licence" src="https://img.shields.io/badge/license-MIT-blue.svg">      
+<div>
+  <h1>Tailus UI React</h1>
+  <p>Collection of highly customizable and accessible React components. Built on top of Tailwind CSS, Radix UI, and themed with Tailus Themer, Tailus UI React is your one-stop shop for building beautiful and functional web user interfaces.</p>
+  <img src="public/main-cover.webp" alt="Tailus UI React cover" width="100%" height="auto" />
+
+  <div style="margin-top: 1rem">
+      <a href="https://twitter.com/tailus_ui">
+        <img alt="badge twitter" src="https://img.shields.io/twitter/follow/tailus_ui?style=social">
+      </a>
+      <a href="https://cd.linkedin.com/company/tailus-ui">
+        <img alt="logo linkedin" src="https://img.shields.io/badge/-tailus_ui-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://cd.linkedin.com/company/tailus-ui">
+      </a>
+      <a href="https://www.github.com/tailus-ui/tailus-ui-react">
+        <img alt="github stars" src="https://img.shields.io/github/stars/tailus-ui/tailus-ui-react?style=social">
+      </a>
+      <img alt="MIT licence" src="https://img.shields.io/badge/license-MIT-blue.svg">      
+  </div>
 </div>
-</div>
 
----
+## Documentation
 
-`tailus-ui-react` is collection of ready-to-use React components, designed to be easily reused and customized. The
-components are based on Radix UI and use Tailwind CSS for styling.
+You can find the Tailus UI React documentation [on our website](https://beta.tailus.io/docs/introduction/).
 
----
+## Examples
+
+You can find the Tailus UI React examples [on our Demo page](https://beta.tailus.io/demo/).
 
 ## Getting started
 
@@ -51,14 +52,14 @@ npm i
 3. Finally, start the development server:
 
 ```bash
-npm start
+npm run storybook
 ```
 
-Then open [http://localhost:3000/](http://localhost:3000/) in your browser.
+Then open [http://localhost:6006/](http://localhost:6006/) in your browser.
 
 ## Contributing
 
-If you want to contribute to Flowbite React, you can follow
+If you want to contribute to Tailus UI React, you can follow
 the [contributing guide](https://github.com/tailus-ui/tailus-ui-react/blob/main/CONTRIBUTING.md).
 
 ## License
