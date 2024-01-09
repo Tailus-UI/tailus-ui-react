@@ -1,4 +1,4 @@
-import button, {
+import {
   ghostButton,
   ghostIconButton,
   ghostLeadingIconButton,
@@ -13,7 +13,8 @@ import button, {
   softIconButton,
   softLeadingIconButton,
   softTrailingIconButton,
-  trailingIconButton
+  trailingIconButton,
+  button
 } from "@tailus/themer-button";
 import {cva, VariantProps} from 'class-variance-authority';
 import {cn} from '../../lib/utils';
