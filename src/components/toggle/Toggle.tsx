@@ -5,7 +5,7 @@ import {cloneElement, cn} from "../../lib/utils.ts";
 
 export type Appearance = {
   variant: 'default' | 'highlight',
-  intent: 'primary' | 'secondary' | 'warning' | 'danger' | 'neutral' | 'accent' | 'success',
+  intent: 'primary' | 'secondary' | 'warning' | 'danger' | 'neutral' | 'accent' | 'success' | 'info' | 'gray',
   size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 }
 
@@ -20,7 +20,7 @@ export const AppearanceContext = createContext(defaultAppearance);
 interface ToggleRootProps {
   className?: string,
   variant?: 'default' | 'highlight',
-  intent?: 'primary' | 'secondary' | 'warning' | 'danger' | 'neutral' | 'accent' | 'success',
+  intent?: 'primary' | 'secondary' | 'warning' | 'danger' | 'neutral' | 'accent' | 'success' | 'info' | 'gray',
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 }
 
