@@ -11,6 +11,7 @@ const formLabelVariants = cva('', {
       xs: theme.label.xs,
       sm: theme.label.sm,
       md: theme.label.md,
+      lg : theme.label.lg
     },
   }
 });

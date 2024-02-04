@@ -68,6 +68,19 @@ export default {
   plugins: [
     themer({
       appearance: "dark", // light | dark | both
+      components: {
+        field: {
+          rounded: "lg",
+          softBg: "100",
+          softBgFocus: "50",
+          borderColor: "300",
+          dark: {
+            softBg: "900",
+            softBgFocus: "950",
+            borderColor: "800",
+          }
+        }
+      }
        /*
       background: "lighter", // light | lighter | hight | higher
       padding: "largest", // small | medium | large | larger | largest

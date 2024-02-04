@@ -6,7 +6,7 @@ const textareaVariants = inputFormVariants("textarea");
 
 export interface TextAreaProps
   extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> {
-    variant?: "soft" | "outlined";
+    variant?: "soft" | "outlined" | "mixed";
     size?: "xs" | "sm" | "md" | "lg" | "xl";
   }
 

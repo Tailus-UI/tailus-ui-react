@@ -1,4 +1,3 @@
-import { button } from "@tailus/themer-button";
 import {
   FormRoot,
   FormControl,
@@ -6,65 +5,44 @@ import {
   FormInput,
   FormLabel,
   FormMessage,
-  FormSubmit,
-  FormTextArea
 } from "./";
 import { Meta, StoryObj } from "@storybook/react";
 
 type FormUIProps = {
-    variant: "soft" | "outlined";
+    variant: "soft" | "outlined" | "mixed";
     size: "xs" | "sm" | "md" | "lg" | "xl";
+    labelSize: "xs" | "sm" | "md" | "lg";
+    messageSize: "xs" | "sm" | "md" | "lg";
     withLabel?: boolean;
     WithPlaceholder?: boolean;
-    errormessageColor: 'danger' | 'warning' | 'gray'; 
+    message: 'primary' | 'secondary' | 'accent' | 'danger' | 'warning' | 'gray' | 'info' | 'success'; 
+    disabled? : boolean
 };
 
-const FormUI = ({ variant, size, withLabel, WithPlaceholder, errormessageColor }: FormUIProps) => (
-    <FormRoot>
-        <div className="space-y-4">
-            <FormField name="email">
-                {withLabel && <FormLabel>Email</FormLabel>}
-                <div className="space-y-1">
-                    <FormControl asChild>
-                        <FormInput
-                          variant={variant}
-                          size={size}
-                          type="email"
-                          placeholder={WithPlaceholder ? "Your email" : undefined}
-                          required
-                        />
-                    </FormControl>
-                    <FormMessage intent={errormessageColor} match="valueMissing">
-                        Please enter your email
-                    </FormMessage>
-                    <FormMessage match="typeMismatch">
-                        Please provide a valid email
-                    </FormMessage>
-                </div>
-            </FormField>
-            <FormField name="question">
-                {withLabel && <FormLabel>Question</FormLabel>}
-                <div>
-                    <FormControl asChild>
-                        <FormTextArea
-                          variant={variant}
-                          size={size}
-                          rows={3}
-                          placeholder={WithPlaceholder ? "Your message here..." : undefined}
-                          required
-                        />
-                    </FormControl>
-                    <FormMessage intent={errormessageColor} match="valueMissing">
-                        Please enter a question
-                    </FormMessage>
-                </div>
-            </FormField>
-            <FormSubmit asChild>
-                <button className={button.primary.md + " w-full"}>
-                    <span>Submit</span>
-                </button>
-            </FormSubmit>
-        </div>
+const FormUI = ({ variant, size, withLabel, WithPlaceholder, message, disabled, labelSize, messageSize }: FormUIProps) => (
+    <FormRoot className="w-72">
+        <FormField name="email" className="w-full">
+            {withLabel && <FormLabel size={labelSize}>Email</FormLabel>}
+            <FormControl asChild>
+                <FormInput
+                    variant={variant}
+                    size={size}
+                    type="email"
+                    disabled={disabled}
+                    placeholder={WithPlaceholder ? "Your email" : undefined}
+                    required
+                />
+            </FormControl>
+            <FormMessage size={messageSize} intent={message}>
+                Helper message
+            </FormMessage>
+            <FormMessage size={messageSize} intent={message} match="valueMissing">
+                Please enter your email
+            </FormMessage>
+            <FormMessage size={messageSize} match="typeMismatch">
+                Please provide a valid email
+            </FormMessage>
+        </FormField>
     </FormRoot>
 );
 
@@ -83,13 +61,23 @@ const meta:Meta<typeof FormUI> = {
     argTypes: {
         variant: {
             control: "select",
-            options: ["soft", "outlined"],
+            options: ["soft", "outlined", "mixed"],
             defaultValue: "soft",
         },
         size: {
             control: "select",
             options: ["xs", "sm", "md", "lg", "xl"],
             defaultValue: "md",
+        },
+        labelSize: {
+            control: "select",
+            options: ["xs", "sm", "md", "lg"],
+            defaultValue: "md",
+        },
+        messageSize: {
+            control: "select",
+            options: ["xs", "sm", "md", "lg"],
+            defaultValue : "md"
         },
         withLabel: {
             control: "boolean",
@@ -99,9 +87,13 @@ const meta:Meta<typeof FormUI> = {
             control: "boolean",
             defaultValue: false,
         },
-        errormessageColor: {
+        disabled: {
+            control: "boolean",
+            defaultValue: false,
+        },
+        message: {
             control: "select",
-            options: ["danger", "warning", "gray"],
+            options: ["primary", "secondary", "accent", "danger", "warning", "gray", "info", "success"],
             defaultValue: "warning",
         },
     },
@@ -114,9 +106,11 @@ type Story = StoryObj<typeof meta>;
 export const Form: Story = {
     args: {
         variant: "outlined",
-        size: "sm",
+        size: "md",
+        labelSize: "md",
+        messageSize : "sm",
         withLabel: true,
         WithPlaceholder: false,
-        errormessageColor: "warning",
+        message: "gray",
     },
 };

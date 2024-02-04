@@ -4,7 +4,8 @@ import { cn } from "../../lib/utils.ts";
 import React from "react";
 import {
   outlinedForm as outlinedTheme,
-  softForm as softTheme
+  softForm as softTheme,
+  mixedForm as mixedTheme
 } from "@tailus/themer-form";
 
 export type FormFieldVariantProps = VariantProps<typeof formFieldVariants>;
@@ -12,7 +13,8 @@ const formFieldVariants = cva('', {
   variants: {
     variant: {
       outlined: outlinedTheme.field,
-      soft: softTheme.field
+      soft: softTheme.field,
+      mixed: mixedTheme.field,
     },
   }
 });

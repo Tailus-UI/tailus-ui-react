@@ -1,17 +1,23 @@
 import {Meta} from "@storybook/react";
 import {FormInput as Input} from "../form";
 import Label from "./Label.tsx";
+import { outlinedForm } from "@tailus/themer-form";
 
-const LabelUI = () => (
-    <div className="space-y-2">
-        <Label htmlFor="firstName">First name</Label>
+type LabelUIProps = {
+    size: "xs" | "sm" | "md"; 
+    disabled? : boolean
+};
+
+export const LabelUI = ({size, disabled}:LabelUIProps) => (
+    <div className={outlinedForm.field + " w-72"}>
+        <Label htmlFor="firstName" size={size}>First name</Label>
         <Input
-            type={"text"}
-            variant={"soft"}
-            size={"md"}
-            name={"firstName"}
-            id={"firstName"}
-            defaultValue={"Théo Balick"}
+            type="text"
+            size="md"
+            name="firstName"
+            id="firstName"
+            defaultValue="Théo Balick"
+            disabled={disabled}
         />
     </div>
     );
@@ -19,22 +25,31 @@ const LabelUI = () => (
 const meta: Meta<typeof LabelUI> = {
     title: 'Label',
     tags: ['autodocs'],
+    argTypes: {
+        size: {
+            control: {
+                type: 'select',
+                options: ['xs', 'sm', 'md'],
+            },
+        },
+        disabled: {
+            control: 'boolean'
+        },
+    }
 }
 
 export default meta;
 
-export const Label_ = () => <LabelUI />;
-
-export const Horizontal = () => (
-    <div className="flex items-center gap-4">
-        <Label htmlFor="firstName" className="whitespace-nowrap">First name</Label>
+export const Horizontal = ({size, disabled}:LabelUIProps) => (
+    <div className={outlinedForm.field + " flex space-y-0 gap-4 items-center"}>
+        <Label htmlFor="firstName" size={size} className="whitespace-nowrap">First name</Label>
         <Input
-            type={"text"}
-            variant={"soft"}
-            size={"md"}
-            name={"firstName"}
-            id={"firstName"}
-            defaultValue={"Meschack Irung"}
+            type="text"
+            size="md"
+            name="firstName"
+            id="firstName"
+            defaultValue="Meschack Irung"
+            disabled={disabled}
         />
     </div>
 );

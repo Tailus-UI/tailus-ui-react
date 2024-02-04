@@ -6,7 +6,7 @@ const inputVariants = inputFormVariants("input");
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
-    variant?: "soft" | "outlined";
+    variant?: "soft" | "outlined" | "mixed";
     size?: "xs" | "sm" | "md" | "lg" | "xl";
   }
 
