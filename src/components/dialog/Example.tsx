@@ -1,5 +1,4 @@
 import ToggleGroup from "../toggle_group/ToggleGroup.tsx";
-import RadioGroupUI from "../radio_group/RadioGroup.tsx";
 import {Cross2Icon} from "@radix-ui/react-icons";
 import Toggle from "../toggle/Toggle.tsx";
 import {Button} from "../button/Button.tsx";
