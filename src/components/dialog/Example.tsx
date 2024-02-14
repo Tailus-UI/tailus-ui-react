@@ -59,8 +59,6 @@ const DialogExample1 = () => (
         <Dialog.Title>What is the reason for your feedback?</Dialog.Title>
         <Dialog.Description>What do you think of Tailus UI ?</Dialog.Description>
 
-        <RadioGroupUI/>
-
         <Dialog.Actions>
           <Dialog.Close>
             <Button label={"Submit"} size={"md"}/>
