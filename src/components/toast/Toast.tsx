@@ -84,7 +84,19 @@ const ToastViewport = React.forwardRef<
 });
 
 const ToastAction = ToastPrimitive.Action;
-const ToastClose = ToastPrimitive.Close;
+const ToastClose = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitive.Close>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitive.Close>
+>((props, forwardedRef) => {
+  return (
+    <ToastPrimitive.Close
+      asChild
+      ref={forwardedRef}
+      className={cn(props.className)}
+      {...props}
+    />
+  );
+});
 
 const Toast = {
   Provider: ToastProvider,
