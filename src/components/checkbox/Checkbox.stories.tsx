@@ -51,7 +51,7 @@ export const Checkbox: Story = {
     variant: 'default',
     label: 'Keep me signed in',
     children: <svg className="w-4 h-4" viewBox="0 0 46 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#clip0_23_2)">
+      <g clipPath="url(#clip0_23_2)">
         <g filter="url(#filter0_d_23_2)">
           <path d="M6 15.91L10.4241 11.546L19.2713 20.273L34.7547 5L39.1788 9.364L19.2723 29L6 15.91Z"
                 fill="white"/>
@@ -59,8 +59,8 @@ export const Checkbox: Story = {
       </g>
       <defs>
         <filter id="filter0_d_23_2" x="2" y="4" width="41.1788" height="32" filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB">
-          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                colorInterpolationFilters="sRGB">
+          <feFlood floodOpacity="0" result="BackgroundImageFix"/>
           <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
                          result="hardAlpha"/>
           <feOffset dy="3"/>
