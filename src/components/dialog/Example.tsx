@@ -1,5 +1,4 @@
 import ToggleGroup from "../toggle_group/ToggleGroup.tsx";
-import RadioGroupUI from "../radio_group/RadioGroup.tsx";
 import {Cross2Icon} from "@radix-ui/react-icons";
 import Toggle from "../toggle/Toggle.tsx";
 import {Button} from "../button/Button.tsx";
@@ -58,8 +57,6 @@ const DialogExample1 = () => (
       <Dialog.Content>
         <Dialog.Title>What is the reason for your feedback?</Dialog.Title>
         <Dialog.Description>What do you think of Tailus UI ?</Dialog.Description>
-
-        <RadioGroupUI/>
 
         <Dialog.Actions>
           <Dialog.Close>

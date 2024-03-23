@@ -14,7 +14,8 @@ const RadioGroupRoot = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> & RadioGroupProps
 >(({withShadow, ...props}, forwardedRef) => {
-  withShadow = withShadow || React.useContext(Context);
+  const context = React.useContext(Context);
+  withShadow = withShadow || context;
 
   return (
     <Context.Provider value={withShadow}>

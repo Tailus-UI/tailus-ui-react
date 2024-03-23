@@ -5,9 +5,20 @@ import {cn} from "../../lib/utils.ts";
 
 // Define custom components based on the Popover components from @radix-ui/react-popover
 const PopoverRoot = Popover.Root;
-const PopoverTrigger = Popover.Trigger;
 const PopoverAnchor = Popover.Anchor;
 const PopoverPortal = Popover.Portal;
+
+const PopoverTrigger = React.forwardRef<
+  React.ElementRef<typeof Popover.Trigger>,
+  React.ComponentPropsWithoutRef<typeof Popover.Trigger>
+>(({className, ...props}, forwardedRef) => (
+  <Popover.Trigger
+    asChild
+    {...props}
+    ref={forwardedRef}
+    className={cn(className)}
+  />
+));
 
 // Creating a custom PopoverContent component with ref
 // This component is based on the Content component from @radix-ui/react-popover

@@ -5,8 +5,19 @@ import React from "react";
 
 const TooltipProvider = TooltipPrimitive.Provider;
 const TooltipRoot = TooltipPrimitive.Root;
-const TooltipTrigger = TooltipPrimitive.Trigger;
 const TooltipPortal = TooltipPrimitive.Portal;
+
+const TooltipTrigger = React.forwardRef<
+  React.ElementRef<typeof TooltipPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger>
+>(({className, ...props}, ref) => (
+  <TooltipPrimitive.Trigger
+    asChild
+    className={cn(className)}
+    ref={ref}
+    {...props}
+  />
+))
 
 const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
@@ -20,13 +31,16 @@ const TooltipContent = React.forwardRef<
   />
 ))
 
-const TooltipArrow = React.forwardRef((props, forwardedRef) => (
+const TooltipArrow = React.forwardRef<
+  React.ElementRef<typeof TooltipPrimitive.Arrow>,
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Arrow>
+>(({className, ...props}, ref) => (
   <TooltipPrimitive.Arrow
-    className={theme.arrow}
-    ref={forwardedRef}
+    className={cn(theme.arrow, className)}
+    ref={ref}
     {...props}
   />
-));
+))
 
 export {
   TooltipProvider,

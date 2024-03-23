@@ -8,7 +8,17 @@ import {Button} from "../button/Button.tsx";
 const DialogRoot = DialogPrimitive.Root;
 
 // Creating DialogTrigger component using DialogPrimitive.Trigger
-const DialogTrigger = DialogPrimitive.Trigger;
+const DialogTrigger = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Trigger>,
+  React.ComponentProps<typeof DialogPrimitive.Trigger>
+>(({className, ...props}, forwardedRef) => (
+  <DialogPrimitive.Trigger
+    asChild
+    {...props}
+    ref={forwardedRef}
+    className={cn(className)}
+  />
+));
 
 // Creating DialogPortal component using DialogPrimitive.Portal
 const DialogPortal = DialogPrimitive.Portal;
@@ -91,7 +101,17 @@ const DialogCloseButton: React.FC<DialogCloseButtonProps> = ({className, ...prop
 );
 
 // Creating DialogClose component using DialogPrimitive.Close
-const DialogClose = DialogPrimitive.Close;
+const DialogClose = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Close>,
+  React.ComponentProps<typeof DialogPrimitive.Close>
+>(({className, ...props}, forwardedRef) => (
+  <DialogPrimitive.Close
+    asChild
+    {...props}
+    ref={forwardedRef}
+    className={cn(className)}
+  />
+));
 
 // Creating Dialog object that contains all the Dialog components
 const Dialog = {
