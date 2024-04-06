@@ -19,13 +19,13 @@ const meta: Meta<typeof Badge> = {
       control: 'select', 
       options: ['solid', 'soft', 'outlined'] 
     },
-    colorVariant: { 
+    intent: { 
       control: 'select', 
       options: ["primary", "secondary", "accent", "danger", "success", "warning", "info", "gray",] 
     },
     size: { 
         control: 'select', 
-        options: ["sm", "md", "lg"] 
+        options: ["xs", "sm", "md", "lg"] 
       },
     children: { control: 'text' }
   }
@@ -39,7 +39,7 @@ type Story = StoryObj<typeof meta>;
 export const Solid: Story = {
   args: {
     variant: 'solid',
-    colorVariant: 'primary',
+    intent: 'primary',
     size: "md",
     children: "Open",
   },
@@ -48,7 +48,7 @@ export const Solid: Story = {
 export const Soft: Story = {
   args: {
     variant: 'soft',
-    colorVariant: 'primary',
+    intent: 'primary',
     size: "md",
     children: "Open",
   },
@@ -57,7 +57,7 @@ export const Soft: Story = {
 export const Oulined: Story = {
   args: {
     variant: 'outlined',
-    colorVariant: "primary",
+    intent: "primary",
     size: "md",
     children: "Open",
   },

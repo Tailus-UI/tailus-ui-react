@@ -6,6 +6,7 @@ export default {
     "index.html",
     "./src/**/*.{js,jsx,ts,tsx,vue,html}",
     './node_modules/@tailus/themer-**/dist/**/*.{js,ts}',
+    './node_modules/@tailus/themer/dist/**/*.{js,ts}',
   ],
   theme: {
     extend: {
