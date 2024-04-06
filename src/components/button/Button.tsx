@@ -1,140 +1,82 @@
-import {
-  ghostButton,
-  ghostIconButton,
-  ghostLeadingIconButton,
-  ghostTrailingIconButton,
-  iconButton,
-  leadingIconButton,
-  outlinedButton,
-  outlinedIconButton,
-  outlinedLeadingIconButton,
-  outlinedTrailingIconButton,
-  softButton,
-  softIconButton,
-  softLeadingIconButton,
-  softTrailingIconButton,
-  trailingIconButton,
-  button
-} from "@tailus/themer-button";
-import {cva, VariantProps} from 'class-variance-authority';
-import {cn} from '../../lib/utils';
 import React from "react";
+import { cloneElement } from "../../lib/utils";
+import { button, buttonIcon as icon, type ButtonType, type ButtonIconType } from "@tailus/themer"
 
-const variantsMap = {
-  solid: {
-    only: iconButton,
-    leading: leadingIconButton,
-    trailing: trailingIconButton,
-  },
-  soft: {
-    only: softIconButton,
-    leading: softLeadingIconButton,
-    trailing: softTrailingIconButton,
-  },
-  ghost: {
-    only: ghostIconButton,
-    leading: ghostLeadingIconButton,
-    trailing: ghostTrailingIconButton,
-  },
-  outlined: {
-    only: outlinedIconButton,
-    leading: outlinedLeadingIconButton,
-    trailing: outlinedTrailingIconButton,
-  }
-};
+export type Root = typeof Root;
+export type Icon = typeof Icon;
+export type Label = typeof Label;
 
-const simpleButtonVariants = {
-  solid: button,
-  soft: softButton,
-  ghost: ghostButton,
-  outlined: outlinedButton,
-}
-
-const colorsMap = {
-  primary: 'primary',
-  secondary: 'secondary',
-  accent: 'accent',
-  danger: 'danger',
-  warning: 'warning',
-  success: 'success',
-  info: 'info',
-  gray: 'gray',
-  neutral: 'neutral',
-};
-
-const sizesMap = {
-  xs: 'xs',
-  sm: 'sm',
-  md: 'md',
-  lg: 'lg',
-  xl: 'xl',
-};
-
-const buttonVariants = cva([''], {
-  variants: {
-    variant: variantsMap,
-    colorVariant: colorsMap,
-    size: sizesMap,
-  },
-  defaultVariants: {
-    variant: "solid",
-    colorVariant: 'primary',
-    size: 'md',
-  },
-});
-
-export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>, VariantProps<typeof buttonVariants> {
+export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>, ButtonType {
   disabled?: boolean;
-  label?: string;
-  icon?: 'only' | 'leading' | 'trailing';
   href?: string;
 }
 
-export const Button = React.forwardRef<
-  HTMLButtonElement & HTMLAnchorElement, ButtonProps
->((
-  {
-    className,
-    colorVariant,
-    variant,
-    size,
-    disabled,
-    label,
-    icon,
-    href,
-    children,
-    ...props
-  }, ref) => {
+export interface IconProps extends React.HTMLAttributes<HTMLElement>, ButtonIconType{}
 
-  const buttonUtilities = simpleButtonVariants[variant!][colorVariant!]?.[size!];
-  const iconButtons = icon && variantsMap[variant!][icon][colorVariant!][size!]
-
-  const classes = icon ? cn(iconButtons, className) : cn(buttonUtilities, className);
-  const Component = href ? 'a' : 'button';
-
-  const cloneElement = (element: React.ReactElement, classNames: string) => {
-    return React.cloneElement(element, {
-      className: cn(element.props.className, classNames),
-    });
-  }
-
+export const Icon = React.forwardRef<HTMLElement, IconProps>(({
+  className,
+  children,
+  size,
+  type
+}) => {
   return (
-    <Component href={href} className={classes} {...props} disabled={disabled} ref={ref as any}>
-      {!icon && <span>{label}</span>}
-      {icon === 'only' && <span className="sr-only">{label}</span>}
-      {icon === 'trailing' && <span>{label}</span>}
-      {icon &&
-        cloneElement(children as React.ReactElement, variantsMap[variant!][icon!].icon[size!])
+    <>
+      {
+        cloneElement(children as React.ReactElement, icon({size, type, className}))
       }
-      {icon === 'leading' && <span>{label}</span>}
-    </Component>
+    </>
   )
-});
+})
 
-Button.displayName = 'Button';
+export const Label = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(({
+  className,
+  children,
+  ...props
+}) => {
+  return (
+    <span className={className} {...props}>{children}</span>
+  )
+})
 
-Button.defaultProps = {
+export const Root = React.forwardRef<
+  HTMLButtonElement & HTMLAnchorElement, ButtonProps
+  >((
+    {
+      className,
+      intent,
+      variant,
+      size,
+      disabled,
+      href,
+      children,
+      ...props
+    }, ref) => {
+
+      const Component = href ? 'a' : 'button';
+      const iconOnly = React.Children.toArray(children).some(child => 
+          React.isValidElement(child) && child.type === Icon && child.props.type === 'only'
+      );
+      const buttonSize = iconOnly ? 'iconOnlyButtonSize' : 'size';
+
+      return (
+        <Component href={href} className={button[variant as keyof typeof button]({intent, [buttonSize]:size, className})} {...props} disabled={disabled} ref={ref as any}>
+          {children}
+        </Component>
+      )
+    });
+
+Root.displayName = 'Root';
+Icon.displayName = "Icon";
+Label.displayName = "Label";
+
+Root.defaultProps = {
   variant: "solid",
-  colorVariant: "primary",
+  intent: "neutral",
   size: "md",
+}
+
+export default {
+  Root: Root,
+  Icon: Icon,
+  Label: Label
 }

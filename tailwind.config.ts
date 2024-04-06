@@ -13,7 +13,7 @@ export default {
             inherit: colors.inherit,
             current: colors.current,
             transparent: colors.transparent,
-            primary: colors.lime,
+            primary: colors.indigo,
             secondary: colors.purple,
             accent: colors.fuchsia,
             danger: colors.red,
@@ -68,6 +68,7 @@ export default {
   plugins: [
     themer({
       appearance: "dark", // light | dark | both
+      radius : "smooth",
       components: {
         field: {
           rounded: "lg",

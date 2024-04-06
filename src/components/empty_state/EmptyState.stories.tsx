@@ -1,6 +1,7 @@
 import EmptyState from "./EmptyState.tsx";
-import {Button} from "../button/Button.tsx";
+import Button from "../button/Button.tsx";
 import {Meta} from "@storybook/react";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 const Template1 = () => (
   <EmptyState.Root>
@@ -11,7 +12,9 @@ const Template1 = () => (
       <EmptyState.Title>You're offline</EmptyState.Title>
       <EmptyState.Description>We've got something for everyone.</EmptyState.Description>
     </EmptyState.Content>
-    <Button label={"Retry"} variant={"outlined"} colorVariant={"info"} />
+    <Button.Root variant="outlined" intent="gray">
+      <Button.Label>Try again</Button.Label>
+    </Button.Root>
   </EmptyState.Root>
 );
 
@@ -24,12 +27,12 @@ const Template2 = () => (
       <EmptyState.Title>You don't have any file</EmptyState.Title>
       <EmptyState.Description>We've got something for everyone.</EmptyState.Description>
     </EmptyState.Content>
-    <Button label={"Add"} variant={"outlined"} icon={"leading"} colorVariant={"primary"}>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-           viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-      </svg>
-    </Button>
+    <Button.Root variant="outlined" intent="gray">
+      <Button.Icon type="leading">
+        <PlusIcon />
+      </Button.Icon>
+      <Button.Label>Add a file</Button.Label>
+    </Button.Root>
   </EmptyState.Root>
 );
 
@@ -42,7 +45,9 @@ const Template3 = () => (
       <EmptyState.Title>No content found</EmptyState.Title>
       <EmptyState.Description>We've got something for everyone.</EmptyState.Description>
     </EmptyState.Content>
-    <Button label={"Discover"} />
+    <Button.Root>
+      <Button.Label>Discover</Button.Label>
+    </Button.Root>
   </EmptyState.Root>
 );
 

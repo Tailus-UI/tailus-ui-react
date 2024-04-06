@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/react";
 import '../src/index.css';
+import { themes } from '@storybook/theming';
 
 const preview: Preview = {
   parameters: {
@@ -11,6 +12,9 @@ const preview: Preview = {
       },
     },
     layout: 'centered',
+    docs: {
+      theme: themes.dark,
+    },
   },
 };
 
