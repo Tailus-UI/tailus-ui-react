@@ -75,6 +75,11 @@ Root.defaultProps = {
   size: "md",
 }
 
+Icon.defaultProps = {
+  size: "md",
+  type: "only"
+}
+
 export default {
   Root: Root,
   Icon: Icon,

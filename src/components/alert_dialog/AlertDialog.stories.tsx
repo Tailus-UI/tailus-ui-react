@@ -1,88 +1,69 @@
 import AlertDialog from "./AlertDialog.tsx";
-import {button as solidButton, ghostButton} from "@tailus/themer-button";
 import {Meta, StoryObj} from "@storybook/react";
-import {Button} from "../button/Button.tsx";
+import Button from "../button/Button.tsx";
+import { ArchiveIcon, TrashIcon } from "@radix-ui/react-icons";
+import { twMerge } from "tailwind-merge";
 
 interface AlertDialogProps {
-  variant: "default" | "centred",
   title: string,
   description: string,
   cancelText: string,
   actionText: string,
-  imageSrc: string,
-  intent: "info" | "warning" | "danger",
+  intent: "warning" | "danger",
   triggerText: string,
   exampleWithImage: boolean,
 }
 
-const AlertDialogUI = (args: AlertDialogProps) => {
-  const renderTriggerIcon = (intent: "info" | "warning" | "danger") => {
-    switch (intent) {
-      case "info":
-        return (
-          <svg viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M8 0C7.478 0 6.94 0.184 6.562 0.563C6.185 0.94 6 1.478 6 2V3H0V5H1V21C1 22.645 2.355 24 4 24H16C17.645 24 19 22.645 19 21V5H20V3H14V2C14 1.478 13.816 0.94 13.437 0.562C13.06 0.186 12.523 0 12 0H8ZM8 2H12V3H8V2ZM3 5H17V21C17 21.555 16.555 22 16 22H4C3.445 22 3 21.555 3 21V5ZM10 8L6 12H9V19H11V12H14L10 8Z"
-              fill="currentColor"/>
-          </svg>
-        );
-      case "warning":
-        return (
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-               strokeWidth={2} stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round"
-                  d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/>
-          </svg>
-        );
-      case "danger":
-        return (
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-               strokeWidth={2} stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round"
-                  d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/>
-          </svg>
-        );
-    }
-  }
+const Separator = ({orientation="vertical", className}:{orientation?:"vertical" | "horizontal", className?:string}) => (
+  <div aria-hidden data-orientation={orientation} className={twMerge("data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:h-full data-[orientation=vertical]:border-l data-[orientation=horizontal]:w-full data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:border-b data-[orientation=horizontal]:bg-transparent bg-[--feedback-border-color] data-[orientation=vertical]:border-white dark:data-[orientation=horizontal]:bg-gray-950 dark:data-[orientation=horizontal]:border-[--ui-dark-border-color] dark:data-[orientation=vertical]:bg-[--ui-dark-border-color] dark:data-[orientation=vertical]:border-gray-950", className)} />
+)
 
-  const renderDefaultImageSrc = (intent: "info" | "warning" | "danger") => {
+const Example1 = (args: AlertDialogProps) => {
+  const renderTriggerIcon = (intent: "warning" | "danger") => {
     switch (intent) {
-      case "info":
-        return "https://cdn-icons-png.flaticon.com/512/7042/7042615.png";
       case "warning":
-        return "https://cdn-icons-png.flaticon.com/512/3071/3071749.png";
+        return (
+          <ArchiveIcon />
+        );
       case "danger":
-        return "https://cdn-icons-png.flaticon.com/512/6460/6460112.png";
+        return (
+          <TrashIcon />
+        );
     }
   }
 
   return (
-    <AlertDialog.Root variant={args.variant}>
+    <AlertDialog.Root defaultOpen>
       <AlertDialog.Trigger asChild>
-        <Button variant="soft" colorVariant={args.intent} icon="only">
-          {renderTriggerIcon(args.intent)}
-        </Button>
+        <Button.Root variant="solid" intent={args.intent}>
+          <Button.Icon type="only">
+            {renderTriggerIcon(args.intent)}
+          </Button.Icon>
+        </Button.Root>
       </AlertDialog.Trigger>
       <AlertDialog.Portal>
-        <AlertDialog.Overlay/>
-        <AlertDialog.Content>
-          {(args.exampleWithImage && args.imageSrc) && (
-            <AlertDialog.ImageContainer intent={args.intent}>
-              <AlertDialog.Image src={args.imageSrc && renderDefaultImageSrc(args.intent)} alt=""/>
-            </AlertDialog.ImageContainer>
-          )}
-          <AlertDialog.Title>{args.title}</AlertDialog.Title>
+        <AlertDialog.Overlay />
+        <AlertDialog.Content className="w-fit">
+          <AlertDialog.Title>{args.title} ?</AlertDialog.Title>
           <AlertDialog.Description>{args.description}</AlertDialog.Description>
           <AlertDialog.Actions>
             <AlertDialog.Cancel asChild>
-              <button className={ghostButton.gray.md}>
-                <span>{args.cancelText}</span>
-              </button>
+              <Button.Root
+                variant="outlined"
+                intent="gray"
+                size="sm"
+              >
+                <Button.Label>{args.cancelText}</Button.Label>
+              </Button.Root>
             </AlertDialog.Cancel>
             <AlertDialog.Action asChild>
-              <button className={solidButton[args.intent].md}>
-                <span>{args.actionText}</span>
-              </button>
+              <Button.Root
+                variant="solid"
+                intent={args.intent}
+                size="sm"
+              >
+                <Button.Label>{args.actionText}</Button.Label>
+              </Button.Root>
             </AlertDialog.Action>
           </AlertDialog.Actions>
         </AlertDialog.Content>
@@ -90,10 +71,185 @@ const AlertDialogUI = (args: AlertDialogProps) => {
     </AlertDialog.Root>
   )
 }
+const Example2 = (args: AlertDialogProps) => {
+  const renderTriggerIcon = (intent: "warning" | "danger") => {
+    switch (intent) {
+      case "warning":
+        return (
+          <ArchiveIcon />
+        );
+      case "danger":
+        return (
+          <TrashIcon />
+        );
+    }
+  }
 
-const meta: Meta<typeof AlertDialogUI> = {
+  return (
+    <AlertDialog.Root defaultOpen>
+      <AlertDialog.Trigger asChild>
+        <Button.Root variant="solid" intent={args.intent}>
+          <Button.Icon type="only">
+            {renderTriggerIcon(args.intent)}
+          </Button.Icon>
+        </Button.Root>
+      </AlertDialog.Trigger>
+      <AlertDialog.Portal>
+        <AlertDialog.Overlay />
+        <AlertDialog.Content className="w-fit text-center">
+          <AlertDialog.Title>{args.title} ?</AlertDialog.Title>
+          <AlertDialog.Description>{args.description}</AlertDialog.Description>
+          <AlertDialog.Actions className="justify-center">
+            <AlertDialog.Cancel asChild>
+              <Button.Root
+                variant="outlined"
+                intent="gray"
+                size="sm"
+              >
+                <Button.Label>{args.cancelText}</Button.Label>
+              </Button.Root>
+            </AlertDialog.Cancel>
+            <AlertDialog.Action asChild>
+              <Button.Root
+                variant="solid"
+                intent={args.intent}
+                size="sm"
+              >
+                <Button.Label>{args.actionText}</Button.Label>
+              </Button.Root>
+            </AlertDialog.Action>
+          </AlertDialog.Actions>
+        </AlertDialog.Content>
+      </AlertDialog.Portal>
+    </AlertDialog.Root>
+  )
+}
+const IOSExample = (args: AlertDialogProps) => {
+  const renderTriggerIcon = (intent: "warning" | "danger") => {
+    switch (intent) {
+      case "warning":
+        return (
+          <ArchiveIcon />
+        );
+      case "danger":
+        return (
+          <TrashIcon />
+        );
+    }
+  }
+
+  return (
+    <AlertDialog.Root defaultOpen>
+      <AlertDialog.Trigger asChild>
+        <Button.Root variant="solid" intent={args.intent}>
+          <Button.Icon type="only">
+            {renderTriggerIcon(args.intent)}
+          </Button.Icon>
+        </Button.Root>
+      </AlertDialog.Trigger>
+      <AlertDialog.Portal>
+        <AlertDialog.Overlay/>
+        <AlertDialog.Content className="overflow-hidden p-0 block max-w-[20rem] w-full">
+          <div className="p-[--feedback-padding] text-center">
+            <AlertDialog.Title>{args.title} ?</AlertDialog.Title>
+            <AlertDialog.Description>{args.description}</AlertDialog.Description>
+          </div>
+          <div>
+            <Separator orientation="horizontal" />
+            <AlertDialog.Actions className="mt-0 overflow-hidden gap-0 h-full">
+              <AlertDialog.Cancel asChild>
+                <Button.Root
+                  className="rounded-none w-1/2"
+                  variant="ghost"
+                  intent="gray"
+                  size="lg"
+                >
+                  <Button.Label>{args.cancelText}</Button.Label>
+                </Button.Root>
+              </AlertDialog.Cancel>
+              <Separator className="!h-10" />
+              <AlertDialog.Action asChild>
+                <Button.Root
+                  className="rounded-none w-1/2"
+                  variant="ghost"
+                  intent={args.intent}
+                  size="lg"
+                >
+                  <Button.Label>{args.actionText}</Button.Label>
+                </Button.Root>
+              </AlertDialog.Action>
+            </AlertDialog.Actions>
+          </div>
+        </AlertDialog.Content>
+      </AlertDialog.Portal>
+    </AlertDialog.Root>
+  )
+}
+const FigmaExample = (args: AlertDialogProps) => {
+  const renderTriggerIcon = (intent: "warning" | "danger") => {
+    switch (intent) {
+      case "warning":
+        return (
+          <ArchiveIcon />
+        );
+      case "danger":
+        return (
+          <TrashIcon />
+        );
+    }
+  }
+
+  return (
+    <AlertDialog.Root defaultOpen>
+      <AlertDialog.Trigger asChild>
+        <Button.Root variant="solid" intent={args.intent}>
+          <Button.Icon type="only">
+            {renderTriggerIcon(args.intent)}
+          </Button.Icon>
+        </Button.Root>
+      </AlertDialog.Trigger>
+      <AlertDialog.Portal>
+        <AlertDialog.Overlay/>
+        <AlertDialog.Content className="overflow-hidden p-0 flex max-w-fit w-full">
+          <div className="p-[--feedback-padding]">
+            <AlertDialog.Title>{args.title} ?</AlertDialog.Title>
+            <AlertDialog.Description>{args.description}</AlertDialog.Description>
+          </div>
+          <div className="w-fit flex">
+            <Separator />
+            <AlertDialog.Actions className="mt-0 overflow-hidden block h-full w-full">
+              <AlertDialog.Cancel asChild>
+                <Button.Root
+                  className="rounded-none h-1/2 w-full"
+                  variant="ghost"
+                  intent="gray"
+                  size="sm"
+                >
+                  <Button.Label>{args.cancelText}</Button.Label>
+                </Button.Root>
+              </AlertDialog.Cancel>
+              <Separator orientation="horizontal" />
+              <AlertDialog.Action asChild>
+                <Button.Root
+                  className="rounded-none h-1/2 w-full"
+                  variant="ghost"
+                  intent={args.intent}
+                  size="sm"
+                >
+                  <Button.Label>{args.actionText}</Button.Label>
+                </Button.Root>
+              </AlertDialog.Action>
+            </AlertDialog.Actions>
+          </div>
+        </AlertDialog.Content>
+      </AlertDialog.Portal>
+    </AlertDialog.Root>
+  )
+}
+
+const meta: Meta<typeof Example1> = {
   title: "Alert Dialog",
-  component: AlertDialogUI,
+  component: Example1,
   parameters: {
     layout: "centered",
     docs: {
@@ -107,11 +263,6 @@ const meta: Meta<typeof AlertDialogUI> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    variant: {
-      control: "radio",
-      options: ["default", "centred"],
-      description: "The variant of the alert dialog.",
-    },
     title: {
       control: "text",
       description: "The title of the alert dialog.",
@@ -128,24 +279,14 @@ const meta: Meta<typeof AlertDialogUI> = {
       control: "text",
       description: "The text of the action button.",
     },
-    imageSrc: {
-      name: "Image source or image url",
-      control: "text",
-      description: "The image source of the alert dialog. If no image source is provided, there will be no image.",
-    },
     intent: {
       control: "radio",
-      options: ["info", "warning", "danger"]
+      options: ["warning", "danger"]
     },
     triggerText: {
       control: "text",
       description: "The text of the trigger button. It must be a string."
     },
-    exampleWithImage: {
-      name: "Example with image",
-      control: "boolean",
-      description: "If true, the alert dialog will have an image."
-    }
   }
 }
 
@@ -156,66 +297,41 @@ type Story = StoryObj<typeof meta>;
 export const AlertDialog_: Story = {
   name: "AlertDialog",
   args: {
-    variant: "default",
-    title: "Title of the alert dialog.",
-    description: "Description of the alert dialog.",
-    cancelText: "Cancel button",
-    actionText: "Action button",
-    imageSrc: "https://cdn-icons-png.flaticon.com/512/3071/3071749.png",
+    title: "Delete Item",
+    description: "This photo will be deleted from your iCloud Photos.",
+    cancelText: "Cancel",
+    actionText: "Action",
     intent: "danger",
     triggerText: undefined,
-    exampleWithImage: false,
   }
 }
 
-
-type anotherDialogProps = {
-  variant: "default" | "centred",
-  intent: "info" | "warning" | "danger",
-
-}
-const anotherExample = (args: anotherDialogProps) => (
-  <AlertDialog.Root variant={args.variant}>
-    <AlertDialog.Trigger asChild>
-      <Button variant="soft" icon="only" label="sync" colorVariant={args.intent}>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-             className="w-6 h-6">
-          <path strokeLinecap="round" strokeLinejoin="round"
-                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/>
-        </svg>
-      </Button>
-    </AlertDialog.Trigger>
-    <AlertDialog.Portal>
-      <AlertDialog.Overlay/>
-      <AlertDialog.Content>
-        <AlertDialog.Title>
-          Syncing
-        </AlertDialog.Title>
-        <AlertDialog.Description>
-          Syncing your data with the server. This may take a while.
-        </AlertDialog.Description>
-        <AlertDialog.Actions>
-          <AlertDialog.Cancel asChild>
-            <button className={ghostButton.gray.md}>
-              <span>Cancel</span>
-            </button>
-          </AlertDialog.Cancel>
-          <AlertDialog.Action asChild>
-            <button className={solidButton[args.intent].md}>
-              <span>Sync</span>
-            </button>
-          </AlertDialog.Action>
-        </AlertDialog.Actions>
-      </AlertDialog.Content>
-    </AlertDialog.Portal>
-  </AlertDialog.Root>
-)
-
-export const Example: Story = {
-  name: "Another Example",
+export const Alert1: Story = {
+  name: "Basic Example",
   args: {
-    variant: "default",
-    intent: "info"
+    title: "Delete Item",
+    description: "This photo will be deleted from your iCloud Photos.",
+    intent: "danger",
+    cancelText: "Cancel",
+    actionText: "Delete",
   },
-  render: anotherExample,
+  render: Example1,
+}
+
+export const Alert2: Story = {
+  ...Alert1,
+  name: "Centred Example",
+  render: Example2,
+}
+
+export const IOSAlert: Story = {
+  ...Alert1,
+  name: "iOS Example",
+  render: IOSExample,
+}
+
+export const FigmaAlert: Story = {
+  ...Alert1,
+  name: "Figma Example",
+  render: FigmaExample,
 }
