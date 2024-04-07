@@ -5,3 +5,20 @@
 body {
     @apply bg-gray-50 dark:bg-gray-950;
 }
+
+@layer base {
+    :root {
+        --accordion-bg : theme(colors.gray.100);
+        --ui-border-color : theme(colors.gray.200);
+        --accordion-radius : theme(borderRadius.xl);
+    }
+    .border, .border-t, .border-b, .border-l, .border-r, .border-y, .border-x {
+        border-color: var(--ui-border-color);
+    }
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --accordion-bg : theme(colors.gray.900);
+            --ui-border-color : theme(colors.gray.800);
+        }
+    }
+}

@@ -1,17 +1,18 @@
 import Accordion from "./Accordion.tsx";
+import { type Accordion as AccordionVariant } from "@tailus/themer";
 import {Meta, StoryObj} from "@storybook/react";
 
 interface AccordionUIProps {
-  variant?: "default" | "outlined" | "elevated" | "ghost" | "soft" | "outlinedElevated",
+  variant: AccordionVariant,
   withIcon?: boolean,
 }
 
 const AccordionUI = (args: AccordionUIProps) => {
-  const contentClassNames = args.withIcon ? "pl-12" : "";
+  const contentClassNames = args.withIcon ? "pl-9" : "";
   return (
     <Accordion.Root
       variant={args.variant}
-      className="w-full min-w-[28rem] max-w-md"
+      className="w-full min-w-[20rem] max-w-[20rem]"
       type="single" defaultValue="item-1"
       collapsible
     >
@@ -19,7 +20,7 @@ const AccordionUI = (args: AccordionUIProps) => {
         <Accordion.Trigger>
           {args.withIcon && (
             <img
-              className="h-9 w-9"
+              className="size-6"
               src="https://cdn-icons-png.flaticon.com/512/1904/1904883.png" loading="lazy"
               alt="tailus accordion" height={512} width={512}
             />
@@ -35,7 +36,7 @@ const AccordionUI = (args: AccordionUIProps) => {
         <Accordion.Trigger>
           {args.withIcon && (
             <img
-              className="h-9 w-9"
+              className="size-6"
               src="https://cdn-icons-png.flaticon.com/512/1904/1904901.png"
               loading="lazy"
               alt="tailus accordion" height={512} width={512}
@@ -52,7 +53,7 @@ const AccordionUI = (args: AccordionUIProps) => {
         <Accordion.Trigger>
           {args.withIcon && (
             <img
-              className="h-9 w-9"
+              className="size-6"
               src="https://cdn-icons-png.flaticon.com/512/1904/1904867.png"
               loading="lazy"
               alt="tailus accordion" height={512} width={512}
@@ -88,7 +89,7 @@ const meta: Meta<typeof AccordionUI> = {
       description: 'The variant of the accordion component.',
       defaultValue: 'default',
       control: 'select',
-      options: ['default', 'outlined', 'elevated', 'ghost', 'soft', 'outlinedElevated'],
+      options: ['default', 'outlined', 'elevated', 'ghost', 'soft', 'mixed'],
     },
     withIcon: {
       name: 'Example with icon',
@@ -106,7 +107,7 @@ type Story = StoryObj<typeof meta>;
 export const Example: Story = {
   name: 'Accordion',
   args: {
-    variant: 'default',
+    variant:"default",
     withIcon: false,
   },
 }

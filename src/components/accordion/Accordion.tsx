@@ -1,48 +1,26 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import {cn} from "../../lib/utils.ts";
 import React from "react";
 import {ChevronDownIcon} from "@radix-ui/react-icons";
-import {
-  accordion as defaultTheme,
-  outlinedVariant as outlinedTheme,
-  elevatedVariant as elevatedTheme,
-  ghostVariant as ghostTheme,
-  softVariant as softTheme,
-  outlinedElevatedVariant as outlinedElevatedTheme,
-} from "@tailus/themer-accordion"
-import {cva} from "class-variance-authority";
+import { accordion, type Accordion as AccordionVariant } from "@tailus/themer";
 
-type Variant = "default" | "outlined" | "elevated" | "ghost" | "soft" | "outlinedElevated";
-type ElementType = keyof typeof defaultTheme;
-
-const variantTheme = (element: ElementType) => cva('', {
-  variants: {
-    variant: {
-      default: defaultTheme[element],
-      outlined: outlinedTheme[element],
-      elevated: elevatedTheme[element],
-      ghost: ghostTheme[element],
-      soft: softTheme[element],
-      outlinedElevated: outlinedElevatedTheme[element],
-    }
-  }
-})
-
-const defaultContextValue: Variant = "default";
-const Context = React.createContext<Variant>(defaultContextValue);
+const defaultContextValue: AccordionVariant = "default";
+const Context = React.createContext<AccordionVariant>(defaultContextValue);
 
 interface AccordionRootProps {
-  variant?: Variant;
+  variant: AccordionVariant;
 }
+
+console.log(typeof accordion)
 
 const AccordionRoot = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & AccordionRootProps
->(({className, variant, ...props}, forwardedRef) => {
+  >(({ className, variant, ...props }, forwardedRef) => {
+  const { root } = accordion({variant});
   return (
     <Context.Provider value={variant || defaultContextValue}>
       <AccordionPrimitive.Root
-        className={cn(variantTheme("root")({variant: variant}), className)}
+        className={root({className})}
         {...props}
         ref={forwardedRef}
       />
@@ -55,9 +33,10 @@ const AccordionItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
 >(({className, ...props}, forwardedRef) => {
   const variant = React.useContext(Context);
+  const { item } = accordion({variant}) 
   return (
     <AccordionPrimitive.Item
-      className={cn(variantTheme("item")({variant: variant}), className)}
+      className={item({className})}
       {...props}
       ref={forwardedRef}
     />
@@ -68,38 +47,20 @@ const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
 >(({className, children, ...props}, forwardedRef) => {
-  const generateTriggerClassNames = (theme: Variant) => {
-    const themes = {
-      default: defaultTheme,
-      outlined: outlinedTheme,
-      elevated: elevatedTheme,
-      ghost: ghostTheme,
-      soft: softTheme,
-      outlinedElevated: outlinedElevatedTheme,
-    }
-
-    return {
-      parent: themes[theme].trigger.parent,
-      icon: themes[theme].trigger.icon,
-      content: themes[theme].trigger.content,
-    }
-  }
-
   const variant = React.useContext(Context);
-  const classNamesIcon = generateTriggerClassNames(variant).icon;
-  const classNamesParent = generateTriggerClassNames(variant).parent;
-  const classNamesContent = generateTriggerClassNames(variant).content;
+  const {header, trigger, triggerIcon, triggerContent} = accordion({variant})
+
   return (
-    <AccordionPrimitive.Header className="flex">
+    <AccordionPrimitive.Header className={header({className})}>
       <AccordionPrimitive.Trigger
-        className={cn(classNamesParent, className)}
+        className={trigger({className})}
         {...props}
         ref={forwardedRef}
       >
-        <div className={classNamesContent}>
+        <div className={triggerContent({className})}>
           {children}
         </div>
-        <ChevronDownIcon className={cn(classNamesIcon)} aria-hidden={true}/>
+        <ChevronDownIcon className={triggerIcon({className})} aria-hidden={true}/>
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   )
@@ -110,13 +71,15 @@ const AccordionContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(({className, children, ...props}, forwardedRef) => {
   const variant = React.useContext(Context);
+  const { content } = accordion({variant})
+
   return (
     <AccordionPrimitive.Content
-      className={cn(variantTheme("content")({variant: variant}), className)}
+      className={content({className})}
       {...props}
       ref={forwardedRef}
     >
-      <div className="pb-4">
+      <div>
         {children}
       </div>
     </AccordionPrimitive.Content>
