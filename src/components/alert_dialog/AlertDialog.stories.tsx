@@ -2,7 +2,7 @@ import AlertDialog from "./AlertDialog.tsx";
 import {Meta, StoryObj} from "@storybook/react";
 import Button from "../button/Button.tsx";
 import { ArchiveIcon, TrashIcon } from "@radix-ui/react-icons";
-import { twMerge } from "tailwind-merge";
+import Separator from "../separator/Separator.tsx";
 
 interface AlertDialogProps {
   title: string,
@@ -13,10 +13,6 @@ interface AlertDialogProps {
   triggerText: string,
   exampleWithImage: boolean,
 }
-
-const Separator = ({orientation="vertical", className}:{orientation?:"vertical" | "horizontal", className?:string}) => (
-  <div aria-hidden data-orientation={orientation} className={twMerge("data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:h-full data-[orientation=vertical]:border-l data-[orientation=horizontal]:w-full data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:border-b data-[orientation=horizontal]:bg-transparent bg-[--feedback-border-color] data-[orientation=vertical]:border-white dark:data-[orientation=horizontal]:bg-gray-950 dark:data-[orientation=horizontal]:border-[--ui-dark-border-color] dark:data-[orientation=vertical]:bg-[--ui-dark-border-color] dark:data-[orientation=vertical]:border-gray-950", className)} />
-)
 
 const Example1 = (args: AlertDialogProps) => {
   const renderTriggerIcon = (intent: "warning" | "danger") => {
@@ -167,7 +163,7 @@ const IOSExample = (args: AlertDialogProps) => {
                   <Button.Label>{args.cancelText}</Button.Label>
                 </Button.Root>
               </AlertDialog.Cancel>
-              <Separator className="!h-10" />
+              <Separator className="!h-10"/>
               <AlertDialog.Action asChild>
                 <Button.Root
                   className="rounded-none w-1/2"

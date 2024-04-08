@@ -29,7 +29,8 @@ body {
             --accordion-bg : theme(colors.gray.900);
             --ui-border-color : theme(colors.gray.800);
             --feedback-bg : theme("colors.gray.900/var(--feedback-bg-opacity)");
-            --feedback-bg-opacity : theme(opacity[100]);
+            --feedback-bg-opacity : theme(opacity[95]);
+            color : theme("colors.white");
         }
     }
 }
