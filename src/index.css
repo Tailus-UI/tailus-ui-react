@@ -9,25 +9,29 @@ body {
 @layer base {
     :root {
         --ui-border-color : theme(colors.gray.200);
+        --ui-soft-bg : theme(colors.gray.100);
+        --ui-bd-blur : theme(blur[2xl]);
         --accordion-bg : theme(colors.gray.100);
         --accordion-radius : theme(borderRadius.xl);
         --feedback-radius : theme(borderRadius.xl);
         --feedback-bg : theme("colors.white/var(--feedback-bg-opacity)");
         --feedback-padding : theme(spacing[4]);
         --feedback-bg-opacity : theme(opacity[50]);
-        --feedback-bd-blur : theme(blur[2xl]);
-        --feedback-border-color : var(--ui-border-color)
+        --feedback-border-color : var(--ui-border-color);
+        --annonce-radius : 2rem;
+        --btn-radius : 2rem;
     }
     .border, .border-t, .border-b, .border-l, .border-r, .border-y, .border-x {
         border-color: var(--ui-border-color);
     }
     .feedback-bg{
-        @apply bg-[var(--feedback-bg)] backdrop-blur-[var(--feedback-bd-blur)];
+        @apply bg-[var(--feedback-bg)] backdrop-blur-[var(--ui-bd-blur)];
     }
     @media (prefers-color-scheme: dark) {
         :root {
             --accordion-bg : theme(colors.gray.900);
             --ui-border-color : theme(colors.gray.800);
+            --ui-soft-bg : theme(colors.gray.900);
             --feedback-bg : theme("colors.gray.900/var(--feedback-bg-opacity)");
             --feedback-bg-opacity : theme(opacity[95]);
             color : theme("colors.white");

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { AnnonceConcern, AnnonceMessage, AnnonceRoot } from './Annonce.tsx';
+import type { AnnonceConcernVariants, AnnonceRootVariants } from '@tailus/themer';
 
 const AnnonceUI = ({
   variant,
@@ -7,15 +8,19 @@ const AnnonceUI = ({
   concern,
   message,
   href,
+  size,
+  concernSize
 } : {
-  variant: 'outlined' | 'soft',
-  intent: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'accent' | 'gray' | 'neutral',
+  variant: AnnonceRootVariants['variant'],
+  intent: AnnonceConcernVariants['intent'],
+  size: AnnonceRootVariants['size'],
+  concernSize: AnnonceConcernVariants['size'],
   concern: string,
   message: string,
   href: string
 }) => (
-  <AnnonceRoot href={href} variant={variant}>
-    <AnnonceConcern intent={intent}>{concern}</AnnonceConcern>
+  <AnnonceRoot href={href} variant={variant} size={size}>
+    <AnnonceConcern intent={intent} size={concernSize}>{concern}</AnnonceConcern>
     <AnnonceMessage>{message}</AnnonceMessage>
   </AnnonceRoot>
 );
@@ -35,11 +40,19 @@ const meta: Meta<typeof AnnonceUI> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['soft', 'outlined']
+      options: ['plain', 'soft', 'outlined', 'mixed']
     },
     intent: {
       control: 'select',
-      options: ["primary", "secondary", "accent", "danger", "success", "warning", "info", "gray",]
+      options: ["primary", "danger", "warning", "gray", "gradient", "neutral"]
+    },
+    size: {
+      control: 'select',
+      options: ["xs", "sm", "md", "lg"]
+    },
+    concernSize: {
+      control: 'select',
+      options: ["xs", "sm", "md", "lg"]
     },
     concern: {
       control: 'text',
@@ -61,6 +74,8 @@ export const Annonce: Story = {
   args: {
     variant: 'outlined',
     intent: "primary",
+    size: "md",
+    concernSize : "md",
     concern: "New",
     message: "The all new version of Tailus is out !",
     href: ""

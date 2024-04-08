@@ -1,19 +1,7 @@
-import { annonce, softAnnonce } from "@tailus/themer-annonce";
-import { cva, VariantProps } from 'class-variance-authority';
-import { cn } from '../../lib/utils';
 import React from "react";
+import { annonceRoot, annonceConcern, type AnnonceRootVariants, type AnnonceConcernVariants } from "@tailus/themer";
 
-export type AnnonceRootVariantProps = VariantProps<typeof annonceRootVariant>;
-const annonceRootVariant = cva('', {
-  variants: {
-    variant: {
-      outlined: annonce.root,
-      soft: softAnnonce.root
-    },
-  }
-});
-
-export interface AnnonceRootProps extends AnnonceRootVariantProps {
+export interface AnnonceRootProps extends AnnonceRootVariants {
   className?: string;
   href?: string;
   children: React.ReactNode;
@@ -23,6 +11,7 @@ export const AnnonceRoot: React.FC<AnnonceRootProps> = ({
   className,
   href,
   variant = "outlined",
+  size = "md",
   children,
   ...props
 }) => {
@@ -31,7 +20,7 @@ export const AnnonceRoot: React.FC<AnnonceRootProps> = ({
   return (
     <Component 
       href={href} 
-      className={cn(annonceRootVariant({ variant: variant }), className)} 
+      className={annonceRoot({variant, size, className})} 
       {...props}
     >
       {children}
@@ -39,20 +28,20 @@ export const AnnonceRoot: React.FC<AnnonceRootProps> = ({
   );
 };
 
-export interface AnnonceConcernProps {
+export interface AnnonceConcernProps extends React.HTMLAttributes<HTMLSpanElement>, AnnonceConcernVariants{
   className?: string,
-  intent?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'accent' | 'gray' | 'neutral',
   children: React.ReactNode,
 }
 
 export const AnnonceConcern: React.FC<AnnonceConcernProps> = (({
   className,
   intent = 'primary',
+  size = 'md',
   children,
   ...props 
 }) => (
   <span 
-    className={cn(annonce.concern[intent], className)} 
+    className={annonceConcern({intent, size, className})} 
     {...props}
   >
     {children}
@@ -69,10 +58,10 @@ export const AnnonceMessage: React.FC<AnnonceMessageProps> = (({
   children,
   ...props
 }) => (
-  <span 
-    className={cn(annonce.message, className)} 
+  <p 
+    className={className} 
     {...props}
   >
     {children}
-  </span>
+  </p>
 ));
