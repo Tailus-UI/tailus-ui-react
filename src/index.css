@@ -20,6 +20,7 @@ body {
         --feedback-border-color : var(--ui-border-color);
         --annonce-radius : 2rem;
         --btn-radius : 2rem;
+        --avatar-radius : 9999px;
     }
     .border, .border-t, .border-b, .border-l, .border-r, .border-y, .border-x {
         border-color: var(--ui-border-color);

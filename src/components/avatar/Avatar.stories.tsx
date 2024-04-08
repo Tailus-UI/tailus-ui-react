@@ -1,27 +1,32 @@
 import Avatar from "./Avatar.tsx";
+import type { AvatarFallbackProps, AvatarRootProps } from "@tailus/themer";
 import type { Meta, StoryObj } from "@storybook/react";
-import type { Intent, Size, Status, StatusPosition } from "./Avatar.tsx";
 
 type AvatarProps = {
-  isSoft: boolean,
-  intent: Intent,
-  size: Size,
-  status: Status,
-  statusPosition: StatusPosition,
-  initials: string,
-  alt: string,
-  src: string,
+  fallbackVariant?: AvatarFallbackProps["variant"],
+  intent?: AvatarFallbackProps["intent"],
+  size?: AvatarRootProps["size"],
+  status?: AvatarRootProps["status"],
+  topStatus?: AvatarRootProps["topStatus"],
+  bottomStatus?: AvatarRootProps["bottomStatus"],
+  initials?: string,
+  src?: string,
+  image? : boolean
 }
 
 const AvatarUI = (args: AvatarProps) => {
   return (
     <Avatar.Root
-      isSoft={args.isSoft} intent={args.intent}
-      size={args.size} status={args.status}
-      statusPosition={args.statusPosition}
+      size={args.size}
+      status={args.status}
+      topStatus={args.topStatus}
+      bottomStatus={args.bottomStatus}
     >
-      {args.src && <Avatar.Image alt={args.alt} src={args.src}/>}
-      <Avatar.Fallback>
+      {args.image && <Avatar.Image alt="user avatar" src="https://pbs.twimg.com/profile_images/1767582956082561024/TLJvxR_V_400x400.jpg" />}
+      <Avatar.Fallback
+        variant={args.fallbackVariant}
+        intent={args.intent}
+      >
         {args.initials}
       </Avatar.Fallback>
     </Avatar.Root>
@@ -41,29 +46,35 @@ const meta: Meta<typeof AvatarUI> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    isSoft: {
-      control: 'boolean',
-    },
     intent: {
       control: 'select',
       options: ["primary", "secondary", "accent", "danger", "success", "warning", "info", "gray",]
     },
+    fallbackVariant: {
+      control: 'select',
+      options: ["soft", "solid"]
+    },
+    image: {
+      control: 'boolean',
+      defaultValue: false
+    },
+    topStatus: {
+      control: 'boolean',
+      defaultValue: false
+    },
+    bottomStatus: {
+      control: 'boolean',
+      defaultValue: false
+    },
     size: {
       control: 'select',
-      options: ["lg", "md", "sm", "xs"]
+      options: ["3xl", "2xl", "xl", "lg", "md", "sm", "xs", "xxs"]
     },
     status: {
       control: 'select',
       options: ["online", "offline", "away", "busy"]
     },
-    statusPosition: {
-      control: {type: 'select'},
-      options: ["top", "bottom"]
-    },
     src: {
-      control: 'text',
-    },
-    alt: {
       control: 'text',
     },
     initials: {
@@ -78,13 +89,11 @@ type Story = StoryObj<typeof meta>;
 export const Avatar_: Story = {
   name: "Avatar",
   args: {
-    isSoft: false,
     intent: "primary",
     size: "md",
     status: "online",
-    statusPosition: "top",
     src: "https://images.unsplash.com/photo-1526510747491-58f928ec870f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2787&q=80",
-    alt: "Meschac irung",
     initials: "MI",
+    image : false
   },
 }
