@@ -1,20 +1,14 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import React from "react";
 import {ChevronDownIcon} from "@radix-ui/react-icons";
-import { accordion, type Accordion as AccordionVariant } from "@tailus/themer";
+import { accordion, type AccordionProps } from "@tailus/themer";
 
-const defaultContextValue: AccordionVariant = "default";
-const Context = React.createContext<AccordionVariant>(defaultContextValue);
-
-interface AccordionRootProps {
-  variant: AccordionVariant;
-}
-
-console.log(typeof accordion)
+const defaultContextValue: AccordionProps["variant"] = "default";
+const Context = React.createContext<AccordionProps["variant"]>(defaultContextValue);
 
 const AccordionRoot = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & AccordionRootProps
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & AccordionProps
   >(({ className, variant, ...props }, forwardedRef) => {
   const { root } = accordion({variant});
   return (

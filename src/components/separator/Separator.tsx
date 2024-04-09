@@ -1,14 +1,12 @@
-import { separator, type SeparatorType } from "@tailus/themer";
+import { separator, type SeparatorProps } from "@tailus/themer";
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
 import React from "react";
 
-interface SeparatorProps extends React.ComponentProps<typeof SeparatorPrimitive.Root> {
-    variant?: SeparatorType;
-}
-
+interface SeparatorVariantProps extends React.ComponentProps<typeof SeparatorPrimitive.Root>, SeparatorProps {}
+  
 const SeparatorRoot = React.forwardRef<
   React.ElementRef<typeof SeparatorPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root> & SeparatorProps
+  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root> & SeparatorVariantProps
 >(({variant, className, ...props}, ref) => {
   return (
     <SeparatorPrimitive.Root

@@ -2,10 +2,10 @@ import * as Switch from "@radix-ui/react-switch";
 import React, { useContext } from "react";
 import {switchTheme, fancySwitch, type SwitchProps} from "@tailus/themer";
 
-type SwitchVariantsProps = SwitchProps & {
+export interface SwitchVariantsProps extends SwitchProps {
   fancy?: boolean;
 }
-const SwitchContext = React.createContext<SwitchVariantsProps>({intent:"primary"})
+const SwitchContext = React.createContext<SwitchVariantsProps>({ intent: "primary" })
 // Creating a container for the Switch component
 // This container is a div that takes all props of a standard div
 // and passes them to the actual div. Additionally, it merges passed class names

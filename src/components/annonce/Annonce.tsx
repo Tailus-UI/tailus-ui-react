@@ -1,13 +1,13 @@
 import React from "react";
-import { annonceRoot, annonceConcern, type AnnonceRootVariants, type AnnonceConcernVariants } from "@tailus/themer";
+import { annonceRoot, annonceConcern, type AnnonceRootProps, type AnnonceConcernProps } from "@tailus/themer";
 
-export interface AnnonceRootProps extends AnnonceRootVariants {
+export interface AnnonceRootVariantsProps extends AnnonceRootProps {
   className?: string;
   href?: string;
   children: React.ReactNode;
 }
 
-export const AnnonceRoot: React.FC<AnnonceRootProps> = ({
+export const AnnonceRoot: React.FC<AnnonceRootVariantsProps> = ({
   className,
   href,
   variant = "outlined",
@@ -28,12 +28,12 @@ export const AnnonceRoot: React.FC<AnnonceRootProps> = ({
   );
 };
 
-export interface AnnonceConcernProps extends React.HTMLAttributes<HTMLSpanElement>, AnnonceConcernVariants{
+export interface AnnonceConcernVariantsProps extends React.HTMLAttributes<HTMLSpanElement>, AnnonceConcernProps{
   className?: string,
   children: React.ReactNode,
 }
 
-export const AnnonceConcern: React.FC<AnnonceConcernProps> = (({
+export const AnnonceConcern: React.FC<AnnonceConcernVariantsProps> = (({
   className,
   intent = 'primary',
   size = 'md',

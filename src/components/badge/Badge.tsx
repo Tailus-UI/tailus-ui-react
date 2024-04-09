@@ -1,8 +1,8 @@
-import { badge, type BadgeType } from "@tailus/themer"
+import { badge, type BadgeProps } from "@tailus/themer"
 
-export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement>, BadgeType {}
+export interface BadgeVariantsProps extends React.HTMLAttributes<HTMLDivElement>, BadgeProps {}
 
-export const Badge: React.FC<BadgeProps> = ({
+export const Badge: React.FC<BadgeVariantsProps> = ({
     className,
     children,
     intent, 

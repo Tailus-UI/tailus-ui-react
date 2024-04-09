@@ -1,17 +1,17 @@
 import React from "react";
 import { cloneElement } from "../../lib/utils";
-import { button, buttonIcon as icon, type ButtonType, type ButtonIconType } from "@tailus/themer"
+import { button, buttonIcon as icon, type ButtonProps as ButtonVariantsProps, type ButtonIconProps } from "@tailus/themer"
 
 export type Root = typeof Root;
 export type Icon = typeof Icon;
 export type Label = typeof Label;
 
-export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>, ButtonType {
+export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>, ButtonVariantsProps {
   disabled?: boolean;
   href?: string;
 }
 
-export interface IconProps extends React.HTMLAttributes<HTMLElement>, ButtonIconType{}
+export interface IconProps extends React.HTMLAttributes<HTMLElement>, ButtonIconProps{}
 
 export const Icon = React.forwardRef<HTMLElement, IconProps>(({
   className,

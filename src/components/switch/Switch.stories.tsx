@@ -1,8 +1,7 @@
 import {SwitchContainer, SwitchLabel, SwitchRoot, SwitchThumb} from "./Switch.tsx";
-import {Meta, StoryObj} from "@storybook/react";
-interface SwitchProps {
-  fancy?: boolean;
-    intent?: 'primary' | 'gray' | 'neutral';
+import { Meta, StoryObj } from "@storybook/react";
+import { type SwitchVariantsProps } from "./Switch.tsx";
+interface SwitchProps extends SwitchVariantsProps {
     disabled?: boolean;
 }
 const SwitchUI = (args:SwitchProps) => (
