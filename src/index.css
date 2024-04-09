@@ -11,11 +11,13 @@ body {
         --ui-border-color : theme(colors.gray.200);
         --ui-soft-bg : theme(colors.gray.100);
         --ui-bd-blur : theme(blur[2xl]);
+        --ui-bg:theme(colors.white);
+        --card-padding : theme(spacing[4]);
         --accordion-bg : theme(colors.gray.100);
         --accordion-radius : theme(borderRadius.xl);
         --feedback-radius : theme(borderRadius.xl);
         --feedback-bg : theme("colors.white/var(--feedback-bg-opacity)");
-        --feedback-padding : theme(spacing[4]);
+        --feedback-padding : var(--card-padding);
         --feedback-bg-opacity : theme(opacity[50]);
         --feedback-border-color : var(--ui-border-color);
         --annonce-radius : 2rem;
@@ -35,6 +37,8 @@ body {
             --ui-soft-bg : theme(colors.gray.900);
             --feedback-bg : theme("colors.gray.900/var(--feedback-bg-opacity)");
             --feedback-bg-opacity : theme(opacity[95]);
+            --ui-bg:theme(colors.gray.900);
+
             color : theme("colors.white");
         }
     }

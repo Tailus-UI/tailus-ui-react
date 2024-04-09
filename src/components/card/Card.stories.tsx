@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Card } from "./Card";
 
-
 const meta: Meta<typeof Card> = {
   title: 'Card',
   component: Card,
@@ -17,11 +16,7 @@ const meta: Meta<typeof Card> = {
   argTypes: {
     variant: { 
       control: 'select', 
-      options: ['outlined', 'elevated', 'soft', 'mixed', 'elevatedGradient', 'softGradient'] 
-    },
-    padding: { 
-      control: 'select', 
-      options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] 
+      options: ['outlined', 'elevated', 'soft', 'mixed'] 
     },
     children: { control: 'text' },
     className: { control: 'text' }
@@ -48,7 +43,6 @@ const example = (
 export const Outlined: Story = {
   args: {
     variant: 'outlined',
-    padding: 5,
     children: example,
     className: "max-w-xs"
   },
@@ -57,7 +51,6 @@ export const Outlined: Story = {
 export const Elevated: Story = {
   args: {
     variant: 'elevated',
-    padding: 5,
     children: example,
     className: "max-w-xs"
   },
@@ -66,7 +59,6 @@ export const Elevated: Story = {
 export const Soft: Story = {
   args: {
     variant: 'soft',
-    padding: 5,
     children: example,
     className: "max-w-xs"
   },
@@ -75,7 +67,6 @@ export const Soft: Story = {
 export const Mixed: Story = {
   args: {
     variant: 'mixed',
-    padding: 5,
     children: example,
     className: "max-w-xs"
   },
@@ -83,8 +74,8 @@ export const Mixed: Story = {
 
 export const SoftGradient: Story = {
   args: {
-    variant: 'softGradient',
-    padding: 5,
+    variant: 'soft',
+    gradient : true,
     children: example,
     className: "max-w-xs",
   },
@@ -92,8 +83,8 @@ export const SoftGradient: Story = {
 
 export const ElevatedGradient: Story = {
   args: {
-    variant: 'elevatedGradient',
-    padding: 5,
+    variant: 'elevated',
+    gradient : true,
     children: example,
     className: "max-w-xs",
   },
