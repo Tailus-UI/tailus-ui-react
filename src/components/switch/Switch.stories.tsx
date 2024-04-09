@@ -1,10 +1,14 @@
 import {SwitchContainer, SwitchLabel, SwitchRoot, SwitchThumb} from "./Switch.tsx";
 import {Meta, StoryObj} from "@storybook/react";
-
-const SwitchUI = () => (
+interface SwitchProps {
+  fancy?: boolean;
+    intent?: 'primary' | 'gray' | 'neutral';
+    disabled?: boolean;
+}
+const SwitchUI = (args:SwitchProps) => (
   <form>
       <SwitchContainer>
-          <SwitchRoot id="airplane-mode">
+          <SwitchRoot id="airplane-mode" fancy={args.fancy} intent={args.intent} disabled={args.disabled}>
               <SwitchThumb />
           </SwitchRoot>
           <SwitchLabel htmlFor="airplane-mode">
@@ -28,6 +32,21 @@ const meta: Meta<typeof SwitchUI> = {
         },
     },
     tags: ['autodocs'],
+    argTypes: {
+        intent: {
+            control: 'select',
+            description: 'The intent of the switch',
+            options : ["primary", "gray", "neutral"],
+        },
+        fancy: {
+            control: 'boolean',
+            description: 'Fancy stye of the switch',
+        },
+        disabled: {
+            control: 'boolean',
+            description: 'Disabled state of the switch',
+        }
+    }
 };
 
 export default meta;
