@@ -2,13 +2,14 @@ import RadioGroup from "./RadioGroup";
 import {Meta, StoryObj} from "@storybook/react";
 
 interface RadioGroupProps {
-  withShadow?: boolean;
+  fancy?: boolean;
+  intent? : 'primary' | 'gray' | 'neutral';
 }
 
-const RadioGroupUI = (ars: RadioGroupProps) => (
+const RadioGroupUI = (args: RadioGroupProps) => (
   <form>
-    <RadioGroup.Root className="flex flex-col gap-2.5" defaultValue="problem" aria-label="View density" withShadow={ars.withShadow}>
-      <div className="flex items-center">
+    <RadioGroup.Root className="space-y-3" defaultValue="problem" aria-label="View density" intent={args.intent} fancy={args.fancy}>
+      <div className="flex gap-3 items-center">
         <RadioGroup.Item value="understanding" id="rr1">
           <RadioGroup.Indicator/>
         </RadioGroup.Item>
@@ -16,7 +17,7 @@ const RadioGroupUI = (ars: RadioGroupProps) => (
           Easy to understand
         </RadioGroup.Label>
       </div>
-      <div className="flex items-center">
+      <div className="flex gap-3 items-center">
         <RadioGroup.Item value="problem" id="rr2">
           <RadioGroup.Indicator/>
         </RadioGroup.Item>
@@ -24,7 +25,7 @@ const RadioGroupUI = (ars: RadioGroupProps) => (
           Solved my problem
         </RadioGroup.Label>
       </div>
-      <div className="flex items-center">
+      <div className="flex gap-3 items-center">
         <RadioGroup.Item value="other" id="rr3">
           <RadioGroup.Indicator/>
         </RadioGroup.Item>
@@ -51,12 +52,23 @@ const meta: Meta<typeof RadioGroupUI> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    withShadow: {
-      name: 'withShadow',
+    fancy: {
+      name: 'fnacy',
       description: 'Whether to use the shadow variant',
-      type: {name: 'boolean', required: false},
+      type: {
+        name: 'boolean', required: false
+      },
       control: 'boolean'
     },
+    intent: {
+      name: 'intent',
+      description: 'The intent of the radio group',
+      type: {
+        name: 'string', required: false
+      },
+      control: 'select',
+      options: ['primary', 'gray', 'neutral'],
+    }
   }
 };
 
@@ -66,6 +78,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Toggle: Story = {
   args: {
-    withShadow: false,
+    fancy: false,
+    intent: 'primary',
   },
 };

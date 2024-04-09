@@ -1,62 +1,65 @@
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
-import {radioGroup as defaultTheme, shadowVariant as shadowTheme} from "@tailus/themer-radio-group"
 import React from "react";
-import {cn} from "../../lib/utils.ts";
+import { useContext } from "react";
+import { radio, fancyRadio, type RadioProps } from "@tailus/themer";
 
-const defaultVariant = false;
-const Context = React.createContext<boolean>(defaultVariant);
+export interface RadioRootProps extends RadioProps {
+  className?: string;
+};
 
-interface RadioGroupProps {
-  withShadow?: boolean;
-}
+const RadioGroupContext = React.createContext<RadioRootProps>({fancy: false, intent: "primary"});
 
 const RadioGroupRoot = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> & RadioGroupProps
->(({withShadow, ...props}, forwardedRef) => {
-  withShadow = withShadow || React.useContext(Context);
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> & RadioRootProps
+  >(({ className, intent, fancy, ...props }, forwardedRef) => {
+  
+    return (
+      <RadioGroupContext.Provider value={{fancy, intent}}>
+        <RadioGroupPrimitive.Root
+          {...props}
+          ref={forwardedRef}
+          className={className}
+        />
+      </RadioGroupContext.Provider>
+    )
+  });
 
-  return (
-    <Context.Provider value={withShadow}>
-      <RadioGroupPrimitive.Root
-        {...props}
-        ref={forwardedRef}
-      />
-    </Context.Provider>
-  )
-});
+export interface RadioItemProps {
+  fancy?: boolean;
+  intent?: RadioProps['intent'];
+  className?: string;
+};
 
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
->((props, forwardedRef) => {
-  return (
-    <Context.Consumer>
-      {withShadow => (
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> & RadioItemProps
+  >((props, forwardedRef) => {
+    const {intent, fancy} = useContext(RadioGroupContext);
+    const {item} = fancy ? fancyRadio({intent}) : radio({intent});
+    return (
         <RadioGroupPrimitive.Item
           {...props}
           ref={forwardedRef}
-          className={cn(withShadow ? shadowTheme.item : defaultTheme.item, props.className)}
+          className={item({className: props.className})}
         />
-      )}
-    </Context.Consumer>
-  )
+    )
 });
 
 const RadioGroupIndicator = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Indicator>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Indicator>
->((props, forwardedRef) => {
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Indicator> & RadioProps & {
+    className?: string;
+  }
+  >((props, forwardedRef) => {
+    const {intent} = useContext(RadioGroupContext);
+  const {indicator} = radio({intent});
   return (
-    <Context.Consumer>
-      {withShadow => (
-        <RadioGroupPrimitive.Indicator
-          {...props}
-          ref={forwardedRef}
-          className={cn(withShadow ? shadowTheme.indicator : defaultTheme.indicator, props.className)}
-        />
-      )}
-    </Context.Consumer>
+    <RadioGroupPrimitive.Indicator
+      {...props}
+      ref={forwardedRef}
+      className={indicator({intent:props.intent, className: props.className})}
+    />
   )
 });
 
@@ -65,15 +68,11 @@ const RadioGroupLabel = React.forwardRef<
   React.ComponentProps<"label">
 >((props, forwardedRef) => {
   return (
-    <Context.Consumer>
-      {withShadow => (
         <label
           {...props}
           ref={forwardedRef}
-          className={cn(withShadow ? shadowTheme.label : defaultTheme.label, props.className)}
+          className=""
         />
-      )}
-    </Context.Consumer>
   )
 });
 
