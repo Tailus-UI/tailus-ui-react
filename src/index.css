@@ -12,6 +12,7 @@ body {
         --ui-soft-bg : theme(colors.gray.100);
         --ui-bd-blur : theme(blur[2xl]);
         --ui-bg:theme(colors.white);
+        --form-border-color : theme(colors.gray.300);
         --card-padding : theme(spacing[4]);
         --accordion-bg : theme(colors.gray.100);
         --accordion-radius : theme(borderRadius.xl);
@@ -34,6 +35,7 @@ body {
         :root {
             --accordion-bg : theme(colors.gray.900);
             --ui-border-color : theme(colors.gray.800);
+        --form-border-color : theme(colors.gray.800);
             --ui-soft-bg : theme(colors.gray.900);
             --feedback-bg : theme("colors.gray.900/var(--feedback-bg-opacity)");
             --feedback-bg-opacity : theme(opacity[95]);
