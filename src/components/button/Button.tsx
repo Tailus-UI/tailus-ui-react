@@ -71,7 +71,7 @@ Label.displayName = "Label";
 
 Root.defaultProps = {
   variant: "solid",
-  intent: "neutral",
+  intent: "primary",
   size: "md",
 }
 
