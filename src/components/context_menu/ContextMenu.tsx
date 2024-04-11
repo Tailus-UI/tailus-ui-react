@@ -1,22 +1,16 @@
 import * as ContextMenuPrimitive from "@radix-ui/react-context-menu";
-import {contextMenu as defaultTheme, softContextMenu as softTheme} from "@tailus/themer-context-menu"
 import React from "react";
-import {cn} from "../../lib/utils.ts";
+import {
+  menu,
+  menuSeparator as separator,
+  defaultMenuProps,
+  type MenuProps,
+  type MenuSeparatorProps as SeparatorProps,
+} from "@tailus/themer"
 
-type MenuContextValue = {
-  variant: "default" | "soft";
-  intent: "primary" | "warning" | "danger" | "gray";
-}
-
-const defaultMenuContextValue: MenuContextValue = {
-  variant: "default",
-  intent: "primary",
-}
-
-const MenuContext = React.createContext(defaultMenuContextValue);
+const MenuContext = React.createContext(defaultMenuProps);
 
 const ContextMenuRoot = ContextMenuPrimitive.Root;
-const ContextMenuTrigger = ContextMenuPrimitive.Trigger;
 const ContextMenuPortal = ContextMenuPrimitive.Portal;
 const ContextMenuLabel = ContextMenuPrimitive.Label;
 const ContextMenuGroup = ContextMenuPrimitive.Group;
@@ -26,40 +20,60 @@ const ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup;
 const ContextMenuRadioItem = ContextMenuPrimitive.RadioItem;
 const ContextMenuSub = ContextMenuPrimitive.Sub;
 
-export interface ContextMenuContentProps {
-  variant?: "default" | "soft";
-  intent?: "primary" | "warning" | "danger" | "gray";
-}
+export interface ContextMenuContentProps extends MenuProps { }
+
+const ContextMenuTrigger = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Trigger>
+  >((props, forwardedRef) => {
+    const {trigger} = menu.solid({intent:"primary"});
+  return (
+    <ContextMenuPrimitive.Trigger
+      {...props}
+      ref={forwardedRef}
+      className={trigger({className: props.className})}
+    />
+  )
+});
 
 const ContextMenuContent = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content> & ContextMenuContentProps
->(({className, variant, intent, ...props}, forwardedRef) => {
-  const contextValues = {
-    variant: variant || defaultMenuContextValue.variant,
-    intent: intent || defaultMenuContextValue.intent
-  }
-  const theme = variant === "default" ? defaultTheme : softTheme;
+  >(({ className, variant, intent, mixed, fancy, ...props }, forwardedRef) => {
+    
+  const {
+    variant: contextVariant,
+    intent: contextIntent,
+    mixed: contextMixed,
+    fancy: contextFancy,
+  } = React.useContext(MenuContext);
 
+  variant = variant || contextVariant || "soft";
+  intent = intent || contextIntent;
+  fancy = fancy || contextFancy;
+  mixed = mixed || contextMixed;
+    
+  if (fancy && mixed) {
+    throw new Error('The fancy and mixed props cannot be used together.');
+  }
+
+  const contextValues = { variant, intent, fancy, mixed };
+  const { content } = menu[variant]();
+    
   return (
     <MenuContext.Provider value={contextValues}>
       <ContextMenuPrimitive.Content
         {...props}
         ref={forwardedRef}
-        className={cn(theme.content, className)}
+        className={content({fancy, mixed, className})}
       />
     </MenuContext.Provider>
   );
 });
 
-export interface ContextMenuItemProps {
-  variant?: "default" | "soft";
-  intent?: "primary" | "warning" | "danger" | "gray";
-}
-
 const ContextMenuItem = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Item> & ContextMenuItemProps
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Item> & MenuProps
 >((
   {
     className,
@@ -73,21 +87,21 @@ const ContextMenuItem = React.forwardRef<
     intent: contextIntent
   } = React.useContext(MenuContext);
 
-  variant = variant || contextVariant;
+  variant = variant || contextVariant || "soft";
   intent = intent || contextIntent;
 
-  const theme = variant === "default" ? defaultTheme : softTheme;
+  const { item } = menu[variant]({intent});
 
   return (
     <ContextMenuPrimitive.Item
       {...props}
       ref={forwardedRef}
-      className={cn(theme.item[intent], className)}
+      className={item({intent, className})}
     />
   );
 });
 
-interface ContextMenuSubTriggerProps extends ContextMenuItemProps {
+interface ContextMenuSubTriggerProps extends MenuProps {
 }
 
 const ContextMenuSubTrigger = React.forwardRef<
@@ -96,7 +110,7 @@ const ContextMenuSubTrigger = React.forwardRef<
 >((
   {
     className,
-    intent = "primary",
+    intent,
     variant,
     ...props
   }, forwardedRef
@@ -106,16 +120,15 @@ const ContextMenuSubTrigger = React.forwardRef<
     intent: contextIntent
   } = React.useContext(MenuContext);
 
-  variant = variant || contextVariant;
+  variant = variant || contextVariant || "soft";
   intent = intent || contextIntent;
 
-  const theme = variant === "default" ? defaultTheme : softTheme;
-
+  const { subTrigger } = menu[variant]({intent});
   return (
     <ContextMenuPrimitive.SubTrigger
       {...props}
       ref={forwardedRef}
-      className={cn(theme.subTriger[intent], className)}
+      className={subTrigger({intent, className})}
     />
   );
 });
@@ -130,78 +143,73 @@ const ContextMenuSubContent = React.forwardRef<
   {
     className,
     variant,
+    intent,
+    mixed,
+    fancy,
     ...props
   }, forwardedRef
 ) => {
-  const {variant: contextVariant} = React.useContext(MenuContext);
-  variant = variant || contextVariant;
-  const theme = variant === "default" ? defaultTheme : softTheme;
+  const { variant: contextVariant, fancy: contextFancy, mixed: contextMixed } = React.useContext(MenuContext);
+  
+  variant = variant || contextVariant || "soft";
+  fancy = fancy || contextFancy;
+  mixed = mixed || contextMixed;
+  const { content } = menu[variant]({ intent });
+  
+  if (fancy && mixed) {
+    throw new Error('The fancy and mixed props cannot be used together.');
+  }
+  
   return (
     <ContextMenuPrimitive.SubContent
       {...props}
       ref={forwardedRef}
-      className={cn(theme.subContent, className)}
+      className={content({mixed, fancy, intent, className})}
     />
   );
 });
 
-interface ContextMenuSeparatorProps extends ContextMenuContentProps {
-}
+interface ContextMenuSeparatorProps extends SeparatorProps {}
 
 const ContextMenuSeparator = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Separator> & ContextMenuSeparatorProps
->(({className, variant, ...props}, forwardedRef) => {
-  const {variant: contextVariant} = React.useContext(MenuContext);
-  variant = variant || contextVariant;
-  const theme = variant === "default" ? defaultTheme : softTheme;
-
+>(({className, fancy, ...props}, forwardedRef) => {
+  const {fancy: contextVariant} = React.useContext(MenuContext);
+  fancy = fancy || contextVariant;
   return (
     <ContextMenuPrimitive.Separator
       {...props}
       ref={forwardedRef}
-      className={cn(theme.separator, className)}
+      className={separator({fancy, className})}
     />
   );
 });
-
-interface ContextMenuCommandProps {
-  variant?: "default" | "soft";
-}
 
 const ContextMenuCommand = React.forwardRef<
   React.ElementRef<"div">,
-  React.ComponentPropsWithoutRef<"div"> & ContextMenuCommandProps
->(({className, variant, ...props}, forwardedRef) => {
-  const {variant: contextVariant} = React.useContext(MenuContext);
-  variant = variant || contextVariant;
-  const theme = variant === "default" ? defaultTheme : softTheme;
-
+  React.ComponentPropsWithoutRef<"div"> & ContextMenuContentProps
+>(({className, ...props}, forwardedRef) => {
+  const { command } = menu.solid({});
   return (
     <div
       {...props}
       ref={forwardedRef}
-      className={cn(theme.command, className)}
+      className={command({className})}
     />
   );
 });
 
-interface ContextMenuIconProps extends ContextMenuCommandProps {
-}
-
 const ContextMenuIcon = React.forwardRef<
   React.ElementRef<"div">,
-  React.ComponentPropsWithoutRef<"div"> & ContextMenuIconProps
+  React.ComponentPropsWithoutRef<"div"> & ContextMenuContentProps
 >(({className, variant, ...props}, forwardedRef) => {
-  const {variant: contextVariant} = React.useContext(MenuContext);
-  variant = variant || contextVariant;
-  const theme = variant === "default" ? defaultTheme : softTheme;
-
+  const { icon } = menu.solid({});
   return (
     <div
       {...props}
       ref={forwardedRef}
-      className={cn(theme.icon, className)}
+      className={icon({className})}
     />
   );
 });

@@ -1,34 +1,26 @@
-import {ChevronRightIcon} from "@radix-ui/react-icons";
+import {ArchiveIcon, ChevronRightIcon, TrashIcon} from "@radix-ui/react-icons";
 import ContextMenu from "./ContextMenu.tsx"
-import {Meta, StoryObj} from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
+import { type MenuProps } from "@tailus/themer";
 
-type ContextMenuUIProps = {
-  variant?: "default" | "soft",
-  intent?: "primary" | "danger" | "gray" | "warning",
-}
-
-const ContextMenuUI = (args: ContextMenuUIProps) => {
+const ContextMenuUI = (args: MenuProps) => {
   return (
     <ContextMenu.Root>
       <div className="-mt-12">
         <span className="text-gray-700 dark:text-gray-300">Right click the logo.</span>
-
-        <ContextMenu.Trigger>
-          <div
-            className="mt-12 mx-auto w-fit rounded-[--menu-border-radius] px-4 py-2 transition duration-300 hover:bg-gray-100 dark:hover:bg-white/5">
+        <ContextMenu.Trigger className="mt-12 mx-auto w-fit rounded-[--menu-radius] px-4 py-2 transition duration-300 hover:bg-gray-100 dark:hover:bg-white/5">
             <img className="w-16 h-16 mx-auto" src="/tls/x512.png" alt=""/>
             <span className="text-xs font-medium text-gray-700 dark:text-gray-300">tailus-logo.png</span>
-          </div>
         </ContextMenu.Trigger>
       </div>
 
       <ContextMenu.Portal>
-        <ContextMenu.Content variant={args.variant} intent={args.intent}>
+        <ContextMenu.Content mixed={args.mixed} fancy={args.fancy} variant={args.variant} intent={args.intent}>
           <ContextMenu.Item>
-            Scale <ContextMenu.Command>⌘+S</ContextMenu.Command>
+            Scale <ContextMenu.Command>⌘S</ContextMenu.Command>
           </ContextMenu.Item>
           <ContextMenu.Item>
-            Set to Primary <ContextMenu.Command>⌘+P</ContextMenu.Command>
+            Set to Primary <ContextMenu.Command>⌘P</ContextMenu.Command>
           </ContextMenu.Item>
           <ContextMenu.Separator/>
           <ContextMenu.Item>Copy </ContextMenu.Item>
@@ -37,26 +29,32 @@ const ContextMenuUI = (args: ContextMenuUIProps) => {
           <ContextMenu.Sub>
             <ContextMenu.SubTrigger>
               Download
-              <ContextMenu.Icon>
+              <ContextMenu.Icon className="ml-auto">
                 <ChevronRightIcon/>
               </ContextMenu.Icon>
             </ContextMenu.SubTrigger>
             <ContextMenu.Portal>
-              <ContextMenu.SubContent sideOffset={4} alignOffset={-5}>
+              <ContextMenu.SubContent className="min-w-fit" sideOffset={2} alignOffset={-5}>
                 <ContextMenu.Item>Logomark </ContextMenu.Item>
                 <ContextMenu.Item>Logotype </ContextMenu.Item>
                 <ContextMenu.Separator/>
-
                 <ContextMenu.Item>All </ContextMenu.Item>
               </ContextMenu.SubContent>
             </ContextMenu.Portal>
           </ContextMenu.Sub>
           <ContextMenu.Separator/>
-          <ContextMenu.Item intent={"warning"}>
-            Archive <ContextMenu.Command>⌘+D</ContextMenu.Command>
+          <ContextMenu.Item disabled intent={"warning"}>
+            <ContextMenu.Icon>
+              <ArchiveIcon />
+              </ContextMenu.Icon>
+              Archive
+            <ContextMenu.Command>⌘A</ContextMenu.Command>
           </ContextMenu.Item>
           <ContextMenu.Item intent={"danger"}>
-            Delete <ContextMenu.Command>⌘+D</ContextMenu.Command>
+            <ContextMenu.Icon>
+              <TrashIcon />
+            </ContextMenu.Icon>
+            Delete <ContextMenu.Command>⌘D</ContextMenu.Command>
           </ContextMenu.Item>
         </ContextMenu.Content>
       </ContextMenu.Portal>
@@ -84,15 +82,27 @@ const meta: Meta<typeof ContextMenuUI> = {
       name: 'Variant',
       control: 'radio',
       description: 'The variant of the context menu content.',
-      defaultValue: 'default',
-      options: ['default', 'soft'],
+      defaultValue: 'solid',
+      options: ['solid', 'soft'],
     },
     intent: {
       name: 'radio',
       control: 'select',
       description: 'The intent of the context menu content.',
       defaultValue: 'primary',
-      options: ['primary', 'danger', 'gray', 'warning'],
+      options: ['primary', 'danger', 'gray', 'warning', 'neutral'],
+    },
+    mixed: {
+      name: 'Mixed Content',
+      control: 'boolean',
+      description: 'Whether the context menu content variant contains a border and boxshadow.',
+      defaultValue: false,
+    },
+    fancy: {
+      name: 'Fancy Border',
+      control: 'boolean',
+      description: 'Whether the context menu content variant contains a fancy border.',
+      defaultValue: false,
     },
   }
 }
@@ -103,7 +113,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Template: Story = {
   args: {
-    variant: "default",
+    variant: "solid",
     intent: "primary",
+    mixed: false,
+    fancy: true,
   },
 }
