@@ -12,6 +12,8 @@ interface AlertDialogProps {
   intent: "warning" | "danger",
   triggerText: string,
   exampleWithImage: boolean,
+  fancy: boolean,
+  mixed: boolean,
 }
 
 const Example1 = (args: AlertDialogProps) => {
@@ -39,7 +41,7 @@ const Example1 = (args: AlertDialogProps) => {
       </AlertDialog.Trigger>
       <AlertDialog.Portal>
         <AlertDialog.Overlay />
-        <AlertDialog.Content className="w-fit">
+        <AlertDialog.Content className="w-fit" mixed={args.mixed} fancy={args.fancy}>
           <AlertDialog.Title>{args.title} ?</AlertDialog.Title>
           <AlertDialog.Description>{args.description}</AlertDialog.Description>
           <AlertDialog.Actions>
@@ -92,7 +94,7 @@ const Example2 = (args: AlertDialogProps) => {
       </AlertDialog.Trigger>
       <AlertDialog.Portal>
         <AlertDialog.Overlay />
-        <AlertDialog.Content className="w-fit text-center">
+        <AlertDialog.Content className="w-fit text-center" fancy={args.fancy} mixed={args.mixed}>
           <AlertDialog.Title>{args.title} ?</AlertDialog.Title>
           <AlertDialog.Description>{args.description}</AlertDialog.Description>
           <AlertDialog.Actions className="justify-center">
@@ -145,13 +147,13 @@ const IOSExample = (args: AlertDialogProps) => {
       </AlertDialog.Trigger>
       <AlertDialog.Portal>
         <AlertDialog.Overlay/>
-        <AlertDialog.Content className="overflow-hidden p-0 block max-w-[20rem] w-full">
+        <AlertDialog.Content className="overflow-hidden p-0 block max-w-[20rem] w-full" mixed={args.mixed} fancy={args.fancy}>
           <div className="p-[--feedback-padding] text-center">
             <AlertDialog.Title>{args.title} ?</AlertDialog.Title>
             <AlertDialog.Description>{args.description}</AlertDialog.Description>
           </div>
           <div>
-            <Separator orientation="horizontal" />
+            <Separator orientation="horizontal" variant={args.fancy ? "fancy" : "simple"} />
             <AlertDialog.Actions className="mt-0 overflow-hidden gap-0 h-full">
               <AlertDialog.Cancel asChild>
                 <Button.Root
@@ -163,7 +165,7 @@ const IOSExample = (args: AlertDialogProps) => {
                   <Button.Label>{args.cancelText}</Button.Label>
                 </Button.Root>
               </AlertDialog.Cancel>
-              <Separator className="!h-10"/>
+              <Separator className="!h-10" variant={args.fancy ? "fancy" : "simple"}/>
               <AlertDialog.Action asChild>
                 <Button.Root
                   className="rounded-none w-1/2"
@@ -206,13 +208,13 @@ const FigmaExample = (args: AlertDialogProps) => {
       </AlertDialog.Trigger>
       <AlertDialog.Portal>
         <AlertDialog.Overlay/>
-        <AlertDialog.Content className="overflow-hidden p-0 flex max-w-fit w-full">
+        <AlertDialog.Content className="overflow-hidden p-0 flex max-w-fit w-full" fancy={args.fancy} mixed={args.mixed}>
           <div className="p-[--feedback-padding]">
             <AlertDialog.Title>{args.title} ?</AlertDialog.Title>
             <AlertDialog.Description>{args.description}</AlertDialog.Description>
           </div>
           <div className="w-fit flex">
-            <Separator />
+            <Separator variant={args.fancy ? "fancy" : "simple"}/>
             <AlertDialog.Actions className="mt-0 overflow-hidden block h-full w-full">
               <AlertDialog.Cancel asChild>
                 <Button.Root
@@ -224,7 +226,7 @@ const FigmaExample = (args: AlertDialogProps) => {
                   <Button.Label>{args.cancelText}</Button.Label>
                 </Button.Root>
               </AlertDialog.Cancel>
-              <Separator orientation="horizontal" />
+              <Separator orientation="horizontal" variant={args.fancy ? "fancy" : "simple"}/>
               <AlertDialog.Action asChild>
                 <Button.Root
                   className="rounded-none h-1/2 w-full"
@@ -279,6 +281,14 @@ const meta: Meta<typeof Example1> = {
       control: "radio",
       options: ["warning", "danger"]
     },
+    fancy: {
+      control: "boolean",
+      description: "The fancy style of the alert dialog content border.",
+    },
+    mixed: {
+      control: "boolean",
+      description: "The mix of the border and shadow of the alert dialog content.",
+    },
     triggerText: {
       control: "text",
       description: "The text of the trigger button. It must be a string."
@@ -299,17 +309,16 @@ export const AlertDialog_: Story = {
     actionText: "Action",
     intent: "danger",
     triggerText: undefined,
+    fancy: true,
+    mixed: false,
   }
 }
 
 export const Alert1: Story = {
   name: "Basic Example",
   args: {
+    ...AlertDialog_.args,
     title: "Delete Item",
-    description: "This photo will be deleted from your iCloud Photos.",
-    intent: "danger",
-    cancelText: "Cancel",
-    actionText: "Delete",
   },
   render: Example1,
 }
