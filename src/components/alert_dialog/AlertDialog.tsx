@@ -1,6 +1,6 @@
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import React from "react";
-import {alertDialog, type AlertDialogProps as AlertDialogVariantsProps } from "@tailus/themer"
+import {dialog, type DialogProps } from "@tailus/themer"
 
 interface AlertDialogProps extends React.ComponentProps<typeof AlertDialogPrimitive.Root> {}
 const AlertDialogRoot: React.FC<AlertDialogProps> = ({...props}) => {
@@ -16,7 +16,7 @@ const AlertDialogOverlay = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>
   >(({ className, ...props }, forwardedRef) => {
-    const { overlay } = alertDialog()
+    const { overlay } = dialog()
 
   return (
     <AlertDialogPrimitive.Overlay
@@ -29,10 +29,10 @@ const AlertDialogOverlay = React.forwardRef<
 
 const AlertDialogContent = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content> & AlertDialogVariantsProps
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content> & DialogProps
   >(({ className, mixed, fancy, ...props }, forwardedRef) => {
   
-  const { content } = alertDialog()
+  const { content } = dialog()
     
   if (fancy && mixed) {
     throw new Error('The fancy and mixed props cannot be used together.');
@@ -80,7 +80,7 @@ const AlertDialogActions = React.forwardRef<
   React.ElementRef<"div">,
   React.ComponentPropsWithoutRef<"div">
   >(({ className, ...props }, forwardedRef) => {
-  const { actions } = alertDialog()
+  const { actions } = dialog()
   return (
     <div
       {...props}
