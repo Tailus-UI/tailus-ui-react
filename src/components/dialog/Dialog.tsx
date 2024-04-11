@@ -2,7 +2,8 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import {dialog as dialogTheme} from "@tailus/themer-dialog";
 import {cn} from "../../lib/utils.ts";
 import React from "react";
-import {Button} from "../button/Button.tsx";
+import Button from "../button/Button.tsx";
+import {dialog, type DialogProps } from "@tailus/themer"
 
 // Creating DialogRoot component using DialogPrimitive.Root
 const DialogRoot = DialogPrimitive.Root;
@@ -30,14 +31,22 @@ const DialogOverlay = React.forwardRef<
 // This component is forwarded a ref and other props
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentProps<typeof DialogPrimitive.Content>
->(({className, ...props}, forwardedRef) => (
-  <DialogPrimitive.Content
-    {...props}
-    ref={forwardedRef}
-    className={cn(dialogTheme.content, className)}
-  />
-));
+  React.ComponentProps<typeof DialogPrimitive.Content> & DialogProps
+  >(({ className, fancy, mixed, ...props }, forwardedRef) => {
+    const { content } = dialog()
+    
+    if (fancy && mixed) {
+      throw new Error('The fancy and mixed props cannot be used together.');
+    }
+    
+    return(
+      <DialogPrimitive.Content
+        {...props}
+        ref={forwardedRef}
+        className={content({ fancy, mixed, className })}
+      />
+    )
+  });
 
 // Creating DialogTitle component using DialogPrimitive.Title
 // This component is forwarded a ref and other props
@@ -48,7 +57,7 @@ const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     {...props}
     ref={forwardedRef}
-    className={cn(dialogTheme.title, className)}
+    className={""}
   />
 ));
 
@@ -61,7 +70,7 @@ const DialogDescription = React.forwardRef<
   <DialogPrimitive.Description
     {...props}
     ref={forwardedRef}
-    className={cn(dialogTheme.description, className)}
+    className={""}
   />
 ));
 
@@ -70,24 +79,31 @@ const DialogDescription = React.forwardRef<
 const DialogActions = React.forwardRef<
   React.ElementRef<"div">,
   React.ComponentProps<"div">
->(({className, ...props}, forwardedRef) => (
-  <div
-    {...props}
-    ref={forwardedRef}
-    className={cn(dialogTheme.actions, className)}
-  />
-));
+  >(({ className, ...props }, forwardedRef) => {
+      const { actions } = dialog()
+    return (
+      <div
+        {...props}
+        ref={forwardedRef}
+        className={actions({className})}
+        />
+      )
+  });
 
 // Defining the type for DialogCloseButtonProps
-type DialogCloseButtonProps = React.ComponentProps<typeof Button>;
+type DialogCloseButtonProps = React.ComponentProps<typeof Button.Root>;
 
 // Creating DialogCloseButton component using Button
 // This component accepts className and other props
 const DialogCloseButton: React.FC<DialogCloseButtonProps> = ({className, ...props}) => (
-  <Button
+  <Button.Root
     {...props}
-    className={cn(dialogTheme.closeButton, className)}
-  />
+    className={cn(dialogTheme.closeButton, "size-5 rounded-full absolute top-1 right-1")}
+  >
+    <Button.Icon type="only" size="xs">
+        {props.children}
+    </Button.Icon>
+  </Button.Root>
 );
 
 // Creating DialogClose component using DialogPrimitive.Close
