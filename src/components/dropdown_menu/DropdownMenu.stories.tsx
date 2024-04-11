@@ -1,44 +1,32 @@
-import DropdownMenu, {Intent, Variant} from "./DropdownMenu.tsx";
+import DropdownMenu from "./DropdownMenu.tsx";
 import {Meta, StoryObj} from "@storybook/react";
 import {
   ArchiveIcon,
+  ChevronDownIcon,
   ChevronRightIcon,
-  DotsVerticalIcon,
   DownloadIcon,
   FileIcon,
   Pencil1Icon,
   TrashIcon
 } from "@radix-ui/react-icons";
-//import {Button} from "../button/Button.tsx";
-import {ghostIconButton as buttonTheme} from "@tailus/themer-button";
+import Button from "../button/Button.tsx";
+import { type MenuProps } from "@tailus/themer"
 
-type DropdownMenuUIProps = {
-  variant?: Variant,
-  intent?: Intent,
-  exampleWithSubmenu?: boolean,
-  subTriggerIntent?: Intent,
-  subTriggerVariant?: Variant,
-  subContentIntent?: Intent,
-  subContentVariant?: Variant,
-}
-
-const DropdownMenuUI = (args: DropdownMenuUIProps) => {
-  const subTriggerIntent = args.subTriggerIntent || args.intent;
-  const subTriggerVariant = args.subTriggerVariant || args.variant;
-  const subContentIntent = args.subContentIntent || args.intent;
-  const subContentVariant = args.subContentVariant || args.variant;
+const DropdownMenuUI = (args:MenuProps) => {
 
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button className={buttonTheme.gray.md}>
-          <span className="sr-only">Dismiss dialog</span>
-          <DotsVerticalIcon className={buttonTheme.icon.md}/>
-        </button>
+        <Button.Root variant="outlined" intent="gray">
+          <Button.Label>Dropdown</Button.Label>
+          <Button.Icon type="trailing">
+            <ChevronDownIcon />
+          </Button.Icon>
+        </Button.Root>
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content sideOffset={5} variant={args.variant} intent={args.intent}>
+        <DropdownMenu.Content sideOffset={5} variant={args.variant} mixed={args.mixed} fancy={args.fancy} intent={args.intent}>
           <DropdownMenu.Item>
             <DropdownMenu.Icon>
               <Pencil1Icon/>
@@ -52,28 +40,23 @@ const DropdownMenuUI = (args: DropdownMenuUIProps) => {
             Duplicate
           </DropdownMenu.Item>
           <DropdownMenu.Separator/>
-          {args.exampleWithSubmenu && (
-            <DropdownMenu.Sub>
-              <DropdownMenu.SubTrigger variant={subTriggerVariant} intent={subTriggerIntent}>
-                <DownloadIcon/>
-                Download
-                <DropdownMenu.RightIcon>
-                  <ChevronRightIcon/>
-                </DropdownMenu.RightIcon>
-              </DropdownMenu.SubTrigger>
-              <DropdownMenu.Portal>
-                <DropdownMenu.SubContent
-                  sideOffset={4} alignOffset={-5} variant={subContentVariant}
-                  intent={subContentIntent}
-                >
-                  <DropdownMenu.Item>Logomark </DropdownMenu.Item>
-                  <DropdownMenu.Item>Logotype </DropdownMenu.Item>
-                  <DropdownMenu.Separator/>
-                  <DropdownMenu.Item>All </DropdownMenu.Item>
-                </DropdownMenu.SubContent>
-              </DropdownMenu.Portal>
-            </DropdownMenu.Sub>
-          )}
+          <DropdownMenu.Sub>
+            <DropdownMenu.SubTrigger>
+              <DownloadIcon/>
+              Download
+              <DropdownMenu.RightIcon>
+                <ChevronRightIcon/>
+              </DropdownMenu.RightIcon>
+            </DropdownMenu.SubTrigger>
+            <DropdownMenu.Portal>
+              <DropdownMenu.SubContent sideOffset={2} alignOffset={-5}>
+                <DropdownMenu.Item>Logomark </DropdownMenu.Item>
+                <DropdownMenu.Item>Logotype </DropdownMenu.Item>
+                <DropdownMenu.Separator/>
+                <DropdownMenu.Item>All </DropdownMenu.Item>
+              </DropdownMenu.SubContent>
+            </DropdownMenu.Portal>
+          </DropdownMenu.Sub>
           <DropdownMenu.Item disabled>
             <DropdownMenu.Icon>
               <ArchiveIcon/>
@@ -113,8 +96,8 @@ const meta: Meta<typeof DropdownMenuUI> = {
       name: "Variant",
       control: "radio",
       description: "The variant of the dropdown menu content.",
-      defaultValue: "default",
-      options: ["default", "soft"],
+      defaultValue: "solid",
+      options: ["solid", "soft"],
     },
     intent: {
       name: "Intent",
@@ -123,39 +106,17 @@ const meta: Meta<typeof DropdownMenuUI> = {
       defaultValue: "primary",
       options: ["primary", "warning", "danger", "gray", "neutral"],
     },
-    exampleWithSubmenu: {
-      name: "Example with submenu",
+    mixed: {
+      name: "Mixed",
       control: "boolean",
-      description: "An example of a dropdown menu with a submenu.",
+      description: "The mix of the border and shadow of the dropdown menu content.",
       defaultValue: false,
     },
-    subTriggerVariant: {
-      name: "Submenu trigger variant",
-      control: "select",
-      description: "The variant of the submenu trigger.",
-      defaultValue: "default",
-      options: ["default", "soft"],
-    },
-    subTriggerIntent: {
-      name: "Submenu trigger intent",
-      control: "select",
-      description: "The intent of the submenu trigger.",
-      defaultValue: "primary",
-      options: ["primary", "warning", "danger", "gray", "neutral"],
-    },
-    subContentVariant: {
-      name: "Submenu content variant",
-      control: "select",
-      description: "The variant of the submenu content.",
-      defaultValue: "default",
-      options: ["default", "soft"],
-    },
-    subContentIntent: {
-      name: "Submenu content intent",
-      control: "select",
-      description: "The intent of the submenu content.",
-      defaultValue: "primary",
-      options: ["primary", "warning", "danger", "gray", "neutral"],
+    fancy: {
+      name: "Fancy",
+      control: "boolean",
+      description: "The fancy style of the dropdown menu content border.",
+      defaultValue: true,
     },
   }
 };
@@ -166,8 +127,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Template: Story = {
   args: {
-    variant: "default",
+    variant: "solid",
     intent: "primary",
-    exampleWithSubmenu: false,
+    mixed: false,
+    fancy: true,
   }
 }
