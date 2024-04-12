@@ -17,7 +17,7 @@ type TitleSizeProp = TextSize |  {
 }
 
 export interface TextProps extends React.HTMLAttributes<HTMLHeadingElement> {
-    as: "p" | "div" | "span",
+    as?: "p" | "div" | "span",
     children: React.ReactNode,
     className?: string,
     size?: TitleSizeProp;
@@ -27,7 +27,7 @@ export interface TextProps extends React.HTMLAttributes<HTMLHeadingElement> {
 
 export const Text: React.FC<TextProps> = ({
     size,
-    as,
+    as="p",
     weight,
     align,
     children,
@@ -46,3 +46,5 @@ export const Text: React.FC<TextProps> = ({
         </TextElement>
     )
 }
+
+Text.displayName = "Text"

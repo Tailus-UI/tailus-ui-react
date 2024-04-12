@@ -32,7 +32,7 @@ type TextAlignProp = {
     xxl?: Align,
 }
 export interface DisplayProps extends React.HTMLAttributes<HTMLHeadingElement> {
-    as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
+    as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
     children: React.ReactNode,
     className?: string,
     size?: DisplaySizeProp;
@@ -42,7 +42,7 @@ export interface DisplayProps extends React.HTMLAttributes<HTMLHeadingElement> {
 
 export const Display: React.FC<DisplayProps> = ({
     size,
-    as,
+    as="h1",
     weight,
     align,
     children,
@@ -61,3 +61,5 @@ export const Display: React.FC<DisplayProps> = ({
         </DisplayElement>
     )
 }
+
+Display.displayName = "Display"

@@ -17,7 +17,7 @@ type TitleSizeProp = TitleSize |  {
 }
 
 export interface TitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
-    as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
+    as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
     children: React.ReactNode,
     className?: string,
     size?: TitleSizeProp;
@@ -27,7 +27,7 @@ export interface TitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
 
 export const Title: React.FC<TitleProps> = ({
     size,
-    as,
+    as="h1",
     weight,
     align,
     children,
@@ -46,3 +46,5 @@ export const Title: React.FC<TitleProps> = ({
         </TitleElement>
     )
 }
+
+Title.displayName = "Title"

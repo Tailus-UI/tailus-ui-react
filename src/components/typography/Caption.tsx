@@ -17,7 +17,7 @@ type TitleSizeProp = CaptionSize |  {
 }
 
 export interface CaptionProps extends React.HTMLAttributes<HTMLHeadingElement> {
-    as: "p" | "div" | "span",
+    as?: "p" | "div" | "span",
     children: React.ReactNode,
     className?: string,
     size?: TitleSizeProp;
@@ -27,7 +27,7 @@ export interface CaptionProps extends React.HTMLAttributes<HTMLHeadingElement> {
 
 export const Caption: React.FC<CaptionProps> = ({
     size,
-    as,
+    as="p",
     weight,
     align,
     children,
@@ -46,3 +46,5 @@ export const Caption: React.FC<CaptionProps> = ({
         </CaptionElement>
     )
 }
+
+Caption.displayName = "Caption"
