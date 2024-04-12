@@ -10,7 +10,7 @@ export const Badge: React.FC<BadgeVariantsProps> = ({
     variant,
     ...props
   }) => {
-   
+    variant = variant || "solid";
     return(
         <span className={badge[variant]({intent, size})} {...props}>
             {children}
