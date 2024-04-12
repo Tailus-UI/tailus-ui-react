@@ -13,10 +13,11 @@ const meta: Meta<TextProps> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    as: { 
+   as: { 
       control: 'select', 
       options: ["p", "div", "span", "em", "strong"] 
     },
+    neutral: { control: 'boolean' },
     size: { 
     control: 'select', 
     options: ["sm", "base", "lg", "xl"] 

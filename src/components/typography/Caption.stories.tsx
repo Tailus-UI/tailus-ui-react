@@ -15,8 +15,9 @@ const meta: Meta<CaptionProps> = {
   argTypes: {
     as: { 
       control: 'select', 
-      options: ["p", "div", "span",] 
+      options: ["p", "div", "span", "em", "strong"] 
     },
+    neutral: { control: 'boolean' },
     size: { 
     control: 'select', 
     options: ["xs", "sm", "base"] 

@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Card } from "./Card";
+import { Title } from '../typography/Title';
+import { Text } from '../typography/Text';
+import { Caption } from '../typography/Caption';
 
 const meta: Meta<typeof Card> = {
   title: 'Card',
@@ -34,8 +37,12 @@ const example = (
       <img className="hidden h-full w-full object-cover dark:block" src="/legend-dark.png" alt="tailus card dark stats img" height={688} width={1168} />
     </div>
     <div className="relative z-10 mt-6 space-y-3 text-center">
-      <h3 className="text-xl font-medium text-gray-800 transition group-hover:text-secondary-950 dark:text-white">Faster than light</h3>
-      <p className="text-base text-gray-700 dark:text-gray-300">Provident fugit vero voluptate dolores voluptates a sapiente.</p>
+      <Title size="lg">
+        Faster than light
+      </Title>
+      <Text>
+        Provident fugit vero voluptate dolores voluptates a sapiente.
+      </Text>
     </div>
   </>
 );
