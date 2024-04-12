@@ -1,7 +1,8 @@
 import type { Config } from 'tailwindcss'
 import themer from '@tailus/themer'
+const { withTV } = require('tailwind-variants/transformer');
 
-export default {
+module.exports =  withTV({
   content: [
     "index.html",
     "./src/**/*.{js,jsx,ts,tsx,vue,html}",
@@ -219,5 +220,5 @@ export default {
       */
     }),
   ]
-}  satisfies Config
+})  satisfies Config
 
