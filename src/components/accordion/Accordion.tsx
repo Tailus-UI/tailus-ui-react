@@ -3,16 +3,16 @@ import React from "react";
 import {ChevronDownIcon} from "@radix-ui/react-icons";
 import { accordion, type AccordionProps } from "@tailus/themer";
 
-const defaultContextValue: AccordionProps["variant"] = "default";
-const Context = React.createContext<AccordionProps["variant"]>(defaultContextValue);
+const defaultContextValue:AccordionProps  = {variant : "default", fancy : true};
+const Context = React.createContext<AccordionProps>(defaultContextValue);
 
 const AccordionRoot = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & AccordionProps
-  >(({ className, variant, ...props }, forwardedRef) => {
+  >(({ className, variant, fancy, ...props }, forwardedRef) => {
   const { root } = accordion({variant});
   return (
-    <Context.Provider value={variant || defaultContextValue}>
+    <Context.Provider value={{variant, fancy} || defaultContextValue}>
       <AccordionPrimitive.Root
         className={root({className})}
         {...props}
@@ -24,13 +24,21 @@ const AccordionRoot = React.forwardRef<
 
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
->(({className, ...props}, forwardedRef) => {
-  const variant = React.useContext(Context);
-  const { item } = accordion({variant}) 
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item> & AccordionProps
+  >(({ className, fancy, ...props }, forwardedRef) => {
+  
+  const { variant, fancy: contextFancy } = React.useContext(Context);
+  const { item } = accordion({ variant }) 
+
+  fancy = fancy || contextFancy;
+
+  if (variant === "soft" && fancy) {
+    throw new Error("The fancy style cannot be applied with the `soft` variant !")
+  } 
+
   return (
     <AccordionPrimitive.Item
-      className={item({className})}
+      className={item({fancy, className})}
       {...props}
       ref={forwardedRef}
     />
@@ -41,7 +49,7 @@ const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
 >(({className, children, ...props}, forwardedRef) => {
-  const variant = React.useContext(Context);
+  const {variant} = React.useContext(Context);
   const {header, trigger, triggerIcon, triggerContent} = accordion({variant})
 
   return (
@@ -64,7 +72,7 @@ const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(({className, children, ...props}, forwardedRef) => {
-  const variant = React.useContext(Context);
+  const {variant} = React.useContext(Context);
   const { content } = accordion({variant})
 
   return (

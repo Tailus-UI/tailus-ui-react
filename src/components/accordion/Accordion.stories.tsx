@@ -1,9 +1,8 @@
 import Accordion from "./Accordion.tsx";
-import { type Accordion as AccordionVariant } from "@tailus/themer";
+import { type AccordionProps } from "@tailus/themer";
 import {Meta, StoryObj} from "@storybook/react";
 
-interface AccordionUIProps {
-  variant: AccordionVariant,
+interface AccordionUIProps extends AccordionProps {
   withIcon?: boolean,
 }
 
@@ -12,6 +11,7 @@ const AccordionUI = (args: AccordionUIProps) => {
   return (
     <Accordion.Root
       variant={args.variant}
+      fancy = {args.fancy}
       className="w-full min-w-[20rem] max-w-[20rem]"
       type="single" defaultValue="item-1"
       collapsible
@@ -97,6 +97,12 @@ const meta: Meta<typeof AccordionUI> = {
       defaultValue: false,
       control: 'boolean',
     },
+    fancy: {
+      name: 'Fancy Border',
+      control: 'boolean',
+      description: 'Whether the context menu content variant contains a fancy border.',
+      defaultValue: false,
+    },
   },
 };
 
@@ -107,7 +113,8 @@ type Story = StoryObj<typeof meta>;
 export const Example: Story = {
   name: 'Accordion',
   args: {
-    variant:"default",
+    variant : "default",
     withIcon: false,
+    fancy : true,
   },
 }
