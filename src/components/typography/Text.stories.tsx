@@ -15,7 +15,7 @@ const meta: Meta<TextProps> = {
   argTypes: {
     as: { 
       control: 'select', 
-      options: ["p", "div", "span",] 
+      options: ["p", "div", "span", "em", "strong"] 
     },
     size: { 
     control: 'select', 
