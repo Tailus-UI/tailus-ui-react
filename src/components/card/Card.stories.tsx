@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Card } from "./Card";
 import { Title } from '../typography/Title';
 import { Text } from '../typography/Text';
-import { Caption } from '../typography/Caption';
 
 const meta: Meta<typeof Card> = {
   title: 'Card',
@@ -21,6 +20,8 @@ const meta: Meta<typeof Card> = {
       control: 'select', 
       options: ['outlined', 'elevated', 'soft', 'mixed'] 
     },
+    gradient: { control: 'boolean' },
+    fancy: { control: 'boolean' },
     children: { control: 'text' },
     className: { control: 'text' }
   }
