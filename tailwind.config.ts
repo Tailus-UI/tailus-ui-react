@@ -2,7 +2,7 @@ import type { Config } from 'tailwindcss'
 import themer from '@tailus/themer'
 const { withTV } = require('tailwind-variants/transformer');
 
-module.exports =  withTV({
+module.exports =  {
   content: [
     "index.html",
     "./src/**/*.{js,jsx,ts,tsx,vue,html}",
@@ -15,9 +15,9 @@ module.exports =  withTV({
             inherit: colors.inherit,
             current: colors.current,
             transparent: colors.transparent,
-            primary: colors.indigo,
+            primary: colors.orange,
             secondary: colors.purple,
-            accent: colors.fuchsia,
+            accent: colors.lime,
             danger: colors.red,
             success: colors.green,
             warning: colors.amber,
@@ -71,154 +71,7 @@ module.exports =  withTV({
     themer({
       appearance: "dark", // light | dark | both
       radius : "smooth",
-      components: {
-        field: {
-          rounded: "lg",
-          softBg: "100",
-          softBgFocus: "50",
-          borderColor: "300",
-          dark: {
-            softBg: "900",
-            softBgFocus: "950",
-            borderColor: "800",
-          }
-        }
-      }
-       /*
-      background: "lighter", // light | lighter | hight | higher
-      padding: "largest", // small | medium | large | larger | largest
-      border: "light", // lighter | light | high | higher 
-      radius: "sharp", // boxy | sharp | smooth | smoothest
-      shadow: {
-        size: "xxl",
-        opacity: 5,
-      },
-      components: {
-        accordion: {
-          rounded: "none",
-          softBg: "200",
-          ghostBg:"100",
-          shadow: {
-            size: "sm",
-            opacity: 5,
-          },
-          dark: {
-            softBg: "900",
-            ghostBg: "900",
-            elevatedBg : "900",
-          }
-        }, 
-        /*
-        alert: {
-          rounded: "none",
-          shadow: {
-            size: "md",
-            opacity:5,
-          }
-        },
-        annonce: {
-          rounded : "md",
-        },
-        avatar: {
-          rounded: "2xl",
-          statusInset:"-0.5"
-        }, 
-        badge: {
-          rounded: "md",
-        },
-        button: {
-          rounded: "xl",
-          borderWith:"1.5",
-        },
-        card: {
-          rounded: "3xl",
-          padding: "12",
-          bg: "100",
-          shadow: {
-            size: "md",
-            opacity:4,
-          },
-          dark: {
-            bg:"950",
-          }
-        },
-        menu: {
-          rounded: "3xl",
-          borderColor: "200",
-          bgOpacity: 99,
-          backdropBlur: "3",
-          shadow: {
-            size: "md",
-            opacity:3,
-          },
-          dark: {
-            bg: "950",
-            borderColor: "800",
-            bgOpacity: 50,
-            backdropBlur: "5",
-          }
-        },
-        feedback: {
-          borderColor : "200",
-          shadow: {
-            size: "md",
-            opacity:4,
-          },
-          dark: {
-            borderColor: "600",
-            bg: "950",
-          }
-        },
-        flag: {
-          rounded: "xl",
-          padding: "4",
-        },
-        field: {
-          rounded: "full",
-          softBg: "100",
-          softBgFocus: "50",
-          borderColor: "300",
-          dark: {
-            softBg: "900",
-            softBgFocus: "950",
-            borderColor: "800",
-          }
-        },
-        popover: {
-          rounded : "3xl",
-        }, 
-        switch: {
-          rounded:"md"
-        },
-        select: {
-          dark: {
-            bg: "950",
-          }
-        },
-        tabs: {
-          borderColor: "200",
-          listBg: "100",
-          rounded: {
-            list: "md",
-            softVariant: "md",
-            bottomIndicatorVariant: "md",
-          },
-          dark: {
-            borderColor: "800",
-            listBg: "800",
-            triggerBg: "900",
-            indicatorBg:"950"
-          }
-        },
-        toast: {
-          rounded:"md"
-        },
-        tooltip: {
-          rounded:"md"
-        },
-      } 
-      */
     }),
   ]
-})  satisfies Config
+} satisfies Config
 

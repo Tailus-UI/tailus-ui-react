@@ -90,3 +90,15 @@ export {
   PopoverClose,
   PopoverArrow
 };
+
+export default {
+  Root: PopoverRoot,
+  Trigger: PopoverTrigger,
+  Anchor: PopoverAnchor,
+  Portal: PopoverPortal,
+  Content: PopoverContent,
+  Title: PopoverTitle,
+  Description: PopoverDescription,
+  Close: PopoverClose,
+  Arrow: PopoverArrow
+}

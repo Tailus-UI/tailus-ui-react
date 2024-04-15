@@ -23,6 +23,7 @@ body {
         --feedback-border-color : var(--ui-border-color);
         --annonce-radius : 2rem;
         --btn-radius : 0.5rem;
+        --calendar-radius : var(--btn-radius);
         --menu-radius : 1rem;
         --avatar-radius : 9999px;
         --accordion-padding : 1rem;
