@@ -1,6 +1,16 @@
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import React from "react";
-import {dialog, type DialogProps } from "@tailus/themer"
+import {
+  dialog,
+  title,
+  text,
+  type DialogProps,
+  type TitleSizeProp,
+  type TextProps,
+  type TextSizeProp,
+  type TextAlignProp,
+  type TextWeightProp
+} from "@tailus/themer"
 
 interface AlertDialogProps extends React.ComponentProps<typeof AlertDialogPrimitive.Root> {}
 const AlertDialogRoot: React.FC<AlertDialogProps> = ({...props}) => {
@@ -49,26 +59,48 @@ const AlertDialogContent = React.forwardRef<
 
 const AlertDialogTitle = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Title>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>
->(({className, ...props}, forwardedRef) => {
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title> & {
+    size?: TitleSizeProp,
+    align?: TextAlignProp,
+    weight?: TextWeightProp
+  }
+>(({className, size="base", weight="medium", align, ...props}, forwardedRef) => {
   return (
     <AlertDialogPrimitive.Title
       {...props}
       ref={forwardedRef}
-      className={className}
+      className={
+        title({
+          size,
+          weight,
+          align,
+          className
+        })
+      }
     />
   )
 });
 
 const AlertDialogDescription = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Description>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description>
->(({className, ...props}, forwardedRef) => {
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description> & TextProps & {
+    size?: TextSizeProp,
+    align?: TextAlignProp,
+    weight?: TextWeightProp
+  }
+>(({className, size="base", weight, align, ...props}, forwardedRef) => {
   return (
     <AlertDialogPrimitive.Description
       {...props}
       ref={forwardedRef}
-      className={className}
+      className={
+        text({
+          size,
+          weight,
+          align,
+          className,
+        })
+      }
     />
   )
 });

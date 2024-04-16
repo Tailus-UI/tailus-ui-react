@@ -13,7 +13,7 @@ body {
         --ui-bd-blur : theme(blur[2xl]);
         --ui-bg:theme(colors.white);
         --form-border-color : theme(colors.gray.300);
-        --card-padding : theme(spacing[4]);
+        --card-padding : theme(spacing[6]);
         --accordion-bg : theme(colors.gray.100);
         --accordion-radius : theme(borderRadius.xl);
         --feedback-radius : theme(borderRadius.xl);
@@ -25,6 +25,8 @@ body {
         --btn-radius : 0.5rem;
         --calendar-radius : var(--btn-radius);
         --menu-radius : 1rem;
+        --overlay-bg: theme("colors.gray.800/0.5");
+        --overlay-backdrop-blur: theme(blur[none]);
         --avatar-radius : 9999px;
         --accordion-padding : 1rem;
         --caption-text-color : theme(colors.gray.500);

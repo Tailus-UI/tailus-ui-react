@@ -43,7 +43,7 @@ const Example1 = (args: AlertDialogProps) => {
         <AlertDialog.Overlay />
         <AlertDialog.Content className="w-fit" mixed={args.mixed} fancy={args.fancy}>
           <AlertDialog.Title>{args.title} ?</AlertDialog.Title>
-          <AlertDialog.Description>{args.description}</AlertDialog.Description>
+          <AlertDialog.Description className="mt-2">{args.description}</AlertDialog.Description>
           <AlertDialog.Actions>
             <AlertDialog.Cancel asChild>
               <Button.Root
@@ -96,7 +96,7 @@ const Example2 = (args: AlertDialogProps) => {
         <AlertDialog.Overlay />
         <AlertDialog.Content className="w-fit text-center" fancy={args.fancy} mixed={args.mixed}>
           <AlertDialog.Title>{args.title} ?</AlertDialog.Title>
-          <AlertDialog.Description>{args.description}</AlertDialog.Description>
+          <AlertDialog.Description className="mt-2">{args.description}</AlertDialog.Description>
           <AlertDialog.Actions className="justify-center">
             <AlertDialog.Cancel asChild>
               <Button.Root
@@ -150,7 +150,7 @@ const IOSExample = (args: AlertDialogProps) => {
         <AlertDialog.Content className="overflow-hidden p-0 block max-w-[20rem] w-full" mixed={args.mixed} fancy={args.fancy}>
           <div className="p-[--feedback-padding] text-center">
             <AlertDialog.Title>{args.title} ?</AlertDialog.Title>
-            <AlertDialog.Description>{args.description}</AlertDialog.Description>
+            <AlertDialog.Description className="mt-2">{args.description}</AlertDialog.Description>
           </div>
           <div>
             <Separator orientation="horizontal" variant={args.fancy ? "fancy" : "simple"} />
@@ -210,8 +210,8 @@ const FigmaExample = (args: AlertDialogProps) => {
         <AlertDialog.Overlay/>
         <AlertDialog.Content className="overflow-hidden p-0 flex max-w-fit w-full" fancy={args.fancy} mixed={args.mixed}>
           <div className="p-[--feedback-padding]">
-            <AlertDialog.Title>{args.title} ?</AlertDialog.Title>
-            <AlertDialog.Description>{args.description}</AlertDialog.Description>
+            <AlertDialog.Title align="left">{args.title} ?</AlertDialog.Title>
+            <AlertDialog.Description align="left" className="mt-2">{args.description}</AlertDialog.Description>
           </div>
           <div className="w-fit flex">
             <Separator variant={args.fancy ? "fancy" : "simple"}/>
