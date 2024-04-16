@@ -1,13 +1,14 @@
 import {Meta, StoryObj} from "@storybook/react";
 import Slider from "./Slider";
+import { type SliderProps } from "@tailus/themer";
 
-const SliderUI = () => (
+const SliderUI = (args:SliderProps) => (
   <form>
-      <Slider.Root defaultValue={[50]} data-orientation="vertical" max={100} step={1}>
+      <Slider.Root className="w-96" size={args.size} intent={args.intent} defaultValue={[50]} data-orientation="vertical" max={100} step={1}>
           <Slider.Track>
               <Slider.Range />
           </Slider.Track>
-          <Slider.Thumb aria-label="Volume" />
+          <Slider.Thumb variant={args.variant} aria-label="Volume" />
       </Slider.Root>
   </form>
 );
@@ -25,6 +26,20 @@ const meta: Meta<typeof SliderUI> = {
             },
         },
     },
+    argTypes: {
+        size: {
+            control: "select",
+            options: ["sm", "md", "lg"],
+        },
+        variant: {
+            control: "select",
+            options: ["solid", "raised", "outlined", "fancy"],
+        },
+        intent: {
+            control: "select",
+            options: ["primary", "secondary", "accent", "gray", "neutral"],
+        },
+    },
     tags: ['autodocs'],
 };
 
@@ -33,4 +48,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Template: Story = {
+    name: 'Slider',
+    args: {
+        size: "md",
+        variant: "raised",
+        intent: "primary",
+    }
 };
