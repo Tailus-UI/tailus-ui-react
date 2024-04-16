@@ -34,10 +34,10 @@ export const DisplayExample: Story = {
                 Highly customizable components for building modern websites and applications that look and feel the way you want.
             </Text>
             <div className="mt-6 flex justify-center flex-wrap gap-3">
-                <Button.Root>
+                <Button.Root intent="neutral" size="lg">
                     <Button.Label>Start Building</Button.Label>
                 </Button.Root>
-                <Button.Root variant="outlined" intent="gray">
+                <Button.Root variant="outlined" intent="gray" size="lg">
                     <Button.Label>Components</Button.Label>
                 </Button.Root>
             </div>

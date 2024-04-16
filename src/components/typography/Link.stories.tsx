@@ -23,7 +23,7 @@ const meta: Meta<LinkProps> = {
     },
     intent: {
         control: 'select',
-        options: ["primary", "info", "gray", "neutral"]
+        options: ["primary", "secondary", "accent", "succes", "danger", "warning", "info", "gray", "neutral"]
       },
       variant: {
         control: 'select',
