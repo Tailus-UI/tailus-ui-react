@@ -58,7 +58,7 @@ const Feedback = (args:DialogProps) => (
       <Dialog.Overlay/>
       <Dialog.Content className="max-w-[20rem]" fancy={args.fancy} mixed={args.mixed}>
         <Dialog.Title>What is the reason for your feedback?</Dialog.Title>
-        <Dialog.Description>What do you think of Tailus UI ?</Dialog.Description>
+        <Dialog.Description className="mt-2">What do you think of Tailus UI ?</Dialog.Description>
 
         <Dialog.Actions>
           <Dialog.Close asChild>
@@ -69,10 +69,10 @@ const Feedback = (args:DialogProps) => (
         </Dialog.Actions>
         <Dialog.Close asChild>
           <Dialog.CloseButton
-            aria-label={"Dismiss dialog"}
-            variant={"outlined"}
-            intent={"gray"}
-            size={"xs"}
+            aria-label="Dismiss dialog"
+            variant="ghost"
+            intent="gray"
+            size="sm"
           >
             <Cross2Icon aria-hidden/>
           </Dialog.CloseButton>
@@ -106,7 +106,7 @@ const Bookmark = (args:DialogProps) => (
       <Dialog.Overlay/>
       <Dialog.Content className="max-w-[20rem]" fancy={args.fancy} mixed={args.mixed}>
         <Dialog.Title>Sign in to bookmark</Dialog.Title>
-        <Dialog.Description>You need to be signed in to save your frequently used components.</Dialog.Description>
+        <Dialog.Description className="mt-2">You need to be signed in to save your frequently used components.</Dialog.Description>
 
         <Dialog.Actions>
           <Dialog.Close asChild>
@@ -200,9 +200,9 @@ const UserFeedback = (args:DialogProps) => (
     </div>
     <Dialog.Portal>
       <Dialog.Overlay/>
-      <Dialog.Content className={"max-w-[18rem]"} fancy={args.fancy} mixed={args.mixed}>
+      <Dialog.Content className={"max-w-[20rem]"} fancy={args.fancy} mixed={args.mixed}>
         <Dialog.Title>Give us a feedback</Dialog.Title>
-        <Dialog.Description>What do you think of Tailus UI ?</Dialog.Description>
+        <Dialog.Description className="mt-2 mb-4">What do you think of Tailus UI ?</Dialog.Description>
 
         <ToggleGroup.Root variant={"highlight"} className={"!justify-start"} type="single" defaultValue=""
                           aria-label="User feedback">
@@ -282,10 +282,10 @@ const UserFeedback = (args:DialogProps) => (
         </Dialog.Actions>
         <Dialog.Close asChild>
           <Dialog.CloseButton
-            aria-label={"Dismiss dialog"}
-            variant={"outlined"}
-            intent={"gray"}
-            size={"xs"}
+            aria-label="Dismiss dialog"
+            variant="ghost"
+            intent="gray"
+            size="sm"
           >
             <Cross2Icon aria-hidden/>
           </Dialog.CloseButton>

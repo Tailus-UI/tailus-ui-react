@@ -3,19 +3,23 @@ import {dialog as dialogTheme} from "@tailus/themer-dialog";
 import {cn} from "../../lib/utils.ts";
 import React from "react";
 import Button from "../button/Button.tsx";
-import {dialog, type DialogProps } from "@tailus/themer"
+import {
+  dialog,
+  title,
+  text,
+  type DialogProps,
+  type TitleSizeProp,
+  type TextProps,
+  type TextSizeProp,
+  type TextAlignProp,
+  type TextWeightProp
+} from "@tailus/themer"
 
-// Creating DialogRoot component using DialogPrimitive.Root
 const DialogRoot = DialogPrimitive.Root;
-
-// Creating DialogTrigger component using DialogPrimitive.Trigger
 const DialogTrigger = DialogPrimitive.Trigger;
-
-// Creating DialogPortal component using DialogPrimitive.Portal
 const DialogPortal = DialogPrimitive.Portal;
+const DialogClose = DialogPrimitive.Close;
 
-// Creating DialogOverlay component using DialogPrimitive.Overlay
-// This component is forwarded a ref and other props
 const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentProps<typeof DialogPrimitive.Overlay>
@@ -27,8 +31,6 @@ const DialogOverlay = React.forwardRef<
   />
 ));
 
-// Creating DialogContent component using DialogPrimitive.Content
-// This component is forwarded a ref and other props
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentProps<typeof DialogPrimitive.Content> & DialogProps
@@ -48,34 +50,51 @@ const DialogContent = React.forwardRef<
     )
   });
 
-// Creating DialogTitle component using DialogPrimitive.Title
-// This component is forwarded a ref and other props
 const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
-  React.ComponentProps<typeof DialogPrimitive.Title>
->(({className, ...props}, forwardedRef) => (
+  React.ComponentProps<typeof DialogPrimitive.Title> & {
+    size?: TitleSizeProp,
+    align?: TextAlignProp,
+    weight?: TextWeightProp
+  }
+>(({className, size="base", align, weight="medium", ...props}, forwardedRef) => (
   <DialogPrimitive.Title
     {...props}
     ref={forwardedRef}
-    className={""}
+    className={
+      title({
+        size,
+        align,
+        weight,
+        className
+      })
+    }
   />
 ));
 
-// Creating DialogDescription component using DialogPrimitive.Description
-// This component is forwarded a ref and other props
 const DialogDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
-  React.ComponentProps<typeof DialogPrimitive.Description>
->(({className, ...props}, forwardedRef) => (
+  React.ComponentProps<typeof DialogPrimitive.Description> & TextProps & {
+    size?: TextSizeProp,
+    align?: TextAlignProp,
+    weight?: TextWeightProp
+  }
+>(({className, size, weight, align, neutral, ...props}, forwardedRef) => (
   <DialogPrimitive.Description
     {...props}
     ref={forwardedRef}
-    className={""}
+    className={
+      text({
+        size,
+        weight,
+        align,
+        neutral,
+        className
+      })
+    }
   />
 ));
 
-// Creating DialogActions component using a div
-// This component is forwarded a ref and other props
 const DialogActions = React.forwardRef<
   React.ElementRef<"div">,
   React.ComponentProps<"div">
@@ -90,15 +109,12 @@ const DialogActions = React.forwardRef<
       )
   });
 
-// Defining the type for DialogCloseButtonProps
 type DialogCloseButtonProps = React.ComponentProps<typeof Button.Root>;
 
-// Creating DialogCloseButton component using Button
-// This component accepts className and other props
 const DialogCloseButton: React.FC<DialogCloseButtonProps> = ({className, ...props}) => (
   <Button.Root
     {...props}
-    className={cn(dialogTheme.closeButton, "size-5 rounded-full absolute top-1 right-1")}
+    className={cn(dialogTheme.closeButton, "rounded-full absolute top-1 right-1")}
   >
     <Button.Icon type="only" size="xs">
         {props.children}
@@ -106,11 +122,7 @@ const DialogCloseButton: React.FC<DialogCloseButtonProps> = ({className, ...prop
   </Button.Root>
 );
 
-// Creating DialogClose component using DialogPrimitive.Close
-const DialogClose = DialogPrimitive.Close;
-
-// Creating Dialog object that contains all the Dialog components
-const Dialog = {
+export default {
   Root: DialogRoot,
   Trigger: DialogTrigger,
   Portal: DialogPortal,
@@ -123,10 +135,6 @@ const Dialog = {
   Close: DialogClose,
 }
 
-// Exporting Dialog as default
-export default Dialog;
-
-// Exporting all the Dialog components
 export {
   DialogRoot,
   DialogTrigger,
