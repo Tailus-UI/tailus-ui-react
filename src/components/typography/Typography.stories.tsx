@@ -1,7 +1,7 @@
 import Avatar from "../avatar/Avatar";
 import Button from "../button/Button";
-import { Display, Title, Text, Link, List, Caption } from "./"
-import type { Meta, StoryObj } from '@storybook/react';
+import { Display, Title, Text, Link, List, Caption, Code, Kbd } from "./"
+import type { StoryObj } from '@storybook/react';
 
 const meta = {
   title: 'Components / Typography / Overview',
@@ -99,6 +99,28 @@ export const TextWithLinkExample: Story = {
         <div className="max-w-md mx-auto">
             <Text>
                 Highly <Link intent="primary" variant="underlined" size="base" href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer">customizable components</Link> for building <Text as="strong">modern</Text> websites and <Text as="em">applications</Text> that look and feel the way you want.
+            </Text>
+        </div>
+    )
+};
+
+export const CodeExample: Story = {
+    name: "Code",
+    render: () => (
+        <div className="max-w-md mx-auto">
+            <Text>
+                Import the plugin in your <Code>tailwind.config.js</Code> file
+            </Text>
+        </div>
+    )
+};
+
+export const KbdExample: Story = {
+    name: "Kbd",
+    render: () => (
+        <div className="max-w-md mx-auto">
+            <Text align="left">
+                Press <Kbd>Cmd</Kbd> + <Kbd>E</Kbd> to open the customizer panel
             </Text>
         </div>
     )
