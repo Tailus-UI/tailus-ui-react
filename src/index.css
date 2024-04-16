@@ -39,7 +39,7 @@ body {
         @apply bg-[var(--feedback-bg)] backdrop-blur-[var(--ui-bd-blur)];
     }
     .fancy-border {
-        @apply border-[0.5px] dark:border-gray-950 !outline !outline-[0.5px] -outline-offset-[1.5px] !outline-white/5 dark:!outline-[--ui-border-color];
+        @apply border dark:border-gray-950 !outline !outline-1 -outline-offset-2 !outline-white/5 dark:!outline-[--ui-border-color];
     }
     @media (prefers-color-scheme: dark) {
         :root {

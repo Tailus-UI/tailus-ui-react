@@ -1,7 +1,7 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import {tooltip as theme} from "@tailus/themer-tooltip";
-import {cn} from "../../lib/utils";
 import React from "react";
+import { tooltip, type TooltipProps } from "@tailus/themer";
+
 
 const TooltipProvider = TooltipPrimitive.Provider;
 const TooltipRoot = TooltipPrimitive.Root;
@@ -10,23 +10,43 @@ const TooltipPortal = TooltipPrimitive.Portal;
 
 const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
->(({className, sideOffset = 4, ...props}, ref) => (
-  <TooltipPrimitive.Content
-    sideOffset={sideOffset}
-    className={cn(theme.content, className)}
-    ref={ref}
-    {...props}
-  />
-))
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content> & TooltipProps
+  >(({ className, fancy, inverted, sideOffset = 4, ...props }, ref) => {
+    
+    const { content } = tooltip();
 
-const TooltipArrow = React.forwardRef((props, forwardedRef) => (
-  <TooltipPrimitive.Arrow
-    className={theme.arrow}
-    ref={forwardedRef}
-    {...props}
-  />
-));
+    if (fancy && inverted) {
+      throw new Error('The fancy and inverted props cannot be used together.');
+    }
+
+    return(
+      <TooltipPrimitive.Content
+        sideOffset={sideOffset}
+        className={content({ fancy, inverted, className })}
+        ref={ref}
+        {...props}
+      />
+    )
+  })
+
+const TooltipArrow = React.forwardRef<
+  SVGSVGElement, React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Arrow> & TooltipProps
+  >(({ fancy, inverted, className, ...props }) => {
+  
+    const { arrow } = tooltip();
+
+    if (fancy && inverted) {
+      throw new Error('The fancy and inverted props cannot be used together.');
+    }
+  
+    return(
+      <TooltipPrimitive.Arrow
+        className={arrow({ fancy, inverted, className })}
+        {...props}
+      />
+    )
+  }
+);
 
 export {
   TooltipProvider,
@@ -36,3 +56,12 @@ export {
   TooltipContent,
   TooltipArrow
 };
+
+export default {
+  Provider: TooltipProvider,
+  Root: TooltipRoot,
+  Trigger: TooltipTrigger,
+  Portal: TooltipPortal,
+  Content: TooltipContent,
+  Arrow: TooltipArrow
+}

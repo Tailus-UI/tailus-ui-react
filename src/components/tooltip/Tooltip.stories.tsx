@@ -1,22 +1,24 @@
-import {TooltipArrow, TooltipContent, TooltipPortal, TooltipProvider, TooltipRoot, TooltipTrigger} from "./Tooltip";
+import { TooltipArrow, TooltipContent, TooltipPortal, TooltipProvider, TooltipRoot, TooltipTrigger } from "./Tooltip";
+import { type TooltipProps } from "@tailus/themer";
 import {ArchiveIcon} from "@radix-ui/react-icons";
-import {iconButton as buttonTheme} from "@tailus/themer-button";
 import {Meta, StoryObj} from "@storybook/react";
+import Button from "../button/Button";
 
-const TooltipUI = ({ withArrow }: { withArrow?: boolean }) => {
+const TooltipUI = (args:TooltipProps & {arrow?:boolean}) => {
     return (
       <TooltipProvider>
           <TooltipRoot>
-              <TooltipTrigger>
-                  <button className={buttonTheme.warning.md}>
-                      <span className="sr-only">Archive</span>
-                      <ArchiveIcon className={buttonTheme.icon.md} aria-hidden/>
-                  </button>
+              <TooltipTrigger asChild>
+                    <Button.Root intent="warning" aria-label="archive button">
+                        <Button.Icon>
+                            <ArchiveIcon />
+                        </Button.Icon>
+                  </Button.Root>
               </TooltipTrigger>
               <TooltipPortal>
-                  <TooltipContent>
+                  <TooltipContent fancy={args.fancy} inverted={args.inverted}>
                       Archive
-                      {withArrow && <TooltipArrow />}
+                      {args.arrow && <TooltipArrow fancy={args.fancy} inverted={args.inverted} />}
                   </TooltipContent>
               </TooltipPortal>
           </TooltipRoot>
@@ -37,7 +39,9 @@ const meta: Meta<typeof TooltipUI> = {
     },
     tags: ['autodocs'],
     argTypes: {
-        withArrow: { control: 'boolean', defaultValue: false  },
+        arrow: { control: 'boolean', defaultValue: false },
+        fancy: { control: 'boolean', defaultValue: true },
+        inverted: { control: 'boolean', defaultValue: false },
     }
 };
 
@@ -47,6 +51,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Tooltip: Story = {
     args: {
-        withArrow: true,
+        arrow: false,
+        fancy: true,
+        inverted: false,
     },
 };
