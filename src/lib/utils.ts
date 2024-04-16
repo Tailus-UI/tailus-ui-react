@@ -23,6 +23,6 @@ export function cn(...inputs: ClassValue[]) {
  */
 export function cloneElement(element: React.ReactElement, classNames: string) {
   return React.cloneElement(element, {
-    className: cn(element.props.className, classNames)
+    className: twMerge(element.props.className, classNames)
   });
 }
