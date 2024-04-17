@@ -4,16 +4,17 @@ import {
   PopoverArrow,
   PopoverClose,
   PopoverContent,
-  PopoverDescription,
   PopoverPortal,
   PopoverRoot,
-  PopoverTitle,
   PopoverTrigger
 } from "./Popover.tsx";
+import { type PopoverProps } from "@tailus/themer";
 import React from "react";
 import {Meta, StoryObj} from "@storybook/react";
+import { Title } from "../typography/Title.tsx";
+import { Text } from "../typography/Text.tsx";
 
-interface PopoverUIProps extends React.ComponentPropsWithoutRef<typeof PopoverContent> {
+interface PopoverUIProps extends React.ComponentPropsWithoutRef<typeof PopoverContent>,PopoverProps {
   withArrow?: boolean;
   arrowWidth?: number;
   arrowHeight?: number;
@@ -21,18 +22,25 @@ interface PopoverUIProps extends React.ComponentPropsWithoutRef<typeof PopoverCo
 
 const PopoverUI = ({...props}: PopoverUIProps) => (
   <PopoverRoot>
-    <PopoverTrigger>
+    <PopoverTrigger asChild>
       <button className={softIconButton.gray.md}>
         <span className="sr-only">Learn more</span>
         <InfoCircledIcon className={softIconButton.icon.md}/>
       </button>
     </PopoverTrigger>
     <PopoverPortal>
-      <PopoverContent sideOffset={props.sideOffset} align={props.align} side={props.side}>
-        <PopoverTitle>Title</PopoverTitle>
-        <PopoverDescription>
+      <PopoverContent
+        className="max-w-xs"
+        sideOffset={props.sideOffset}
+        align={props.align}
+        side={props.side}
+        fancy={props.fancy}
+        mixed={props.mixed}
+      >
+        <Title as="h3" size="base">Title</Title>
+        <Text className="mt-2">
           Inventore perspiciatis atque consequatur? Autem reiciendis nemo error, rerum tempora.
-        </PopoverDescription>
+        </Text>
         <PopoverClose asChild>
           <button className={ghostIconButton.gray.md + " !absolute top-1 right-1"}>
             <span className="sr-only">Dismiss dialog</span>
@@ -96,6 +104,16 @@ const meta: Meta<typeof PopoverUI> = {
       control: 'number',
       description: 'The height of the popover arrow.',
       defaultValue: 5,
+    },
+    fancy: {
+      control: 'boolean',
+      defaultValue: true,
+      description: 'Whether to use the fancy variant.',
+    },
+    mixed: {
+      control: 'boolean',
+      defaultValue: false,
+      description: 'Whether to use the mixed variant.',
     },
   }
 };
