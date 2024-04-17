@@ -1,6 +1,5 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import {dialog as dialogTheme} from "@tailus/themer-dialog";
-import {cn} from "../../lib/utils.ts";
 import React from "react";
 import Button from "../button/Button.tsx";
 import {
@@ -23,13 +22,18 @@ const DialogClose = DialogPrimitive.Close;
 const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentProps<typeof DialogPrimitive.Overlay>
->(({className, ...props}, forwardedRef) => (
-  <DialogPrimitive.Overlay
-    {...props}
-    ref={forwardedRef}
-    className={cn(dialogTheme.overlay, className)}
-  />
-));
+  >(({ className, ...props }, forwardedRef) => {
+    
+    const { overlay } = dialog()
+
+    return (
+      <DialogPrimitive.Overlay
+          {...props}
+          ref={forwardedRef}
+          className={overlay({ className })}
+      />
+    )
+  });
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
@@ -111,16 +115,20 @@ const DialogActions = React.forwardRef<
 
 type DialogCloseButtonProps = React.ComponentProps<typeof Button.Root>;
 
-const DialogCloseButton: React.FC<DialogCloseButtonProps> = ({className, ...props}) => (
-  <Button.Root
-    {...props}
-    className={cn(dialogTheme.closeButton, "rounded-full absolute top-1 right-1")}
-  >
-    <Button.Icon type="only" size="xs">
+const DialogCloseButton: React.FC<DialogCloseButtonProps> = ({ className, ...props }) => {
+  const { close } = dialog()
+
+  return(
+    <Button.Root
+      {...props}
+      className={close({ className })}
+    >
+      <Button.Icon type="only" size="xs">
         {props.children}
-    </Button.Icon>
-  </Button.Root>
-);
+      </Button.Icon>
+    </Button.Root>
+  )
+};
 
 export default {
   Root: DialogRoot,
