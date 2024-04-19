@@ -1,20 +1,25 @@
 import * as LabelPrimitive from "@radix-ui/react-label";
-import {outlinedForm as theme} from "@tailus/themer-form";
 import React from "react";
-import {cn} from "../../lib/utils.ts";
+import {
+    form,
+    type LabelProps,
+} from "@tailus/themer"
 
-type LabelRootProps = {
-  size?: "xs" | "sm" | "md",
+export interface FormLabelProps extends LabelProps {
+  className?: string;
 }
 
 const Label = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & LabelRootProps
->(({className, size = "md", ...props}, forwardedRef) => {
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & FormLabelProps
+  >(({ className,floating, variant, asTextarea, size = "md", ...props }, forwardedRef) => {
+  
+  const { label } = form();
+    
   return (
     <LabelPrimitive.Root
       ref={forwardedRef}
-      className={cn(theme.label[size], className)}
+      className={label({ size, floating, variant, asTextarea, className })}
       {...props}
     />
     )
