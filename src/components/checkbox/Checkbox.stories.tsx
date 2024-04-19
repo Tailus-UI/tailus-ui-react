@@ -1,21 +1,23 @@
-import { CheckIcon, DividerHorizontalIcon } from "@radix-ui/react-icons";
-import {CheckboxIndicator, CheckboxLabel, CheckboxRoot} from "./Checkbox";
-import {Meta, StoryObj} from "@storybook/react";
-import { ReactNode } from "react";
-import React from "react";
+import { CheckIcon } from "@radix-ui/react-icons";
+import { CheckboxIndicator, CheckboxRoot } from "./Checkbox";
+import { Meta, StoryObj } from "@storybook/react";
+import Label from "../label/Label";
+import { Caption } from "../typography";
+import type { CheckboxProps } from "@tailus/themer";
 
-const CheckboxUI = ({ intent, label, fancy }: { intent: 'primary' | 'gray' | 'neutral', fancy?:boolean, children: ReactNode, label: string }) => {
+const CheckboxUI = (args:CheckboxProps) => {
   return (
-    <div className="flex items-center">
-      <CheckboxRoot intent={intent} id="c1" fancy={fancy} defaultChecked>
+    <div className="max-w-md grid items-center gap-x-3 gap-y-1 [grid-template-columns:1fr_auto]">
+      <CheckboxRoot className="size-4" intent={args.intent} id="c1" fancy={args.fancy}>
         <CheckboxIndicator>
-          <CheckIcon className="size-5" />
+          <CheckIcon className="size-4" />
         </CheckboxIndicator>
       </CheckboxRoot>
-      <CheckboxLabel htmlFor="c1" className="text-gray-950 dark:text-white peer-disabled:opacity-50">
-        {label}
-      </CheckboxLabel>
-  </div> 
+      <Label htmlFor="c1">
+        Accept terms and conditions.
+      </Label>
+      <Caption as="p" className="row-start-2 col-start-2">A control that allows the user to toggle between checked and not checked.</Caption>
+    </div>
   )
 };
 
@@ -34,17 +36,11 @@ const meta: Meta<typeof CheckboxUI> = {
   argTypes: {
     intent: {
       control: 'select',
-      options: ['primary', 'gray', 'neutral'],
+      options: ['primary', 'secondary', 'accent', 'gray', 'neutral'],
       defaultValue: 'primary',
     },
     fancy: {
       control: 'boolean',
-    },
-    children: {
-      control: 'hidden'
-    },
-    label: {
-      control: 'text',
     },
   },
 };
@@ -56,6 +52,7 @@ type Story = StoryObj<typeof meta>;
 export const Checkbox: Story = {
   args: {
     intent: 'primary',
-    label: 'Keep me signed in',
+    fancy:true
   },
+  render : CheckboxUI
 };
