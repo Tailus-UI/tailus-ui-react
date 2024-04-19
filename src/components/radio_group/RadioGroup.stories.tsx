@@ -1,6 +1,8 @@
 import RadioGroup from "./RadioGroup";
 import { Meta, StoryObj } from "@storybook/react";
 import Label from "../label/Label";
+import { Caption } from "../typography";
+import { Aligner } from "../form";
 
 interface RadioGroupProps {
   fancy?: boolean;
@@ -9,31 +11,34 @@ interface RadioGroupProps {
 
 const RadioGroupUI = (args: RadioGroupProps) => (
   <form>
-    <RadioGroup.Root className="space-y-3" defaultValue="problem" aria-label="View density" intent={args.intent} fancy={args.fancy}>
-      <div className="flex gap-3 items-center">
-        <RadioGroup.Item value="understanding" id="rr1">
+    <RadioGroup.Root className="space-y-6 max-w-md" defaultValue="problem" aria-label="View density" intent={args.intent} fancy={args.fancy}>
+      <Aligner>
+        <RadioGroup.Item value="easy" id="easy">
           <RadioGroup.Indicator/>
         </RadioGroup.Item>
-        <Label htmlFor="rr1">
-          Easy to understand
+        <Label htmlFor="easy">
+          Easy understanding
         </Label>
-      </div>
-      <div className="flex gap-3 items-center">
-        <RadioGroup.Item value="problem" id="rr2">
+        <Caption as="p" size="base" className="row-start-2 col-start-2">Buttons—where no buttons can be checked at a time.</Caption>
+      </Aligner>
+      <Aligner>
+        <RadioGroup.Item value="problem" id="problem">
           <RadioGroup.Indicator/>
         </RadioGroup.Item>
-        <Label htmlFor="rr2">
+        <Label htmlFor="problem">
           Solved my problem
         </Label>
-      </div>
-      <div className="flex gap-3 items-center">
-        <RadioGroup.Item value="other" id="rr3">
+        <Caption as="p" size="base" className="row-start-2 col-start-2">A set of checkable buttons—known as buttons—where.</Caption>
+      </Aligner>
+      <Aligner className="max-w-md grid items-center gap-x-3 gap-y-1 [grid-template-columns:auto_1fr]">
+        <RadioGroup.Item value="other" id="other">
           <RadioGroup.Indicator/>
         </RadioGroup.Item>
-        <Label htmlFor="rr3">
+        <Label htmlFor="other">
           Other
         </Label>
-      </div>
+        <Caption as="p" size="base" className="row-start-2 col-start-2">A set more than one can be checked at a time.</Caption>
+      </Aligner>
     </RadioGroup.Root>
   </form>
 );
@@ -68,7 +73,7 @@ const meta: Meta<typeof RadioGroupUI> = {
         name: 'string', required: false
       },
       control: 'select',
-      options: ['primary', 'gray', 'neutral'],
+      options: ['primary', 'secondary', 'accent', 'gray', 'neutral'],
     }
   }
 };
@@ -78,6 +83,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Toggle: Story = {
+  name:'Radio Group',
   args: {
     fancy: false,
     intent: 'primary',

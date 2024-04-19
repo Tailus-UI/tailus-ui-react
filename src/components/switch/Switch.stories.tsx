@@ -3,22 +3,21 @@ import { Meta, StoryObj } from "@storybook/react";
 import { type SwitchVariantsProps } from "./Switch.tsx";
 import Label from "../label/Label.tsx";
 import { Caption } from "../typography/Caption.tsx";
+import { Aligner } from "../form/Aligner.tsx";
 interface SwitchProps extends SwitchVariantsProps {
     disabled?: boolean;
 }
 const SwitchUI = (args:SwitchProps) => (
-    <form>
-        <div className="max-w-md space-y-1">
-            <div className="flex items-center justify-between">
-                <Label htmlFor="airplane-mode">
-                    Airplane mode
-                </Label>
-                <SwitchRoot className="mt-1" id="airplane-mode" fancy={args.fancy} intent={args.intent} disabled={args.disabled}>
-                    <SwitchThumb />
-                </SwitchRoot>
-            </div>
+    <form className="max-w-md">
+        <Aligner fromRight>
+            <Label htmlFor="airplane-mode">
+                Airplane mode
+            </Label>
+            <SwitchRoot className="mt-1" id="airplane-mode" fancy={args.fancy} intent={args.intent} disabled={args.disabled}>
+                <SwitchThumb />
+            </SwitchRoot>
             <Caption as="p" size="base">Switch components are used to allow users to toggle between two states, such as on and off.</Caption>
-        </div>
+        </Aligner>
     </form>
 );
 

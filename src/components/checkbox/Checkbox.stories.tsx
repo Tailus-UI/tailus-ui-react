@@ -4,20 +4,21 @@ import { Meta, StoryObj } from "@storybook/react";
 import Label from "../label/Label";
 import { Caption } from "../typography";
 import type { CheckboxProps } from "@tailus/themer";
+import { Aligner } from "../form";
 
 const CheckboxUI = (args:CheckboxProps) => {
   return (
-    <div className="max-w-md grid items-center gap-x-3 gap-y-1 [grid-template-columns:1fr_auto]">
-      <CheckboxRoot className="size-4" intent={args.intent} id="c1" fancy={args.fancy}>
+    <Aligner className="max-w-md">
+      <CheckboxRoot className="size-[1.125rem]" intent={args.intent} id="c1" fancy={args.fancy}>
         <CheckboxIndicator>
-          <CheckIcon className="size-4" />
+          <CheckIcon className="size-5" />
         </CheckboxIndicator>
       </CheckboxRoot>
       <Label htmlFor="c1">
         Accept terms and conditions.
       </Label>
-      <Caption as="p" className="row-start-2 col-start-2">A control that allows the user to toggle between checked and not checked.</Caption>
-    </div>
+      <Caption as="p" size="base" className="row-start-2 col-start-2">A control that allows the user to toggle between checked and not checked.</Caption>
+    </Aligner>
   )
 };
 
