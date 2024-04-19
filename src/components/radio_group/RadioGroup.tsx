@@ -63,24 +63,10 @@ const RadioGroupIndicator = React.forwardRef<
   )
 });
 
-const RadioGroupLabel = React.forwardRef<
-  React.ElementRef<"label">,
-  React.ComponentProps<"label">
->((props, forwardedRef) => {
-  return (
-        <label
-          {...props}
-          ref={forwardedRef}
-          className=""
-        />
-  )
-});
-
 const RadioGroup = {
   Root: RadioGroupRoot,
   Item: RadioGroupItem,
   Indicator: RadioGroupIndicator,
-  Label: RadioGroupLabel,
 }
 
 export default RadioGroup;
@@ -89,5 +75,4 @@ export {
   RadioGroupRoot,
   RadioGroupItem,
   RadioGroupIndicator,
-  RadioGroupLabel,
 }

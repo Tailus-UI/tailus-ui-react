@@ -1,5 +1,6 @@
 import RadioGroup from "./RadioGroup";
-import {Meta, StoryObj} from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
+import Label from "../label/Label";
 
 interface RadioGroupProps {
   fancy?: boolean;
@@ -13,25 +14,25 @@ const RadioGroupUI = (args: RadioGroupProps) => (
         <RadioGroup.Item value="understanding" id="rr1">
           <RadioGroup.Indicator/>
         </RadioGroup.Item>
-        <RadioGroup.Label htmlFor="rr1">
+        <Label htmlFor="rr1">
           Easy to understand
-        </RadioGroup.Label>
+        </Label>
       </div>
       <div className="flex gap-3 items-center">
         <RadioGroup.Item value="problem" id="rr2">
           <RadioGroup.Indicator/>
         </RadioGroup.Item>
-        <RadioGroup.Label htmlFor="rr2">
+        <Label htmlFor="rr2">
           Solved my problem
-        </RadioGroup.Label>
+        </Label>
       </div>
       <div className="flex gap-3 items-center">
         <RadioGroup.Item value="other" id="rr3">
           <RadioGroup.Indicator/>
         </RadioGroup.Item>
-        <RadioGroup.Label htmlFor="rr3">
+        <Label htmlFor="rr3">
           Other
-        </RadioGroup.Label>
+        </Label>
       </div>
     </RadioGroup.Root>
   </form>
@@ -53,7 +54,7 @@ const meta: Meta<typeof RadioGroupUI> = {
   tags: ['autodocs'],
   argTypes: {
     fancy: {
-      name: 'fnacy',
+      name: 'fancy',
       description: 'Whether to use the shadow variant',
       type: {
         name: 'boolean', required: false
