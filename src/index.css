@@ -21,10 +21,13 @@ body {
         --menu-radius : 1rem;
         --calendar-radius : var(--btn-radius);
         --avatar-radius : 9999px;
+        --input-radius : var(--btn-radius);
 
         --form-border-color : theme(colors.gray.300);
         --card-padding : theme(spacing[6]);
         --accordion-bg : theme(colors.gray.100);
+
+        --input-bg : theme(colors.gray.200);
 
         --feedback-bg : theme("colors.white/var(--feedback-bg-opacity)");
         --feedback-padding : var(--card-padding);
@@ -35,6 +38,8 @@ body {
         --accordion-padding : 1rem;
         --caption-text-color : theme(colors.gray.500);
         --body-text-color : theme(colors.gray.600);
+
+        --placeholder-text-color : theme(colors.gray.400);
     }
     .border, .border-t, .border-b, .border-l, .border-r, .border-y, .border-x {
         border-color: var(--ui-border-color);
@@ -56,6 +61,7 @@ body {
             --ui-bg:theme(colors.gray.900);
             color : theme("colors.white");
         --body-text-color : theme(colors.gray.400);
+        --input-bg : theme(colors.gray.800);
         }
     }
 }

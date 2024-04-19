@@ -1,34 +1,41 @@
 import { Label } from "@radix-ui/react-form";
-import { VariantProps, cva } from "class-variance-authority";
-import { cn } from "../../lib/utils.ts";
 import React from "react";
-import { outlinedForm as theme } from "@tailus/themer-form";
+import { useContext } from 'react';
+import {
+    form,
+    type LabelProps,
+} from "@tailus/themer"
+import { FormContext } from "./Field";
 
-export type FormLabelVariantProps = VariantProps<typeof formLabelVariants>;
-const formLabelVariants = cva('', {
-  variants: {
-    size: {
-      xs: theme.label.xs,
-      sm: theme.label.sm,
-      md: theme.label.md,
-      lg : theme.label.lg
-    },
-  }
-});
-
-export interface FormLabelProps extends FormLabelVariantProps {
+export interface FormLabelProps extends LabelProps {
   className?: string;
 }
 
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof Label>,
   React.ComponentPropsWithoutRef<typeof Label> & FormLabelProps
->(({ className, size = "sm", ...props }, forwardedRef) => (
-  <Label
-    ref={forwardedRef}
-    className={cn(formLabelVariants({ size: size }), className)}
-    {...props}
-  />
-));
+  >(({ className, floating, variant, size, ...props }, forwardedRef) => {
+
+    const { label } = form();
+    
+    const {
+      variant: contextVariant,
+      size: contextSize,
+      floating: contextFloating,
+      asTextarea:contextAsTextare,
+    } = useContext(FormContext);
+
+    variant = variant || contextVariant;
+    size = size || contextSize;
+    floating = floating || contextFloating;
+
+    return(
+      <Label
+        ref={forwardedRef}
+        className={label({ size, floating, asTextarea:contextAsTextare, variant, className })}
+        {...props}
+      />
+    )
+  });
 
 export default FormLabel;

@@ -4,43 +4,105 @@ import {
   FormField,
   FormInput,
   FormLabel,
-  FormMessage,
+    FormMessage,
+  FormTextArea
 } from "./";
 import { Meta, StoryObj } from "@storybook/react";
 
 type FormUIProps = {
-    variant: "soft" | "outlined" | "mixed";
-    size: "xs" | "sm" | "md" | "lg" | "xl";
-    labelSize: "xs" | "sm" | "md" | "lg";
-    messageSize: "xs" | "sm" | "md" | "lg";
-    withLabel?: boolean;
-    WithPlaceholder?: boolean;
-    message: 'primary' | 'secondary' | 'accent' | 'danger' | 'warning' | 'gray' | 'info' | 'success'; 
-    disabled? : boolean
+    variant: "soft" | "outlined" | "mixed" | "bottomOutlined" | "plain";
+    floatness: boolean;
+    size: "sm" | "md" | "lg" | "xl";
+    labelSize: "sm" | "md" | "lg";
+    messageSize: "xs" | "sm" | "md";
+    disabled?: boolean;
 };
 
-const FormUI = ({ variant, size, withLabel, WithPlaceholder, message, disabled, labelSize, messageSize }: FormUIProps) => (
-    <FormRoot className="w-72">
-        <FormField name="email" className="w-full">
-            {withLabel && <FormLabel size={labelSize}>Email</FormLabel>}
+const FormUI = ({ variant, size, disabled, labelSize, messageSize }: FormUIProps) => (
+    <FormRoot className="w-80">
+        <FormField name="email" className="w-full space-y-2" size={size}>
+            <FormLabel size={labelSize}>Label here</FormLabel>
             <FormControl asChild>
                 <FormInput
                     variant={variant}
                     size={size}
                     type="email"
                     disabled={disabled}
-                    placeholder={WithPlaceholder ? "Your email" : undefined}
+                    placeholder="Your placeholder here"
                     required
                 />
             </FormControl>
-            <FormMessage size={messageSize} intent={message}>
-                Helper message
-            </FormMessage>
-            <FormMessage size={messageSize} intent={message} match="valueMissing">
+            <FormMessage size={messageSize} match="valueMissing">
                 Please enter your email
             </FormMessage>
             <FormMessage size={messageSize} match="typeMismatch">
                 Please provide a valid email
+            </FormMessage>
+        </FormField>
+    </FormRoot>
+);
+
+const Floating = ({ variant, size, disabled }: FormUIProps) => (
+    <FormRoot className="w-80">
+        <FormField name="email" className="w-full space-y-2.5" floating variant={variant} size={size}>
+            <div className="relative">
+                <FormControl asChild>
+                    <FormInput
+                        type="email"
+                        disabled={disabled}
+                        placeholder=""
+                        required
+                    />
+                </FormControl>
+                <FormLabel>Label here</FormLabel>
+            </div>
+            <FormMessage match="valueMissing">
+                Please enter your email
+            </FormMessage>
+            <FormMessage match="typeMismatch">
+                Please provide a valid email
+            </FormMessage>
+        </FormField>
+    </FormRoot>
+);
+
+const TextArea = ({ variant, size, disabled }: FormUIProps) => (
+    <FormRoot className="w-80">
+        <FormField name="message" className="w-full space-y-2" size={size}>
+            <FormLabel>Message here</FormLabel>
+            <FormControl asChild>
+                <FormTextArea
+                    variant={variant}
+                    size={size}
+                    disabled={disabled}
+                    rows={3}
+                    placeholder="Your placeholder here"
+                    required
+                />
+            </FormControl>
+            <FormMessage match="valueMissing">
+                Please enter your message
+            </FormMessage>
+        </FormField>
+    </FormRoot>
+);
+
+const FloatingTextArea = ({ variant, size, disabled }: FormUIProps) => (
+    <FormRoot className="w-80">
+        <FormField name="message" className="w-full space-y-2.5" floating asTextarea variant={variant} size={size}>
+            <div className="relative">
+                <FormControl asChild>
+                    <FormTextArea
+                        disabled={disabled}
+                        rows={3}
+                        placeholder=""
+                        required
+                    />
+                </FormControl>
+                <FormLabel>Message here</FormLabel>
+            </div>
+            <FormMessage match="valueMissing">
+                Please enter your message
             </FormMessage>
         </FormField>
     </FormRoot>
@@ -61,41 +123,28 @@ const meta:Meta<typeof FormUI> = {
     argTypes: {
         variant: {
             control: "select",
-            options: ["soft", "outlined", "mixed"],
+            options: ["soft", "outlined", "mixed", "bottomOutlined", "plain"],
             defaultValue: "soft",
         },
         size: {
             control: "select",
-            options: ["xs", "sm", "md", "lg", "xl"],
+            options: ["sm", "md", "lg", "xl"],
             defaultValue: "md",
         },
         labelSize: {
             control: "select",
-            options: ["xs", "sm", "md", "lg"],
+            options: ["sm", "md", "lg", "xl"],
             defaultValue: "md",
         },
         messageSize: {
             control: "select",
-            options: ["xs", "sm", "md", "lg"],
-            defaultValue : "md"
-        },
-        withLabel: {
-            control: "boolean",
-            defaultValue: true,
-        },
-        WithPlaceholder: {
-            control: "boolean",
-            defaultValue: false,
+            options: ["xs", "sm", "md"],
+            defaultValue : "sm"
         },
         disabled: {
             control: "boolean",
             defaultValue: false,
-        },
-        message: {
-            control: "select",
-            options: ["primary", "secondary", "accent", "danger", "warning", "gray", "info", "success"],
-            defaultValue: "warning",
-        },
+        }
     },
 };
 
@@ -109,8 +158,38 @@ export const Form: Story = {
         size: "md",
         labelSize: "md",
         messageSize : "sm",
-        withLabel: true,
-        WithPlaceholder: false,
-        message: "gray",
     },
+};
+
+export const FloatingExample: Story = {
+    name:"Floating Label",
+    args: {
+        variant: "outlined",
+        size: "md",
+        labelSize: "md",
+        messageSize : "sm",
+    },
+    render: Floating
+};
+
+export const TextAreaExample: Story = {
+    name:"Text Area",
+    args: {
+        variant: "outlined",
+        size: "md",
+        labelSize: "md",
+        messageSize : "sm",
+    },
+    render: TextArea
+};
+
+export const FloatingTextAreaExample: Story = {
+    name:"Floating Text Area",
+    args: {
+        variant: "outlined",
+        size: "md",
+        labelSize: "md",
+        messageSize : "sm",
+    },
+    render: FloatingTextArea
 };

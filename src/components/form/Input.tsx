@@ -1,22 +1,39 @@
 import React from 'react';
-import { cn } from '../../lib/utils.ts';
-import {inputFormVariants} from "./utils.ts";
+import { FormContext } from './Field';
+import { useContext } from 'react';
+import {
+    form,
+    type InputProps as InputVariants,
+} from "@tailus/themer"
 
-const inputVariants = inputFormVariants("input");
-
-export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
-    variant?: "soft" | "outlined" | "mixed";
-    size?: "xs" | "sm" | "md" | "lg" | "xl";
-  }
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>, InputVariants {}
 
 export const FormInput = React.forwardRef<
-  HTMLInputElement, InputProps>(({ className, variant, size, ...props }, forwardedRef) => (
-  <input
-    ref={forwardedRef as React.RefObject<HTMLInputElement>}
-    className={cn(inputVariants({ variant, size, className }))}
-    {...props}
-  />
-));
+  HTMLInputElement, InputProps>(({ variant, className, size, ...props }, forwardedRef) => {
+    const { input } = form();
+
+    const {
+      variant: contextVariant,
+      size: contextSize,
+      floating
+    } = useContext(FormContext);
+
+    variant = variant || contextVariant;
+    size = size || contextSize;
+
+    if (variant === "soft" && (size === "md" || size === "sm") && floating) {
+      throw Error("Floating label is only supported with size `lg` and `xl` for the soft variant !");
+    } else if (variant === "plain" && floating) {
+      throw Error("Floating label is not supported with the plain variant !");
+    }
+
+    return (
+      <input
+        ref={forwardedRef}
+        className={input({ variant, size, floating, className})}
+        {...props}
+      />
+    );
+});
 
 export default FormInput;
