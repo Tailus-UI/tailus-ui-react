@@ -1,13 +1,13 @@
 import React from "react";
 import Progress from "./Progress";
-import {Meta, StoryObj} from "@storybook/react";
-import {ClockIcon} from "@radix-ui/react-icons";
+import { type RootProps, type IndicatorProps as IndicatorVariants } from "@tailus/themer";
+import { Meta, StoryObj } from "@storybook/react";
 
-interface ComponentProps {
-  value: number;
+interface ArgsType extends RootProps, IndicatorVariants {
+  value: number
 }
 
-const ProgressUI = ({...args}: ComponentProps) => {
+const ProgressUI = (args:ArgsType) => {
   const [progress, setProgress] = React.useState(args.value);
 
   React.useEffect(() => {
@@ -16,78 +16,25 @@ const ProgressUI = ({...args}: ComponentProps) => {
 
   return (
     <Progress.Root
-      className={"w-64"}
+      className={"w-72"}
+      variant={args.variant}
+      size={args.size}
       value={progress}
     >
       <Progress.Indicator
+        intent={args.intent}
+        indeterminate={args.indeterminate}
+        complete={args.complete}
+        loading={args.loading}
+        withStripes={args.withStripes}
+        withHighlight={args.withHighlight}
+        innerShadow={args.innerShadow}
         style={{transform: `translateX(-${100 - progress}%)`}}
       />
     </Progress.Root>
   );
 };
 
-const GradientProgress = ({...args}: ComponentProps) => {
-  const [progress, setProgress] = React.useState(args.value);
-  const maxTime = 60; // max time in minutes
-  const maxFiles = 124; // max number of files
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => setProgress(args.value), 100);
-    return () => clearTimeout(timer);
-  }, [args.value]);
-
-  // Calculate remaining time and uploaded files based on progress
-  const remainingTime = maxTime - Math.round((progress * maxTime) / 100);
-  const uploadedFiles = Math.round((progress * maxFiles) / 100);
-
-  return (
-    <div>
-      <Progress.Header>
-        <Progress.Label>{progress}% Completed</Progress.Label>
-        <Progress.Timer>
-          <ClockIcon />
-          <span>{remainingTime}min</span>
-        </Progress.Timer>
-      </Progress.Header>
-      <Progress.Root className={"w-64"} value={progress}>
-        <Progress.Indicator
-          intent={"gradient"}
-          className={"from-primary-600 to-secondary-400"}
-          style={{ transform: `translateX(-${100 - progress}%)` }}
-        />
-      </Progress.Root>
-      <Progress.Message>{uploadedFiles} files of {maxFiles} files uploaded</Progress.Message>
-    </div>
-  );
-};
-
-const ProgressExample2= ({...args}: ComponentProps) => {
-  const [progress, setProgress] = React.useState(args.value);
-  const totalStorage = 15; // total storage in GB
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => setProgress(args.value), 100);
-    return () => clearTimeout(timer);
-  }, [args.value]);
-
-  // Calculate used storage based on progress
-  const usedStorage = (progress * totalStorage) / 100;
-
-  return (
-    <div>
-      <Progress.Header>
-        <Progress.Label>{progress}% of storage used</Progress.Label>
-      </Progress.Header>
-      <Progress.Root className={"w-64"} value={progress}>
-        <Progress.Indicator
-          intent={"danger"}
-          style={{ transform: `translateX(-${100 - progress}%)` }}
-        />
-      </Progress.Root>
-      <Progress.Message>{usedStorage.toFixed(2)} GB of {totalStorage} GB used</Progress.Message>
-    </div>
-  );
-};
 
 const meta: Meta<typeof ProgressUI> = {
   title: 'Progress',
@@ -110,6 +57,39 @@ const meta: Meta<typeof ProgressUI> = {
       step: 1,
       defaultValue: 0,
     },
+    size: {
+      control: 'select',
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+    },
+    variant: {
+      control: 'select',
+      options: ['soft', 'outlined', 'mixed'],
+    },
+    intent: {
+      control: 'select',
+      options: ['primary', 'gradient', 'secondary', 'accent', 'danger', 'success', 'warning', 'info', 'gray', 'neutral'],
+    },
+    complete: {
+      control: 'select',
+      options: ['primary', 'gradient', 'secondary', 'accent', 'danger', 'success', 'warning', 'info', 'gray', 'neutral'],
+    },
+    loading: {
+      control: 'select',
+      options: ['primary', 'gradient', 'secondary', 'accent', 'danger', 'success', 'warning', 'info', 'gray', 'neutral'],
+    },
+    indeterminate: {
+      control: 'select',
+      options: ['primary', 'gradient', 'secondary', 'accent', 'danger', 'success', 'warning', 'info', 'gray', 'neutral'],
+    },
+    withStripes: {
+      control: 'boolean',
+    },
+    withHighlight: {
+      control: 'boolean',
+    },
+    innerShadow: {
+      control: 'boolean',
+    },
   },
 };
 
@@ -121,19 +101,11 @@ export const Progress1: Story = {
   render: (args) => <ProgressUI {...args} />,
   args: {
     value: 0,
-  }
-}
-
-export const Progress2: Story = {
-  render: (args) => <GradientProgress {...args} />,
-  args: {
-    value: 0,
-  }
-}
-
-export const Progress3: Story = {
-  render: (args) => <ProgressExample2 {...args} />,
-  args: {
-    value: 0,
+    size: 'md',
+    variant: 'soft',
+    intent: 'primary',
+    complete: 'success',
+    loading: 'gray',
+    indeterminate: 'accent',
   }
 }
