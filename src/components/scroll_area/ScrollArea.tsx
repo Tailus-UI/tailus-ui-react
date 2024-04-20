@@ -1,7 +1,8 @@
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
-import {scrollArea as theme} from "@tailus/themer-scroll-area"
 import React from "react";
-import {cn} from "../../lib/utils.ts";
+import { scrollArea } from "@tailus/themer"
+
+const {root, bar, thumb} = scrollArea()
 
 const ScrollAreaRoot = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
@@ -10,13 +11,11 @@ const ScrollAreaRoot = React.forwardRef<
   <ScrollAreaPrimitive.Root
     {...props}
     ref={forwardedRef}
-    className={cn(theme.root, props.className)}
+    className={root({className: props.className})}
   />
 ));
-ScrollAreaRoot.displayName = ScrollAreaPrimitive.Root.displayName;
 
 const ScrollAreaViewport = ScrollAreaPrimitive.Viewport;
-ScrollAreaViewport.displayName = ScrollAreaPrimitive.Viewport.displayName;
 
 const ScrollAreaScrollBar = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Scrollbar>,
@@ -34,10 +33,10 @@ const ScrollAreaScrollBar = React.forwardRef<
       {...props}
       orientation={orientation}
       ref={forwardedRef}
-      className={cn(theme.bar[orientation], className)}
+      className={bar({className})}
     >
       {children ?? (
-        <ScrollAreaPrimitive.Thumb className={theme.thumb}/>
+        <ScrollAreaPrimitive.Thumb className={thumb({className})}/>
       )}
     </ScrollAreaPrimitive.Scrollbar>
   );
@@ -51,23 +50,19 @@ const ScrollAreaThumb = React.forwardRef<
   <ScrollAreaPrimitive.Thumb
     {...props}
     ref={forwardedRef}
-    className={cn(theme.thumb, props.className)}
+    className={thumb({className: props.className})}
   />
 ));
-ScrollAreaThumb.displayName = 'ScrollAreaThumb';
 
 const ScrollAreaCorner = ScrollAreaPrimitive.Corner;
-ScrollAreaCorner.displayName = ScrollAreaPrimitive.Corner.displayName;
 
-const ScrollArea = {
+export default {
   Root: ScrollAreaRoot,
   Viewport: ScrollAreaViewport,
   Scrollbar: ScrollAreaScrollBar,
   Thumb: ScrollAreaThumb,
   Corner: ScrollAreaCorner,
 }
-
-export default ScrollArea;
 
 export {
   ScrollAreaRoot,
