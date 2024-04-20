@@ -183,7 +183,7 @@ const IOSExample = (args: AlertDialogProps) => {
     </AlertDialog.Root>
   )
 }
-const FigmaExample = (args: AlertDialogProps) => {
+const MacOsExample = (args: AlertDialogProps) => {
   const renderTriggerIcon = (intent: "warning" | "danger") => {
     switch (intent) {
       case "warning":
@@ -211,7 +211,7 @@ const FigmaExample = (args: AlertDialogProps) => {
         <AlertDialog.Content className="overflow-hidden p-0 flex max-w-fit w-full" fancy={args.fancy} mixed={args.mixed}>
           <div className="p-[--feedback-padding]">
             <AlertDialog.Title align="left">{args.title} ?</AlertDialog.Title>
-            <AlertDialog.Description align="left" className="mt-2">{args.description}</AlertDialog.Description>
+            <AlertDialog.Description align="left" className="mt-1">{args.description}</AlertDialog.Description>
           </div>
           <div className="w-fit flex">
             <Separator variant={args.fancy ? "fancy" : "simple"}/>
@@ -220,10 +220,10 @@ const FigmaExample = (args: AlertDialogProps) => {
                 <Button.Root
                   className="rounded-none h-1/2 w-full"
                   variant="ghost"
-                  intent="gray"
+                  intent="success"
                   size="sm"
                 >
-                  <Button.Label>{args.cancelText}</Button.Label>
+                  <Button.Label>Accept</Button.Label>
                 </Button.Root>
               </AlertDialog.Cancel>
               <Separator orientation="horizontal" variant={args.fancy ? "fancy" : "simple"}/>
@@ -231,10 +231,10 @@ const FigmaExample = (args: AlertDialogProps) => {
                 <Button.Root
                   className="rounded-none h-1/2 w-full"
                   variant="ghost"
-                  intent={args.intent}
+                  intent="danger"
                   size="sm"
                 >
-                  <Button.Label>{args.actionText}</Button.Label>
+                  <Button.Label>Decline</Button.Label>
                 </Button.Root>
               </AlertDialog.Action>
             </AlertDialog.Actions>
@@ -335,8 +335,8 @@ export const IOSAlert: Story = {
   render: IOSExample,
 }
 
-export const FigmaAlert: Story = {
+export const CallAlert: Story = {
   ...Alert1,
-  name: "Figma Example",
-  render: FigmaExample,
+  name: "Mac OS Call Alert",
+  render: MacOsExample,
 }
