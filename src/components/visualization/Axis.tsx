@@ -10,11 +10,12 @@ import { axis } from '@tailus/themer';
 export const YAxis: React.FC<YAxisProps> = (props) => {
     return (
         <YPrimitive
-            stroke={props.stroke || "currentColor"}
+            stroke="currentColor"
             className={axis({class:props.className})}
-            fontSize={props.fontSize || 12}
-            tickLine={props.tickLine || false}
-            axisLine={props.axisLine || false}
+            fontSize={12}
+            tickLine={false}
+            axisLine={false}
+            {...props}
         />
     )
 }
@@ -22,11 +23,11 @@ export const YAxis: React.FC<YAxisProps> = (props) => {
 export const XAxis: React.FC<XAxisProps> = (props) => {
     return (
         <XPrimitive
-            stroke={props.stroke || "currentColor"}
+            stroke="currentColor"
             className={axis({class:props.className})}
-            fontSize={props.fontSize || 12}
-            tickLine={props.tickLine || false}
-            axisLine={props.axisLine || false}
+            fontSize={12}
+            tickLine={false}
+            axisLine={false}
         />
     )
 }

@@ -17,9 +17,9 @@ interface CustomTooltipProps extends React.HTMLAttributes<HTMLDivElement>, Toolt
 export const Root: React.FC<TooltipProps<number, string>> = (props) => {
     return (
         <Primitive
+            cursor={{ stroke: 'currentColor', strokeWidth: 2 }}
+            offset={6}
             {...props}
-            cursor={props.cursor || { stroke: 'currentColor', strokeWidth: 2 }}
-            offset={props.offset || 6}
         />
     )
 }

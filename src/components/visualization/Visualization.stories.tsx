@@ -1,8 +1,9 @@
 import { faker } from '@faker-js/faker';
-import { ResponsiveContainer, Area, AreaChart } from 'recharts';
+import { ResponsiveContainer } from 'recharts';
 import Tooltip from './Tooltip';
 import Axis from './Axis';
 import CartesianGrid from './CartesianGrid';
+import {Area, AreaChart} from "./Area"
 import { type VTooltipProps as TooltipProps } from "@tailus/themer";
 import type { Meta, StoryObj } from '@storybook/react';
 
@@ -39,22 +40,8 @@ const Chart = (args:TooltipProps) => {
                         />
                     } />
                     <CartesianGrid horizontal={false} />
-                    <Area
-                        className="text-accent-500"
-                        dataKey="Savings"
-                        stroke="currentColor"
-                        strokeWidth={1.5}
-                        strokeLinejoin="round"
-                        fill="url(#colorOld)"
-                    />
-                    <Area
-                        className="text-primary-600 dark:text-primary-500"
-                        dataKey="Spends"
-                        stroke="currentColor"
-                        strokeWidth={1.5}
-                        strokeLinejoin="round"
-                        fill="url(#colorNew)"
-                    />
+                    <Area intent="accent" dataKey="Savings" />
+                    <Area intent="primary" dataKey="Spends" />
                 </AreaChart>
             </ResponsiveContainer>
         </div>
