@@ -1,6 +1,8 @@
 import { faker } from '@faker-js/faker';
-import { Tooltip, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Area, AreaChart } from 'recharts';
-import { Tooltip as CustomTooltip } from './Tooltip';
+import { ResponsiveContainer, Area, AreaChart } from 'recharts';
+import Tooltip from './Tooltip';
+import Axis from './Axis';
+import CartesianGrid from './CartesianGrid';
 import { type VTooltipProps as TooltipProps } from "@tailus/themer";
 import type { Meta, StoryObj } from '@storybook/react';
 
@@ -25,25 +27,18 @@ const Chart = (args:TooltipProps) => {
                             <stop className="text-white dark:text-gray-950" offset="95%" stopColor="currentColor" stopOpacity={0} />
                         </linearGradient>
                     </defs>
-                    <YAxis
-                        stroke="currentColor"
-                        className="text-gray-500"
-                        fontSize={12}
-                        tickLine={false}
-                        axisLine={false}
-                    />
-                    <XAxis
-                        dataKey="name"
-                        stroke="currentColor"
-                        className="text-gray-500"
-                        fontSize={12}
-                        tickLine={false}
-                        axisLine={false}
-                    />
-                    <Tooltip active cursor={{ stroke: 'currentColor', strokeWidth: 2 }} offset={6} content={
-                        <CustomTooltip fancy={args.fancy} mixed={args.mixed} active={false} payload={[]} label={""} />
+                    <Axis.Y />
+                    <Axis.X/>
+                    <Tooltip.Root content={
+                        <Tooltip.Custom
+                            fancy={args.fancy}
+                            mixed={args.mixed}
+                            active={false}
+                            payload={[]}
+                            label={""}
+                        />
                     } />
-                    <CartesianGrid horizontal={false} strokeDasharray={3} className="text-[--ui-light-border-color] dark:text-[--ui-dark-border-color]" stroke="currentColor" />
+                    <CartesianGrid horizontal={false} />
                     <Area
                         className="text-accent-500"
                         dataKey="Savings"

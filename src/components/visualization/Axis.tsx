@@ -30,3 +30,8 @@ export const XAxis: React.FC<XAxisProps> = (props) => {
         />
     )
 }
+
+export default {
+    X: XAxis,
+    Y: YAxis
+}

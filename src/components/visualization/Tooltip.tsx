@@ -1,5 +1,6 @@
 import React from "react";
-import { vTooltip as tooltip, type VTooltipProps as TooltipProps } from "@tailus/themer";
+import { vTooltip as tooltip, type VTooltipProps as TooltipVariants } from "@tailus/themer";
+import { Tooltip as Primitive, type TooltipProps } from "recharts";
 
 type PayloadEntry = {
     name: string;
@@ -7,15 +8,25 @@ type PayloadEntry = {
     color: string;
 };
 
-interface CustomTooltipProps extends React.HTMLAttributes<HTMLDivElement>, TooltipProps {
+interface CustomTooltipProps extends React.HTMLAttributes<HTMLDivElement>, TooltipVariants {
     active: boolean;
     payload: PayloadEntry[];
     label: string;
 }
 
+export const Root: React.FC<TooltipProps<number, string>> = (props) => {
+    return (
+        <Primitive
+            {...props}
+            cursor={props.cursor || { stroke: 'currentColor', strokeWidth: 2 }}
+            offset={props.offset || 6}
+        />
+    )
+}
+
 const { root, title, separator, content, entry:entryTheme, entryValue, entryNameContainer, entryName, entryIndicator } = tooltip()
 
-export const Tooltip: React.FC<CustomTooltipProps> = ({
+export const Custom: React.FC<CustomTooltipProps> = ({
     active,
     payload,
     label,
@@ -56,3 +67,8 @@ export const Tooltip: React.FC<CustomTooltipProps> = ({
 
   return null;
 };
+
+export default {
+    Root: Root,
+    Custom : Custom
+}
