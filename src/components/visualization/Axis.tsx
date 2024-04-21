@@ -28,6 +28,7 @@ export const XAxis: React.FC<XAxisProps> = (props) => {
             fontSize={12}
             tickLine={false}
             axisLine={false}
+            xAxisId={0}
         />
     )
 }

@@ -14,11 +14,12 @@ interface CustomTooltipProps extends React.HTMLAttributes<HTMLDivElement>, Toolt
     label: string;
 }
 
-export const Root: React.FC<TooltipProps<number, string>> = (props) => {
+export const Tooltip: React.FC<TooltipProps<string, string> & CustomTooltipProps> = ({fancy, mixed, active, payload, label, ...props}) => {
     return (
         <Primitive
             cursor={{ stroke: 'currentColor', strokeWidth: 2 }}
             offset={6}
+            content={<Custom payload={payload} active={active} label={label} />}
             {...props}
         />
     )
@@ -57,7 +58,7 @@ export const Custom: React.FC<CustomTooltipProps> = ({
                                 } />
                                 <span className={entryName()}>{entry.name}</span>
                             </div>
-                            <span className={entryValue()}>${entry.value}</span>
+                            <span className={entryValue()}>{entry.value}</span>
                         </div>
                     ))}
                 </div>
@@ -67,8 +68,3 @@ export const Custom: React.FC<CustomTooltipProps> = ({
 
   return null;
 };
-
-export default {
-    Root: Root,
-    Custom : Custom
-}

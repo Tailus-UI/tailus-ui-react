@@ -40,6 +40,14 @@ body {
         --body-text-color : theme(colors.gray.600);
 
         --placeholder-text-color : theme(colors.gray.400);
+
+        /* visualization */
+        --area-primary-stroke:theme(colors.primary.600);
+        --area-secondary-stroke:theme(colors.secondary.600);
+        --area-accent-stroke:theme(colors.accent.600);
+        --area-gray-stroke:theme(colors.gray.600);
+        --area-neutral-stroke:theme(colors.gray.950);
+        --vtooltip-border-color:var(--ui-border-color);
     }
     .border, .border-t, .border-b, .border-l, .border-r, .border-y, .border-x {
         border-color: var(--ui-border-color);
@@ -62,6 +70,9 @@ body {
             color : theme("colors.white");
         --body-text-color : theme(colors.gray.400);
         --input-bg : theme(colors.gray.800);
+
+        --area-neutral-stroke:theme(colors.white);
+        --vtooltip-border-color:theme(colors.gray.700);
         }
     }
 }

@@ -1,66 +1,12 @@
 import React from 'react';
-import {
-    Area as Primitive,
-    type AreaProps,
-} from 'recharts';
 export { AreaChart } from "recharts"
-import { tv } from "tailwind-variants"
+import {gradientStop, type AreaProps as AreaVariants } from "@tailus/themer"
 
-const area = tv({
-    variants: {
-        intent: {
-            primary: "stroke-primary-600",
-            secondary: "stroke-secondary-600",
-            accent: "stroke-secondary-600",
-            gray: "stroke-gray-600",
-            neutral : "stroke-gray-950 dark:stroke-white"
-        },
-        gradient: {
-            false : ""
-        },
-    },
-    compoundVariants: [
-        {
-            gradient: false,
-            intent: "primary",
-            class : "fill-primary-500/15"
-        },
-        {
-            gradient: false,
-            intent: "secondary",
-            class : "fill-secondary-500/15"
-        },
-        {
-            gradient: false,
-            intent: "accent",
-            class : "fill-accent-500/15"
-        },
-        {
-            gradient: false,
-            intent: ["gray", "neutral"],
-            class : "fill-gray-500/15"
-        }
-    ],
-    defaultVariants: {
-        intent: "primary",
-        gradient : false
-    }
-})
-
-type AreaVariants = {
-    intent?: keyof typeof area.variants.intent
-    gradient? : boolean
-}
-
-export const Area = React.forwardRef<Primitive, AreaProps & AreaVariants >(({ intent, gradient, ref, ...props}) => {
+export const LinearGradient: React.FC<Omit<AreaVariants, "gradient"> & {id:string}> = ({intent, id}) => {
     return (
-        <Primitive
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth={1.5}
-            strokeLinejoin="round"
-            className={area({ intent, gradient, class: props.className })}
-            {...props}
-        />
-    );
-});
+        <linearGradient x1={0} y1={0} x2={0} y2={1} id={id}>
+            <stop className={gradientStop({intent})} offset="5%" stopColor="currentColor" stopOpacity={0.8} />
+            <stop className="text-white dark:text-gray-950" offset="95%" stopColor="currentColor" stopOpacity={0} />
+        </linearGradient>
+    )
+}
