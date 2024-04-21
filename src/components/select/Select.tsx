@@ -1,11 +1,24 @@
 import React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import {select as theme} from "@tailus/themer-select"
-import {softForm as softTheme, outlinedForm as defaultTheme} from "@tailus/themer-form"
-import {cloneElement, cn} from "../../lib/utils.ts";
-import {CheckIcon, ChevronDownIcon, ChevronUpIcon} from "@radix-ui/react-icons";
+import { cloneElement } from "../../lib/utils.ts";
+import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
+import {
+  caption,
+  select,
+  trigger,
+  type SelectProps,
+  type TriggerProps
+} from "@tailus/themer"
+import { twMerge } from "tailwind-merge";
 
-const SelectRoot = SelectPrimitive.Root;
+interface SelectIconProps {
+  className?: string,
+  children: React.ReactNode,
+  size?: TriggerProps["size"]
+}
+
+const SelectContext = React.createContext<SelectProps>({});
+const { button, separator, itemIndicator, label } = select.soft()
 
 const SelectScrollUpButton = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
@@ -14,7 +27,7 @@ const SelectScrollUpButton = React.forwardRef<
   <SelectPrimitive.ScrollUpButton
     {...props}
     ref={forwardedRef}
-    className={cn(theme.scrollButton, className)}
+    className={button({className})}
   >
     {children || <ChevronUpIcon/>}
   </SelectPrimitive.ScrollUpButton>
@@ -27,84 +40,66 @@ const SelectScrollDownButton = React.forwardRef<
   <SelectPrimitive.ScrollDownButton
     {...props}
     ref={forwardedRef}
-    className={cn(theme.scrollButton, className)}
+    className={button({className})}
   >
     {children || <ChevronDownIcon/>}
   </SelectPrimitive.ScrollDownButton>
 ));
 
-interface SelectTriggerProps {
-  softVariant?: boolean,
-  size?: "xs" | "sm" | "md" | "lg" | "xl",
-  placeholder?: string,
-}
-
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & SelectTriggerProps
->((
-  {
-    softVariant = false,
-    size = "md",
-    className,
-    ...props
-  }, forwardedRef
-) => {
-  const theme = softVariant ? softTheme : defaultTheme;
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & TriggerProps
+>(({size, variant, className, children, ...props}, forwardedRef) => {
+  const { parent } = trigger()
   return (
     <SelectPrimitive.Trigger
       {...props}
       ref={forwardedRef}
-      className={cn(theme.input[size], "flex items-center justify-between gap-4", className)}
+      className={parent({size, variant, className})}
     >
-      <SelectPrimitive.Value placeholder={props.placeholder}/>
-      <SelectPrimitive.Icon>
-        <SelectTriggerIcon>
-          {props.children || <ChevronDownIcon/>}
-        </SelectTriggerIcon>
-      </SelectPrimitive.Icon>
+      {children}
     </SelectPrimitive.Trigger>
   )
 });
 
-interface SelectIconProps {
-  className?: string,
-  children: React.ReactNode
-}
-
-const SelectTriggerIcon = ({className, children}: SelectIconProps) => {
-  return cloneElement(children as React.ReactElement, cn(theme.triggerIcon, className));
+const SelectTriggerIcon = ({ className, size, children }: SelectIconProps) => {
+  const {icon} = trigger()
+  return cloneElement(children as React.ReactElement, icon({size, className}));
 };
-
-const SelectViewport = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Viewport>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Viewport>
->(({className, ...props}, forwardedRef) => (
-  <SelectPrimitive.Viewport
-    {...props}
-    ref={forwardedRef}
-    className={cn(theme.viewport, className)}
-  />
-));
 
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
->(({className, children, ...props}, forwardedRef) => (
-  <SelectPrimitive.Portal>
-    <SelectPrimitive.Content
-      {...props}
-      ref={forwardedRef}
-      className={cn(theme.content, className)}
-    >
-      <SelectScrollUpButton/>
-      <SelectViewport>
-        {children}
-      </SelectViewport>
-      <SelectScrollDownButton/>
-    </SelectPrimitive.Content>
-  </SelectPrimitive.Portal>
-));
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content> & SelectProps
+  >(({ className, variant, intent, mixed, fancy, children, ...props }, forwardedRef) => {
+
+    const {
+      variant: contextVariant,
+      intent: contextIntent,
+      fancy: contextFancy,
+    } = React.useContext(SelectContext);
+
+    variant = variant || contextVariant || "soft";
+    intent = intent || contextIntent;
+    fancy = fancy || contextFancy;
+
+    if (fancy && mixed) {
+      throw new Error('The fancy and mixed props cannot be used together.');
+    }
+    
+    const { content } = select[variant]();
+
+    return (
+      <SelectContext.Provider value={{variant, fancy, intent}}>
+        <SelectPrimitive.Content
+          {...props}
+          ref={forwardedRef}
+          className={content({ mixed, fancy, intent, className })}
+        >
+            {children}
+        </SelectPrimitive.Content>
+      </SelectContext.Provider>
+    ); 
+  });
 
 const SelectItemIndicator = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.ItemIndicator>,
@@ -113,25 +108,34 @@ const SelectItemIndicator = React.forwardRef<
   <SelectPrimitive.ItemIndicator
     {...props}
     ref={forwardedRef}
-    className={cn(theme.itemIndicator, className)}
+    className={itemIndicator({className})}
   />
 ));
 
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
->(({className, children, ...props}, forwardedRef) => (
-  <SelectPrimitive.Item
-    {...props}
-    ref={forwardedRef}
-    className={cn(theme.item, className)}
-  >
-    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-    <SelectItemIndicator>
-      <CheckIcon/>
-    </SelectItemIndicator>
-  </SelectPrimitive.Item>
-));
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> & SelectProps
+  >(({ className, variant, children, ...props }, forwardedRef) => {
+
+    const {
+      variant : contextVariant,
+      intent,
+    } = React.useContext(SelectContext);
+
+    variant = contextVariant || "soft";
+
+    const { item } = select[variant]();
+
+    return(
+      <SelectPrimitive.Item
+        {...props}
+        ref={forwardedRef}
+        className={item({ intent, className })}
+      >
+        {children}
+      </SelectPrimitive.Item>
+    )
+  });
 
 const SelectLabel = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Label>,
@@ -140,54 +144,57 @@ const SelectLabel = React.forwardRef<
   <SelectPrimitive.Label
     {...props}
     ref={forwardedRef}
-    className={cn(theme.label, className)}
+    className={twMerge(caption(), label(), className)}
   />
 ));
 
-interface SelectGroupProps {
-  label: string,
-}
-
 const SelectGroup = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Group>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Group> & SelectGroupProps
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Group>
 >(({children, ...props}, forwardedRef) => (
   <SelectPrimitive.Group
     {...props}
     ref={forwardedRef}
   >
-    <SelectLabel>{props.label}</SelectLabel>
     {children}
   </SelectPrimitive.Group>
 ));
 
 const SelectSeparator = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Separator>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>
->(({className, ...props}, forwardedRef) => (
-  <SelectPrimitive.Separator
-    {...props}
-    ref={forwardedRef}
-    className={cn(theme.separator, className)}
-  />
-));
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator> & Pick<SelectProps, "fancy">
+  >(({ className, fancy, ...props }, forwardedRef) => {
 
-const Select = {
-  Root: SelectRoot,
+    const {
+        fancy : contextFancy,
+    } = React.useContext(SelectContext);
+
+    fancy = fancy || contextFancy;
+    return (
+      <SelectPrimitive.Separator
+        {...props}
+        ref={forwardedRef}
+        className={separator({ fancy, className })}
+      />
+    );
+  });
+
+
+export default {
+  Root: SelectPrimitive.Root,
   Trigger: SelectTrigger,
   Content: SelectContent,
   Item: SelectItem,
   Group: SelectGroup,
   Separator: SelectSeparator,
+  Portal: SelectPrimitive.Portal,
+  Value: SelectPrimitive.Value,
+  Icon: SelectPrimitive.Icon,
+  ItemIndicator: SelectItemIndicator,
+  ScrollUpButton : SelectScrollUpButton,
+  ScrollDownButton: SelectScrollDownButton,
+  Label: SelectLabel,
+  Viewport: SelectPrimitive.Viewport,
+  ItemText: SelectPrimitive.ItemText,
+  TriggerIcon : SelectTriggerIcon
 };
-
-export default Select;
-
-export {
-  SelectRoot,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectGroup,
-  SelectSeparator,
-}

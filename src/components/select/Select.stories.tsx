@@ -1,62 +1,70 @@
+import { CaretSortIcon, CheckIcon, ChevronDownIcon } from "@radix-ui/react-icons";
 import Select from "./Select.tsx";
-import {Meta, StoryObj} from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
+import React, { ReactNode } from "react";
 
 interface SelectProps {
-  softVariant: boolean,
-  size: "xs" | "sm" | "md" | "lg" | "xl",
+  variant?: "soft" | "outlined" | "mixed" | "bottomOutlined" | "plain"
+  itemsVariant? : "soft" | "solid"
+  size?: "sm" | "md" | "lg" | "xl",
+  fancy?: boolean,
+  mixed?: boolean,
+  intent?: "primary" | "secondary" | "accent" | "gray" | "neutral",
+  position?: "item-aligned" | "popper"
 }
 
 const SelectUI = (args: SelectProps) => (
   <Select.Root>
-    <Select.Trigger aria-label="Food" placeholder="Select a fruit…" softVariant={args.softVariant} size={args.size}/>
-    <Select.Content>
-      <Select.Group label={"Fruits"}>
-        <Select.Item value="apple">Apple</Select.Item>
-        <Select.Item value="banana">Banana</Select.Item>
-        <Select.Item value="blueberry">Blueberry</Select.Item>
-        <Select.Item value="grapes">Grapes</Select.Item>
-        <Select.Item value="pineapple">Pineapple</Select.Item>
-      </Select.Group>
-
-      <Select.Separator/>
-
-      <Select.Group label={"Vegetables"}>
-        <Select.Item value="aubergine">Aubergine</Select.Item>
-        <Select.Item value="broccoli">Broccoli</Select.Item>
-        <Select.Item value="carrot" disabled>Carrot</Select.Item>
-        <Select.Item value="courgette">Courgette</Select.Item>
-        <Select.Item value="leek">Leek</Select.Item>
-      </Select.Group>
-
-      <Select.Separator/>
-
-      <Select.Group label={"Meat"}>
-        <Select.Item value="beef">Beef</Select.Item>
-        <Select.Item value="chicken">Chicken</Select.Item>
-        <Select.Item value="lamb">Lamb</Select.Item>
-        <Select.Item value="pork">Pork</Select.Item>
-      </Select.Group>
-    </Select.Content>
+    <Select.Trigger
+      size={args.size}
+      variant={args.variant}
+      aria-label="Food"
+    >
+      <Select.Value placeholder="Select a fruit…" />
+      <Select.TriggerIcon size={args.size}>
+        <CaretSortIcon className="size-5" />
+      </Select.TriggerIcon>
+    </Select.Trigger>
+    <Select.Portal>
+      <Select.Content position={args.position} align="center" sideOffset={5} variant={args.itemsVariant} fancy={args.fancy} mixed={args.mixed} intent={args.intent}>
+        <Select.ScrollUpButton/>
+        <Select.Viewport>
+            <Select.Group>
+              <Select.Label>Fruits</Select.Label>
+              <SelectItem value="apple">🍎&nbsp;&nbsp;Apple</SelectItem>
+              <SelectItem value="banana">🍌&nbsp;&nbsp;Banana</SelectItem>
+              <SelectItem value="orange">🍊&nbsp;&nbsp;Orange</SelectItem>
+              <SelectItem value="grape">🍇&nbsp;&nbsp;Grape</SelectItem>
+              <SelectItem value="pear">🍐&nbsp;&nbsp;Pear</SelectItem>
+            </Select.Group>
+          <Select.Separator />
+          <Select.Group>
+            <Select.Label>Fast Food</Select.Label>
+            <SelectItem value="pizza">🍕&nbsp;&nbsp;Pizza</SelectItem>
+            <SelectItem value="burger">🍔&nbsp;&nbsp;Burger</SelectItem>
+            <SelectItem value="fries">🍟&nbsp;&nbsp;Fries</SelectItem>
+            <SelectItem value="hotdog">🌭&nbsp;&nbsp;Hot Dog</SelectItem>
+            <SelectItem value="taco">🌮&nbsp;&nbsp;Taco</SelectItem>
+          </Select.Group>
+        </Select.Viewport>
+        <Select.ScrollDownButton>
+          <ChevronDownIcon />
+        </Select.ScrollDownButton>
+      </Select.Content>
+    </Select.Portal>
   </Select.Root>
 );
 
-const SelectUI2 = (args: SelectProps) => (
-  <Select.Root defaultValue="apple">
-    <Select.Trigger softVariant={args.softVariant} size={args.size}/>
-    <Select.Content>
-      <Select.Group label={"Fruits"}>
-        <Select.Item value="orange">Orange</Select.Item>
-        <Select.Item value="apple">Apple</Select.Item>
-        <Select.Item value="grape" disabled>Grape</Select.Item>
-      </Select.Group>
-      <Select.Separator/>
-      <Select.Group label={"Vegetables"}>
-        <Select.Item value="carrot">Carrot</Select.Item>
-        <Select.Item value="potato">Potato</Select.Item>
-      </Select.Group>
-    </Select.Content>
-  </Select.Root>
-);
+const SelectItem = ({value, children}:{value:string, children:ReactNode}) => {
+  return (
+    <Select.Item value={value}>
+      <Select.ItemText>{children}</Select.ItemText>
+      <Select.ItemIndicator>
+        <CheckIcon />
+      </Select.ItemIndicator>
+    </Select.Item>
+  );
+};
 
 const meta: Meta<typeof SelectUI> = {
   title: 'Select',
@@ -72,14 +80,38 @@ const meta: Meta<typeof SelectUI> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    softVariant: {
-      description: 'Whether to use the soft variant.',
-      control: 'boolean'
+    variant: {
+      description: 'The variant of the select.',
+      control: 'select',
+      options: ['soft', 'outlined', 'mixed', 'bottomOutlined', 'plain'],
+    },
+    fancy: {
+      description: 'Whether the select has a fancy style.',
+      control: 'boolean',
     },
     size: {
       description: 'The size of the select.',
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
+    },
+    intent: {
+      description: 'The intent of the select.',
+      control: 'select',
+      options: ['primary', 'secondary', 'accent', 'gray', 'neutral'],
+    },
+    itemsVariant: {
+      description: 'The variant of the items in the select.',
+      control: 'select',
+      options: ['soft', 'solid'],
+    },
+    mixed: {
+      description: 'Whether the select has a mixed style.',
+      control: 'boolean',
+    },
+    position: {
+      description: 'The position of the items in the select.',
+      control: 'select',
+      options: ['item-aligned', 'popper'],
     },
   },
 };
@@ -91,17 +123,13 @@ type Story = StoryObj<typeof meta>;
 export const Template: Story = {
   name: 'Select',
   args: {
-    softVariant: false,
     size: 'md',
+    position: "item-aligned",
+    intent: "primary",
+    variant: "soft",
+    itemsVariant: "solid",
+    fancy: false,
+    mixed: false,
   },
   render: SelectUI,
-};
-
-export const Template2: Story = {
-  name: 'Select with default value',
-  args: {
-    softVariant: false,
-    size: 'md',
-  },
-  render: SelectUI2,
 };
