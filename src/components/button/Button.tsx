@@ -13,7 +13,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HT
 
 export interface IconProps extends React.HTMLAttributes<HTMLElement>, ButtonIconProps{}
 
-export const Icon = React.forwardRef<HTMLElement, IconProps>(({
+export const Icon: React.FC<IconProps> = (({
   className,
   children,
   size,
@@ -32,9 +32,9 @@ export const Label = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElem
   className,
   children,
   ...props
-}) => {
+}, forwardedRef) => {
   return (
-    <span className={className} {...props}>{children}</span>
+    <span className={className} {...props} ref={forwardedRef}>{children}</span>
   )
 })
 
@@ -50,7 +50,7 @@ export const Root = React.forwardRef<
       href,
       children,
       ...props
-    }, ref) => {
+    }, forwardedRef) => {
 
       const Component = href ? 'a' : 'button';
       const iconOnly = React.Children.toArray(children).some(child => 
@@ -59,7 +59,7 @@ export const Root = React.forwardRef<
       const buttonSize = iconOnly ? 'iconOnlyButtonSize' : 'size';
 
       return (
-        <Component href={href} className={button[variant as keyof typeof button]({intent, [buttonSize]:size, className})} {...props} disabled={disabled} ref={ref as any}>
+        <Component ref={forwardedRef} href={href} className={button[variant as keyof typeof button]({intent, [buttonSize]:size, className})} {...props} disabled={disabled}>
           {children}
         </Component>
       )
