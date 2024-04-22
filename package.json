@@ -45,7 +45,8 @@
     "rechartjs": "^1.0.1",
     "recharts": "^2.12.6",
     "tailwind-merge": "^1.14.0",
-    "tailwind-variants": "^0.2.1"
+    "tailwind-variants": "^0.2.1",
+    "vaul": "^0.9.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.3.3",
@@ -57,7 +58,7 @@
     "@storybook/blocks": "^8.0.8",
     "@storybook/react": "^8.0.8",
     "@storybook/react-vite": "^8.0.8",
-    "@tailus/themer": "^0.0.2",
+    "@tailus/themer": "file:../themer",
     "@tailus/themer-accordion": "^0.0.6",
     "@tailus/themer-alert-dialog": "^0.0.1",
     "@tailus/themer-annonce": "^0.0.1",

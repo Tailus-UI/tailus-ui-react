@@ -1,5 +1,4 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import {dialog as dialogTheme} from "@tailus/themer-dialog";
 import React from "react";
 import Button from "../button/Button.tsx";
 import {
