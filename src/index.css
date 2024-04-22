@@ -31,6 +31,7 @@ body {
 
         --feedback-bg : theme("colors.white/var(--feedback-bg-opacity)");
         --feedback-padding : var(--card-padding);
+        --toast-padding : theme(spacing[4]);
         --feedback-bg-opacity : theme(opacity[100]);
         --feedback-border-color : var(--ui-border-color);
         --overlay-bg: theme("colors.gray.800/0.5");

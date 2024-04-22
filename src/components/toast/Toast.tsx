@@ -1,31 +1,26 @@
 import * as React from "react";
 import * as ToastPrimitive from "@radix-ui/react-toast";
-import {toast as theme} from "@tailus/themer-toast";
-import {cn} from "../../lib/utils.ts";
+import {toast, type ToastProps} from "@tailus/themer";
+
+const {root, title, description, viewport} = toast()
 
 const ToastProvider = ToastPrimitive.Provider;
+const ToastAction = ToastPrimitive.Action;
+const ToastClose = ToastPrimitive.Close;
 
 const ToastRoot = React.forwardRef<
   React.ElementRef<typeof ToastPrimitive.Root>,
-  React.ComponentProps<typeof ToastPrimitive.Root>
->((props, forwardedRef) => {
+  React.ComponentProps<typeof ToastPrimitive.Root> & ToastProps
+  >(({fancy, mixed, withAction, className, ...props}, forwardedRef) => {
+    
+    if (mixed && fancy) {
+      throw new Error("The properties 'fancy' and 'mixed' cannot be used together.")
+    }
+
   return (
     <ToastPrimitive.Root
       ref={forwardedRef}
-      className={cn(theme.root, props.className)}
-      {...props}
-    />
-  );
-});
-
-const ToastHeader = React.forwardRef<
-  React.ElementRef<"div">,
-  React.ComponentPropsWithoutRef<"div">
->((props, forwardedRef) => {
-  return (
-    <div
-      ref={forwardedRef}
-      className={cn(theme.header, props.className)}
+      className={root({fancy, mixed, withAction, className})}
       {...props}
     />
   );
@@ -38,20 +33,7 @@ const ToastTitle = React.forwardRef<
   return (
     <ToastPrimitive.Title
       ref={forwardedRef}
-      className={cn(theme.title, props.className)}
-      {...props}
-    />
-  );
-});
-
-const ToastActions = React.forwardRef<
-  React.ElementRef<"div">,
-  React.ComponentPropsWithoutRef<"div">
->((props, forwardedRef) => {
-  return (
-    <div
-      ref={forwardedRef}
-      className={cn(theme.actions, props.className)}
+      className={title({class:props.className})}
       {...props}
     />
   );
@@ -64,7 +46,7 @@ const ToastDescription = React.forwardRef<
   return (
     <ToastPrimitive.Description
       ref={forwardedRef}
-      className={cn(theme.description, props.className)}
+      className={description({class:props.className})}
       {...props}
     />
   );
@@ -77,21 +59,16 @@ const ToastViewport = React.forwardRef<
   return (
     <ToastPrimitive.Viewport
       ref={forwardedRef}
-      className={cn(theme.viewport, props.className)}
+      className={viewport({ class: props.className })}
       {...props}
     />
   );
 });
 
-const ToastAction = ToastPrimitive.Action;
-const ToastClose = ToastPrimitive.Close;
-
 const Toast = {
   Provider: ToastProvider,
   Root: ToastRoot,
-  Header: ToastHeader,
   Title: ToastTitle,
-  Actions: ToastActions,
   Description: ToastDescription,
   Viewport: ToastViewport,
   Action: ToastAction,
@@ -103,9 +80,7 @@ export default Toast;
 export {
   ToastProvider,
   ToastRoot,
-  ToastHeader,
   ToastTitle,
-  ToastActions,
   ToastDescription,
   ToastViewport,
   ToastAction,

@@ -1,8 +1,8 @@
 import {Meta, StoryObj} from "@storybook/react";
 import * as React from "react";
-import {Cross2Icon} from "@radix-ui/react-icons";
 import Toast from "./Toast";
-import {Button} from "../button/Button.tsx";
+import Button from "../button/Button.tsx";
+import { type ToastProps } from "@tailus/themer";
 
 // Custom hooks for managing state and effects
 const useToastState = () => {
@@ -17,7 +17,7 @@ const useToastState = () => {
   return {open, setOpen, eventDateRef, timerRef};
 };
 
-const ToastUI = () => {
+const ToastUI = (args:ToastProps) => {
   const {open, setOpen, eventDateRef, timerRef} = useToastState();
 
   const handleOpen = () => {
@@ -31,26 +31,24 @@ const ToastUI = () => {
 
   return (
     <Toast.Provider>
-      <Button label={"Add to calendar"} size={"lg"} onClick={handleOpen} />
-      <Toast.Root open={open} onOpenChange={setOpen}>
-        <Toast.Header>
-          <Toast.Title>Scheduled: Catch up</Toast.Title>
-          <Toast.Actions>
-            <Toast.Action asChild altText="Goto schedule to undo">
-              <Button label="Undo" variant={"ghost"} colorVariant={"primary"} size={"sm"}/>
+      <Button.Root size={"lg"} onClick={handleOpen}>
+        <Button.Label>Schedule Catch up</Button.Label>
+      </Button.Root>
+      <Toast.Root open={open} onOpenChange={setOpen} fancy={args.fancy} mixed={args.mixed} withAction={args.withAction}>
+        <Toast.Title>Scheduled: Catch up</Toast.Title>
+        {
+            args.withAction &&
+            <Toast.Action asChild altText="Undo">
+              <Button.Root className="-my-1 -mr-1" variant="soft" size={"xs"} onClick={() => setOpen(false)}>
+                <Button.Label>Undo</Button.Label>
+              </Button.Root>
             </Toast.Action>
-            <Toast.Close>
-              <Button label="Dismiss toast" icon={"only"} variant={"ghost"} colorVariant={"gray"} size={"sm"}>
-                <Cross2Icon aria-hidden/>
-              </Button>
-            </Toast.Close>
-          </Toast.Actions>
-        </Toast.Header>
-        <Toast.Description asChild>
-          <time dateTime={eventDateRef.current.toISOString()}>
-            {prettyDate(eventDateRef.current)}
-          </time>
-        </Toast.Description>
+          }
+          <Toast.Description asChild>
+            <time dateTime={eventDateRef.current.toISOString()}>
+              {prettyDate(eventDateRef.current)}
+            </time>
+          </Toast.Description>
       </Toast.Root>
       <Toast.Viewport/>
     </Toast.Provider>
@@ -72,7 +70,7 @@ const prettyDate = (date: Date) => {
 };
 
 // Metadata for the story
-const meta: Meta<typeof ToastUI> = {
+const meta: Meta<ToastProps> = {
   title: 'Toast',
   component: ToastUI,
   parameters: {
@@ -86,6 +84,11 @@ const meta: Meta<typeof ToastUI> = {
     },
   },
   tags: ['autodocs'],
+  argTypes: {
+    fancy: { control: 'boolean', defaultValue: true },
+    mixed: { control: 'boolean', defaultValue: false },
+    withAction: { control: 'boolean', defaultValue: false },
+  }
 };
 
 export default meta;
@@ -94,4 +97,5 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   name: 'Toast',
+  render: ToastUI,
 };
