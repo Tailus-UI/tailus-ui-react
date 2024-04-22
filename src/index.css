@@ -20,6 +20,7 @@ body {
         --btn-radius : 0.5rem;
         --menu-radius : 1rem;
         --calendar-radius : var(--btn-radius);
+        --tabs-radius : var(--btn-radius);
         --avatar-radius : 9999px;
         --input-radius : var(--btn-radius);
 
@@ -28,6 +29,7 @@ body {
         --accordion-bg : theme(colors.gray.100);
 
         --input-bg : theme(colors.gray.200);
+        --tabs-bg : var(--input-bg);
 
         --feedback-bg : theme("colors.white/var(--feedback-bg-opacity)");
         --feedback-padding : var(--card-padding);
