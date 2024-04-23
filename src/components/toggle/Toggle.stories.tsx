@@ -1,7 +1,7 @@
 import {Meta, StoryObj} from "@storybook/react";
 import { ToggleIcon, ToggleRoot } from "./Toggle";
 import { FontBoldIcon } from "@radix-ui/react-icons";
-import { type ToggleRootProps, type ToggleIconProps as ToggleIconVariants } from "@tailus/themer";
+import { type ToggleRootProps } from "@tailus/themer";
 
 const ToggleUI = (args: ToggleRootProps) => (
   <ToggleRoot aria-label="Toggle bold" {...args}>
