@@ -9,7 +9,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import Dialog from "../dialog/Dialog";
 import SeparatorRoot from "../separator/Separator";
-import { outlinedForm } from "@tailus/themer-form";
 import { twMerge } from "tailwind-merge";
 import { Title } from "../typography";
 import Select from "../select/Select";
@@ -197,7 +196,7 @@ const Custom = (args:CalendarProps) => {
         </Popover.Root>
     );
 };
-
+/*
 const Inputs = (args:CalendarProps) => {
     const today = new Date();
     const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
@@ -376,7 +375,7 @@ const Inputs = (args:CalendarProps) => {
         </Dialog.Root>
     );
 };
-
+*/
 const meta: Meta<typeof DatePicker> = {
   title: 'Date Picker',
   component: DatePicker,
@@ -430,10 +429,11 @@ export const Presets: Story = {
     render: Custom
 }
 
+/*
 export const PresetsInputs: Story = {
     name: 'Date Picker with presets and inputs',
     args: {
         intent: "primary",
     },
     render: Inputs
-}
+} */

@@ -1,4 +1,3 @@
-import {ghostIconButton, softIconButton} from "@tailus/themer-button";
 import {Cross2Icon, InfoCircledIcon} from "@radix-ui/react-icons";
 import {
   PopoverArrow,
@@ -13,6 +12,7 @@ import React from "react";
 import {Meta, StoryObj} from "@storybook/react";
 import { Title } from "../typography/Title.tsx";
 import { Text } from "../typography/Text.tsx";
+import Button from "../button/Button.tsx";
 
 interface PopoverUIProps extends React.ComponentPropsWithoutRef<typeof PopoverContent>,PopoverProps {
   withArrow?: boolean;
@@ -23,10 +23,11 @@ interface PopoverUIProps extends React.ComponentPropsWithoutRef<typeof PopoverCo
 const PopoverUI = ({...props}: PopoverUIProps) => (
   <PopoverRoot>
     <PopoverTrigger asChild>
-      <button className={softIconButton.gray.md}>
-        <span className="sr-only">Learn more</span>
-        <InfoCircledIcon className={softIconButton.icon.md}/>
-      </button>
+      <Button.Root aria-label="">
+        <Button.Icon>
+          <InfoCircledIcon />
+        </Button.Icon>
+      </Button.Root>
     </PopoverTrigger>
     <PopoverPortal>
       <PopoverContent
@@ -42,10 +43,11 @@ const PopoverUI = ({...props}: PopoverUIProps) => (
           Inventore perspiciatis atque consequatur? Autem reiciendis nemo error, rerum tempora.
         </Text>
         <PopoverClose asChild>
-          <button className={ghostIconButton.gray.md + " !absolute top-1 right-1"}>
-            <span className="sr-only">Dismiss dialog</span>
-            <Cross2Icon className={ghostIconButton.icon.md} aria-hidden/>
-          </button>
+          <Button.Root>
+            <Button.Icon>
+              <Cross2Icon />
+            </Button.Icon>
+          </Button.Root>
         </PopoverClose>
         {props.withArrow && <PopoverArrow height={props.arrowHeight} width={props.arrowWidth}/>}
       </PopoverContent>

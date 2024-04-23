@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Button from "./Button";
-import type { ButtonIconType, ButtonType } from '@tailus/themer';
+import type { ButtonIconProps, ButtonProps } from '@tailus/themer';
 import { PlusIcon } from '@radix-ui/react-icons';
 
 const UIButton = ({
@@ -14,15 +14,15 @@ const UIButton = ({
   iconType,
   icon,
 } : {
-  variant: ButtonType["variant"],
-  intent?: ButtonType["intent"],
-  size? : ButtonType["size"],
+  variant: ButtonProps["variant"],
+  intent?: ButtonProps["intent"],
+  size? : ButtonProps["size"],
   disabled?: boolean,
   label: string,
   href?: string,
   className?: string,
   icon?: boolean,
-  iconSize?: ButtonIconType["size"],
+  iconSize?: ButtonIconProps["size"],
   iconType?: 'leading' | 'trailing' | 'only',
 }) => (
   <Button.Root href={href} variant={variant} size={size} intent={intent} disabled={disabled}>

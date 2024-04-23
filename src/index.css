@@ -2,64 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    @apply bg-gray-50 dark:bg-gray-950;
-}
-
 @layer base {
     :root {
         --ui-border-color : theme(colors.gray.200);
-        --ui-soft-bg : theme(colors.gray.100);
-        --ui-bd-blur : theme(blur[2xl]);
-        --ui-bg:theme(colors.white);
-
-        --card-radius : theme(borderRadius.xl);
-        --accordion-radius : var(--card-radius);
-        --feedback-radius : var(--card-radius);
-        --annonce-radius : 2rem;
-        --btn-radius : 0.5rem;
-        --menu-radius : 1rem;
-        --calendar-radius : var(--btn-radius);
-        --tabs-radius : var(--btn-radius);
-        --avatar-radius : 9999px;
-        --input-radius : var(--btn-radius);
-
         --form-border-color : theme(colors.gray.300);
-        --card-padding : theme(spacing[6]);
-        --accordion-bg : theme(colors.gray.100);
+        --feedback-border-color : var(--ui-border-color);
+        --vtooltip-border-color:theme(colors.gray.700);
 
+        --ui-soft-bg : theme(colors.gray.100);
+        --accordion-bg : theme(colors.gray.100);
         --input-bg : theme(colors.gray.200);
         --tabs-bg : var(--input-bg);
-
         --feedback-bg : theme("colors.white/var(--feedback-bg-opacity)");
-        --feedback-padding : var(--card-padding);
-        --toast-padding : theme(spacing[4]);
-        --feedback-bg-opacity : theme(opacity[100]);
-        --feedback-border-color : var(--ui-border-color);
-        --overlay-bg: theme("colors.gray.800/0.5");
-        --overlay-backdrop-blur: theme(blur[none]);
-        --accordion-padding : 1rem;
+        --overlay-bg: theme("colors.gray.900/0.5");
+
+        --display-text-color: theme(colors.gray.950);
+        --title-text-color: theme(colors.gray.950);
         --caption-text-color : theme(colors.gray.500);
         --body-text-color : theme(colors.gray.600);
-
         --placeholder-text-color : theme(colors.gray.400);
 
-        /* visualization */
         --area-primary-stroke:theme(colors.primary.600);
         --area-secondary-stroke:theme(colors.secondary.600);
         --area-accent-stroke:theme(colors.accent.600);
         --area-gray-stroke:theme(colors.gray.600);
         --area-neutral-stroke:theme(colors.gray.950);
         --vtooltip-border-color:var(--ui-border-color);
-    }
-    .border, .border-t, .border-b, .border-l, .border-r, .border-y, .border-x {
-        border-color: var(--ui-border-color);
-    }
-    .feedback-bg{
-        @apply bg-[var(--feedback-bg)] backdrop-blur-[var(--ui-bd-blur)];
-    }
-    .fancy-border {
-        @apply border dark:border-gray-950 !outline !outline-1 -outline-offset-2 !outline-white/5 dark:!outline-white/5;
     }
     @media (prefers-color-scheme: dark) {
         :root {
@@ -68,14 +36,13 @@ body {
             --form-border-color : theme(colors.gray.700);
             --ui-soft-bg : theme(colors.gray.900);
             --feedback-bg : theme("colors.gray.900/var(--feedback-bg-opacity)");
-            --feedback-bg-opacity : theme(opacity[100]);
             --ui-bg:theme(colors.gray.900);
-            color : theme("colors.white");
-        --body-text-color : theme(colors.gray.400);
-        --input-bg : theme(colors.gray.800);
+            --body-text-color : theme(colors.gray.400);
+            --input-bg : theme(colors.gray.800);
 
-        --area-neutral-stroke:theme(colors.white);
-        --vtooltip-border-color:theme(colors.gray.700);
+            --area-neutral-stroke:theme(colors.white);
+            --display-text-color: theme(colors.white);
+            --title-text-color: theme(colors.white);
         }
     }
-}
+} 
