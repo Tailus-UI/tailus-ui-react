@@ -49,7 +49,7 @@ const AriaChart = (args:TooltipProps) => {
                     />
                     <CartesianGrid horizontal={false} />
                     <Tooltip
-                        cursor={{ stroke: 'var(--vtooltip-border-color)', strokeWidth: 1 }}
+                        cursor={{ stroke: 'var(--ui-border-color)', strokeWidth: 1 }}
                         content={
                             <Custom payload={[]} active fancy={args.fancy} mixed={args.mixed}  label={""}/>
                         }
@@ -93,7 +93,7 @@ const AriaChartGradient = (args:TooltipProps) => {
                     />
                     <CartesianGrid horizontal={false} />
                     <Tooltip
-                        cursor={{ stroke: 'var(--vtooltip-border-color)', strokeWidth: 1 }}
+                        cursor={{ stroke: 'var(--ui-border-color)', strokeWidth: 1 }}
                         content={
                             <Custom payload={[]} active fancy={args.fancy} mixed={args.mixed}  label={""}/>
                         }
@@ -136,7 +136,7 @@ const LineChartComponentExample = (args:TooltipProps) => {
                     />
                     <CartesianGrid horizontal />
                     <Tooltip
-                        cursor={{ stroke: 'var(--vtooltip-border-color)', strokeWidth: 1 }}
+                        cursor={{ stroke: 'var(--ui-border-color)', strokeWidth: 1 }}
                         content={
                             <Custom payload={[]} active fancy={args.fancy} mixed={args.mixed}  label={""}/>
                         }
@@ -172,7 +172,7 @@ const BarChartComponentExample = (args:TooltipProps) => {
                     />
                     <CartesianGrid horizontal />
                     <Tooltip
-                        cursor={{ fill:"var(--vtooltip-border-color)", opacity:0.5, strokeWidth: 1 }}
+                        cursor={{ fill:"var(--ui-border-color)", opacity:0.5, strokeWidth: 1 }}
                         content={
                             <Custom payload={[]} active fancy={args.fancy} mixed={args.mixed}  label={""}/>
                         }
@@ -208,7 +208,7 @@ const ScatterChartComponentExample = (args:TooltipProps) => {
                     />
                     <CartesianGrid horizontal />
                     <Tooltip
-                        cursor={{ stroke: 'var(--vtooltip-border-color)', strokeWidth: 1 }}
+                        cursor={{ stroke: 'var(--ui-border-color)', strokeWidth: 1 }}
                         content={
                             <Custom payload={[]} active fancy={args.fancy} mixed={args.mixed}  label={""}/>
                         }
