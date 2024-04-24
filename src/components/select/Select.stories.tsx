@@ -55,7 +55,7 @@ const SelectUI = (args: SelectProps) => (
   </Select.Root>
 );
 
-const SelectItem = ({value, children}:{value:string, children:ReactNode}) => {
+export const SelectItem = ({value, children}:{value:string, children:ReactNode}) => {
   return (
     <Select.Item value={value}>
       <Select.ItemText>{children}</Select.ItemText>

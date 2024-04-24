@@ -42,13 +42,6 @@ const PopoverUI = ({...props}: PopoverUIProps) => (
         <Text className="mt-2">
           Inventore perspiciatis atque consequatur? Autem reiciendis nemo error, rerum tempora.
         </Text>
-        <PopoverClose asChild>
-          <Button.Root>
-            <Button.Icon>
-              <Cross2Icon />
-            </Button.Icon>
-          </Button.Root>
-        </PopoverClose>
         {props.withArrow && <PopoverArrow height={props.arrowHeight} width={props.arrowWidth}/>}
       </PopoverContent>
     </PopoverPortal>
