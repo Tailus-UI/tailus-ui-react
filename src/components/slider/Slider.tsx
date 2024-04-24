@@ -1,7 +1,7 @@
 import * as SliderPrimitive from "@radix-ui/react-slider";
 import React from "react";
 import { createContext, useContext } from "react";
-import { slider, type SliderProps } from "@tailus/themer";
+import { slider, type SliderProps, type SliderTrackProps } from "@tailus/themer";
 
 const SliderContext = createContext<SliderProps>({})
 
@@ -44,8 +44,8 @@ const SliderThumb = React.forwardRef<
 
 const SliderTrack = React.forwardRef<
   React.ElementRef<typeof SliderPrimitive.Track>,
-  React.ComponentProps<typeof SliderPrimitive.Track> & SliderProps
-  >(({ className, size, ...props }, forwardedRef) => {
+  React.ComponentProps<typeof SliderPrimitive.Track> & Pick<SliderProps, "size"> & SliderTrackProps
+  >(({ className, size, variant, ...props }, forwardedRef) => {
 
     const { track } = slider()
     const { size: contextSize } = useContext(SliderContext)
@@ -56,14 +56,14 @@ const SliderTrack = React.forwardRef<
       <SliderPrimitive.Track
         {...props}
         ref={forwardedRef}
-        className={track({size, className })}
+        className={track({size, variant, className })}
       />
     )
 });
 
 const SliderRange = React.forwardRef<
   React.ElementRef<typeof SliderPrimitive.Range>,
-  React.ComponentProps<typeof SliderPrimitive.Range> & SliderProps
+  React.ComponentProps<typeof SliderPrimitive.Range> & SliderProps 
   >(({ intent, className, ...props }, forwardedRef) => {
 
     const { range } = slider()

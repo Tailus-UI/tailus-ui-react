@@ -1,11 +1,13 @@
 import {Meta, StoryObj} from "@storybook/react";
 import Slider from "./Slider";
-import { type SliderProps } from "@tailus/themer";
+import { type SliderProps, type SliderTrackProps } from "@tailus/themer";
 
-const SliderUI = (args:SliderProps & {thumbSize: "sm" | "md" | "lg"}) => (
+const SliderUI = (args: SliderProps & {
+    thumbSize: SliderProps["size"],
+    trackVariant:SliderTrackProps["variant"]}) => (
   <form>
       <Slider.Root className="w-96" size={args.size} intent={args.intent} defaultValue={[50]} data-orientation="vertical" max={100} step={1}>
-          <Slider.Track>
+          <Slider.Track variant={args.trackVariant}>
               <Slider.Range />
           </Slider.Track>
           <Slider.Thumb variant={args.variant} size={args.thumbSize} aria-label="Volume" />
@@ -38,6 +40,10 @@ const meta: Meta<typeof SliderUI> = {
         variant: {
             control: "select",
             options: ["solid", "raised", "outlined", "fancy"],
+        },
+        trackVariant: {
+            control: "select",
+            options: ["outlined", "soft", "mixed"],
         },
         intent: {
             control: "select",
