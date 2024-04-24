@@ -5,7 +5,7 @@ import { radio, fancyRadio, type RadioProps } from "@tailus/themer";
 
 export interface RadioRootProps extends RadioProps {
   className?: string;
-};
+}
 
 const RadioGroupContext = React.createContext<RadioRootProps>({fancy: false, intent: "primary"});
 
@@ -29,7 +29,7 @@ export interface RadioItemProps {
   fancy?: boolean;
   intent?: RadioProps['intent'];
   className?: string;
-};
+}
 
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,

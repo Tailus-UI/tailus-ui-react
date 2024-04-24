@@ -54,6 +54,7 @@ const ProgressIndicator = React.forwardRef<
           indeterminate,
           complete,
           withStripes,
+          loading,
           withHighlight,
           innerShadow,
           className

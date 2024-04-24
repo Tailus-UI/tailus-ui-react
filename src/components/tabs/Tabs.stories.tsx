@@ -102,7 +102,6 @@ export default meta;
 type Story = StoryObj<typeof TabsUI>;
 
 export const Tabs_: Story = {
-  name: "Tabs",
   args: {
     variant: "soft",
     triggerVariant: "plain",

@@ -203,7 +203,7 @@ const ContextMenuCommand = React.forwardRef<
 const ContextMenuIcon = React.forwardRef<
   React.ElementRef<"div">,
   React.ComponentPropsWithoutRef<"div"> & ContextMenuContentProps
->(({className, variant, ...props}, forwardedRef) => {
+>(({className, ...props}, forwardedRef) => {
   const { icon } = menu.solid({});
   return (
     <div

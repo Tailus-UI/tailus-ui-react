@@ -87,7 +87,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Avatar_: Story = {
-  name: "Avatar",
   args: {
     intent: "primary",
     size: "md",

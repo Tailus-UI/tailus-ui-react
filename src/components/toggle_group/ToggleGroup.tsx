@@ -1,5 +1,5 @@
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
-import React, {createContext, useContext} from "react";
+import React, { createContext, useContext } from "react";
 import { cloneElement } from "../../lib/utils.ts";
 import { toggle, type ToggleRootProps } from "@tailus/themer";
 
@@ -20,7 +20,6 @@ const ToggleGroupRoot = React.forwardRef<
     variant,
     intent,
     size,
-    withLabel,
     ...props
   }, forwardedRef
 ) => {

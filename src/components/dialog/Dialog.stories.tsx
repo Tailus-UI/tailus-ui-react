@@ -1,6 +1,6 @@
 import {Meta, type StoryObj} from "@storybook/react";
 import ToggleGroup from "../toggle_group/ToggleGroup.tsx";
-import {BookmarkFilledIcon, BookmarkIcon, Cross2Icon} from "@radix-ui/react-icons";
+import {BookmarkFilledIcon, Cross2Icon} from "@radix-ui/react-icons";
 import Toggle from "../toggle/Toggle.tsx";
 import Button from "../button/Button.tsx";
 import Dialog from "./Dialog.tsx";

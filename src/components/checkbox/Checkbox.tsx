@@ -21,21 +21,7 @@ const CheckboxRoot = forwardRef<
     )
 });
 
-type CheckboxIndicatorProps = {
-  className?: string;
-  props?: React.ComponentProps<typeof CheckboxPrimitive.Indicator>;
-}
-
-const CheckboxIndicator = forwardRef<
-  React.ElementRef<typeof CheckboxPrimitive.Indicator>,
-  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Indicator>
->(({className, ...props}: CheckboxIndicatorProps, forwardedRef) => (
-  <CheckboxPrimitive.Indicator
-    ref={forwardedRef}
-    className=" "
-    {...props}
-  />
-));
+const CheckboxIndicator = CheckboxPrimitive.Indicator;
 
 export {
   CheckboxRoot,

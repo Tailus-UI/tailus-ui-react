@@ -11,7 +11,9 @@ const useToastState = () => {
   const timerRef = React.useRef(0);
 
   React.useEffect(() => {
-    return () => clearTimeout(timerRef.current);
+    const timer = timerRef.current;
+
+    return () => clearTimeout(timer);
   }, []);
 
   return {open, setOpen, eventDateRef, timerRef};

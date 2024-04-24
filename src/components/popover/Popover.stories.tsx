@@ -1,7 +1,6 @@
-import {Cross2Icon, InfoCircledIcon} from "@radix-ui/react-icons";
+import {InfoCircledIcon} from "@radix-ui/react-icons";
 import {
   PopoverArrow,
-  PopoverClose,
   PopoverContent,
   PopoverPortal,
   PopoverRoot,
