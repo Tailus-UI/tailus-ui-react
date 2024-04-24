@@ -28,7 +28,7 @@ const TabsList = React.forwardRef<
         <TabsPrimitive.List
           {...props}
           ref={forwardedRef}
-          className={list({listVariant:variant, size, className})}
+          className={list({listVariant:variant, size, triggerVariant, className})}
         />
     </TabsContext.Provider>
   )
