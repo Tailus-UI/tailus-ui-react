@@ -37,7 +37,11 @@ const TabsUI = ({variant, triggerVariant, size, intent, indicatorVariant}: TabsU
         intent={intent}
         size={size}
       >
-        <Tabs.Indicator ref={spanRef} variant={indicatorVariant} intent={intent} />
+        {
+          triggerVariant === "plain" && (
+            <Tabs.Indicator ref={spanRef} variant={indicatorVariant} intent={intent} />
+          )
+        }
         <Tabs.Trigger value="nike" id="nike">
           Nike
         </Tabs.Trigger>
