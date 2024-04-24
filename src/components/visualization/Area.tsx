@@ -1,6 +1,6 @@
 import React from 'react';
 export { AreaChart } from "recharts"
-import {gradientStop, type AreaProps as AreaVariants } from "@tailus/themer"
+import { gradientStop, type AreaProps as AreaVariants } from "@tailus/themer"
 
 export const LinearGradient: React.FC<Omit<AreaVariants, "gradient"> & {id:string}> = ({intent, id}) => {
     return (
