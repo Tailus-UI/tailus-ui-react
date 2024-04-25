@@ -56,7 +56,7 @@ const SliderTrack = React.forwardRef<
       <SliderPrimitive.Track
         {...props}
         ref={forwardedRef}
-        className={track({size, variant, className })}
+        className={track({size, trackVariant:variant, className })}
       />
     )
 });

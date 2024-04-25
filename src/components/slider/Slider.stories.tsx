@@ -43,7 +43,7 @@ const meta: Meta<typeof SliderUI> = {
         },
         trackVariant: {
             control: "select",
-            options: ["outlined", "soft", "mixed"],
+            options: ["outlined", "soft", "mixed", "fancy"],
         },
         intent: {
             control: "select",
