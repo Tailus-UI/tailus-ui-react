@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-    @apply dark:bg-gray-925;
+    @apply dark:bg-gray-925 dark:before:fixed dark:before:inset-0 dark:before:-z-50 dark:before:[background-image:url('/grainy-bg.svg')] dark:before:opacity-[0.03];
 }

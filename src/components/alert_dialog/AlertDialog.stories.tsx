@@ -153,7 +153,7 @@ const IOSExample = (args: AlertDialogProps) => {
             <AlertDialog.Description className="mt-2">{args.description}</AlertDialog.Description>
           </div>
           <div>
-            <Separator orientation="horizontal" variant={args.fancy ? "fancy" : "simple"} />
+            <Separator orientation="horizontal" fancy={args.fancy} />
             <AlertDialog.Actions className="mt-0 overflow-hidden gap-0 h-full">
               <AlertDialog.Cancel asChild>
                 <Button.Root
@@ -165,7 +165,7 @@ const IOSExample = (args: AlertDialogProps) => {
                   <Button.Label>{args.cancelText}</Button.Label>
                 </Button.Root>
               </AlertDialog.Cancel>
-              <Separator className="!h-10" variant={args.fancy ? "fancy" : "simple"}/>
+              <Separator className="!h-10" fancy={args.fancy}/>
               <AlertDialog.Action asChild>
                 <Button.Root
                   className="rounded-none w-1/2"
@@ -214,7 +214,7 @@ const MacOsExample = (args: AlertDialogProps) => {
             <AlertDialog.Description align="left" className="mt-1">{args.description}</AlertDialog.Description>
           </div>
           <div className="w-fit flex">
-            <Separator variant={args.fancy ? "fancy" : "simple"}/>
+            <Separator fancy={args.fancy}/>
             <AlertDialog.Actions className="mt-0 overflow-hidden block h-full w-full">
               <AlertDialog.Cancel asChild>
                 <Button.Root
@@ -226,7 +226,7 @@ const MacOsExample = (args: AlertDialogProps) => {
                   <Button.Label>Accept</Button.Label>
                 </Button.Root>
               </AlertDialog.Cancel>
-              <Separator orientation="horizontal" variant={args.fancy ? "fancy" : "simple"}/>
+              <Separator orientation="horizontal" fancy={args.fancy}/>
               <AlertDialog.Action asChild>
                 <Button.Root
                   className="rounded-none h-1/2 w-full"
@@ -309,7 +309,7 @@ export const AlertDialog_: Story = {
     actionText: "Action",
     intent: "danger",
     triggerText: undefined,
-    fancy: true,
+    fancy: false,
     mixed: false,
   }
 }
