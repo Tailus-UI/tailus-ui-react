@@ -9,7 +9,7 @@ import {
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>, InputVariants {}
 
 export const FormInput = React.forwardRef<
-  HTMLInputElement, InputProps>(({ variant, className, size, ...props }, forwardedRef) => {
+  HTMLInputElement, InputProps>(({ variant, fancy, className, size, ...props }, forwardedRef) => {
     const { input } = form();
 
     const {
@@ -27,10 +27,14 @@ export const FormInput = React.forwardRef<
       throw Error("Floating label is not supported with the plain variant !");
     }
 
+    if ((variant === "bottomOutlined" || variant === "plain") && fancy) {
+      throw Error("Fancy is not supported with the bottomOutlined or plain variant !");
+    }
+
     return (
       <input
         ref={forwardedRef}
-        className={input({ variant, size, floating, className})}
+        className={input({ variant, fancy, size, floating, className})}
         {...props}
       />
     );

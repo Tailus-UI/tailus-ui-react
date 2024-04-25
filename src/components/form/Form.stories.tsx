@@ -16,9 +16,10 @@ type FormUIProps = {
     labelSize: "sm" | "md" | "lg";
     messageSize: "xs" | "sm" | "md";
     disabled?: boolean;
+    fancy?: boolean;
 };
 
-const FormUI = ({ variant, size, disabled, labelSize, messageSize }: FormUIProps) => (
+const FormUI = ({ variant, size, fancy, disabled, labelSize, messageSize }: FormUIProps) => (
     <FormRoot className="w-80">
         <FormField name="email" className="w-full space-y-2" size={size}>
             <FormLabel size={labelSize}>Label here</FormLabel>
@@ -29,6 +30,7 @@ const FormUI = ({ variant, size, disabled, labelSize, messageSize }: FormUIProps
                     type="email"
                     disabled={disabled}
                     placeholder="Your placeholder here"
+                    fancy={fancy}
                     required
                 />
             </FormControl>
@@ -125,6 +127,10 @@ const meta:Meta<typeof FormUI> = {
             control: "select",
             options: ["soft", "outlined", "mixed", "bottomOutlined", "plain"],
             defaultValue: "soft",
+        },
+        fancy: {
+            control: "boolean",
+            defaultValue: false,
         },
         size: {
             control: "select",

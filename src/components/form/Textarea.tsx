@@ -12,7 +12,7 @@ export interface TextAreaProps
     size?: Exclude<InputProps["size"], "xs">
   }
 
-  export const FormTextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(({ className, variant, size, ...props }, forwardedRef) => {
+  export const FormTextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(({ className, variant, fancy, size, ...props }, forwardedRef) => {
     
     const { input, textarea } = form({asTextarea:true});
     const {
@@ -29,10 +29,15 @@ export interface TextAreaProps
     } else if (variant === "plain" && floating) {
       throw Error("Floating label is not supported with the plain variant !");
     }
+
+    if ((variant === "bottomOutlined" || variant === "plain") && fancy) {
+      throw Error("Fancy is not supported with the bottomOutlined or plain variant !");
+    }
+    
     return (
         <textarea
           ref={forwardedRef as React.RefObject<HTMLTextAreaElement>}
-          className={input({ variant, size, floating, class:twMerge(textarea(), className)})}
+          className={input({ variant, fancy, size, floating, class:twMerge(textarea(), className)})}
           {...props}
         />
     )
