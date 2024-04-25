@@ -63,7 +63,7 @@ const meta: Meta<typeof ProgressUI> = {
     },
     variant: {
       control: 'select',
-      options: ['soft', 'outlined', 'mixed'],
+      options: ['soft', 'outlined', 'mixed', "fancy"],
     },
     intent: {
       control: 'select',
