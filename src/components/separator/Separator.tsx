@@ -2,15 +2,15 @@ import { separator, type SeparatorProps } from "@tailus/themer";
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
 import React from "react";
 
-interface SeparatorVariantProps extends React.ComponentProps<typeof SeparatorPrimitive.Root>, SeparatorProps {}
+interface SeparatorVariantProps extends React.ComponentProps<typeof SeparatorPrimitive.Root>, Pick<SeparatorProps, "fancy"> {}
   
 const SeparatorRoot = React.forwardRef<
   React.ElementRef<typeof SeparatorPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root> & SeparatorVariantProps
->(({variant, className, ...props}, ref) => {
+>(({fancy, className, ...props}, ref) => {
   return (
     <SeparatorPrimitive.Root
-      className={separator({variant, className})}
+      className={separator({fancy, orientation:props.orientation, className})}
       {...props}
       ref={ref}
     />
@@ -19,7 +19,6 @@ const SeparatorRoot = React.forwardRef<
 
 SeparatorRoot.displayName = "Separator";
 SeparatorRoot.defaultProps = {
-    variant: "fancy",
     orientation: "vertical"
 }
 
