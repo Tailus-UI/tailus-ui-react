@@ -1,7 +1,6 @@
 {
   "name": "tailus-ui-react",
-  "version": "0.0.1",
-  "type": "module",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {
     "dev": "vite",
@@ -33,7 +32,6 @@
     "@radix-ui/react-tooltip": "^1.0.6",
     "@storybook/addon-a11y": "^8.0.8",
     "@storybook/test": "^8.0.8",
-    "@tailus/themer": "file:../themer",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.4",
     "react": "^18.2.0",
@@ -54,6 +52,7 @@
     "@storybook/blocks": "^8.0.8",
     "@storybook/react": "^8.0.8",
     "@storybook/react-vite": "^8.0.8",
+    "@tailus/themer": "file:../themer",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",

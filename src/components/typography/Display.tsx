@@ -1,10 +1,10 @@
+import React from "react"
 import {
     display,
     type DisplayProps as DisplayVariants,
-    type Align,
-    type Weight
+    type TextAlignProp,
+    type TextWeightProp
 } from "@tailus/themer"
-import React from "react"
 
 type DisplaySize = DisplayVariants["size"]
 type DisplaySizeProp = DisplaySize |  {
@@ -15,22 +15,7 @@ type DisplaySizeProp = DisplaySize |  {
     xl?: DisplaySize,
     xxl?: DisplaySize,
 }
-type TextWeightProp = {
-    initial?: Weight,
-    sm?: Weight,
-    md?: Weight,
-    lg?: Weight,
-    xl?: Weight,
-    xxl?: Weight,
-}
-type TextAlignProp = {
-    initial?: Align,
-    sm?: Align,
-    md?: Align,
-    lg?: Align,
-    xl?: Align,
-    xxl?: Align,
-}
+
 export interface DisplayProps extends React.HTMLAttributes<HTMLHeadingElement> {
     as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "span",
     children: React.ReactNode,

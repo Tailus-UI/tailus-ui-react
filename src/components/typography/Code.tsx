@@ -9,8 +9,8 @@ export const Code = React.forwardRef<HTMLPreElement, CodeProps>(({
     ...props
 }, ref) => {
     return (
-        <pre ref={ref} className={codeTheme({ intent, className })} {...props}>
+        <code ref={ref} className={codeTheme({ intent, className })} {...props}>
             {children}
-        </pre>
+        </code>
     )
 })

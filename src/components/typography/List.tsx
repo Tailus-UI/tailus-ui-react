@@ -1,9 +1,9 @@
+import React from "react"
 import {
     list,
     type ListProps as ListVariants,
     type TextWeightProp
 } from "@tailus/themer"
-import React from "react"
 
 type ListSize = ListVariants["size"]
 type ListInside = ListVariants["inside"]
@@ -70,4 +70,4 @@ export const List: React.FC<ListProps> = ({
     )
 }
 
-List.displayName = "Text"
+List.displayName = "List"

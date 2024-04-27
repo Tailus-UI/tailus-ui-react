@@ -1,10 +1,10 @@
+import React from "react"
 import {
     text,
     type TextProps as TextVariants,
     type TextAlignProp,
     type TextWeightProp
 } from "@tailus/themer"
-import React from "react"
 
 type TextSize = TextVariants["size"]
 type TitleSizeProp = TextSize |  {
