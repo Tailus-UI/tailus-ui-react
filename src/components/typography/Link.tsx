@@ -1,10 +1,10 @@
+import React from "react"
 import {
     link,
     type LinkProps as LinkVariants,
     type TextAlignProp,
     type TextWeightProp
 } from "@tailus/themer"
-import React from "react"
 
 type LinkSize = LinkVariants["size"]
 type LinkVariant = LinkVariants["variant"]

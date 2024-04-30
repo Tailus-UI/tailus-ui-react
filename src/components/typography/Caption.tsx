@@ -1,13 +1,13 @@
+import React from "react"
 import {
     caption,
     type CaptionProps as CaptionVariants,
     type TextAlignProp,
     type TextWeightProp
 } from "@tailus/themer"
-import React from "react"
 
 type CaptionSize = CaptionVariants["size"]
-type TitleSizeProp = CaptionSize |  {
+type CaptionSizeProp = CaptionSize |  {
     initial?: CaptionSize,
     sm?: CaptionSize,
     md?: CaptionSize,
@@ -21,7 +21,7 @@ export interface CaptionProps extends React.HTMLAttributes<
     as?: "p" | "div" | "span" | "em" | "strong",
     children: React.ReactNode,
     className?: string,
-    size?: TitleSizeProp;
+    size?: CaptionSizeProp;
     align?: TextAlignProp;
     weight?: TextWeightProp;
     neutral?: boolean;
