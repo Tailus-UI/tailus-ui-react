@@ -38,9 +38,7 @@ const DropdownMenuContent = React.forwardRef<
   fancy = fancy || contextFancy;
   mixed = mixed || contextMixed;
     
-  if (fancy && mixed) {
-    throw new Error('The fancy and mixed props cannot be used together.');
-  }
+  if (fancy && mixed) throw new Error('The fancy and mixed props cannot be used together.');
 
   const contextValues = { variant, intent, fancy, mixed };
   const { content } = menu[variant]();
@@ -82,16 +80,18 @@ const DropdownMenuItem = React.forwardRef<
 const DropdownMenuSeparator = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator> & SeparatorProps
-  >(({ className, fancy, ...props }, forwardedRef) => {
+  >(({ className, fancy, dashed, ...props }, forwardedRef) => {
 
-    const {fancy: contextVariant} = React.useContext(MenuContext);
-    fancy = fancy || contextVariant;
+  const {fancy: contextVariant} = React.useContext(MenuContext);
+  fancy = fancy || contextVariant;
+    
+  if (fancy && dashed) throw new Error("A separator cannot be both fancy and dashed");
     
   return (
     <DropdownMenuPrimitive.Separator
       {...props}
       ref={forwardedRef}
-      className={separator({fancy, className})}
+      className={separator({fancy, dashed, className})}
     />
   );
 });
@@ -136,9 +136,7 @@ const DropdownMenuSubContent = React.forwardRef<
   mixed = mixed || contextMixed;
   const { content } = menu[variant]({ intent });
   
-  if (fancy && mixed) {
-    throw new Error('The fancy and mixed props cannot be used together.');
-  }
+  if (fancy && mixed) throw new Error('The fancy and mixed props cannot be used together.');
 
   return (
     <DropdownMenuPrimitive.SubContent

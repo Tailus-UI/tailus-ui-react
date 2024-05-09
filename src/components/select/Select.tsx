@@ -7,7 +7,8 @@ import {
   select,
   trigger,
   type SelectProps,
-  type TriggerProps
+  type TriggerProps,
+  type SeparatorProps
 } from "@tailus/themer"
 import { twMerge } from "tailwind-merge";
 
@@ -162,8 +163,8 @@ const SelectGroup = React.forwardRef<
 
 const SelectSeparator = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Separator>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator> & Pick<SelectProps, "fancy">
-  >(({ className, fancy, ...props }, forwardedRef) => {
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator> & Pick<SeparatorProps, "fancy" | "dashed">
+  >(({ className, fancy, dashed, ...props }, forwardedRef) => {
 
     const {
         fancy : contextFancy,
@@ -174,7 +175,7 @@ const SelectSeparator = React.forwardRef<
       <SelectPrimitive.Separator
         {...props}
         ref={forwardedRef}
-        className={separator({ fancy, className })}
+        className={separator({ fancy, dashed, className })}
       />
     );
   });
