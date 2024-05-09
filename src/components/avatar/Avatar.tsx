@@ -1,6 +1,6 @@
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import React from "react";
-import { avatar, fallback, image, type AvatarRootProps, AvatarFallbackProps } from "@tailus/themer";
+import { avatar, fallback, image, type AvatarRootProps, type AvatarFallbackProps } from "@tailus/themer";
 
 const AvatarRoot = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
