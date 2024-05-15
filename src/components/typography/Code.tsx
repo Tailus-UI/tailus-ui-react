@@ -14,3 +14,6 @@ export const Code = React.forwardRef<HTMLPreElement, CodeProps>(({
         </code>
     )
 })
+
+Code.displayName = "Code"
+export default Code

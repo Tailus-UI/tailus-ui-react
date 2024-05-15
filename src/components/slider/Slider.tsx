@@ -80,14 +80,12 @@ const SliderRange = React.forwardRef<
     )
   });
 
-const Slider = {
+export default {
   Root: SliderRoot,
   Thumb: SliderThumb,
   Track: SliderTrack,
   Range: SliderRange,
 };
-
-export default Slider;
 
 export {
   SliderRoot,

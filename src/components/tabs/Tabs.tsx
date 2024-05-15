@@ -67,15 +67,13 @@ const TabsIndicator = React.forwardRef<
 
 const TabsContent = TabsPrimitive.Content;
 
-const Tabs = {
+export default {
   Root: TabsRoot,
   List: TabsList,
   Trigger: TabsTrigger,
   Content: TabsContent,
   Indicator: TabsIndicator,
 }
-
-export default Tabs;
 
 export {
   TabsRoot,

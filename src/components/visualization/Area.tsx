@@ -9,3 +9,6 @@ export const LinearGradient: React.FC<Omit<AreaVariants, "gradient"> & {id:strin
         </linearGradient>
     )
 }
+
+LinearGradient.displayName = "LinearGradient"
+export default LinearGradient

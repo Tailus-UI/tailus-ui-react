@@ -24,7 +24,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement | HTMLAnc
 
 export const Card: React.FC<CardProps> = ({
   className,
-  variant,
+  variant = "mixed",
   fancy,
   children,
   gradient,

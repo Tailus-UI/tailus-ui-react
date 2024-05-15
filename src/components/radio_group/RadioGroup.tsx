@@ -63,13 +63,11 @@ const RadioGroupIndicator = React.forwardRef<
   )
 });
 
-const RadioGroup = {
+export default {
   Root: RadioGroupRoot,
   Item: RadioGroupItem,
   Indicator: RadioGroupIndicator,
 }
-
-export default RadioGroup;
 
 export {
   RadioGroupRoot,

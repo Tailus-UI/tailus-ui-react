@@ -40,7 +40,7 @@ export const List: React.FC<ListProps> = ({
     as="ul",
     weight,
     neutral,
-    inside,
+    inside = true,
     type,
     children,
     className,
@@ -71,3 +71,4 @@ export const List: React.FC<ListProps> = ({
 }
 
 List.displayName = "List"
+export default List

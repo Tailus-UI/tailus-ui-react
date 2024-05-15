@@ -14,7 +14,7 @@ export interface FormLabelProps extends LabelProps {
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof Label>,
   React.ComponentPropsWithoutRef<typeof Label> & FormLabelProps
-  >(({ className, floating, variant, size, ...props }, forwardedRef) => {
+  >(({ className, floating, variant, size="md", ...props }, forwardedRef) => {
 
     const { label } = form();
     

@@ -140,8 +140,8 @@ const ContextMenuSubContent = React.forwardRef<
 >((
   {
     className,
-    variant,
-    intent,
+    variant = "soft",
+    intent = "gray",
     mixed,
     fancy,
     ...props
@@ -213,7 +213,7 @@ const ContextMenuIcon = React.forwardRef<
   );
 });
 
-const ContextMenu = {
+export default {
   Root: ContextMenuRoot,
   Trigger: ContextMenuTrigger,
   Portal: ContextMenuPortal,
@@ -252,5 +252,3 @@ export {
   ContextMenuCommand,
   ContextMenuIcon,
 }
-
-export default ContextMenu;

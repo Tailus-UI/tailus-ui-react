@@ -28,7 +28,7 @@ export interface CaptionProps extends React.HTMLAttributes<
 }
 
 export const Caption: React.FC<CaptionProps> = ({
-    size,
+    size = "sm",
     as="p",
     weight,
     align,
@@ -60,3 +60,4 @@ export const Caption: React.FC<CaptionProps> = ({
 }
 
 Caption.displayName = "Caption"
+export default Caption

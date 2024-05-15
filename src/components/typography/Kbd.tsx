@@ -14,3 +14,6 @@ export const Kbd = React.forwardRef<HTMLPreElement, KbdProps>(({
         </kbd>
     )
 })
+
+Kbd.displayName = "Kbd"
+export default Kbd

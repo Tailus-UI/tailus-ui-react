@@ -48,3 +48,4 @@ export const Display: React.FC<DisplayProps> = ({
 }
 
 Display.displayName = "Display"
+export default Display

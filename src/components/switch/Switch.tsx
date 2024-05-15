@@ -7,9 +7,7 @@ export interface SwitchVariantsProps extends SwitchProps {
 }
 const SwitchContext = React.createContext<SwitchVariantsProps>({ intent: "primary" })
 
-// Creating the root component of the Switch
-// This component is based on the Root component from @radix-ui/react-switch
-// It merges passed class names with those of the switch theme.
+
 const SwitchRoot = React.forwardRef<
   React.ElementRef<typeof Switch.Root>,
   React.ComponentPropsWithoutRef<typeof Switch.Root> & SwitchVariantsProps
@@ -22,9 +20,6 @@ const SwitchRoot = React.forwardRef<
     )
   });
 
-// Creating the Thumb component of the Switch
-// This component is based on the Thumb component from @radix-ui/react-switch
-// It merges passed class names with those of the switch theme.
 const SwitchThumb = React.forwardRef<
   React.ElementRef<typeof Switch.Thumb>,
   React.ComponentPropsWithoutRef<typeof Switch.Thumb> & SwitchProps
@@ -36,7 +31,6 @@ const SwitchThumb = React.forwardRef<
     )
   });
 
-// Exporting components
 export {
   SwitchRoot,
   SwitchThumb,

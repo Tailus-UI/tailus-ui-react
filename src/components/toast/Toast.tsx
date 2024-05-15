@@ -65,7 +65,7 @@ const ToastViewport = React.forwardRef<
   );
 });
 
-const Toast = {
+export default {
   Provider: ToastProvider,
   Root: ToastRoot,
   Title: ToastTitle,
@@ -74,8 +74,6 @@ const Toast = {
   Action: ToastAction,
   Close: ToastClose,
 }
-
-export default Toast;
 
 export {
   ToastProvider,

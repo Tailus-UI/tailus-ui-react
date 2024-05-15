@@ -63,12 +63,10 @@ const ProgressIndicator = React.forwardRef<
     )
 });
 
-const Progress = {
+export default {
   Root: ProgressRoot,
   Indicator: ProgressIndicator,
 }
-
-export default Progress;
 
 export {
   ProgressIndicator,

@@ -15,7 +15,7 @@ interface CustomTooltipProps extends React.HTMLAttributes<HTMLDivElement>, Toolt
 
 const { root, title, separator, content, entry:entryTheme, entryValue, entryNameContainer, entryName, entryIndicator } = tooltip()
 
-export const Custom: React.FC<CustomTooltipProps> = ({
+export const CustomTooltip: React.FC<CustomTooltipProps> = ({
     active,
     payload,
     label,
@@ -55,3 +55,6 @@ export const Custom: React.FC<CustomTooltipProps> = ({
 
   return null;
 };
+
+CustomTooltip.displayName = "CustomTooltip";
+export default CustomTooltip;

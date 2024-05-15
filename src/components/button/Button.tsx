@@ -16,7 +16,7 @@ export interface IconProps extends React.HTMLAttributes<HTMLElement>, ButtonIcon
 export const Icon: React.FC<IconProps> = (({
   className,
   children,
-  size,
+  size = "md",
   type
 }) => {
   return (
@@ -43,9 +43,9 @@ export const Root = React.forwardRef<
   >((
     {
       className,
-      intent,
-      variant,
-      size,
+      intent = "primary",
+      variant = "solid",
+      size = "md",
       disabled,
       href,
       children,
@@ -68,17 +68,6 @@ export const Root = React.forwardRef<
 Root.displayName = 'Root';
 Icon.displayName = "Icon";
 Label.displayName = "Label";
-
-Root.defaultProps = {
-  variant: "solid",
-  intent: "primary",
-  size: "md",
-}
-
-Icon.defaultProps = {
-  size: "md",
-  type: "only"
-}
 
 export default {
   Root: Root,

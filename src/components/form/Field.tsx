@@ -15,7 +15,7 @@ export const FormContext = createContext<LabelProps>({});
 const FormField = React.forwardRef<
     React.ElementRef<typeof Field>,
     React.ComponentPropsWithoutRef<typeof Field> & FormFieldProps
-  >(({ className, size, floating, asTextarea, name, variant, ...props }, forwardedRef) => {
+  >(({ className, size="md", floating, asTextarea, name, variant="mixed", ...props }, forwardedRef) => {
 
     const { field } = form();
     

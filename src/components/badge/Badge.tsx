@@ -19,9 +19,3 @@ export const Badge: React.FC<BadgeVariantsProps> = ({
 }
   
 Badge.displayName = "Badge";
-
-Badge.defaultProps = {
-  variant: "solid",
-  intent: "danger",
-  size: "md"
-}
