@@ -65,3 +65,9 @@ export const AnnonceMessage: React.FC<AnnonceMessageProps> = (({
     {children}
   </p>
 ));
+
+export default {
+  Root: AnnonceRoot,
+  Concern: AnnonceConcern,
+  Message: AnnonceMessage,
+}
