@@ -5,7 +5,10 @@ import { avatar, fallback, image, type AvatarRootProps, type AvatarFallbackProps
 const AvatarRoot = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> & AvatarRootProps
->(({className, size, status, bottomStatus, topStatus, ...props}, ref) => {
+  >(({ className, size = "md", status = "online", bottomStatus = false, topStatus = false, ...props }, ref) => {
+    
+    if (topStatus && bottomStatus) throw new Error('Cannot have both topStatus and bottomStatus');
+    
   return (
     <AvatarPrimitive.Root
       {...props}

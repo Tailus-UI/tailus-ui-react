@@ -17,7 +17,7 @@ export const Icon: React.FC<IconProps> = (({
   className,
   children,
   size = "md",
-  type
+  type = "leading"
 }) => {
   return (
     <>
