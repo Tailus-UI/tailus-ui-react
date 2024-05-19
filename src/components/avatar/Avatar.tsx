@@ -6,7 +6,7 @@ const AvatarRoot = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> & AvatarRootProps
   >(({ className, size = "md", status = "online", bottomStatus = false, topStatus = false, ...props }, ref) => {
-    
+
     if (topStatus && bottomStatus) throw new Error('Cannot have both topStatus and bottomStatus');
     
   return (
@@ -21,7 +21,7 @@ const AvatarRoot = React.forwardRef<
 const AvatarFallback = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Fallback>,
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback> & AvatarFallbackProps
->(({className, variant = "solid", intent, ...props}, ref) => {
+>(({className, variant = "solid", intent="primary", ...props}, ref) => {
   return (
     <AvatarPrimitive.Fallback
       {...props}
