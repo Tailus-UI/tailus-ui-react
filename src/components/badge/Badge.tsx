@@ -5,12 +5,11 @@ export interface BadgeVariantsProps extends React.HTMLAttributes<HTMLDivElement>
 export const Badge: React.FC<BadgeVariantsProps> = ({
     className,
     children,
-    intent, 
-    size,
-    variant,
+    intent = "primary", 
+    size = "sm",
+    variant = "soft",
     ...props
   }) => {
-    variant = variant || "solid";
     return(
         <span className={badge[variant]({intent, size, className})} {...props}>
             {children}
@@ -19,3 +18,4 @@ export const Badge: React.FC<BadgeVariantsProps> = ({
 }
   
 Badge.displayName = "Badge";
+export default Badge;
