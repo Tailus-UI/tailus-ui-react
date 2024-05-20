@@ -3,7 +3,7 @@ import Popover from "../popover/Popover";
 import { Calendar, type CalendarProps } from "../calendar/Calendar";
 import { useState } from "react";
 import { addDays, format } from "date-fns"
-import { DateRange } from "react-day-picker"
+import { type DateRange } from "react-day-picker"
 import { CalendarIcon, ChevronDownIcon } from "@radix-ui/react-icons";
 import { Meta, StoryObj } from "@storybook/react";
 import ToggleGroup from "../toggle_group/ToggleGroup";
