@@ -7,15 +7,15 @@ const SliderContext = createContext<SliderProps>({})
 
 const SliderRoot = React.forwardRef<
   React.ElementRef<typeof SliderPrimitive.Root>,
-  React.ComponentProps<typeof SliderPrimitive.Root> & SliderProps
-  >(({ intent, variant, size, className, ...props }, forwardedRef) => {
+  React.ComponentProps<typeof SliderPrimitive.Root> & Omit<SliderProps, "variant">
+  >(({ intent="primary", size="md", className, ...props }, forwardedRef) => {
     const { root } = slider()
     return (
-      <SliderContext.Provider value={{intent, variant, size}}>
+      <SliderContext.Provider value={{intent, size}}>
         <SliderPrimitive.Root
           {...props}
           ref={forwardedRef}
-          className={root({ variant, size, intent, className})}
+          className={root({ size, intent, className})}
         />
       </SliderContext.Provider>
     )
@@ -23,14 +23,13 @@ const SliderRoot = React.forwardRef<
 
 const SliderThumb = React.forwardRef<
   React.ElementRef<typeof SliderPrimitive.SliderThumb>,
-  React.ComponentProps<typeof SliderPrimitive.SliderThumb> & SliderProps
-  >(({ variant, intent, size, className, ...props }, forwardedRef) => {
+  React.ComponentProps<typeof SliderPrimitive.SliderThumb> & Omit<SliderProps, "intent">
+  >(({ variant="raised", size="md", className, ...props }, forwardedRef) => {
 
     const { thumb } = slider()
 
-    const { intent: contextIntent, size: contextSize, variant: contextVariant } = useContext(SliderContext)
+    const { intent, size: contextSize, variant: contextVariant } = useContext(SliderContext)
     
-    intent = intent || contextIntent
     size = size || contextSize
     variant = variant || contextVariant
     return (
@@ -44,19 +43,16 @@ const SliderThumb = React.forwardRef<
 
 const SliderTrack = React.forwardRef<
   React.ElementRef<typeof SliderPrimitive.Track>,
-  React.ComponentProps<typeof SliderPrimitive.Track> & Pick<SliderProps, "size"> & SliderTrackProps
-  >(({ className, size, variant, ...props }, forwardedRef) => {
+  React.ComponentProps<typeof SliderPrimitive.Track> & SliderTrackProps
+  >(({ className, variant="soft", ...props }, forwardedRef) => {
 
     const { track } = slider()
-    const { size: contextSize } = useContext(SliderContext)
-
-    size = size || contextSize
 
     return (
       <SliderPrimitive.Track
         {...props}
         ref={forwardedRef}
-        className={track({size, trackVariant:variant, className })}
+        className={track({trackVariant:variant, className })}
       />
     )
 });
@@ -80,12 +76,14 @@ const SliderRange = React.forwardRef<
     )
   });
 
-export default {
+const Slider = {
   Root: SliderRoot,
   Thumb: SliderThumb,
   Track: SliderTrack,
   Range: SliderRange,
 };
+
+export default Slider;
 
 export {
   SliderRoot,

@@ -7,7 +7,7 @@ const { root, indicator } = progress();
 const ProgressRoot = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> & RootProps
-  >(({ className, size, variant, ...props}, forwardedRef) => {
+  >(({ className, size="md", variant="soft", ...props}, forwardedRef) => {
 
     return(
       <ProgressPrimitive.Root
@@ -31,13 +31,13 @@ const ProgressIndicator = React.forwardRef<
   IndicatorProps
   >(({
     className,
-    intent,
-    indeterminate,
-    withHighlight,
-    innerShadow,
-    loading,
-    complete,
-    withStripes,
+    intent = "primary",
+    indeterminate = "gray",
+    withHighlight = false,
+    innerShadow = false,
+    loading = "primary",
+    complete = "success",
+    withStripes = false,
     ...props
   }, forwardedRef) => {
 
@@ -63,10 +63,12 @@ const ProgressIndicator = React.forwardRef<
     )
 });
 
-export default {
+const Progress = {
   Root: ProgressRoot,
   Indicator: ProgressIndicator,
 }
+
+export default Progress;
 
 export {
   ProgressIndicator,
