@@ -12,7 +12,7 @@ const RadioGroupContext = React.createContext<RadioRootProps>({fancy: false, int
 const RadioGroupRoot = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> & RadioRootProps
-  >(({ className, intent, fancy, ...props }, forwardedRef) => {
+  >(({ className, intent="primary", fancy=false, ...props }, forwardedRef) => {
   
     return (
       <RadioGroupContext.Provider value={{fancy, intent}}>

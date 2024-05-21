@@ -5,13 +5,13 @@ import {switchTheme, fancySwitch, type SwitchProps} from "@tailus/themer";
 export interface SwitchVariantsProps extends SwitchProps {
   fancy?: boolean;
 }
-const SwitchContext = React.createContext<SwitchVariantsProps>({ intent: "primary" })
+const SwitchContext = React.createContext<SwitchVariantsProps>({ intent: "primary", fancy:false })
 
 
 const SwitchRoot = React.forwardRef<
   React.ElementRef<typeof Switch.Root>,
   React.ComponentPropsWithoutRef<typeof Switch.Root> & SwitchVariantsProps
-  >(({ className, intent, fancy, ...props }, forwardedRef) => {
+  >(({ className, intent="primary", fancy=false, ...props }, forwardedRef) => {
     const { root } = fancy ? fancySwitch({intent}) : switchTheme({intent});
     return (
       <SwitchContext.Provider value={{ intent }}>
