@@ -11,7 +11,7 @@ const ToastClose = ToastPrimitive.Close;
 const ToastRoot = React.forwardRef<
   React.ElementRef<typeof ToastPrimitive.Root>,
   React.ComponentProps<typeof ToastPrimitive.Root> & ToastProps
-  >(({fancy, mixed, withAction, className, ...props}, forwardedRef) => {
+  >(({fancy=false, mixed=false, withAction=false, className, ...props}, forwardedRef) => {
     
     if (mixed && fancy) {
       throw new Error("The properties 'fancy' and 'mixed' cannot be used together.")

@@ -1,6 +1,6 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import React from "react";
-import Button from "../button/Button.tsx";
+import Button from "./../button/Button";
 import {
   dialog,
   title,
@@ -119,8 +119,10 @@ const DialogCloseButton: React.FC<DialogCloseButtonProps> = ({ className, ...pro
 
   return(
     <Button.Root
-      {...props}
-      className={close({ className })}
+        {...props}
+        className={close({ className })}
+        variant="ghost"
+        size="sm"
     >
       <Button.Icon type="only" size="xs">
         {props.children}

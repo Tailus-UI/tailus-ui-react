@@ -1,6 +1,6 @@
 import {Root} from "@radix-ui/react-toggle";
 import React from "react";
-import { cloneElement } from "../../lib/utils.ts";
+import { cloneElement } from "./../../lib/utils";
 import { toggle, type ToggleRootProps, type ToggleIconProps as ToggleIconVariants } from "@tailus/themer";
 
 const {root, icon} = toggle();
@@ -10,10 +10,10 @@ const ToggleRoot = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof Root> & ToggleRootProps
 >(({
      className,
-     variant,
-     size,
-      intent,
-     withLabel,
+     variant = "soft",
+     size = "md",
+      intent = "primary",
+     withLabel = false,
      ...props
    },
    forwardedRef

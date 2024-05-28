@@ -11,7 +11,7 @@ const TooltipPortal = TooltipPrimitive.Portal;
 const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content> & TooltipProps
-  >(({ className, fancy, inverted, sideOffset = 4, ...props }, ref) => {
+  >(({ className, fancy=false, inverted=false, sideOffset = 4, ...props }, ref) => {
     
     const { content } = tooltip();
 
@@ -31,7 +31,7 @@ const TooltipContent = React.forwardRef<
 
 const TooltipArrow = React.forwardRef<
   SVGSVGElement, React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Arrow> & TooltipProps
-  >(({ fancy, inverted, className, ...props }) => {
+  >(({ fancy=false, inverted=false, className, ...props }) => {
   
     const { arrow } = tooltip();
 
