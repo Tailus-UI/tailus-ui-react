@@ -19,7 +19,7 @@ const TabsRoot = TabsPrimitive.Root;
 const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.List> & ListProps
-  >(({ className, variant, triggerVariant, intent, size, ...props }, forwardedRef) => {
+  >(({ className, variant="bottomOutlined", triggerVariant="plain", intent="primary", size="md", ...props }, forwardedRef) => {
 
   variant = variant || "soft";
     
@@ -52,9 +52,11 @@ const TabsTrigger = React.forwardRef<
 
 const TabsIndicator = React.forwardRef<
   React.ElementRef<"span">,
-  React.ComponentProps<"span"> & IndicatorProps
->(({className, variant="bottom", intent="primary", ...props}, forwardedRef) => {
+  React.ComponentProps<"span"> & Pick<IndicatorProps, "variant">
+  >(({ className, variant = "bottom", ...props }, forwardedRef) => {
   
+  const { intent } = React.useContext(TabsContext);
+    
   return (
     <span
       {...props}

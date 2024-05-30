@@ -1,6 +1,6 @@
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 import React, { createContext, useContext } from "react";
-import { cloneElement } from "../../lib/utils.ts";
+import { cloneElement } from "../../lib/utils";
 import { toggle, type ToggleRootProps } from "@tailus/themer";
 
 const {group, root: item, icon } = toggle();
@@ -17,9 +17,9 @@ const ToggleGroupRoot = React.forwardRef<
 >((
   {
     className,
-    variant,
-    intent,
-    size,
+    variant="soft",
+    intent="primary",
+    size="md",
     ...props
   }, forwardedRef
 ) => {
@@ -65,11 +65,13 @@ const ToggleGroupItem = React.forwardRef<
 
 interface ToggleIconProps {
   className?: string,
-  children: React.ReactNode
+  children: React.ReactNode,
+  size? : ToggleRootProps["size"]
 }
 
-const ToggleGroupIcon = ({className, children}: ToggleIconProps) => {
-  const {size} = useContext(RootContext);
+const ToggleGroupIcon = ({className, children, size}: ToggleIconProps) => {
+  const { size : rootSize } = useContext(RootContext);
+  size = size || rootSize;
   return cloneElement(children as React.ReactElement, icon({size, className}));
 };
 
